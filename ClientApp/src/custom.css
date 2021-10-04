@@ -1,4 +1,5 @@
 /* Provide sufficient contrast against white background */
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons+Outlined');
 a {
   color: #0366d6;
 }
@@ -11,4 +12,297 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+
+/* copy from artizans hub*/
+.artisan-page-body, .artisan-page-footer {
+  font-family: 'Microsoft YaHei' !important;
+  color: black !important;
+}
+
+.artisan-page-body .header-menu {
+  padding: 15px 0 !important;
+  margin: 0 auto !important;
+  border: none !important;
+}
+
+.artisan-page-body .header-menu > ul {
+  margin-bottom: 0;
+}
+
+h6 {
+  line-height: 2.6 !important;
+  margin-bottom: 0 !important;
+  color: black !important;
+}
+
+.paragraph-margin {
+  margin-bottom: 40px !important;
+}
+
+.logo-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.home-logo-image {
+  margin-left: 0;
+  margin-right: 0;
+  width: 20%;
+  height: 33%;
+  margin-top: 0px;
+}
+
+.artisan-headermenu {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  margin: 0 auto 30px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-size:17px;
+}
+
+.artisan-headermenu > ul {
+  margin: 0;
+}
+
+.artisan-headermenu > ul > li {
+  display: inline-block;
+}
+
+  .artisan-headermenu > ul > li > a {
+      display: block;
+      padding: 10px 16px;
+  }
+
+      .artisan-headermenu > ul > li > a:hover {
+          color: #8c52ff;
+      }
+
+.artisan-inline-group {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+
+}
+
+.artisan-input {
+  border: 3px solid #8c52ff !important;
+  height: 35px !important;
+  text-align: left;
+}
+
+  .artisan-input:hover, .artisan-input:focus {
+      border-color: transparent !important;
+      box-shadow: 0 0 0 0.12rem #7902f7 !important;
+  }
+
+  .artisan-inline-group .artisan-input {
+      width: 30%;
+      margin: 0 5px 8px 5px;
+  }
+
+.artisan-card {
+  display: flex;
+}
+
+.btn-common {
+  background-color: #c7aefb !important;
+  color: black !important;
+  height: 25px;
+  width: auto;
+  padding: 2px 20px !important;
+  border-radius: 0 !important;
+  font-size: 13px !important;
+}
+
+  .btn-common:hover, .btn-common:focus {
+      box-shadow: 0 0 0 0.17rem #b794fe !important;
+  }
+
+.divide-line {
+  border-top: 3px solid #8c52ff;
+  width: 65%;
+  margin: auto;
+}
+
+.checkbox-inline {
+  margin-right: 15px !important;
+}
+
+/* FORM SECTION - BEGIN */
+.artisan-form {
+  margin: auto
+}
+
+  .artisan-form .buttons {
+      text-align: center;
+  }
+
+  .artisan-form .artisan-inline-group {
+      margin-bottom: 20px;
+  }
+
+  .artisan-form .artisan-inline-group .artisan-input {
+      width: 60%;
+      margin: 0 15px;
+  }
+
+/* FORM SECTION - END */
+
+/** MATIRIAL ICON SECTION - BEGIN **/
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 27px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.material-icons-outlined {
+  color: #8c52ff;
+}
+
+.apply-material-icons {
+  position: relative;
+  width: 100%;
+}
+
+  .apply-material-icons > i, .apply-material-icons > span {
+      position: absolute;
+      z-index: 2;
+      left:18px;
+      top: 5px;
+  }
+
+/** MATIRIAL ICON SECTION - END **/
+/*** COMMON STYLES END***/
+/*** LANDING PAGE -***/
+.card-header {
+  background-color: #d1b8ff !important;
+  border-radius: 20px 20px 0 0 !important;
+}
+
+  .card-header h5 {
+      color: black;
+      font-size: 22px;
+  }
+
+.btn-landingpage {
+  background-color: #fcd181 !important;
+  border: 3px solid #fcd181 !important;
+  color: black !important;
+  margin-left: 10px !important;
+  height: 35px;
+  padding: 2px 20px !important;
+  border-radius: 0 !important;
+}
+
+  .btn-landingpage:hover, .btn-landingpage:focus {
+      border-color: transparent !important;
+      box-shadow: 0 0 0 0.17rem #be7d04 !important;
+  }
+
+  .tagline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #faa405;
+      font-size: 1.75em;
+      margin-bottom: 12px;
+  }
+
+.artisan-inline-group .btn-landingpage {
+  width: 138px;
+}
+
+.text-monospace {
+  font-family: 'Microsoft YaHei' !important;
+}
+
+.card {
+  border-radius: 20px !important;
+}
+
+.gallery {
+  width: 550px;
+  height: 112px;
+  margin: 10px auto;
+  background: #999;
+  border: 1px solid orange;
+}
+
+/***multiImageStyle.css***/
+
+.thumb {
+  padding: 5px !important;
+}
+
+.img-thumbnail {
+  border: none !important;
+}
+/***multiImageStyle.css***/
+/*** LANDING PAGE END***/
+/*** ABOUT PAGE -***/
+.profile-page .page-header {
+}
+
+.profile-image {
+  max-width: 160px !important;
+  width: 100%;
+  float: left;
+  margin-right: 25px;
+  margin-top: 17px;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+  box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+/*** ABOUT PAGE END***/
+
+
+/*** Media Queries for Mobile (< 575Px)***/
+@media all and (max-width: 575px) {
+
+  .artisan-inline-group {
+      flex-direction: column;
+  }
+
+      .artisan-inline-group .artisan-input {
+          width: 100% !important;
+          margin-bottom: 8px !important;
+      }
+
+      .artisan-inline-group .btn-landingpage {
+          width: 145px;
+          margin-left: 0 !important;
+      }
+}
+
+@media all and (max-width: 769px) {
+
+  .artisan-inline-group .artisan-input {
+      width: 40%;
+  }
 }
