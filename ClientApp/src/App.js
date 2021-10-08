@@ -2,8 +2,10 @@ import { HomeScreen } from './screens/HomeScreen';
 
 import NavBar from './components/NavBar/NavBar';
 import Riban from './components/Riban/Riban';
+import Footer from './components/Footer/Footer';
 
 import './App.css';
+
 
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
         <Riban />
         <HomeScreen />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import CN from 'classnames';
-import { RiEyeLine } from 'react-icons/ri';
 
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
 import zeroLogo from '../../assets/zeroLogo.png';
+import { RiEyeLine } from 'react-icons/ri';
+import { motion } from 'framer-motion';
 
 import './NavBar.scss';
-import { motion } from 'framer-motion';
 
 export const NavBar = ({ className, ...restProps }) => {
   const NavBarClasses = CN('nav-bar h-[72px]', className, {});

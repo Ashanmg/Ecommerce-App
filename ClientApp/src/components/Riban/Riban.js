@@ -17,7 +17,7 @@ export const Riban = ({ className, ...restProps }) => {
     <motion.div
       className={RibanClasses}
       {...restProps}
-      initial={{ x: 2000 }}
+      initial={{ x: -2000 }}
       animate={{ x: 0 }}
       transition={{duration: 0.45, delay:0.2}}
     >
