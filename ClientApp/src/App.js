@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { HomeScreen } from './screens/HomeScreen';
 
-import './custom.css'
+import NavBar from './components/NavBar/NavBar';
+import Riban from './components/Riban/Riban';
 
-export default class App extends Component {
-  static displayName = App.name;
+import './App.css';
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
-    );
-  }
+
+function App() {
+  return (
+    <div className="App font-sans">
+      <NavBar />
+      <div className="max-w-screen-xl container">
+        <Riban />
+        <HomeScreen />
+      </div>
+    </div>
+  );
 }
+
+export default App;
