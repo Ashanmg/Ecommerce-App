@@ -21,7 +21,7 @@ export const NavBar = ({ className, ...restProps }) => {
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="container max-w-screen-xl flex pt-5 justify-around">
+      <div className="container max-w-screen-xl pt-5 justify-around flex flex-wrap">
         <div className="logo flex-initial">
           <img src={zeroLogo} alt="Logo" className="object-cover h-9 w-auto" />
           <div className="logo_description text-G-dark text-xs italic">
