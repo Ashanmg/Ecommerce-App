@@ -8,7 +8,7 @@ import './Riban.scss';
 
 export const Riban = ({ className, ...restProps }) => {
   const RibanClasses = CN(
-    'riban flex w-full justify-center items-center text-xl italic h-14 text-G-dark font-semibold',
+    'riban flex w-full justify-center items-center text-md md:text-xl italic h-14 text-G-dark font-semibold',
     className,
     {}
   );

@@ -222,12 +222,11 @@ export const HomeScreen = ({ className, ...restProps }) => {
       let randomFirst = Math.floor(Math.random() * 5 + 15);
       let randomSecond = Math.floor(Math.random() * 5 + 20);
       let randomThird = Math.floor(Math.random() * 2 + 25);
-      console.log(first, randomFirst);
 
       productCopy.splice(first, 1, prods[randomFirst]);
       productCopy[second] = prods[randomSecond];
       productCopy[third] = prods[randomThird];
-      
+
       setProducts(productCopy);
     }, 3000);
   }, []);

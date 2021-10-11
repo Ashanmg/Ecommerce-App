@@ -13,7 +13,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
 
   return (
     <div className={ContactInfoClasses} {...restProps}>
-      <div className="top flex leading-9 mt-8">
+      <div className="top flex flex-col md:flex-row px-2 md:px-4 lg:px-1 w-full leading-9 mt-8">
         <img
           src={Founder}
           alt=""
@@ -43,7 +43,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
         </div>
       </div>
       <br />
-      <div className="bottom-para text-justify leading-9">
+      <div className="bottom-para text-justify leading-9 px-2 md:px-4 lg:px-1">
         <h6>
           It wasn't until 1995 that the art / artisan / retail bug hit again.
           This time I was in Cairns, Australia and again I was selling my own
