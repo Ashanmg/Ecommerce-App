@@ -116,7 +116,8 @@ export const ContactInfo = ({ className, ...restProps }) => {
         <br />
         <h6>
           <strong>Richard Croome</strong>
-          <br />Founder, ArtizansHub
+          <br />
+          Founder, ArtizansHub
         </h6>
       </div>
     </div>

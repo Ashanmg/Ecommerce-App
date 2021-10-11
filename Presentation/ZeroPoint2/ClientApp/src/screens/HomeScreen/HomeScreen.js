@@ -214,32 +214,29 @@ export const HomeScreen = ({ className, ...restProps }) => {
 
   useEffect(() => {
     setInterval(() => {
-      setProducts(shuffleArray(prods));
+      let productCopy = [...products];
+      let first = Math.floor(Math.random() * 5);
+      let second = Math.floor(Math.random() * 5 + 5);
+      let third = Math.floor(Math.random() * 5 + 10);
+
+      let randomFirst = Math.floor(Math.random() * 5 + 15);
+      let randomSecond = Math.floor(Math.random() * 5 + 20);
+      let randomThird = Math.floor(Math.random() * 2 + 25);
+      console.log(first, randomFirst);
+
+      productCopy.splice(first, 1, prods[randomFirst]);
+      productCopy[second] = prods[randomSecond];
+      productCopy[third] = prods[randomThird];
+      
+      setProducts(productCopy);
     }, 3000);
   }, []);
 
-  const shuffleArray = (array) => {
-    let i = array.length - 1;
-    for (i = 0; i < 15; i++) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-
-    let randomArray = [];
-
-    for (let index = 0; index < 15; index++) {
-      randomArray.push(array[index]);
-    }
-
-    return randomArray;
-  };
-
   return (
     <div className={HomeScreenClasses} {...restProps}>
-      {products.map((product) => (
+      {products.map((product, idx) => (
         <ProductCard
+          onClick={() => console.log(idx)}
           key={product.id || _.uniqueId}
           thumbnail={product.thumbnail}
         />
