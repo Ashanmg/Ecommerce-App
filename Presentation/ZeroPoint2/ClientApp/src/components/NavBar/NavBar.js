@@ -1,13 +1,14 @@
 import React from 'react';
 import CN from 'classnames';
+import { RiEyeLine } from 'react-icons/ri';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
 
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
 import zeroLogo from '../../assets/zeroLogo.png';
-import { RiEyeLine } from 'react-icons/ri';
-import { motion } from 'framer-motion';
-
 import './NavBar.scss';
 
 export const NavBar = ({ className, ...restProps }) => {
@@ -21,9 +22,15 @@ export const NavBar = ({ className, ...restProps }) => {
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="container max-w-screen-xl flex pt-5 justify-around">
+      <div className="container max-w-screen-xl flex pt-5 justify-between">
         <div className="logo flex-initial">
-          <img src={zeroLogo} alt="Logo" className="object-cover h-9 w-auto" />
+          <Link to="/">
+            <img
+              src={zeroLogo}
+              alt="Logo"
+              className="object-cover h-9 w-auto"
+            />
+          </Link>
           <div className="logo_description text-G-dark text-xs italic">
             Environmentally conscious gifts
           </div>
@@ -37,11 +44,11 @@ export const NavBar = ({ className, ...restProps }) => {
               className="h-9 py-2 px-3 flex items-center mr-5"
             />
             <Button
-              children="Sing In"
+              children="Sign In"
               className="h-9 py-2 px-5 bg-G-light text-sm mr-5 hover:text-white"
             />
             <Button
-              children="Sing Up"
+              children="Sign Up"
               className="h-9 py-2 px-5 bg-G-light text-sm mr-5 hover:text-white"
             />
           </form>
