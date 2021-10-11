@@ -20,7 +20,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
           className="w-40 h-56 mr-8 shadow"
           style={{ borderRadius: '50%' }}
         />
-        <div className="top-para text-left">
+        <div className="top-para text-justify">
           <h6>
             Hi, I 've been an artist, artisan, marketeer and boutique retailer
             (with a bit of teaching thrown in along the way), since 1982.
@@ -43,7 +43,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
         </div>
       </div>
       <br />
-      <div className="bottom-para text-left leading-9">
+      <div className="bottom-para text-justify leading-9">
         <h6>
           It wasn't until 1995 that the art / artisan / retail bug hit again.
           This time I was in Cairns, Australia and again I was selling my own
