@@ -15,7 +15,7 @@ export const Footer = ({ className, ...restProps }) => {
   return (
     <div className={FooterClasses} {...restProps}>
       <div className="copyRight text-G-dark italic text-xs">
-        Copyright © 2021 artizanshub.com. All rights reserved.
+        Copyright © 2021 zeropoint2.com. All rights reserved.
       </div>
       <div className="">
         <Link to="./contact-info" className="text-G-dark italic px-5">
