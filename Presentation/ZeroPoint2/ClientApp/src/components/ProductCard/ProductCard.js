@@ -18,8 +18,6 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
       initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.45 }}
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
       {...restProps}
     >
       <img src={thumbnail} alt="" />

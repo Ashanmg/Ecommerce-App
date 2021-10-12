@@ -213,20 +213,36 @@ export const HomeScreen = ({ className, ...restProps }) => {
   const [products, setProducts] = useState(initialProducts);
 
   useEffect(() => {
+    let productCopy = [...products];
+    let a = [1];
+    let randomFirst;
     setInterval(() => {
-      let productCopy = [...products];
       let first = Math.floor(Math.random() * 5);
-      let second = Math.floor(Math.random() * 5 + 5);
-      let third = Math.floor(Math.random() * 5 + 10);
+      // let second = Math.floor(Math.random() * 5 + 5);
+      // let third = Math.floor(Math.random() * 5 + 10);
 
-      let randomFirst = Math.floor(Math.random() * 5 + 15);
-      let randomSecond = Math.floor(Math.random() * 5 + 20);
-      let randomThird = Math.floor(Math.random() * 2 + 25);
+      randomFirst = Math.floor(Math.random() * 5 + 15);
+      productCopy.splice(first, 1, prods[randomFirst]);
+      let ids = productCopy.map((product) => product.id);
+      a = ids.filter((item, index) => ids.indexOf(item) !== index);
+
+      while (a.length !== 0) {
+        randomFirst = Math.floor(Math.random() * 5 + 15);
+        productCopy.splice(first, 1, prods[randomFirst]);
+        let ids = productCopy.map((product) => product.id);
+        a = ids.filter((item, index) => ids.indexOf(item) !== index);
+      }
+
+
+      // let randomSecond = Math.floor(Math.random() * 5 + 20);
+      // let randomThird = Math.floor(Math.random() * 2 + 25);
 
       productCopy.splice(first, 1, prods[randomFirst]);
-      productCopy[second] = prods[randomSecond];
-      productCopy[third] = prods[randomThird];
+      // productCopy[second] = prods[randomSecond];
+      // productCopy[third] = prods[randomThird];
 
+      // console.log(ids);
+      console.log(productCopy);
       setProducts(productCopy);
     }, 3000);
   }, []);

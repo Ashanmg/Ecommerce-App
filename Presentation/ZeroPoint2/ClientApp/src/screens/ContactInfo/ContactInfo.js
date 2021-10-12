@@ -47,7 +47,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
         <h6>
           It wasn't until 1995 that the art / artisan / retail bug hit again.
           This time I was in Cairns, Australia and again I was selling my own
-          handpainted designs, however this time, they were bespoke children's
+          hand painted designs, however this time, they were bespoke children's
           designs painted on the spot for customers in markets and shopping
           malls.
         </h6>
