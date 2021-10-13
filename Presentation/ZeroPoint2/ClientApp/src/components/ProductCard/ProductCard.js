@@ -6,11 +6,7 @@ import { motion } from 'framer-motion';
 import './ProductCard.scss';
 
 export const ProductCard = ({ className, thumbnail, ...restProps }) => {
-  const ProductCardClasses = CN(
-    'product-card min-w-[20%] w-1/2 md:w-1/4 lg:w-1/5 p-5 cursor-pointer',
-    className,
-    {}
-  );
+  const ProductCardClasses = CN('product-card h-', className, {});
 
   return (
     <motion.div
@@ -20,7 +16,7 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
       transition={{ duration: 0.45 }}
       {...restProps}
     >
-      <img src={thumbnail} alt="" />
+      <img className='object-contain h-40 w-full' src={thumbnail} alt="" />
     </motion.div>
   );
 };

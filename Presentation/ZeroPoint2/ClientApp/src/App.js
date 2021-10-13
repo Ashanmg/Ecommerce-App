@@ -11,9 +11,11 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <div className="App font-sans">
-        <NavBar />
-        <div className="max-w-screen-xl container">
+      <div className="App font-sans h-screen">
+        <header>
+          <NavBar />
+        </header>
+        <main className="max-w-screen-xl container">
           <Riban />
           <Switch>
             <Route path="/contact-info">
@@ -23,8 +25,10 @@ function App() {
               <HomeScreen />
             </Route>
           </Switch>
-        </div>
-        <Footer />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </Router>
   );

@@ -7,7 +7,7 @@ import './Footer.scss';
 
 export const Footer = ({ className, ...restProps }) => {
   const FooterClasses = CN(
-    'footer container flex flex-wrap justify-center md:justify-between items-center max-w-screen-xl py-2',
+    'footer container flex flex-wrap justify-center md:justify-between items-center max-w-screen-xl',
     className,
     {}
   );

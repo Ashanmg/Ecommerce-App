@@ -208,7 +208,11 @@ import './HomeScreen.scss';
 import _ from 'lodash';
 
 export const HomeScreen = ({ className, ...restProps }) => {
-  const HomeScreenClasses = CN('home-screen flex flex-wrap', className, {});
+  const HomeScreenClasses = CN(
+    'home-screen grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 h-auto',
+    className,
+    {}
+  );
 
   const [products, setProducts] = useState(initialProducts);
 
@@ -233,7 +237,6 @@ export const HomeScreen = ({ className, ...restProps }) => {
         a = ids.filter((item, index) => ids.indexOf(item) !== index);
       }
 
-
       // let randomSecond = Math.floor(Math.random() * 5 + 20);
       // let randomThird = Math.floor(Math.random() * 2 + 25);
 
@@ -242,7 +245,6 @@ export const HomeScreen = ({ className, ...restProps }) => {
       // productCopy[third] = prods[randomThird];
 
       // console.log(ids);
-      console.log(productCopy);
       setProducts(productCopy);
     }, 3000);
   }, []);
