@@ -7,26 +7,26 @@ import './Footer.scss';
 
 export const Footer = ({ className, ...restProps }) => {
   const FooterClasses = CN(
-    'footer container flex flex-wrap justify-center md:justify-between items-center max-w-screen-xl',
+    'footer container flex flex-col flex-wrap justify-center md:justify-between items-end max-w-screen-xl px-12',
     className,
     {}
   );
 
   return (
     <div className={FooterClasses} {...restProps}>
-      <div className="copyRight text-G-dark italic text-xs">
-        Copyright © 2021 zeropoint2.com. All rights reserved.
-      </div>
-      <div className="">
-        <Link to="./contact-info" className="text-G-dark italic px-5">
+      <div className="mb-3 text-lg font-medium">
+        <Link to="./contact-info" className="text-G-dark italic px-7">
           Company info
         </Link>
-        <a href="./" className="text-G-dark italic px-5">
+        <a href="./" className="text-G-dark italic px-7">
           Support
         </a>
-        <a href="./" className="text-G-dark italic p-5">
+        <a href="./" className="text-G-dark italic">
           Connect
         </a>
+      </div>
+      <div className="copyRight text-G-dark italic text-xs">
+        Copyright © 2021 zeropoint2.com. All rights reserved.
       </div>
     </div>
   );

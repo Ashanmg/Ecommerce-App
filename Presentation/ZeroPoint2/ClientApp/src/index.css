@@ -9,24 +9,24 @@
     }
 } */
 
-.App{
-    display: grid;
-    grid-template-areas: 
+.App {
+  display: grid;
+  grid-template-areas:
     'header'
     'main'
     'footer';
-    grid-template-columns: 1fr;
-    grid-template-rows: 4rem 1fr 3rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10rem 1fr 4rem;
 }
 
-@media (max-width: 768px){
-  .App{
+@media (max-width: 768px) {
+  .App {
     grid-template-rows: 13rem 1fr 3rem;
   }
 }
 
-@media (max-width: 640px){
-    .App{
-      grid-template-rows: 11rem 1fr 3rem;
-    }
+@media (max-width: 640px) {
+  .App {
+    grid-template-rows: 11rem 1fr 3rem;
   }
+}

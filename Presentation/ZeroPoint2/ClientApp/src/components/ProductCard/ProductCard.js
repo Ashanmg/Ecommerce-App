@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import './ProductCard.scss';
 
 export const ProductCard = ({ className, thumbnail, ...restProps }) => {
-  const ProductCardClasses = CN('product-card h-', className, {});
+  const ProductCardClasses = CN('product-card cursor-pointer', className, {});
 
   return (
     <motion.div

@@ -18,7 +18,7 @@ export const TextField = ({
         disabled={false}
         readOnly={false}
         placeholder={placeholder}
-        className="placeholder-G-dark pl-2 border-G-dark border-solid border-2 w-full h-7 md:h-10 focus:border-G-dark"
+        className="placeholder-G-dark pl-2 border-G-dark border-solid border-4 w-full h-7 md:h-10 focus:border-G-dark"
       />
     </div>
   );

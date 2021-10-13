@@ -30,67 +30,7 @@ import product25 from '../../assets/products/25.png';
 import product26 from '../../assets/products/26.png';
 import product27 from '../../assets/products/27.png';
 
-const prods = [
-  {
-    id: 1,
-    thumbnail: product1,
-  },
-  {
-    id: 2,
-    thumbnail: product2,
-  },
-  {
-    id: 3,
-    thumbnail: product3,
-  },
-  {
-    id: 4,
-    thumbnail: product4,
-  },
-  {
-    id: 5,
-    thumbnail: product5,
-  },
-  {
-    id: 6,
-    thumbnail: product6,
-  },
-  {
-    id: 7,
-    thumbnail: product7,
-  },
-  {
-    id: 8,
-    thumbnail: product8,
-  },
-  {
-    id: 9,
-    thumbnail: product9,
-  },
-  {
-    id: 10,
-    thumbnail: product10,
-  },
-  {
-    id: 11,
-    thumbnail: product11,
-  },
-  {
-    id: 12,
-    thumbnail: product12,
-  },
-  {
-    id: 13,
-    thumbnail: product13,
-  },
-  {
-    id: 14,
-    thumbnail: product14,
-  },
-  {
-    id: 15,
-    thumbnail: product15,
-  },
+const hiddenProds = [
   {
     id: 16,
     thumbnail: product16,
@@ -216,41 +156,46 @@ export const HomeScreen = ({ className, ...restProps }) => {
 
   const [products, setProducts] = useState(initialProducts);
 
+  let productCopy = [...products];
+  let randomFirst, randomSecond, randomThird;
+
   useEffect(() => {
-    let productCopy = [...products];
-    let a = [1];
-    let randomFirst;
-    setInterval(() => {
+    const pro = setInterval(() => {
       let first = Math.floor(Math.random() * 5);
-      // let second = Math.floor(Math.random() * 5 + 5);
-      // let third = Math.floor(Math.random() * 5 + 10);
+      let second = Math.floor(Math.random() * 5 + 5);
+      let third = Math.floor(Math.random() * 5 + 10);
 
-      randomFirst = Math.floor(Math.random() * 5 + 15);
-      productCopy.splice(first, 1, prods[randomFirst]);
-      let ids = productCopy.map((product) => product.id);
-      a = ids.filter((item, index) => ids.indexOf(item) !== index);
+      randomFirst = Math.floor(Math.random() * hiddenProds.length);
+      let randomFElement = hiddenProds[randomFirst];
+      hiddenProds.splice(randomFirst, 1);
 
-      while (a.length !== 0) {
-        randomFirst = Math.floor(Math.random() * 5 + 15);
-        productCopy.splice(first, 1, prods[randomFirst]);
-        let ids = productCopy.map((product) => product.id);
-        a = ids.filter((item, index) => ids.indexOf(item) !== index);
-      }
+      randomSecond = Math.floor(Math.random() * hiddenProds.length);
+      let randomSElement = hiddenProds[randomSecond];
+      hiddenProds.splice(randomSecond, 1);
 
-      // let randomSecond = Math.floor(Math.random() * 5 + 20);
-      // let randomThird = Math.floor(Math.random() * 2 + 25);
+      randomThird = Math.floor(Math.random() * hiddenProds.length);
+      let randomTElement = hiddenProds[randomThird];
+      hiddenProds.splice(randomThird, 1);
 
-      productCopy.splice(first, 1, prods[randomFirst]);
-      // productCopy[second] = prods[randomSecond];
-      // productCopy[third] = prods[randomThird];
+      hiddenProds.push(productCopy[first]);
+      hiddenProds.push(productCopy[second]);
+      hiddenProds.push(productCopy[third]);
 
-      // console.log(ids);
+      productCopy[first] = randomFElement;
+      productCopy[second] = randomSElement;
+      productCopy[third] = randomTElement;
+
       setProducts(productCopy);
     }, 3000);
-  }, []);
+
+    return () => {
+      clearInterval(pro);
+    };
+  }, [products]);
 
   return (
     <div className={HomeScreenClasses} {...restProps}>
+      {/* {console.log(products)} */}
       {products.map((product, idx) => (
         <ProductCard
           onClick={() => console.log(idx)}

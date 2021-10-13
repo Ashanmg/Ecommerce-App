@@ -16,7 +16,7 @@ function App() {
           <NavBar />
         </header>
         <main className="max-w-screen-xl container">
-          <Riban />
+          {/* <Riban /> */}
           <Switch>
             <Route path="/contact-info">
               <ContactInfo />
