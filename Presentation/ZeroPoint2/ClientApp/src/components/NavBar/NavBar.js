@@ -35,7 +35,7 @@ export const NavBar = ({ className, ...restProps }) => {
           </div>
         </div>
         <div className="auth_form mb-5 sm:mb-0">
-          <div className="flex flex-row h-7 md:h-10 items-center italic text-G-dark text-md md:text-xl font-medium mb-2">
+          <div className="flex flex-row h-7 md:h-10 items-center italic text-G-dark text-md md:text-xl font-medium mb-4 md:mb-2">
             Your one-stop shop for giving -20% of every sale Donated to the
             charity of your choice.&nbsp; <RiInformationLine />
           </div>
@@ -43,17 +43,17 @@ export const NavBar = ({ className, ...restProps }) => {
             action="submit"
             className="flex flex-col md:flex-col lg:flex-row md:justify-between"
           >
-            <div className="flex mb-2 mx-1">
+            <div className="flex justify-center mb-2 mx-1">
               <TextField
                 placeholder="Email"
-                className="mr-4 md:w-auto xl:w-80"
+                className="mr-4 w-auto md:w-auto xl:w-80"
               />
               <TextField placeholder="Password" className="md:w-auto xl:w-80" />
             </div>
             <div className="flex justify-center">
               <Button
                 beforeIcon={<RiEyeLine size={32} color="#005C27" />}
-                className="h-7 md:h-10 py-2 px-3 flex items-center"
+                className="h-7 md:h-10 py-2 px-3 hidden md:flex items-center"
               />
               <Button
                 children="Sign In"
