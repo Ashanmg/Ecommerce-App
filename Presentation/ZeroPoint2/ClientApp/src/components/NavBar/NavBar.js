@@ -51,7 +51,7 @@ export const NavBar = ({ className, ...restProps }) => {
               />
               <TextField placeholder="Password" className="md:w-auto lg:w-80" />
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center ml-16 lg:ml-0">
               <Button
                 beforeIcon={<RiEyeLine size={32} color="#005C27" />}
                 className={CN(
