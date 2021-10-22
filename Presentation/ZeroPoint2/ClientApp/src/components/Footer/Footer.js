@@ -7,15 +7,15 @@ import './Footer.scss';
 
 export const Footer = ({ className, ...restProps }) => {
   const FooterClasses = CN(
-    'footer container flex flex-col flex-wrap justify-center md:justify-between items-end max-w-screen-xl px-12',
+    'footer container flex flex-col flex-wrap justify-center md:justify-between item-center lg:items-end max-w-screen-xl px-12',
     className,
     {}
   );
 
   return (
     <div className={FooterClasses} {...restProps}>
-      <div className="mb-3 text-lg font-medium">
-        <Link to="./contact-info" className="text-G-dark italic px-7">
+      <div className="mb-3 text-sm md:text-lg font-medium">
+        <Link to="./contact-info" className="text-G-dark italic">
           Company info
         </Link>
         <a href="./" className="text-G-dark italic px-7">

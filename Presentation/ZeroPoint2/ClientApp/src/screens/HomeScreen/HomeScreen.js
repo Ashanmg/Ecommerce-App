@@ -15,7 +15,7 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 export const HomeScreen = ({ className, ...restProps }) => {
   const HomeScreenClasses = CN(
-    'home-screen grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 h-auto',
+    'home-screen grid grid-cols-4 lg:grid-cols-5 gap-4 h-auto',
     className,
     {}
   );
@@ -39,8 +39,8 @@ export const HomeScreen = ({ className, ...restProps }) => {
       setProducts(initialMProducts);
       setRandomLimit(4);
     } else if (!isLargeWide && !isMediumWide && !isSmallWide) {
-      setProducts(initialSProducts);
-      setRandomLimit(1);
+      setProducts(initialMProducts);
+      setRandomLimit(4);
     }
   }, [isLargeWide, isMediumWide, isSmallWide]);
 
