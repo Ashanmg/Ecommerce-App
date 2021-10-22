@@ -1,5 +1,6 @@
 import React from 'react';
 import CN from 'classnames';
+import {useHistory} from 'react-router-dom';
 import { RiEyeLine, RiInformationLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,12 @@ import './NavBar.scss';
 
 export const NavBar = ({ className, ...restProps }) => {
   const NavBarClasses = CN('nav-bar h-[72px]', className, {});
+
+  const history = useHistory();
+
+  const handleOnClick = () => {
+    history.push('/signup');
+  };
 
   return (
     <motion.div
@@ -35,7 +42,7 @@ export const NavBar = ({ className, ...restProps }) => {
           </div>
         </div>
         <div className="auth_form mb-5 sm:mb-0">
-          <div className="flex flex-row h-7 md:h-10 items-center italic text-G-dark text-md md:text-xl font-medium mb-4 md:mb-2">
+          <div className="flex flex-row h-7 md:h-10 items-center italic text-G-dark text-md md:text-base xl:text-lg font-medium mb-4 md:mb-2">
             Your one-stop shop for giving -20% of every sale Donated to the
             charity of your choice.&nbsp;{' '}
             <RiInformationLine className="hidden lg:flex" />
@@ -49,7 +56,10 @@ export const NavBar = ({ className, ...restProps }) => {
                 placeholder="Email"
                 className="mr-4 w-auto md:w-auto xl:w-80"
               />
-              <TextField placeholder="Password" className="md:w-auto lg:w-80" />
+              <TextField
+                placeholder="Password"
+                className="w-auto md:w-auto xl:w-80"
+              />
             </div>
             <div className="flex justify-center ml-16 lg:ml-0">
               <Button
@@ -66,6 +76,7 @@ export const NavBar = ({ className, ...restProps }) => {
               <Button
                 children="Sign Up"
                 className="h-7 md:h-10 py-1 md:py-2 px-6 xl:px-8 items-center bg-G-light text-sm hover:text-white"
+                onClick={handleOnClick}
               />
               <Button
                 beforeIcon={<RiInformationLine size={32} />}

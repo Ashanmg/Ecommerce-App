@@ -9,6 +9,13 @@
     }
 } */
 
+input:checked + div {
+  @apply border-G-dark;
+}
+input:checked + div svg {
+  @apply block;
+}
+
 .App {
   display: grid;
   grid-template-areas:

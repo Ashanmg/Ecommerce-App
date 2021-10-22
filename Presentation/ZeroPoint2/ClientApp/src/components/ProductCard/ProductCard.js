@@ -16,7 +16,7 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
       transition={{ duration: 0.45 }}
       {...restProps}
     >
-      <img className='object-contain h-40 w-full' src={thumbnail} alt="" />
+      <img className='object-contain h-auto md:h-40 w-full' src={thumbnail} alt="" />
     </motion.div>
   );
 };

@@ -1,9 +1,9 @@
 import { HomeScreen } from './screens/HomeScreen';
 import ContactInfo from './screens/ContactInfo/ContactInfo';
+import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar';
-import Riban from './components/Riban/Riban';
 import Footer from './components/Footer/Footer';
 
 import './App.css';
@@ -11,25 +11,31 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <div className="App font-sans h-screen">
-        <header>
-          <NavBar />
-        </header>
-        <main className="max-w-screen-xl container">
-          {/* <Riban /> */}
-          <Switch>
+      <Switch>
+        <Route path="/signup">
+          <SignUpScreen />
+        </Route>
+        <div className="App font-sans h-screen">
+          <Route path="/signup">
+            <SignUpScreen />
+          </Route>
+          <header>
+            <NavBar />
+          </header>
+          <main className="max-w-screen-xl container">
+            {/* <Riban /> */}
             <Route path="/contact-info">
               <ContactInfo />
             </Route>
             <Route path="/">
               <HomeScreen />
             </Route>
-          </Switch>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+        </div>
+      </Switch>
     </Router>
   );
 }
