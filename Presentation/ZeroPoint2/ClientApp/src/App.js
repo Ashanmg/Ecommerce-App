@@ -31,7 +31,7 @@ function App() {
               <HomeScreen />
             </Route>
           </main>
-          <footer>
+          <footer className='flex'>
             <Footer />
           </footer>
         </div>

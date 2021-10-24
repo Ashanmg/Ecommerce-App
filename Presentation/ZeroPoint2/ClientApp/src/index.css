@@ -40,6 +40,6 @@ input:checked + div svg {
 
 @media (max-width: 640px) {
   .App {
-    grid-template-rows: 14rem 1fr 3rem;
+    grid-template-rows: 14rem 1fr 7rem;
   }
 }
