@@ -6,6 +6,7 @@ import './TextField.scss';
 export const TextField = ({
   className,
   placeholder,
+  type,
   isCustom,
   ...restProps
 }) => {
@@ -14,7 +15,7 @@ export const TextField = ({
   return (
     <div className={TextFieldClasses} {...restProps}>
       <input
-        type="text"
+        type={type}
         disabled={false}
         readOnly={false}
         placeholder={placeholder}
@@ -26,6 +27,7 @@ export const TextField = ({
 
 TextField.defaultProps = {
   className: undefined,
+  type: 'text'
 };
 
 export default TextField;

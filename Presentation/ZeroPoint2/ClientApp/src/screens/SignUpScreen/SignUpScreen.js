@@ -13,7 +13,7 @@ import './SignUpScreen.scss';
 
 export const SignUpScreen = ({ className, ...restProps }) => {
   const SignUpScreenClasses = CN(
-    'sign-up-screen w-full h-screen flex justify-center items-center',
+    'sign-up-screen w-full h-4/6 flex justify-center items-center',
     className,
     {}
   );
@@ -30,8 +30,8 @@ export const SignUpScreen = ({ className, ...restProps }) => {
       {...restProps}
       style={{ backgroundColor: '#01a45300' }}
     >
-      <div className="sign-up-screen__wrapper flex justify-center items-center w-1/2 h-3/4">
-        <div className="sign-up-screen__left flex-1 bg-white p-10 border-G-100 border-4 h-full flex flex-col justify-center">
+      <div className="sign-up-screen__wrapper flex justify-center items-center w-full h-full p-5">
+        <div className="sign-up-screen__left flex-1 bg-white p-10 border-G-light border-4 h-full flex flex-col justify-center">
           <div className="sign-up-screen__left__title text-G-dark text-2xl font-semibold text-center mb-8">
             Create Account
           </div>
@@ -39,7 +39,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
             <form action="submit">
               <TextField placeholder="Name" className="mb-4" />
               <TextField placeholder="Email" className="mb-4" />
-              <TextField placeholder="Password" className="mb-4" />
+              <TextField placeholder="Password" className="mb-4" type='password' />
               <CheckBox title="Please subscribe me to the monthly newsletter." />
               <div className="mb-4 text-justify">
                 Newsletter subscribers stay up to date with recent projects
@@ -57,7 +57,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
             </form>
           </div>
         </div>
-        <div className="sign-up-screen__right flex-1 flex flex-col items-center justify-center h-full bg-G-100 p-10">
+        {/* <div className="sign-up-screen__right flex-1 flex flex-col items-center justify-center h-full  p-10">
           <div className="logo flex-initial flex flex-col items-center mb-8">
             <Link to="/" className="flex justify-center">
               <img
@@ -82,7 +82,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
               onClick={handleOnClick}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

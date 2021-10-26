@@ -9254,7 +9254,7 @@
     "lilconfig" "^2.0.3"
     "yaml" "^1.10.2"
 
-"postcss-loader@3.0.0":
+"postcss-loader@^3.0.0", "postcss-loader@3.0.0":
   "integrity" "sha512-cLWoDEY5OwHcAjDnkyRQzAXfs2jrKjXpO/HQFcc5b5u/r7aa471wdmChmwfnv7x2u840iat/wi0lQ5nbRgSkUA=="
   "resolved" "https://registry.npmjs.org/postcss-loader/-/postcss-loader-3.0.0.tgz"
   "version" "3.0.0"

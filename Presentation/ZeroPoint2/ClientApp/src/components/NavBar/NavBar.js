@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CN from 'classnames';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { RiEyeLine, RiInformationLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
+import Modal from '../Modal/Modal/Modal';
+import SignUpScreen from '../../screens/SignUpScreen/SignUpScreen';
 
 import zeroLogo from '../../assets/zeroLogo.png';
 import './NavBar.scss';
 
-export const NavBar = ({ className, ...restProps }) => {
+export const NavBar = ({ className, handleToggle, ...restProps }) => {
   const NavBarClasses = CN('nav-bar h-[72px]', className, {});
 
   const history = useHistory();
@@ -76,7 +78,7 @@ export const NavBar = ({ className, ...restProps }) => {
               <Button
                 children="Sign Up"
                 className="h-7 md:h-10 py-1 md:py-2 px-6 xl:px-8 items-center bg-G-light text-sm hover:text-white"
-                onClick={handleOnClick}
+                onClick={handleToggle}
               />
               <Button
                 beforeIcon={<RiInformationLine size={32} />}
