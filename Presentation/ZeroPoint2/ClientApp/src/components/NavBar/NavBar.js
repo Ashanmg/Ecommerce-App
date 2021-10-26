@@ -45,7 +45,7 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
         </div>
         <div className="auth_form mb-5 sm:mb-0">
           <div className="flex flex-row h-7 md:h-10 items-center italic text-G-dark text-md md:text-base xl:text-lg font-medium mb-4 md:mb-2">
-            Your one-stop shop for giving -20% of every sale Donated to the
+            Your one-stop shop for giving - 20% of every sale donated to the
             charity of your choice.&nbsp;{' '}
             <RiInformationLine className="hidden lg:flex" />
           </div>
