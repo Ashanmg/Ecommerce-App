@@ -14,7 +14,6 @@ import { Modal } from './components/Modal/Modal';
 import './App.css';
 
 function App() {
-
   const [showModal, setshowModal] = useState(false);
 
   const handleToggle = () => {
@@ -45,7 +44,7 @@ function App() {
           <Footer />
         </footer>
       </div>
-      <Modal isOpen={showModal} onClickOverlay={handleToggle} size='sm'>
+      <Modal isOpen={showModal} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen />
       </Modal>
       {/* <Switch>
