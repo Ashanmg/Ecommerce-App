@@ -11,12 +11,16 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
   return (
     <motion.div
       className={ProductCardClasses}
-      initial={{ scale: 0.5 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 0.45 }}
+      initial={{ width: '0', height: '100%' }}
+      animate={{ width: '100%', height: '100%' }}
+      transition={{ transition: 'width 0.45s ease-in-out' }}
       {...restProps}
     >
-      <img className='object-scale-down h-auto md:h-40 lf w-full' src={thumbnail} alt="" />
+      <img
+        className="object-scale-down h-auto md:h-40 lf w-full"
+        src={thumbnail}
+        alt=""
+      />
     </motion.div>
   );
 };
