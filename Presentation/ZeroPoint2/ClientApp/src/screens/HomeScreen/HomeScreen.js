@@ -6,15 +6,11 @@ import {
   hiddenProds,
   initialMProducts,
   initialFProducts,
-  initialSProducts,
 } from '../../config/product';
 
 import './HomeScreen.scss';
 import _ from 'lodash';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
-import Overlay from '../../components/Overlay/Overlay';
-import { Modal } from '../../components/Modal/Modal';
-import SignUpScreen from '../SignUpScreen/SignUpScreen';
 
 export const HomeScreen = ({ className, ...restProps }) => {
   const HomeScreenClasses = CN(
