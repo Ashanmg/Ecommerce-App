@@ -55,7 +55,7 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
           <div className="flex">
             <div className="signIn-btn mr-1 lg:mr-3">
               <Button
-                children="Sign Up"
+                children="Sign In"
                 className="h-7 w-max md:h-8 lg:h-10 py-1 md:py-2 px-3 xl:px-8 items-center bg-G-light text-xs lg:text-sm border-2 border-G-light hover:bg-white text-white hover:text-G-dark"
               />
             </div>
