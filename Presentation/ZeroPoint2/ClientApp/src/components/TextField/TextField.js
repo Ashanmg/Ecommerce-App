@@ -20,7 +20,7 @@ export const TextField = ({
         disabled={false}
         readOnly={false}
         placeholder={placeholder}
-        className="placeholder-G-dark pl-2 border-G-dark border-solid border-2 w-full h-7 md:h-10 focus:border-G-dark"
+        className="placeholder-G-dark pl-2 border-G-dark border-solid border-2 w-full h-7 md:h-8 lg:h-10 focus:border-G-dark"
       />
       {textRules && (
         <div className="text-right text-xs text-G-light italic">

@@ -5,7 +5,7 @@ import {
   RiEyeLine,
   RiInformationLine,
   RiShoppingCartFill,
-  RiMenuFill
+  RiMenuFill,
 } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -17,15 +17,13 @@ import zeroLogo from '../../assets/zeroLogo.png';
 import './NavBar.scss';
 
 export const NavBar = ({ className, handleToggle, ...restProps }) => {
-  const NavBarClasses = CN('nav-bar h-[72px]', className, {});
+  const NavBarClasses = CN(
+    'nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3',
+    className,
+    {}
+  );
 
   const [isLogin, setIsLogin] = useState(false);
-
-  const history = useHistory();
-
-  const handleOnClick = () => {
-    history.push('/signup');
-  };
 
   return (
     <motion.div
@@ -35,80 +33,46 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="container max-w-screen-xl flex flex-col sm:flex-col md:flex-col lg:flex-row pt-5 items-center md:items-center md:justify-center lg:items-start lg:justify-around px-0 lg:px-1">
-        <div className="logo flex-initial mb-4 mr-0 lg:mr-7 lg:mb-0">
-          <Link to="/" className="flex justify-center">
-            <img
-              src={zeroLogo}
-              alt="Logo"
-              className="object-cover w-1/2 h-auto lg:h-10 lg:w-auto mb-1"
-            />
-          </Link>
-          <div className="logo_description text-G-dark text-xs italic font-semibold">
-            Environmentally conscious gifts
+      <div className="flex flex-col pt-5 items-center">
+        <form action="submit" method="post" className="flex w-full">
+          <div className="logo mr-1 lg:mr-3">
+            <Link to="/" className="flex justify-center">
+              <img
+                src={zeroLogo}
+                alt="Logo"
+                className="object-fill h-7 sm:h-8 lg:h-10 sm:w-full"
+              />
+            </Link>
           </div>
-        </div>
-        {!isLogin ? (
-          <div className="auth_form mb-5 sm:mb-0">
-            <div className="flex flex-row h-7 md:h-10 items-center italic text-G-dark text-md md:text-base xl:text-lg font-medium mb-4 md:mb-2">
-              Your one-stop shop for giving - 20% of every sale donated to the
-              charity of your choice.&nbsp;{' '}
-              <RiInformationLine className="hidden lg:flex" />
+          <div className="flex flex-grow justify-around mr-1 lg:mr-3">
+            <div className="email-field flex-1 mr-1 lg:mr-3">
+              <TextField placeholder="Email" />
             </div>
-            <form
-              action="submit"
-              className="flex flex-col md:flex-col lg:flex-row md:justify-between"
-            >
-              <div className="flex justify-center mb-2 mx-1">
-                <TextField
-                  placeholder="Email"
-                  className="mr-4 w-auto md:w-auto xl:w-80"
-                />
-                <TextField
-                  placeholder="Password"
-                  className="w-auto md:w-auto xl:w-80"
-                />
-              </div>
-              <div className="flex justify-center ml-16 lg:ml-0">
-                <Button
-                  beforeIcon={<RiEyeLine size={32} color="#005C27" />}
-                  className={CN(
-                    'hidden lg:flex h-7 md:h-10 py-2 px-3 items-center',
-                    {}
-                  )}
-                />
-                <Button
-                  children="Sign In"
-                  className="h-7 md:h-10 py-1 md:py-2 px-6 xl:px-8 items-center bg-G-light text-sm mr-4 hover:text-white"
-                />
-                <Button
-                  children="Sign Up"
-                  className="h-7 md:h-10 py-1 md:py-2 px-6 xl:px-8 items-center bg-G-light text-sm hover:text-white"
-                  onClick={handleToggle}
-                />
-                <Button
-                  beforeIcon={<RiInformationLine size={32} />}
-                  className={CN(
-                    'flex lg:hidden h-7 md:h-10 py-2 px-3 items-center text-G-dark',
-                    {}
-                  )}
-                />
-              </div>
-            </form>
-          </div>
-        ) : (
-          <div className="w-9/12 flex items-center">
-            <RiMenuFill size={40} className="mx-4 text-G-dark" /> 
-            <div className="bg-G-light h-10 w-full flex items-center justify-center font-semibold text-2xl text-G-dark">
-              Add Product
+            <div className="password-field flex-1">
+              <TextField placeholder="Password" />
             </div>
-            <Button
-              className="mx-4 text-G-dark"
-              children=""
-              afterIcon={<RiShoppingCartFill size={32} />}
-            />
           </div>
-        )}
+          <div className="flex">
+            <div className="signIn-btn mr-1 lg:mr-3">
+              <Button
+                children="Sign Up"
+                className="h-7 w-max md:h-8 lg:h-10 py-1 md:py-2 px-3 xl:px-8 items-center bg-G-light text-xs lg:text-sm border-2 border-G-light hover:bg-white text-white hover:text-G-dark"
+              />
+            </div>
+            <div className="signUp-btn">
+              <Button
+                children="Sign Up"
+                className="h-7 w-max md:h-8 lg:h-10 py-1 md:py-2 px-3 xl:px-8 items-center bg-G-light text-xs lg:text-sm border-2 border-G-light hover:bg-white text-white hover:text-G-dark"
+                onClick={handleToggle}
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="nav-bar-buttom text-G-dark text-base lg:text-base 2xl:text-xl mt-2 italic flex">
+        Environmental Socially responsible gifts - your one-shop shop for giving
+        -20% of every sale donated to the charity fo your choice
+        <RiInformationLine size={24} />
       </div>
     </motion.div>
   );

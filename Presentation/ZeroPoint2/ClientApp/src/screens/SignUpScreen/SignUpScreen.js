@@ -37,9 +37,14 @@ export const SignUpScreen = ({ className, ...restProps }) => {
           </div>
           <div className="sign-up-screen__left__form text-xs">
             <form action="submit">
-              <TextField placeholder="Name" className="mb-4" />
+              <TextField placeholder="First Name" className="mb-4" />
+              <TextField placeholder="Last Name" className="mb-4" />
               <TextField placeholder="Email" className="mb-4" />
-              <TextField placeholder="Password" className="mb-4" type='password' />
+              <TextField
+                placeholder="Password"
+                className="mb-4"
+                type="password"
+              />
               <CheckBox title="Please subscribe me to the monthly newsletter." />
               <div className="mb-4 text-justify">
                 Newsletter subscribers stay up to date with recent projects

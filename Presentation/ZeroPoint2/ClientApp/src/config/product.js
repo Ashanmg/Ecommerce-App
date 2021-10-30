@@ -1,44 +1,32 @@
-import product1 from '../assets/products/1.png';
-import product2 from '../assets/products/2.png';
-import product3 from '../assets/products/3.png';
-import product4 from '../assets/products/4.png';
-import product5 from '../assets/products/5.png';
-import product6 from '../assets/products/6.png';
-import product7 from '../assets/products/7.png';
-import product8 from '../assets/products/8.png';
-import product9 from '../assets/products/9.png';
-import product10 from '../assets/products/10.png';
-import product11 from '../assets/products/11.png';
-import product12 from '../assets/products/12.png';
-import product13 from '../assets/products/13.png';
-import product14 from '../assets/products/14.png';
-import product15 from '../assets/products/15.png';
-import product16 from '../assets/products/16.png';
-import product17 from '../assets/products/17.png';
-import product18 from '../assets/products/18.png';
-import product19 from '../assets/products/19.png';
-import product20 from '../assets/products/20.png';
-import product21 from '../assets/products/21.png';
-import product22 from '../assets/products/22.png';
-import product23 from '../assets/products/23.png';
-import product24 from '../assets/products/24.png';
-import product25 from '../assets/products/25.png';
-import product26 from '../assets/products/26.png';
-import product27 from '../assets/products/27.png';
+import product1 from '../assets/products/1.JPG';
+import product2 from '../assets/products/2.JPG';
+import product3 from '../assets/products/3.JPG';
+import product4 from '../assets/products/4.JPG';
+import product5 from '../assets/products/5.JPG';
+import product6 from '../assets/products/6.JPG';
+import product7 from '../assets/products/7.JPG';
+import product8 from '../assets/products/8.JPG';
+import product9 from '../assets/products/9.JPG';
+import product10 from '../assets/products/10.JPG';
+import product11 from '../assets/products/11.JPG';
+import product12 from '../assets/products/12.JPG';
+import product13 from '../assets/products/13.JPG';
+import product14 from '../assets/products/14.JPG';
+import product15 from '../assets/products/15.JPG';
+import product16 from '../assets/products/16.JPG';
+import product17 from '../assets/products/17.JPG';
+import product18 from '../assets/products/18.JPG';
+import product19 from '../assets/products/19.JPG';
+import product20 from '../assets/products/20.JPG';
+import product21 from '../assets/products/21.JPG';
+import product22 from '../assets/products/22.JPG';
+import product23 from '../assets/products/23.JPG';
+import product24 from '../assets/products/24.JPG';
+import product25 from '../assets/products/25.JPG';
+import product26 from '../assets/products/26.JPG';
+import product27 from '../assets/products/27.JPG';
 
 export const hiddenProds = [
-    {
-      id: 16,
-      thumbnail: product16,
-    },
-    {
-      id: 17,
-      thumbnail: product17,
-    },
-    {
-      id: 18,
-      thumbnail: product18,
-    },
     {
       id: 19,
       thumbnail: product19,
@@ -137,6 +125,18 @@ export const  initialFProducts = [
     {
       id: 15,
       thumbnail: product15,
+    },
+    {
+      id: 16,
+      thumbnail: product16,
+    },
+    {
+      id: 17,
+      thumbnail: product17,
+    },
+    {
+      id: 18,
+      thumbnail: product18,
     },
   ];
 

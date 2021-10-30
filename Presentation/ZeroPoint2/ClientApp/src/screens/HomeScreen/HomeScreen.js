@@ -14,14 +14,24 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 export const HomeScreen = ({ className, ...restProps }) => {
   const HomeScreenClasses = CN(
-    'home-screen grid grid-cols-4 lg:grid-cols-5 gap-4 h-auto',
+    'home-screen grid grid-cols-4 lg:grid-cols-6 gap-4 h-auto',
     className,
     {}
   );
 
-  let isLargeWide = useMediaQuery('(min-width: 1024px)');
-  let isMediumWide = useMediaQuery('(min-width: 768px)');
-  let isSmallWide = useMediaQuery('(min-width: 640px)');
+  const [largeWide, setLargeWide] = useState(false);
+  const [mediumWide, setMediumWide] = useState(false);
+  const [smallWide, setSmallWide] = useState(false);
+
+  const isLargeWide = useMediaQuery('(min-width: 1024px)');
+  const isMediumWide = useMediaQuery('(min-width: 768px)');
+  const isSmallWide = useMediaQuery('(min-width: 640px)');
+
+  useEffect(() => {
+    setLargeWide(isLargeWide);
+    setMediumWide(isMediumWide);
+    setSmallWide(isSmallWide);
+  }, [isLargeWide, isMediumWide, smallWide]);
 
   const [products, setProducts] = useState(initialFProducts);
   const [randomLimit, setRandomLimit] = useState(5);
@@ -32,7 +42,7 @@ export const HomeScreen = ({ className, ...restProps }) => {
   useEffect(() => {
     if (isLargeWide && isMediumWide && isSmallWide) {
       setProducts(initialFProducts);
-      setRandomLimit(5);
+      setRandomLimit(6);
     } else if (!isLargeWide && isMediumWide && isSmallWide) {
       console.log(isLargeWide, isMediumWide, isSmallWide);
       setProducts(initialMProducts);
