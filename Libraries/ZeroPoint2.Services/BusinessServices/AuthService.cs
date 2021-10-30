@@ -22,6 +22,8 @@ namespace ZeroPoint2.Services
         {
             var userToCreate = new User
             {
+                Firstname = userForRegisterDto.Firstname,
+                Lastname = userForRegisterDto.Lastname,
                 Username = userForRegisterDto.Username
             };
 
