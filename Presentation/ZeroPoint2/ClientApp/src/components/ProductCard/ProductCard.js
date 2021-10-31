@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import './ProductCard.scss';
 
 export const ProductCard = ({ className, thumbnail, ...restProps }) => {
-  const ProductCardClasses = CN('product-card cursor-pointer', className, {});
+  const ProductCardClasses = CN('product-card cursor-pointer flex items-center', className, {});
 
   return (
     <motion.div
@@ -17,7 +17,7 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
       {...restProps}
     >
       <img
-        className="object-scale-down h-auto md:h-40 lf w-full"
+        className="object-contain h-auto md:h-40 lf w-full"
         src={thumbnail}
         alt=""
       />
