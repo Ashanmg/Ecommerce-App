@@ -17,7 +17,7 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
       {...restProps}
     >
       <img
-        className="object-contain h-auto md:h-40 lf w-full"
+        className="object-fill w-full h-auto md:h-40 lf"
         src={thumbnail}
         alt=""
       />

@@ -7,25 +7,25 @@ import './Footer.scss';
 
 export const Footer = ({ className, ...restProps }) => {
   const FooterClasses = CN(
-    'footer container  max-w-screen-xl flex px-1 md:px-3 flex-col flex-wrap justify-center md:justify-between item-center lg:items-end max-w-screen-xl',
+    'footer container  max-w-screen-xl flex px-1 md:px-3 flex-row flex-wrap justify-center md:justify-end items-center lg:items-center max-w-screen-xl',
     className,
     {}
   );
 
   return (
     <div className={FooterClasses} {...restProps}>
-      <div className="mb-3 text-sm md:text-lg font-medium">
-        <Link to="./" className="text-G-dark italic">
+      <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
+        <Link to="./" className="italic text-G-dark">
           Company info
         </Link>
-        <a href="./" className="text-G-dark italic px-7">
+        <a href="./" className="italic text-G-dark px-7">
           Support
         </a>
-        <a href="./" className="text-G-dark italic">
+        <a href="./" className="italic text-G-dark">
           Connect
         </a>
       </div>
-      <div className="copyRight text-G-dark italic text-xs">
+      <div className="text-xs italic copyRight text-G-dark">
         Copyright © 2021 zeropoint2.com. All rights reserved.
       </div>
     </div>
