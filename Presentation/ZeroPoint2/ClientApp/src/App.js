@@ -8,6 +8,7 @@ import { useState } from 'react';
 import ProductUploadScreen from './screens/ProductUploadScreen/ProductUploadScreen';
 
 import NavBar from './components/NavBar/NavBar';
+import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Footer from './components/Footer/Footer';
 import { Modal } from './components/Modal/Modal';
 
@@ -15,6 +16,7 @@ import './App.css';
 
 function App() {
   const [showModal, setshowModal] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleToggle = () => {
     setshowModal(!showModal);
@@ -22,11 +24,11 @@ function App() {
 
   return (
     <Router>
-      <div className="App font-sans h-screen">
+      <div className="h-screen font-sans App">
         <header>
-          <NavBar handleToggle={handleToggle} />
+          {!isLogin ? <NavBar handleToggle={handleToggle} /> : <LoginNavBar />}
         </header>
-        <main className="max-w-screen-xl container">
+        <main className="container max-w-screen-xl">
           {/* <Riban /> */}
           <Switch>
             <Route path="/product-upload">

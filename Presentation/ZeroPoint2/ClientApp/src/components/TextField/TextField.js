@@ -4,18 +4,45 @@ import CN from 'classnames';
 import './TextField.scss';
 
 export const TextField = ({
+  appearance,
   className,
+  disabled,
   placeholder,
   type,
   isCustom,
   textRules,
   iconAfter,
   iconBefore,
+  isCustomStyles,
   onClickIconAfter,
   onClickIconBefore,
+  readOnly,
+  size,
+  wrapperClassName,
   ...restProps
 }) => {
-  const TextFieldClasses = CN('text-field w-full flex flex-col', className, {});
+  const TextFieldClasses = !isCustomStyles
+    ? CN(
+        'text-field border-2 border-solid placeholder-G-dark border-G-dark h-7 md:h-8 lg:h-10 focus:border-G-dark',
+        className,
+        {}
+      )
+    : className;
+
+  const TextFieldWrapperClasses = !isCustomStyles
+    ? CN('text-field__wrapper', wrapperClassName, {
+        'text-field--is-danger': appearance === 'danger',
+        'text-field--is-default': appearance === 'default' || !appearance,
+        'text-field--is-success': appearance === 'success',
+        'text-field--is-warning': appearance === 'warning',
+        'text-field--has-icon-after': iconAfter,
+        'text-field--has-icon-before': iconBefore,
+        'text-field--is-disabled': disabled,
+        'text-field--is-readonly': readOnly,
+        'text-field--is-large': size === 'large',
+        'text-field--is-compact': size === 'compact',
+      })
+    : wrapperClassName;
 
   return (
     <div className={TextFieldClasses} {...restProps}>
@@ -37,11 +64,11 @@ export const TextField = ({
         disabled={false}
         readOnly={false}
         placeholder={placeholder}
-        className="placeholder-G-dark pl-2 border-G-dark border-solid border-2 w-full h-7 md:h-8 lg:h-10 focus:border-G-dark"
+        className={CN('w-full h-full pl-2 focus:outline-none')}
       />
       {iconAfter && (
         <div
-          className={CN('text-field__icon icon-after', {
+          className={CN('text-field__icon icon-after text-G-dark', {
             'text-field__icon--is-clickable': onClickIconAfter,
           })}
           onClick={onClickIconAfter}
@@ -53,7 +80,7 @@ export const TextField = ({
         </div>
       )}
       {textRules && (
-        <div className="text-right text-xs text-G-light italic">
+        <div className="text-xs italic text-right text-G-light">
           {textRules}
         </div>
       )}

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import CN from 'classnames';
-import { useHistory } from 'react-router-dom';
-import {
-  RiEyeLine,
-  RiInformationLine,
-  RiShoppingCartFill,
-  RiMenuFill,
-} from 'react-icons/ri';
+import { RiEyeLine, RiInformationLine, RiEyeOffLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +17,7 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
     {}
   );
 
-  const [isLogin, setIsLogin] = useState(false);
+  const [passwordShow, setPasswordShow] = useState(false);
 
   return (
     <motion.div
@@ -33,9 +27,9 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="flex flex-col pt-5 items-center">
+      <div className="flex flex-col items-center pt-5">
         <form action="submit" method="post" className="flex w-full">
-          <div className="logo mr-1 lg:mr-3">
+          <div className="mr-1 logo lg:mr-3">
             <Link to="/" className="flex justify-center">
               <img
                 src={zeroLogo}
@@ -44,32 +38,45 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
               />
             </Link>
           </div>
-          <div className="flex flex-grow justify-around mr-1 lg:mr-3">
-            <div className="email-field flex-1 mr-1 lg:mr-3">
+          <div className="flex justify-around flex-grow mr-1 lg:mr-3">
+            <div className="flex-1 mr-1 email-field lg:mr-3">
               <TextField placeholder="Email" />
             </div>
-            <div className="password-field flex-1">
-              <TextField placeholder="Password" />
+            <div className="flex-1 password-field">
+              <TextField
+                placeholder="Password"
+                onClickIconAfter={() => {
+                  setPasswordShow(!passwordShow);
+                }}
+                type={passwordShow ? 'text' : 'password'}
+                iconAfter={
+                  passwordShow ? (
+                    <RiEyeOffLine size={20} />
+                  ) : (
+                    <RiEyeLine size={20} />
+                  )
+                }
+              />
             </div>
           </div>
           <div className="flex">
-            <div className="signIn-btn mr-1 lg:mr-3">
+            <div className="mr-1 signIn-btn lg:mr-3">
               <Button
                 children="Sign In"
-                className="h-7 w-max md:h-8 lg:h-10 py-1 md:py-2 px-3 xl:px-8 items-center bg-G-light text-xs lg:text-sm border-2 border-G-light hover:bg-white text-white hover:text-G-dark"
+                className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
               />
             </div>
             <div className="signUp-btn">
               <Button
                 children="Sign Up"
-                className="h-7 w-max md:h-8 lg:h-10 py-1 md:py-2 px-3 xl:px-8 items-center bg-G-light text-xs lg:text-sm border-2 border-G-light hover:bg-white text-white hover:text-G-dark"
+                className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
                 onClick={handleToggle}
               />
             </div>
           </div>
         </form>
       </div>
-      <div className="nav-bar-buttom text-G-dark text-base lg:text-base 2xl:text-xl mt-2 italic flex">
+      <div className="flex mt-2 text-base italic nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
         Environmental Socially responsible gifts - your one-shop shop for giving
         -20% of every sale donated to the charity fo your choice
         <RiInformationLine size={24} />

@@ -6,7 +6,11 @@ import { motion } from 'framer-motion';
 import './ProductCard.scss';
 
 export const ProductCard = ({ className, thumbnail, ...restProps }) => {
-  const ProductCardClasses = CN('product-card cursor-pointer flex items-center', className, {});
+  const ProductCardClasses = CN(
+    'product-card cursor-pointer flex items-center',
+    className,
+    {}
+  );
 
   return (
     <motion.div
@@ -17,7 +21,7 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
       {...restProps}
     >
       <img
-        className="object-fill w-full h-auto md:h-40 lf"
+        className="object-cover w-full h-auto md:h-full lf"
         src={thumbnail}
         alt=""
       />

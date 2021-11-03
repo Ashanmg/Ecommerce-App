@@ -1,5 +1,76 @@
+:root {
+  --text-field-height: 40px;
+  --text-field-large-height: 52px;
+  --text-field-compact-height: 28px;
+}
+
 .text-field {
+  align-items: center;
+  appearance: none;
   box-sizing: border-box;
   display: flex;
   font-family: var(--font-family);
+  min-width: 0;
+  outline: none;
+  width: 100%;
+
+  /* Wrapper */
+  &__wrapper {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 45, 71, 0.05);
+    display: flex;
+    flex: 1 1 100%;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease-in-out 0s, border-color 0.2s ease-in-out 0s;
+    width: 100%;
+
+    /* Focus */
+    &:focus-within {
+      box-shadow: 0 0 0 2px #b4d8fc;
+      outline: none !important;
+    }
+  }
+
+  /* Icon */
+  &__icon {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    outline: none;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    /* Is clickable */
+    &--is-clickable {
+      cursor: pointer;
+    }
+  }
+
+  /* Has Icon Before */
+  &--has-icon-before {
+    .text-field {
+      padding-left: 0;
+    }
+  }
+
+  /* Has Icon After */
+  &--has-icon-after {
+    .text-field {
+      padding-right: 0;
+    }
+  }
+
+  /* Sizes */
+  .text-field--is-large & {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .text-field--is-compact & {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }
