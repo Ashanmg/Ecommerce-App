@@ -12,7 +12,12 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './NavBar.scss';
 
-export const NavBar = ({ className, handleToggle, ...restProps }) => {
+export const NavBar = ({
+  className,
+  handleToggle,
+  handleSignIn,
+  ...restProps
+}) => {
   const NavBarClasses = CN(
     'nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3',
     className,
@@ -74,6 +79,7 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
                 <Button
                   children="Sign In"
                   className="items-center px-5 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+                  onClick={handleSignIn}
                 />
               </div>
               <div className="signUp-btn">
@@ -83,7 +89,7 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
                   onClick={handleToggle}
                 />
               </div>
-              <div className='ml-1'>
+              <div className="ml-1">
                 <RiInformationLine size={26} className="text-G-dark" />
               </div>
             </div>
@@ -138,6 +144,7 @@ export const NavBar = ({ className, handleToggle, ...restProps }) => {
               <Button
                 children="Sign In"
                 className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+                onClick={handleSignIn}
               />
             </div>
             <div className="signUp-btn">

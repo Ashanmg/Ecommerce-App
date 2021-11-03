@@ -22,11 +22,19 @@ function App() {
     setshowModal(!showModal);
   };
 
+  const handleSignIn = () => {
+    setIsLogin(!isLogin);
+  };
+
   return (
     <Router>
       <div className="h-screen font-sans App">
         <header>
-          {!isLogin ? <NavBar handleToggle={handleToggle} /> : <LoginNavBar />}
+          {!isLogin ? (
+            <NavBar handleToggle={handleToggle} handleSignIn={handleSignIn} />
+          ) : (
+            <LoginNavBar handleToggle={handleToggle} handleSignIn={handleSignIn} />
+          )}
         </header>
         <main className="container max-w-screen-xl">
           {/* <Riban /> */}
