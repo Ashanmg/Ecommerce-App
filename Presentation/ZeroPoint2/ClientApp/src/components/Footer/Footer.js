@@ -15,7 +15,7 @@ export const Footer = ({ className, ...restProps }) => {
   return (
     <div className={FooterClasses} {...restProps}>
       <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
-        <Link to="./" className="italic text-G-dark">
+        <Link to="./contact-info" className="italic text-G-dark">
           Company info
         </Link>
         <a href="./" className="italic text-G-dark px-7">
