@@ -15,7 +15,7 @@ export const ProductCard = ({ className, thumbnail, ...restProps }) => {
   return (
     <motion.div
       className={ProductCardClasses}
-      initial={{ x: '200px', width: '100%', height: '100%' }}
+      initial={{ x: '100%', width: '100%', height: '100%' }}
       animate={{ x: '0', width: '100%', height: '100%' }}
       transition={{ transition: 'width 0.45s ease-in-out' }}
       {...restProps}
