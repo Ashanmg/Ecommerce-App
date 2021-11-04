@@ -46,10 +46,10 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               </div>
               <div className="product-upload-screen__left__product-category flex items-center mb-3">
                 <span className="text-left w-2/5 text-G-dark">
-                  Product Category
+                  Meta Description
                 </span>
                 <TextArea
-                  placeholder="Product Category"
+                  placeholder="Meta Description"
                   maxLength={150}
                   rows={2}
                   textRules="150 characters maximum"
@@ -119,8 +119,26 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               <DropDown options={options} />
             </div>
             <div className="product-upload-screen__left__product-category flex items-center mb-3">
-              <span className="text-left w-2/5 text-G-dark">Other</span>
-              <DropDown options={options} />
+                <span className="text-left w-2/5 text-G-dark">
+                    Company Information
+                </span>
+                <TextArea
+                    placeholder="Company Information"
+                    maxLength={500}
+                    rows={3}
+                    textRules="500 characters maximum"
+                />
+            </div>
+            <div className="product-upload-screen__left__product-category flex items-center mb-3">
+                <span className="text-left w-2/5 text-G-dark">
+                    Return Information
+                </span>
+                <TextArea
+                    placeholder="Return Information"
+                    maxLength={500}
+                    rows={3}
+                    textRules="500 characters maximum"
+                />
             </div>
           </div>
         </div>
