@@ -14,7 +14,7 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 export const HomeScreen = ({ className, ...restProps }) => {
   const HomeScreenClasses = CN(
-    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6 h-auto',
+    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6 h-auto',
     className,
     {}
   );

@@ -47,7 +47,7 @@ export const NavBar = ({
             Environmental Socially gifts
           </div>
         </div>
-        <div className="flex pb-2 mt-2 text-base italic nav-bar-buttom text-G-dark">
+        <div className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-G-dark">
           your one-shop shop for giving -20% of every sale donated to the
           charity fo your choice
         </div>

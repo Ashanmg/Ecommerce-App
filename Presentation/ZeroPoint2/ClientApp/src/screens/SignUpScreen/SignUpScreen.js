@@ -1,6 +1,6 @@
 import React from 'react';
 import CN from 'classnames';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RiInformationLine } from 'react-icons/ri';
 
 import zeroLogo from '../../assets/zeroLogo.png';
@@ -18,11 +18,11 @@ export const SignUpScreen = ({ className, ...restProps }) => {
     {}
   );
 
-  const history = useHistory();
+  // const history = useHistory();
 
-  const handleOnClick = () => {
-    history.push('/');
-  };
+  // const handleOnClick = () => {
+  //   history.push('/');
+  // };
 
   return (
     <div
@@ -30,12 +30,12 @@ export const SignUpScreen = ({ className, ...restProps }) => {
       {...restProps}
       style={{ backgroundColor: '#01a45300' }}
     >
-      <div className="sign-up-screen__wrapper flex justify-center items-center w-full h-full p-5">
-        <div className="sign-up-screen__left flex-1 bg-white p-10 border-G-light border-4 h-full flex flex-col justify-center">
-          <div className="sign-up-screen__left__title text-G-dark text-2xl font-semibold text-center mb-8">
+      <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
+        <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
+          <div className="mb-8 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
             Create Account
           </div>
-          <div className="sign-up-screen__left__form text-xs">
+          <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
               <TextField placeholder="First Name" className="mb-4" />
               <TextField placeholder="Last Name" className="mb-4" />
@@ -56,26 +56,26 @@ export const SignUpScreen = ({ className, ...restProps }) => {
               <div className="text-center">
                 <Button
                   children="Sign Up"
-                  className="h-7 w-full md:h-10 py-1 md:py-2 px-6 xl:px-8 items-center bg-G-light text-sm border-2 border-G-light hover:bg-white text-white hover:text-G-dark"
+                  className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
                 />
               </div>
             </form>
           </div>
         </div>
-        {/* <div className="sign-up-screen__right flex-1 flex flex-col items-center justify-center h-full  p-10">
-          <div className="logo flex-initial flex flex-col items-center mb-8">
+        {/* <div className="flex flex-col items-center justify-center flex-1 h-full p-10 sign-up-screen__right">
+          <div className="flex flex-col items-center flex-initial mb-8 logo">
             <Link to="/" className="flex justify-center">
               <img
                 src={zeroLogo}
                 alt="Logo"
-                className="object-cover w-1/2 h-auto lg:h-10 lg:w-auto mb-1"
+                className="object-cover w-1/2 h-auto mb-1 lg:h-10 lg:w-auto"
               />
             </Link>
-            <div className="logo_description text-G-dark text-xs italic font-semibold">
+            <div className="text-xs italic font-semibold logo_description text-G-dark">
               Environmentally conscious gifts
             </div>
           </div>
-          <div className="flex flex-row h-7 md:h-10 items-center text-center italic text-G-dark text-md md:text-base xl:text-lg font-medium mb-8">
+          <div className="flex flex-row items-center mb-8 italic font-medium text-center h-7 md:h-10 text-G-dark text-md md:text-base xl:text-lg">
             Your one-stop shop for giving - 20% of every sale donated to the
             charity of your choice.&nbsp;{' '}
             <RiInformationLine className="hidden lg:flex" />
@@ -83,7 +83,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
           <div className="text-center">
             <Button
               children="Sign In"
-              className="h-7 w-full md:h-10 py-1 md:py-2 px-6 xl:px-8 items-center bg-white hover:bg-G-light border-G-light hover:border-white border-2 hover:border-2 text-sm text-G-dark hover:text-white font-medium"
+              className="items-center w-full px-6 py-1 text-sm font-medium bg-white border-2 h-7 md:h-10 md:py-2 xl:px-8 hover:bg-G-light border-G-light hover:border-white hover:border-2 text-G-dark hover:text-white"
               onClick={handleOnClick}
             />
           </div>

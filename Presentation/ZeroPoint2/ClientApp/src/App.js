@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { HomeScreen } from './screens/HomeScreen';
 import ContactInfo from './screens/ContactInfo/ContactInfo';
@@ -33,22 +33,22 @@ function App() {
           {!isLogin ? (
             <NavBar handleToggle={handleToggle} handleSignIn={handleSignIn} />
           ) : (
-            <LoginNavBar handleToggle={handleToggle} handleSignIn={handleSignIn} />
+            <LoginNavBar
+              handleToggle={handleToggle}
+              handleSignIn={handleSignIn}
+            />
           )}
         </header>
         <main className="container max-w-screen-xl">
           {/* <Riban /> */}
-          <Switch>
-            <Route path="/product-upload">
-              <ProductUploadScreen />
-            </Route>
-            <Route path="/contact-info">
-              <ContactInfo />
-            </Route>
-            <Route path="/">
-              <HomeScreen />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route
+              path="/product-upload"
+              element={<ProductUploadScreen />}
+            ></Route>
+            <Route path="/contact-info" element={<ContactInfo />}></Route>
+            <Route path="/" element={<HomeScreen />}></Route>
+          </Routes>
         </main>
         <footer className="flex">
           <Footer />
