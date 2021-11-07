@@ -11,15 +11,28 @@ import NavBar from './components/NavBar/NavBar';
 import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Footer from './components/Footer/Footer';
 import { Modal } from './components/Modal/Modal';
+import { AuthRoute, PrivateRoute } from './routes';
 
 import './App.css';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserData] = useState(null);
+
   const [showModal, setshowModal] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
 
   const handleToggle = () => {
     setshowModal(!showModal);
+  };
+
+  const handleSignup = (data) => {
+    setUserData(data);
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setUserData(null);
+    setIsAuthenticated(false);
   };
 
   const handleSignIn = () => {
@@ -42,10 +55,10 @@ function App() {
         <main className="container max-w-screen-xl">
           {/* <Riban /> */}
           <Routes>
-            <Route
+            <PrivateRoute
               path="/product-upload"
               element={<ProductUploadScreen />}
-            ></Route>
+            ></PrivateRoute>
             <Route path="/contact-info" element={<ContactInfo />}></Route>
             <Route path="/" element={<HomeScreen />}></Route>
           </Routes>
