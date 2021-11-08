@@ -157,9 +157,9 @@ export const NavBar = ({
           </div>
         </form>
       </div>
-      <div className="flex mt-2 text-base italic nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
+      <div className="flex items-center mt-2 text-base italic nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
         Environmental Socially responsible gifts - your one-shop shop for giving
-        -20% of every sale donated to the charity fo your choice
+        -20% of every sale donated to the charity fo your choice&nbsp;
         <RiInformationLine size={24} />
       </div>
     </motion.div>
