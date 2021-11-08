@@ -20,6 +20,7 @@ function App() {
   const [userData, setUserData] = useState(null);
 
   const [showModal, setshowModal] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleToggle = () => {
     setshowModal(!showModal);
@@ -30,7 +31,7 @@ function App() {
     setIsAuthenticated(true);
   };
 
-  const handleLogout = () => {
+  const handleLogout = (data) => {
     setUserData(null);
     setIsAuthenticated(false);
   };
@@ -55,10 +56,10 @@ function App() {
         <main className="container max-w-screen-xl">
           {/* <Riban /> */}
           <Routes>
-            <PrivateRoute
+            <Route
               path="/product-upload"
               element={<ProductUploadScreen />}
-            ></PrivateRoute>
+            ></Route>
             <Route path="/contact-info" element={<ContactInfo />}></Route>
             <Route path="/" element={<HomeScreen />}></Route>
           </Routes>
