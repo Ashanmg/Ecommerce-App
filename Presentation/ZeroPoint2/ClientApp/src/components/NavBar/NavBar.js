@@ -48,7 +48,7 @@ export const NavBar = ({
           </div>
         </div>
         <div className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-G-dark">
-          your one-shop shop for giving -20% of every sale donated to the
+          your one-shop shop for giving - 20% of every sale donated to the
           charity fo your choice
         </div>
         <div>
@@ -159,7 +159,7 @@ export const NavBar = ({
       </div>
       <div className="flex items-center mt-2 text-base italic nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
         Environmental Socially responsible gifts - your one-shop shop for giving
-        -20% of every sale donated to the charity fo your choice&nbsp;
+        - 20% of every sale donated to the charity fo your choice&nbsp;
         <RiInformationLine size={24} />
       </div>
     </motion.div>
