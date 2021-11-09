@@ -23,7 +23,7 @@ input:checked + div svg {
     'main'
     'footer';
   grid-template-columns: 1fr;
-  grid-template-rows: 6rem 1fr 2rem;
+  grid-template-rows: 6rem 1fr 3rem;
 }
 
 @media (max-width: 1024px) {
