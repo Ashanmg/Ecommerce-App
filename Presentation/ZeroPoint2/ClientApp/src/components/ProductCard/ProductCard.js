@@ -30,15 +30,15 @@ export const ProductCard = ({ className, thumbnail, price, ...restProps }) => {
         alt=""
       />
       <div
-        className="bottom-0 flex flex-col w-full h-4 py-2 text-sm italic product-card__description text-G-dark"
-        style={{ transition: 'height 1s ease-in' }}
+        className="bottom-0 flex flex-col w-full h-10 py-2 text-sm italic product-card__description text-G-dark"
+        style={{ transition: 'height 1s ease-in'}}
       >
         {isFocus && (
-          <span className="text-sm">
+          <span className="text-sm product-card__description__title">
             Leather Dog Collar with Hand Made Ornament
           </span>
         )}
-        <span className="font-bold text-G-dark">{price}</span>
+        <span className="font-bold product-card__description__price text-G-dark">{price}</span>
       </div>
     </motion.div>
   );
