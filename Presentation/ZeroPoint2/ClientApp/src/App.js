@@ -11,9 +11,11 @@ import NavBar from './components/NavBar/NavBar';
 import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Footer from './components/Footer/Footer';
 import { Modal } from './components/Modal/Modal';
+import LayoutHeader from './components/LayoutHeader/LayoutHeader';
 import { AuthRoute, PrivateRoute } from './routes';
 
 import './App.css';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,10 +49,13 @@ function App() {
           {!isLogin ? (
             <NavBar handleToggle={handleToggle} handleSignIn={handleSignIn} />
           ) : (
-            <LoginNavBar
-              handleToggle={handleToggle}
-              handleSignIn={handleSignIn}
-            />
+            <>
+              <LoginNavBar
+                handleToggle={handleToggle}
+                handleSignIn={handleSignIn}
+              />
+              <LayoutHeader />
+            </>
           )}
         </header>
         <main className="container max-w-screen-xl">
