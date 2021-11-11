@@ -27,195 +27,245 @@ import product26 from '../assets/products/26.JPG';
 import product27 from '../assets/products/27.JPG';
 
 export const hiddenProds = [
-    {
-      id: 19,
-      thumbnail: product19,
-    },
-    {
-      id: 20,
-      thumbnail: product20,
-    },
-    {
-      id: 21,
-      thumbnail: product21,
-    },
-    {
-      id: 22,
-      thumbnail: product22,
-    },
-    {
-      id: 23,
-      thumbnail: product23,
-    },
-    {
-      id: 24,
-      thumbnail: product24,
-    },
-    {
-      id: 25,
-      thumbnail: product25,
-    },
-    {
-      id: 26,
-      thumbnail: product26,
-    },
-    {
-      id: 27,
-      thumbnail: product27,
-    },
-  ];
-  
-export const  initialFProducts = [
-    {
-      id: 1,
-      thumbnail: product1,
-    },
-    {
-      id: 2,
-      thumbnail: product2,
-    },
-    {
-      id: 3,
-      thumbnail: product3,
-    },
-    {
-      id: 4,
-      thumbnail: product4,
-    },
-    {
-      id: 5,
-      thumbnail: product5,
-    },
-    {
-      id: 6,
-      thumbnail: product6,
-    },
-    {
-      id: 7,
-      thumbnail: product7,
-    },
-    {
-      id: 8,
-      thumbnail: product8,
-    },
-    {
-      id: 9,
-      thumbnail: product9,
-    },
-    {
-      id: 10,
-      thumbnail: product10,
-    },
-    {
-      id: 11,
-      thumbnail: product11,
-    },
-    {
-      id: 12,
-      thumbnail: product12,
-    },
-    {
-      id: 13,
-      thumbnail: product13,
-    },
-    {
-      id: 14,
-      thumbnail: product14,
-    },
-    {
-      id: 15,
-      thumbnail: product15,
-    },
-    {
-      id: 16,
-      thumbnail: product16,
-    },
-    {
-      id: 17,
-      thumbnail: product17,
-    },
-    {
-      id: 18,
-      thumbnail: product18,
-    },
-  ];
+  {
+    id: 19,
+    thumbnail: product19,
+    price: '$250',
+  },
+  {
+    id: 20,
+    thumbnail: product20,
+    price: '$352',
+  },
+  {
+    id: 21,
+    thumbnail: product21,
+    price: '$225',
+  },
+  {
+    id: 22,
+    thumbnail: product22,
+    price: '$35',
+  },
+  {
+    id: 23,
+    thumbnail: product23,
+    price: '$238',
+  },
+  {
+    id: 24,
+    thumbnail: product24,
+    price: '$298',
+  },
+  {
+    id: 25,
+    thumbnail: product25,
+    price: '$209',
+  },
+  {
+    id: 26,
+    thumbnail: product26,
+    price: '$256',
+  },
+  {
+    id: 27,
+    thumbnail: product27,
+    price: '$199',
+  },
+];
 
-  export const  initialMProducts = [
-    {
-      id: 1,
-      thumbnail: product1,
-    },
-    {
-      id: 2,
-      thumbnail: product2,
-    },
-    {
-      id: 3,
-      thumbnail: product3,
-    },
-    {
-      id: 4,
-      thumbnail: product4,
-    },
-    {
-      id: 5,
-      thumbnail: product5,
-    },
-    {
-      id: 6,
-      thumbnail: product6,
-    },
-    {
-      id: 7,
-      thumbnail: product7,
-    },
-    {
-      id: 8,
-      thumbnail: product8,
-    },
-    {
-      id: 9,
-      thumbnail: product9,
-    },
-    {
-      id: 10,
-      thumbnail: product10,
-    },
-    {
-      id: 11,
-      thumbnail: product11,
-    },
-    {
-      id: 12,
-      thumbnail: product12,
-    }
-  ];
+export const initialFProducts = [
+  {
+    id: 1,
+    thumbnail: product1,
+    price: '$250',
+  },
+  {
+    id: 2,
+    thumbnail: product2,
+    price: '$352',
+  },
+  {
+    id: 3,
+    thumbnail: product3,
+    price: '$225',
+  },
+  {
+    id: 4,
+    thumbnail: product4,
+    price: '$35',
+  },
+  {
+    id: 5,
+    thumbnail: product5,
+    price: '$238',
+  },
+  {
+    id: 6,
+    thumbnail: product6,
+    price: '$298',
+  },
+  {
+    id: 7,
+    thumbnail: product7,
+    price: '$209',
+  },
+  {
+    id: 8,
+    thumbnail: product8,
+    price: '$256',
+  },
+  {
+    id: 9,
+    thumbnail: product9,
+    price: '$199',
+  },
+  {
+    id: 10,
+    thumbnail: product10,
+    price: '$250',
+  },
+  {
+    id: 11,
+    thumbnail: product11,
+    price: '$352',
+  },
+  {
+    id: 12,
+    thumbnail: product12,
+    price: '$225',
+  },
+  {
+    id: 13,
+    thumbnail: product13,
+    price: '$35',
+  },
+  {
+    id: 14,
+    thumbnail: product14,
+    price: '$238',
+  },
+  {
+    id: 15,
+    thumbnail: product15,
+    price: '$298',
+  },
+  {
+    id: 16,
+    thumbnail: product16,
+    price: '$209',
+  },
+  {
+    id: 17,
+    thumbnail: product17,
+    price: '$256',
+  },
+  {
+    id: 18,
+    thumbnail: product18,
+    price: '$199',
+  },
+];
 
-  export const  initialSProducts = [
-    {
-      id: 1,
-      thumbnail: product1,
-    },
-    {
-      id: 2,
-      thumbnail: product2,
-    },
-    {
-      id: 3,
-      thumbnail: product3,
-    },
-    {
-      id: 4,
-      thumbnail: product4,
-    },
-    {
-      id: 5,
-      thumbnail: product5,
-    },
-    {
-      id: 6,
-      thumbnail: product6,
-    }
-  ];
+export const initialMProducts = [
+  {
+    id: 1,
+    thumbnail: product1,
+    price: '$250',
+  },
+  {
+    id: 2,
+    thumbnail: product2,
+    price: '$352',
+  },
+  {
+    id: 3,
+    thumbnail: product3,
+    price: '$225',
+  },
+  {
+    id: 4,
+    thumbnail: product4,
+    price: '$35',
+  },
+  {
+    id: 5,
+    thumbnail: product5,
+    price: '$238',
+  },
+  {
+    id: 6,
+    thumbnail: product6,
+    price: '$298',
+  },
+  {
+    id: 7,
+    thumbnail: product7,
+    price: '$209',
+  },
+  {
+    id: 8,
+    thumbnail: product8,
+    price: '$256',
+  },
+  {
+    id: 9,
+    thumbnail: product9,
+    price: '$199',
+  },
+  {
+    id: 10,
+    thumbnail: product10,
+    price: '$250',
+  },
+  {
+    id: 11,
+    thumbnail: product11,
+    price: '$352',
+  },
+  {
+    id: 12,
+    thumbnail: product12,
+    price: '$225',
+  },
+];
 
-  export default {initialFProducts, initialMProducts, initialSProducts, hiddenProds};
+export const initialSProducts = [
+  {
+    id: 1,
+    thumbnail: product1,
+    price: '$250',
+  },
+  {
+    id: 2,
+    thumbnail: product2,
+    price: '$352',
+  },
+  {
+    id: 3,
+    thumbnail: product3,
+    price: '$225',
+  },
+  {
+    id: 4,
+    thumbnail: product4,
+    price: '$35',
+  },
+  {
+    id: 5,
+    thumbnail: product5,
+    price: '$238',
+  },
+  {
+    id: 6,
+    thumbnail: product6,
+    price: '$298',
+  },
+];
+
+export default {
+  initialFProducts,
+  initialMProducts,
+  initialSProducts,
+  hiddenProds,
+};

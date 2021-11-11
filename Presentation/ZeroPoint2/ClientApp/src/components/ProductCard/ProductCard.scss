@@ -2,4 +2,8 @@
   box-sizing: border-box;
   display: flex;
   font-family: var(--font-family);
+  
+  &__description {
+    background-color: #f0f5f1;
+  }
 }

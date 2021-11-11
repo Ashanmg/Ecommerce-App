@@ -6,6 +6,7 @@ import {
   RiSearchLine,
   RiLogoutCircleRLine,
   RiShoppingCartFill,
+  RiFilter2Fill,
 } from 'react-icons/ri';
 
 import zeroLogo from '../../assets/zeroLogo.png';
@@ -14,7 +15,12 @@ import Button from '../Button/Button';
 
 import './LoginNavBar.scss';
 
-export const LoginNavBar = ({ className, handleToggle, handleSignIn, ...restProps }) => {
+export const LoginNavBar = ({
+  className,
+  handleToggle,
+  handleSignIn,
+  ...restProps
+}) => {
   const LoginNavBarClasses = CN(
     'login-nav-bar nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3',
     className,
@@ -65,7 +71,15 @@ export const LoginNavBar = ({ className, handleToggle, handleSignIn, ...restProp
                 <Button
                   children=""
                   className="items-center px-2 py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
+                  afterIcon={<RiFilter2Fill size={32} />}
+                />
+              </div>
+              <div className="search-btn">
+                <Button
+                  children=""
+                  className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
                   afterIcon={<RiShoppingCartFill size={32} />}
+                  onClick={handleSignIn}
                 />
               </div>
               <div className="search-btn">
