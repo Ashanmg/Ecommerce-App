@@ -92,7 +92,7 @@ export const HomeScreen = ({ className, ...restProps }) => {
     <div className={HomeScreenClasses} {...restProps}>
       <Helmet>
         <title>ZeroPoint2 - Environmental, Socially Responsible Gifts</title>
-        <meta name="description" content="Environmental, socially responsible gifts - Your one-stop shop for giving - 20% of every sale donated to the charity of your choice." />
+        <meta name="description" content="ZeroPoint2, Environmental, socially responsible gifts - Your one-stop shop for giving - 20% of every sale donated to the charity of your choice." />
       </Helmet>
       {products.map((product, idx) => (
         <ProductCard
