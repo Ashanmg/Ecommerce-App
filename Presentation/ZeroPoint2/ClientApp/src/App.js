@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HomeScreen } from './screens/HomeScreen';
 import ContactInfo from './screens/ContactInfo/ContactInfo';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
+import FundRaiseScreen from './screens/FundRaiseScreen/FundRaiseScreen';
 import { useState } from 'react';
 
 import ProductUploadScreen from './screens/ProductUploadScreen/ProductUploadScreen';
@@ -21,11 +22,16 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  const [showModal, setshowModal] = useState(false);
+  const [showSignUpModal, setshowSingUpModal] = useState(false);
+  const [showFundModal, setshowFundModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
   const handleToggle = () => {
-    setshowModal(!showModal);
+    setshowSingUpModal(!showSignUpModal);
+  };
+
+  const handleFundModal = () => {
+    setshowFundModal(!showFundModal);
   };
 
   const handleSignup = (data) => {
@@ -47,7 +53,7 @@ function App() {
       <div className="h-screen font-sans App">
         <header>
           {!isLogin ? (
-            <NavBar handleToggle={handleToggle} handleSignIn={handleSignIn} />
+            <NavBar handleToggle={handleToggle} handleFundModal={handleFundModal} handleSignIn={handleSignIn} />
           ) : (
             <>
               <LoginNavBar
@@ -73,8 +79,11 @@ function App() {
           <Footer />
         </footer>
       </div>
-      <Modal isOpen={showModal} onClickOverlay={handleToggle} size="sm">
+      <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen />
+      </Modal>
+      <Modal isOpen={showFundModal} onClickOverlay={handleFundModal} size="sm">
+        <FundRaiseScreen />
       </Modal>
       {/* <Switch>
         <Route path="/signup">
