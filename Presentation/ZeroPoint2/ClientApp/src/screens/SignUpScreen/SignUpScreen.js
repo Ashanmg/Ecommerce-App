@@ -39,11 +39,12 @@ export const SignUpScreen = ({ className, ...restProps }) => {
             <form action="submit">
               <TextField placeholder="First Name" className="mb-4" />
               <TextField placeholder="Last Name" className="mb-4" />
-              <TextField placeholder="Email" className="mb-4" />
+              <TextField placeholder="Email" autocomplete='off' className="mb-4" />
               <TextField
                 placeholder="Password"
                 className="mb-4"
                 type="password"
+                autocomplete='new-password'
               />
               <CheckBox title="Please subscribe me to the monthly newsletter." />
               <div className="mb-4 text-justify">

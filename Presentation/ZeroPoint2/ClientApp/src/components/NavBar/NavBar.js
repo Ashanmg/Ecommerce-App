@@ -55,7 +55,11 @@ export const NavBar = ({
           <form action="" method="post">
             <div className="flex justify-around flex-grow mb-2">
               <div className="flex-1 mr-1 email-field">
-                <TextField placeholder="Email" />
+                <TextField
+                  placeholder="Email"
+                  autocomplete="off"
+                  type="email"
+                />
               </div>
               <div className="flex-1 password-field">
                 <TextField
@@ -63,6 +67,7 @@ export const NavBar = ({
                   onClickIconAfter={() => {
                     setPasswordShow(!passwordShow);
                   }}
+                  autocomplete="new-password"
                   type={passwordShow ? 'text' : 'password'}
                   iconAfter={
                     passwordShow ? (
@@ -120,11 +125,12 @@ export const NavBar = ({
           </div>
           <div className="flex justify-around flex-grow mr-1 lg:mr-3">
             <div className="flex-1 mr-1 email-field lg:mr-3">
-              <TextField placeholder="Email" />
+              <TextField placeholder="Email" autocomplete='off' />
             </div>
             <div className="flex-1 password-field">
               <TextField
                 placeholder="Password"
+                autocomplete="new-password"
                 onClickIconAfter={() => {
                   setPasswordShow(!passwordShow);
                 }}

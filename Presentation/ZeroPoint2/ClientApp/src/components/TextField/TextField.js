@@ -16,6 +16,7 @@ export const TextField = ({
   isCustomStyles,
   onClickIconAfter,
   onClickIconBefore,
+  autocomplete,
   readOnly,
   size,
   wrapperClassName,
@@ -65,6 +66,7 @@ export const TextField = ({
         readOnly={false}
         placeholder={placeholder}
         className={CN('w-full h-full pl-2 focus:outline-none')}
+        autocomplete={autocomplete}
       />
       {iconAfter && (
         <div
@@ -91,6 +93,7 @@ export const TextField = ({
 TextField.defaultProps = {
   className: undefined,
   type: 'text',
+  autocomplete: 'off',
 };
 
 export default TextField;
