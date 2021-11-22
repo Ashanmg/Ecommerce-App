@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import CN from 'classnames';
+import _ from 'lodash';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 import {
@@ -9,7 +11,6 @@ import {
 } from '../../config/product';
 
 import './HomeScreen.scss';
-import _ from 'lodash';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 export const HomeScreen = ({ className, ...restProps }) => {
@@ -89,6 +90,10 @@ export const HomeScreen = ({ className, ...restProps }) => {
 
   return (
     <div className={HomeScreenClasses} {...restProps}>
+      <Helmet>
+        <title>ZeroPoint2 - Environmental, Socially Responsible Gifts</title>
+        <meta name="description" content="ZeroPoint2, Environmental, socially responsible gifts - Your one-stop shop for giving - 20% of every sale donated to the charity of your choice." />
+      </Helmet>
       {products.map((product, idx) => (
         <ProductCard
           onClick={() => console.log(idx)}
