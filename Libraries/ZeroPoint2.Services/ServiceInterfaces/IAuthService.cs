@@ -14,6 +14,6 @@ namespace ZeroPoint2.Services
 
         Task<User> LoginAsync(UserForLoginDto userForRegisterDto);
 
-        Task<bool> UserExistsAsync(string username);
+        Task<bool> UserExistsAsync(string email);
     }
 }

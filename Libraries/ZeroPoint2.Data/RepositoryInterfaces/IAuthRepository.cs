@@ -10,7 +10,7 @@ namespace ZeroPoint2.Data
     public interface IAuthRepository
     {
         Task<User> RegisterAsync(User user, string password);
-        Task<User> LoginAsync(string username, string password);
-        Task<bool> UserExistsAsync(string username);
+        Task<User> LoginAsync(string email, string password);
+        Task<bool> UserExistsAsync(string email);
     }
 }

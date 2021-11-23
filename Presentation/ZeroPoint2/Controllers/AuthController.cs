@@ -30,9 +30,9 @@ namespace ZeroPoint2.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+            userForRegisterDto.Email = userForRegisterDto.Email.ToLower();
 
-            if (await _authService.UserExistsAsync(userForRegisterDto.Username))
+            if (await _authService.UserExistsAsync(userForRegisterDto.Email))
             {
                 return BadRequest("Username already exists");
             }
@@ -55,8 +55,8 @@ namespace ZeroPoint2.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, string.Format("{0} {1}",userFromRepo.Firstname, userFromRepo.Lastname)),
-                new Claim(ClaimTypes.Email, userFromRepo.Username),
+                new Claim(ClaimTypes.Name, userFromRepo.Name),
+                new Claim(ClaimTypes.Email, userFromRepo.Email),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.
