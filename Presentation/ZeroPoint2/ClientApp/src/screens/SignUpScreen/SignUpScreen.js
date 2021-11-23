@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CN from 'classnames';
-import { Link } from 'react-router-dom';
-import { RiInformationLine } from 'react-icons/ri';
-
-import zeroLogo from '../../assets/zeroLogo.png';
+import { Flip, toast } from 'react-toastify';
 
 import TextField from '../../components/TextField/TextField';
 import CheckBox from '../../components/CheckBox/CheckBox';
@@ -18,10 +15,35 @@ export const SignUpScreen = ({ className, ...restProps }) => {
     {}
   );
 
-  // const history = useHistory();
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // const handleOnClick = () => {
-  //   history.push('/');
+  const errorToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'error',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  // const handleSubmit = (e) => {
+  //   if (fullName === '' || email === '' || password === '') {
+  //     errorToast('Please fill in all fields');
+  //   } else if (!emailValidation(email)) {
+  //     errorToast('Please Enter Valid Email');
+  //   } else if (password.length < 6) {
+  //     errorToast('Password must be at least 6 characters');
+  //   } else {
+  //     e.preventDefault();
+  //     dispatch(loginSuccess({ email: email, password: password }));
+  //   }
   // };
 
   return (
@@ -36,15 +58,28 @@ export const SignUpScreen = ({ className, ...restProps }) => {
             Create Account
           </div>
           <div className="text-xs sign-up-screen__left__form">
-            <form action="submit">
-              <TextField placeholder="First Name" className="mb-4" />
-              <TextField placeholder="Last Name" className="mb-4" />
-              <TextField placeholder="Email" autoComplete='off' className="mb-4" />
+            <form onSubmit={(e) => handleSubmit(e)}>
+              {/* <TextField placeholder="First Name" className="mb-4" /> */}
+              <TextField
+                placeholder="Name"
+                className="mb-4"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+              <TextField
+                placeholder="Email"
+                autoComplete="off"
+                className="mb-4"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <TextField
                 placeholder="Password"
                 className="mb-4"
                 type="password"
-                autoComplete='new-password'
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <CheckBox title="Please subscribe me to the monthly newsletter." />
               <div className="mb-4 text-justify">
@@ -58,6 +93,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
                 <Button
                   children="Sign Up"
                   className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
+                  type="submit"
                 />
               </div>
             </form>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { RiEyeLine, RiInformationLine, RiEyeOffLine } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Flip, toast } from 'react-toastify';
+import { useNavigate, useLocation } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
@@ -38,7 +39,7 @@ export const NavBar = ({
   const [passwordShow, setPasswordShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const isSmallWide = useMediaQuery('(max-width: 640px)');
@@ -63,10 +64,15 @@ export const NavBar = ({
     if (email === '' || password === '') {
       errorToast('Please fill in all fields');
     }
-
-    e.preventDefault();
-    dispatch(loginSuccess({ email: email, password: password }));
   };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    };
+  }, [location]);
 
   if (isSmallWide) {
     return (
