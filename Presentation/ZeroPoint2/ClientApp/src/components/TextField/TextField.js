@@ -6,6 +6,7 @@ import './TextField.scss';
 export const TextField = ({
   appearance,
   className,
+  colorRules,
   disabled,
   placeholder,
   type,
@@ -16,7 +17,7 @@ export const TextField = ({
   isCustomStyles,
   onClickIconAfter,
   onClickIconBefore,
-  autocomplete,
+  autoComplete,
   readOnly,
   size,
   wrapperClassName,
@@ -66,7 +67,7 @@ export const TextField = ({
         readOnly={false}
         placeholder={placeholder}
         className={CN('w-full h-full pl-2 focus:outline-none')}
-        autocomplete={autocomplete}
+        autoComplete={autoComplete}
       />
       {iconAfter && (
         <div
@@ -82,7 +83,11 @@ export const TextField = ({
         </div>
       )}
       {textRules && (
-        <div className="text-xs italic text-right text-G-light">
+        <div
+          className={CN('text-xs italic text-right text-G-light', {
+            colorRules: colorRules ? colorRules : 'text-G-light',
+          })}
+        >
           {textRules}
         </div>
       )}
@@ -93,7 +98,7 @@ export const TextField = ({
 TextField.defaultProps = {
   className: undefined,
   type: 'text',
-  autocomplete: 'off',
+  autoComplete: 'off',
 };
 
 export default TextField;

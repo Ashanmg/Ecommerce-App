@@ -54,39 +54,39 @@ export const HomeScreen = ({ className, ...restProps }) => {
     }
   }, [isLargeWide, isMediumWide, isSmallWide]);
 
-  useEffect(() => {
-    const pro = setInterval(() => {
-      let first = Math.floor(Math.random() * randomLimit);
-      let second = Math.floor(Math.random() * randomLimit + randomLimit);
-      let third = Math.floor(Math.random() * randomLimit + randomLimit * 2);
+  // useEffect(() => {
+  //   const pro = setInterval(() => {
+  //     let first = Math.floor(Math.random() * randomLimit);
+  //     let second = Math.floor(Math.random() * randomLimit + randomLimit);
+  //     let third = Math.floor(Math.random() * randomLimit + randomLimit * 2);
 
-      randomFirst = Math.floor(Math.random() * hiddenProds.length);
-      let randomFElement = hiddenProds[randomFirst];
-      hiddenProds.splice(randomFirst, 1);
+  //     randomFirst = Math.floor(Math.random() * hiddenProds.length);
+  //     let randomFElement = hiddenProds[randomFirst];
+  //     hiddenProds.splice(randomFirst, 1);
 
-      randomSecond = Math.floor(Math.random() * hiddenProds.length);
-      let randomSElement = hiddenProds[randomSecond];
-      hiddenProds.splice(randomSecond, 1);
+  //     randomSecond = Math.floor(Math.random() * hiddenProds.length);
+  //     let randomSElement = hiddenProds[randomSecond];
+  //     hiddenProds.splice(randomSecond, 1);
 
-      randomThird = Math.floor(Math.random() * hiddenProds.length);
-      let randomTElement = hiddenProds[randomThird];
-      hiddenProds.splice(randomThird, 1);
+  //     randomThird = Math.floor(Math.random() * hiddenProds.length);
+  //     let randomTElement = hiddenProds[randomThird];
+  //     hiddenProds.splice(randomThird, 1);
 
-      hiddenProds.push(productCopy[first]);
-      hiddenProds.push(productCopy[second]);
-      hiddenProds.push(productCopy[third]);
+  //     hiddenProds.push(productCopy[first]);
+  //     hiddenProds.push(productCopy[second]);
+  //     hiddenProds.push(productCopy[third]);
 
-      productCopy[first] = randomFElement;
-      productCopy[second] = randomSElement;
-      productCopy[third] = randomTElement;
+  //     productCopy[first] = randomFElement;
+  //     productCopy[second] = randomSElement;
+  //     productCopy[third] = randomTElement;
 
-      setProducts(productCopy);
-    }, 3000);
+  //     setProducts(productCopy);
+  //   }, 3000);
 
-    return () => {
-      clearInterval(pro);
-    };
-  }, [products]);
+  //   return () => {
+  //     clearInterval(pro);
+  //   };
+  // }, [products]);
 
   return (
     <div className={HomeScreenClasses} {...restProps}>

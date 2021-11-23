@@ -13,6 +13,7 @@ import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Footer from './components/Footer/Footer';
 import { Modal } from './components/Modal/Modal';
 import LayoutHeader from './components/LayoutHeader/LayoutHeader';
+import { ToastContainer } from 'react-toastify';
 import { AuthRoute, PrivateRoute } from './routes';
 
 import './App.css';
@@ -90,6 +91,7 @@ function App() {
           <SignUpScreen />
         </Route>
       </Switch> */}
+      <ToastContainer autoClose={5000} />
     </Router>
   );
 }

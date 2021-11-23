@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import CN from 'classnames';
 import { RiEyeLine, RiInformationLine, RiEyeOffLine } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Flip, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import {
+  loginPending,
+  loginFail,
+  loginSuccess,
+} from '../../features/userSlice';
 
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
@@ -11,6 +20,7 @@ import zeroLogo from '../../assets/zeroLogo.png';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './NavBar.scss';
+import { emailValidation } from '../../config/utils/emailValidation';
 
 export const NavBar = ({
   className,
@@ -26,8 +36,37 @@ export const NavBar = ({
   );
 
   const [passwordShow, setPasswordShow] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const isSmallWide = useMediaQuery('(max-width: 640px)');
+
+  const dispatch = useDispatch();
+
+  const errorToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'error',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    if (email === '' || password === '') {
+      errorToast('Please fill in all fields');
+    }
+
+    e.preventDefault();
+    dispatch(loginSuccess({ email: email, password: password }));
+  };
 
   if (isSmallWide) {
     return (
@@ -53,13 +92,15 @@ export const NavBar = ({
           charity fo your choice
         </div>
         <div>
-          <form action="" method="post">
+          <form onSubmit={(e) => handleSubmit(e)}>
             <div className="flex justify-around flex-grow mb-2">
               <div className="flex-1 mr-1 email-field">
                 <TextField
                   placeholder="Email"
-                  autocomplete="off"
+                  autoComplete="off"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="flex-1 password-field">
@@ -68,7 +109,7 @@ export const NavBar = ({
                   onClickIconAfter={() => {
                     setPasswordShow(!passwordShow);
                   }}
-                  autocomplete="new-password"
+                  autoComplete="new-password"
                   type={passwordShow ? 'text' : 'password'}
                   iconAfter={
                     passwordShow ? (
@@ -77,6 +118,8 @@ export const NavBar = ({
                       <RiEyeLine size={20} />
                     )
                   }
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -85,7 +128,8 @@ export const NavBar = ({
                 <Button
                   children="Sign In"
                   className="items-center px-5 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
-                  onClick={handleSignIn}
+                  // onClick={handleSignIn}
+                  type="submit"
                 />
               </div>
               <div className="signUp-btn">
@@ -96,7 +140,11 @@ export const NavBar = ({
                 />
               </div>
               <div className="ml-1">
-                <RiInformationLine size={26} className="text-G-dark" />
+                <RiInformationLine
+                  onClick={handleFundModal}
+                  size={26}
+                  className="cursor-pointer text-G-dark"
+                />
               </div>
             </div>
           </form>
@@ -114,7 +162,7 @@ export const NavBar = ({
       transition={{ stiffness: 120 }}
     >
       <div className="flex flex-col items-center pt-5">
-        <form action="submit" method="post" className="flex w-full">
+        <form className="flex w-full" onSubmit={(e) => handleSubmit(e)}>
           <div className="mr-1 logo lg:mr-3">
             <Link to="/" className="flex justify-center">
               <img
@@ -126,12 +174,17 @@ export const NavBar = ({
           </div>
           <div className="flex justify-around flex-grow mr-1 lg:mr-3">
             <div className="flex-1 mr-1 email-field lg:mr-3">
-              <TextField placeholder="Email" autocomplete='off' />
+              <TextField
+                placeholder="Email"
+                autoComplete="off"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="flex-1 password-field">
               <TextField
                 placeholder="Password"
-                autocomplete="new-password"
+                autoComplete="new-password"
                 onClickIconAfter={() => {
                   setPasswordShow(!passwordShow);
                 }}
@@ -143,6 +196,8 @@ export const NavBar = ({
                     <RiEyeLine size={20} />
                   )
                 }
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -151,7 +206,7 @@ export const NavBar = ({
               <Button
                 children="Sign In"
                 className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
-                onClick={handleSignIn}
+                type="submit"
               />
             </div>
             <div className="signUp-btn">
@@ -164,10 +219,16 @@ export const NavBar = ({
           </div>
         </form>
       </div>
-      <div className="flex items-center mt-2 text-base italic nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
-        Environmental Socially responsible gifts - your one-shop shop for giving
-        - 20% of every sale donated to the charity fo your choice&nbsp;
-        <RiInformationLine onClick={handleFundModal} size={24} />
+      <div className="flex items-center justify-between mt-2 text-base italic text-left nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
+        <span>
+          Sustainable, socially responsible gifts - your one stop shop for gift
+          giving - 20% of every sale donated to the charity of your choice
+        </span>
+        <RiInformationLine
+          className="cursor-pointer"
+          onClick={handleFundModal}
+          size={24}
+        />
       </div>
     </motion.div>
   );

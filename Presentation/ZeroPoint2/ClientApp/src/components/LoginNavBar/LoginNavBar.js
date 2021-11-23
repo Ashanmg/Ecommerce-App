@@ -27,8 +27,6 @@ export const LoginNavBar = ({
     {}
   );
 
-  const [passwordShow, setPasswordShow] = useState(false);
-
   return (
     <motion.div
       className={LoginNavBarClasses}
