@@ -22,9 +22,8 @@ namespace ZeroPoint2.Services
         {
             var userToCreate = new User
             {
-                Firstname = userForRegisterDto.Firstname,
-                Lastname = userForRegisterDto.Lastname,
-                Username = userForRegisterDto.Username
+                Name = userForRegisterDto.Name,
+                Email = userForRegisterDto.Email
             };
 
             var createdUser = await _authRepository.RegisterAsync(userToCreate, userForRegisterDto.Password);
@@ -34,12 +33,12 @@ namespace ZeroPoint2.Services
 
         public async Task<User> LoginAsync(UserForLoginDto userForRegisterDto)
         {
-            return await _authRepository.LoginAsync(userForRegisterDto.Username, userForRegisterDto.Password);
+            return await _authRepository.LoginAsync(userForRegisterDto.Email, userForRegisterDto.Password);
         }
 
-        public async Task<bool> UserExistsAsync(string username)
+        public async Task<bool> UserExistsAsync(string email)
         {
-            return await _authRepository.UserExistsAsync(username);
+            return await _authRepository.UserExistsAsync(email);
         }
     }
 }

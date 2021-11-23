@@ -16,9 +16,9 @@ namespace ZeroPoint2.Data
             this._context = context;
         }
 
-        public async Task<User> LoginAsync(string username, string password)
+        public async Task<User> LoginAsync(string email, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {
@@ -57,6 +57,7 @@ namespace ZeroPoint2.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Created = DateTime.Now;
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -73,9 +74,9 @@ namespace ZeroPoint2.Data
             }
         }
 
-        public async Task<bool> UserExistsAsync(string username)
+        public async Task<bool> UserExistsAsync(string email)
         {
-            if (await _context.Users.AnyAsync(u => u.Username == username))
+            if (await _context.Users.AnyAsync(u => u.Email == email))
             {
                 return true;
             }
