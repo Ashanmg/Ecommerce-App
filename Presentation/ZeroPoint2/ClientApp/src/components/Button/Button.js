@@ -6,6 +6,7 @@ import './Button.scss';
 export const Button = ({
   className,
   children,
+  type,
   afterIcon,
   beforeIcon,
   ...restProps
@@ -13,7 +14,7 @@ export const Button = ({
   const ButtonClasses = CN('button', className, {});
 
   return (
-    <button type="button" className={ButtonClasses} {...restProps}>
+    <button type={type} className={ButtonClasses} {...restProps}>
       {beforeIcon && beforeIcon}
       {children}
       {afterIcon && afterIcon}
@@ -23,6 +24,7 @@ export const Button = ({
 
 Button.defaultProps = {
   className: undefined,
+  type: 'button',
 };
 
 export default Button;

@@ -17,6 +17,7 @@ export const TextField = ({
   isCustomStyles,
   onClickIconAfter,
   onClickIconBefore,
+  onChange,
   autoComplete,
   readOnly,
   size,
@@ -67,6 +68,7 @@ export const TextField = ({
         disabled={false}
         readOnly={false}
         value={value}
+        onChange={onChange}
         placeholder={placeholder}
         className={CN('w-full h-full pl-2 focus:outline-none')}
         autoComplete={autoComplete}

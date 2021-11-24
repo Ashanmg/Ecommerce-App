@@ -61,11 +61,11 @@ export const NavBar = ({
     });
   };
 
-  const handleSubmit = (e) => {
-    if (email === '' || password === '') {
-      errorToast('Please fill in all fields');
-    }
-  };
+  // const handleSubmit = (e) => {
+  //   if (email === '' || password === '') {
+  //     errorToast('Please fill in all fields');
+  //   }
+  // };
 
   useEffect(() => {
     setEmail('');
@@ -107,7 +107,7 @@ export const NavBar = ({
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="flex-1 password-field">
+              <div className="flex-1 password-field"> 
                 <TextField
                   placeholder="Password"
                   onClickIconAfter={() => {
