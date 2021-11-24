@@ -37,8 +37,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
           </div>
           <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
-              <TextField placeholder="First Name" className="mb-4" />
-              <TextField placeholder="Last Name" className="mb-4" />
+              <TextField placeholder="Full Name" className="mb-4" />
               <TextField placeholder="Email" autocomplete='off' className="mb-4" />
               <TextField
                 placeholder="Password"
