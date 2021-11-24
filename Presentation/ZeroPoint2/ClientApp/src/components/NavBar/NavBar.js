@@ -45,6 +45,7 @@ export const NavBar = ({
   const isSmallWide = useMediaQuery('(max-width: 640px)');
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const errorToast = (message) => {
     toast(message, {
@@ -66,12 +67,9 @@ export const NavBar = ({
     }
   };
 
-  const location = useLocation();
-
   useEffect(() => {
-    return () => {
-      window.location.reload();
-    };
+    setEmail('');
+    setPassword('');
   }, [location]);
 
   if (isSmallWide) {

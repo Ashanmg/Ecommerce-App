@@ -20,6 +20,7 @@ export const TextField = ({
   autoComplete,
   readOnly,
   size,
+  value,
   wrapperClassName,
   ...restProps
 }) => {
@@ -65,6 +66,7 @@ export const TextField = ({
         type={type}
         disabled={false}
         readOnly={false}
+        value={value}
         placeholder={placeholder}
         className={CN('w-full h-full pl-2 focus:outline-none')}
         autoComplete={autoComplete}
