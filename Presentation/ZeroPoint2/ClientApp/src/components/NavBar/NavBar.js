@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { RiEyeLine, RiInformationLine, RiEyeOffLine } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Flip, toast } from 'react-toastify';
@@ -13,6 +13,8 @@ import {
   loginFail,
   loginSuccess,
 } from '../../features/userSlice';
+import { emailValidation } from '../../config/utils/emailValidation';
+import { userLogin } from '../../api/userApi';
 
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
@@ -21,7 +23,6 @@ import zeroLogo from '../../assets/zeroLogo.png';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './NavBar.scss';
-import { emailValidation } from '../../config/utils/emailValidation';
 
 export const NavBar = ({
   className,
@@ -47,6 +48,10 @@ export const NavBar = ({
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const { isLoading, isAuthenticated, error } = useSelector(
+    (state) => state.user
+  );
+
   const errorToast = (message) => {
     toast(message, {
       position: 'top-right',
@@ -61,11 +66,43 @@ export const NavBar = ({
     });
   };
 
-  // const handleSubmit = (e) => {
-  //   if (email === '' || password === '') {
-  //     errorToast('Please fill in all fields');
-  //   }
-  // };
+  const SuccessToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'success',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    if (email === '' || password === '') {
+      errorToast('Please fill in all fields');
+      return;
+    } else if (!emailValidation(email)) {
+      errorToast('Please enter a valid email');
+      return;
+    } else if (password.length < 6) {
+      errorToast('Password must be at least 6 characters');
+      return;
+    }
+    e.preventDefault();
+    dispatch(loginPending());
+
+    try {
+      const isAuth = await userLogin({ email, password });
+      dispatch(loginSuccess());
+      SuccessToast('Login Successful');
+    } catch (error) {
+      errorToast('Login is Failed');
+      dispatch(loginFail(error.message));
+    }
+  };
 
   useEffect(() => {
     setEmail('');
@@ -96,7 +133,7 @@ export const NavBar = ({
           charity fo your choice
         </div>
         <div>
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <form>
             <div className="flex justify-around flex-grow mb-2">
               <div className="flex-1 mr-1 email-field">
                 <TextField
@@ -107,7 +144,7 @@ export const NavBar = ({
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="flex-1 password-field"> 
+              <div className="flex-1 password-field">
                 <TextField
                   placeholder="Password"
                   onClickIconAfter={() => {
@@ -130,10 +167,11 @@ export const NavBar = ({
             <div className="flex items-center justify-center ml-9">
               <div className="mr-1 signIn-btn lg:mr-3">
                 <Button
-                  children="Sign In"
+                  children={!isLoading ? 'Sign In' : ''}
                   className="items-center px-5 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+                  isLoading={isLoading}
                   // onClick={handleSignIn}
-                  type="submit"
+                  // type="submit"
                 />
               </div>
               <div className="signUp-btn">
@@ -208,9 +246,12 @@ export const NavBar = ({
           <div className="flex">
             <div className="mr-1 signIn-btn lg:mr-3">
               <Button
-                children="Sign In"
+                children={!isLoading ? 'Sign In' : ''}
                 className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
-                type="submit"
+                color="text-G-dark"
+                // type="submit"
+                onClick={handleSubmit}
+                isLoading={isLoading}
               />
             </div>
             <div className="signUp-btn">

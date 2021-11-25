@@ -5,6 +5,7 @@ import ContactInfo from './screens/ContactInfo/ContactInfo';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import FundRaiseScreen from './screens/FundRaiseScreen/FundRaiseScreen';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import ProductUploadScreen from './screens/ProductUploadScreen/ProductUploadScreen';
 
@@ -18,14 +19,15 @@ import { AuthRoute, PrivateRoute } from './routes';
 
 import './App.css';
 
-
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
 
   const [showSignUpModal, setshowSingUpModal] = useState(false);
   const [showFundModal, setshowFundModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   const handleToggle = () => {
     setshowSingUpModal(!showSignUpModal);
@@ -53,8 +55,12 @@ function App() {
     <Router>
       <div className="h-screen font-sans App">
         <header>
-          {!isLogin ? (
-            <NavBar handleToggle={handleToggle} handleFundModal={handleFundModal} handleSignIn={handleSignIn} />
+          {!isAuthenticated ? (
+            <NavBar
+              handleToggle={handleToggle}
+              handleFundModal={handleFundModal}
+              handleSignIn={handleSignIn}
+            />
           ) : (
             <>
               <LoginNavBar

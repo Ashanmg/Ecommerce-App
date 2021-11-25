@@ -37,7 +37,6 @@ export const DropZone = ({ className, ...restProps }) => {
   const handleUpload = (e) => {
     e.preventDefault();
     const files = e.target.files[0];
-    console.log(files);
     setImage(files);
     setPreviewUrl(URL.createObjectURL(files));
   };
@@ -56,7 +55,7 @@ export const DropZone = ({ className, ...restProps }) => {
       </div>
       <header>Drag & Drop to Upload File</header>
       <span>OR</span>
-      <label htmlFor className="cursor-pointer underline">
+      <label htmlFor className="underline cursor-pointer">
         <input type="file" onChange={(e) => handleUpload(e)} hidden />
         Browse File
       </label>

@@ -45,7 +45,6 @@ export const HomeScreen = ({ className, ...restProps }) => {
       setProducts(initialFProducts);
       setRandomLimit(6);
     } else if (!isLargeWide && isMediumWide && isSmallWide) {
-      console.log(isLargeWide, isMediumWide, isSmallWide);
       setProducts(initialMProducts);
       setRandomLimit(4);
     } else if (!isLargeWide && !isMediumWide && !isSmallWide) {

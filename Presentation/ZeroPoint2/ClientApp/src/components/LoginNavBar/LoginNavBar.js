@@ -13,7 +13,11 @@ import zeroLogo from '../../assets/zeroLogo.png';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
+import { useDispatch } from 'react-redux';
+import {logOut } from '../../features/userSlice';
+
 import './LoginNavBar.scss';
+
 
 export const LoginNavBar = ({
   className,
@@ -26,6 +30,15 @@ export const LoginNavBar = ({
     className,
     {}
   );
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    sessionStorage.clear();
+    dispatch(logOut());
+  };
+
 
   return (
     <motion.div
@@ -85,7 +98,7 @@ export const LoginNavBar = ({
                   children=""
                   className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
                   afterIcon={<RiLogoutCircleRLine size={32} />}
-                  onClick={handleSignIn}
+                  onClick={handleLogout}
                 />
               </div>
             </div>

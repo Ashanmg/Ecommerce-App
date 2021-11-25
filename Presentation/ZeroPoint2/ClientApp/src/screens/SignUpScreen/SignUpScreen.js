@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CN from 'classnames';
 import { Link } from 'react-router-dom';
-import { RiInformationLine } from 'react-icons/ri';
+import { toast, Flip } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+
+import {
+  signupFail,
+  signupPending,
+  signupSuccess,
+} from '../../features/signupSlice';
+import { userSingUp } from '../../api/userApi';
+
+import { emailValidation } from '../../config/utils/emailValidation';
+import { useSelector } from 'react-redux';
 
 import zeroLogo from '../../assets/zeroLogo.png';
 
@@ -18,11 +29,74 @@ export const SignUpScreen = ({ className, ...restProps }) => {
     {}
   );
 
-  // const history = useHistory();
+  const { isLoading, isAuthenticated, error } = useSelector(
+    (state) => state.user
+  );
 
-  // const handleOnClick = () => {
-  //   history.push('/');
-  // };
+  const errorToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'error',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  const SuccessToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'success',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [subscribe, setSubscribe] = useState(false);
+  const [isLater, setIsLater] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    if (name === '' || email === '' || password === '') {
+      errorToast('Please fill in all fields');
+      return;
+    } else if (!emailValidation(email)) {
+      errorToast('Please enter a valid email');
+      return;
+    } else if (password.length < 6) {
+      errorToast('Password must be at least 6 characters');
+      return;
+    }
+    e.preventDefault();
+    dispatch(signupPending());
+
+    try {
+      const isSignup = await userSingUp({ name, email, password });
+      dispatch(signupSuccess());
+      SuccessToast('Registration Successful');
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 400) {
+          errorToast('User already exit');
+          dispatch(signupFail(error.response.data.message));
+        }
+      }
+      dispatch(signupFail(error.message));
+    }
+  };
 
   return (
     <div
@@ -37,26 +111,51 @@ export const SignUpScreen = ({ className, ...restProps }) => {
           </div>
           <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
-              <TextField placeholder="Full Name" className="mb-4" />
-              <TextField placeholder="Email" autocomplete='off' className="mb-4" />
+              <TextField
+                placeholder="Name"
+                className="mb-4"
+                autoComplete="off"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <TextField
+                placeholder="Email"
+                autoComplete="off"
+                className="mb-4"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <TextField
                 placeholder="Password"
                 className="mb-4"
                 type="password"
-                autocomplete='new-password'
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <CheckBox title="Please subscribe me to the monthly newsletter." />
+              <CheckBox
+                title="Please subscribe me to the monthly newsletter."
+                value={subscribe}
+                onChange={() => setSubscribe(!subscribe)}
+              />
               <div className="mb-4 text-justify">
                 Newsletter subscribers stay up to date with recent projects
                 product reviews, interviews with amazing sustainability people
                 around the world. new product listings, and of course, the cause
                 we are funding right now.
               </div>
-              <CheckBox title="Maybe later." className="mb-4" />
+              <CheckBox
+                title="Maybe later."
+                className="mb-4"
+                value={isLater}
+                onChange={() => setIsLater(!isLater)}
+              />
               <div className="text-center">
                 <Button
-                  children="Sign Up"
+                  children={!isLoading ? 'Sign Up' : ''}
                   className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
+                  onClick={(e) => handleSubmit(e)}
+                  isLoading={isLoading}
                 />
               </div>
             </form>

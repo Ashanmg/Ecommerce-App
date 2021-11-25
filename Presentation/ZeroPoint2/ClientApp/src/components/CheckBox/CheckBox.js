@@ -11,7 +11,7 @@ export const CheckBox = ({ className, title, ...restProps }) => {
       <div class="flex items-center mr-4 mb-2">
         <input
           type="checkbox"
-          id="A3-yes"
+          id={`A3-yes-${title}`}
           name="A3-confirmation"
           value="yes"
           className="absolute w-4 h-4 opacity-0 text-G-dark"
@@ -35,7 +35,7 @@ export const CheckBox = ({ className, title, ...restProps }) => {
           </svg>
         </div>
         {title && (
-          <label htmlFor="A3-yes" className="select-none">
+          <label htmlFor={`A3-yes-${title}`} className="select-none">
             {title}
           </label>
         )}
