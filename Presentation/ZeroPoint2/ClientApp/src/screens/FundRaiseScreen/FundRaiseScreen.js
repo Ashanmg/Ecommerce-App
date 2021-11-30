@@ -16,7 +16,7 @@ export const FundRaiseScreen = ({ className, ...restProps }) => {
             <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
                 <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
                     <div className="mb-8 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
-                        FundRaising Information
+                        Fundraising Information
                     </div>
                     <div className="text-xs sign-up-screen__left__form">
                         <h6>

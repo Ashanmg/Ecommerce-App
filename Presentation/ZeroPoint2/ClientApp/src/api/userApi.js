@@ -3,6 +3,9 @@ import axios from 'axios';
 const loginUrl = 'https://localhost:44372/api/Auth/login';
 const signupUrl = 'https://localhost:44372/api/Auth/register';
 
+// const loginUrl = 'https://zeropoint2.com/api/Auth/login';
+// const signupUrl = 'https://zeropoint2.com/api/Auth/register';
+
 export const userLogin = (fromData) => {
   return new Promise(async (resolve, reject) => {
     try {
