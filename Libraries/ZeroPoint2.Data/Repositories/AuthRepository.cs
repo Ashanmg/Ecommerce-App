@@ -57,7 +57,7 @@ namespace ZeroPoint2.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.Created = DateTime.Now;
+            user.CreatedOnUtc = DateTime.UtcNow;
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
