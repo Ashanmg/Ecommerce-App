@@ -11,9 +11,10 @@ namespace ZeroPoint2.Data
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
+
         public AuthRepository(DataContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<User> LoginAsync(string email, string password)

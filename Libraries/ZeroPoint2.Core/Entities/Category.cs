@@ -15,7 +15,7 @@ namespace ZeroPoint2.Core.Entities
         public string MetaTitle { get; set; }
         public string MetaDescription { get; set; }
         public int ParentCategoryId { get; set; }
-        public int IncludeInTopMenu { get; set; }
+        public bool IncludeInTopMenu { get; set; }
         public int DisplayOrder { get; set; }
         public int PictureId { get; set; }
         public bool Deleted { get; set; }

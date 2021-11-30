@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\ZeroPoint2.Helper\ZeroPoint2.Helper.csproj" />
     <ProjectReference Include="..\ZeroPoint2.Core\ZeroPoint2.Core.csproj" />
     <ProjectReference Include="..\ZeroPoint2.Data\ZeroPoint2.Data.csproj" />
   </ItemGroup>
