@@ -82,7 +82,7 @@ export const NavBar = ({
 
   const handleSubmit = async (e) => {
     if (email === '' || password === '') {
-      errorToast('Please fill in all fields');
+      errorToast('Please fill the required fields');
       return;
     } else if (!emailValidation(email)) {
       errorToast('Please enter a valid email');
@@ -97,9 +97,9 @@ export const NavBar = ({
     try {
       const isAuth = await userLogin({ email, password });
       dispatch(loginSuccess());
-      SuccessToast('Login Successful');
+      SuccessToast('Login successful.');
     } catch (error) {
-      errorToast('Login is Failed');
+      errorToast('Login failed.');
       dispatch(loginFail(error.message));
     }
   };
@@ -125,7 +125,7 @@ export const NavBar = ({
             </Link>
           </div>
           <div className="text-xs italic logo_text text-G-dark">
-            Environmental Socially gifts
+            Sustainable, socially responsible gifts
           </div>
         </div>
         <div className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-G-dark">
@@ -266,8 +266,7 @@ export const NavBar = ({
       </div>
       <div className="flex items-center justify-between mt-2 text-base italic text-left nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
         <span>
-          Sustainable, socially responsible gifts - your one stop shop for gift
-          giving - 20% of every sale donated to the charity of your choice
+          Sustainable, socially responsible gifts - your one stop shop for giving - 20% of every sale donated to the charity of your choice
         </span>
         <RiInformationLine
           className="cursor-pointer"

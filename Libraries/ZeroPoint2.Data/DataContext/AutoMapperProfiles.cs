@@ -9,6 +9,12 @@ namespace ZeroPoint2.Data
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForListDto>();
+
+            CreateMap<Category, CategoryForMenuDto>()
+                .ForMember(des => des.CategoryImageUrl, opt =>
+                    opt.MapFrom(src => src.Picture.ImageUrl))
+                .ForMember(des => des.ChildCategoryList, opt =>
+                    opt.Ignore());
         }
     }
 }

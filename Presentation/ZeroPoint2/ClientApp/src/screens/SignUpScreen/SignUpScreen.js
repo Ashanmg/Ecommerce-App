@@ -71,13 +71,13 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
 
   const handleSubmit = async (e) => {
     if (name === '' || email === '' || password === '') {
-      errorToast('Please fill in all fields');
+      errorToast('Please fill the required fields.');
       return;
     } else if (!emailValidation(email)) {
-      errorToast('Please enter a valid email');
+      errorToast('Please enter a valid email.');
       return;
     } else if (password.length < 6) {
-      errorToast('Password must be at least 6 characters');
+      errorToast('Password must be at least 6 characters.');
       return;
     }
     e.preventDefault();
@@ -91,7 +91,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) {
-          errorToast('User already exit');
+          errorToast('User already exists.');
           dispatch(signupFail(error.response.data.message));
         }
       }

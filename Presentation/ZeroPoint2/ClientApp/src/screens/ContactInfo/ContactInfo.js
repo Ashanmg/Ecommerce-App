@@ -26,7 +26,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
           <h6>ZeroPoint2 donates 20% of all its sales to worthwhile causes.</h6>
           <br />
           <h6>
-            Each month between February and December we focus on two different
+            Each month between February and December we focus on different
             causes that will have an immediate and lasting positive impact on
             the planet.
           </h6>

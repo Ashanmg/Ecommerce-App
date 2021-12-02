@@ -56,6 +56,8 @@ namespace ZeroPoint2
             #region DI
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
             #endregion
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

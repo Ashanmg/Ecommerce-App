@@ -60,7 +60,7 @@ export const LoginNavBar = ({
             </Link>
           </div>
           <div className="text-xs italic logo_text text-G-dark">
-            Environmental Socially gifts
+            Sustainable, socially responsible gifts
           </div>
         </div>
         <form
@@ -72,7 +72,7 @@ export const LoginNavBar = ({
             <div className="flex justify-around flex-grow mr-1 lg:mr-3">
               <div className="flex-1 mr-1 email-field lg:mr-3">
                 <TextField
-                  placeholder="Search"
+                  placeholder="Search for sustainable, socially responsible gifts"
                   iconAfter={<RiSearchLine size={24} />}
                 />
               </div>

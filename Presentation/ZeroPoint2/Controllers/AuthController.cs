@@ -37,7 +37,7 @@ namespace ZeroPoint2.Controllers
                 return BadRequest("Username already exists");
             }
 
-            var createdUser = _authService.RegisterAsync(userForRegisterDto);
+            await _authService.RegisterAsync(userForRegisterDto);
 
             return StatusCode(201);
         }

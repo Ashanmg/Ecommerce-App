@@ -11,9 +11,10 @@ namespace ZeroPoint2.Data
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
+
         public AuthRepository(DataContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<User> LoginAsync(string email, string password)
@@ -57,7 +58,7 @@ namespace ZeroPoint2.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.Created = DateTime.Now;
+            user.CreatedOnUtc = DateTime.UtcNow;
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
