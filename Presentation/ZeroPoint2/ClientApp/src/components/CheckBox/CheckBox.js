@@ -8,7 +8,7 @@ export const CheckBox = ({ className, title, ...restProps }) => {
 
   return (
     <label className={CheckBoxClasses} {...restProps}>
-      <div class="flex items-center mr-4 mb-2">
+      <div className="flex items-center mb-2 mr-4">
         <input
           type="checkbox"
           id={`A3-yes-${title}`}
@@ -16,9 +16,9 @@ export const CheckBox = ({ className, title, ...restProps }) => {
           value="yes"
           className="absolute w-4 h-4 opacity-0 text-G-dark"
         />
-        <div class="bg-white border-2 border-G-dark w-4 h-4 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-G-dark">
+        <div className="flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 bg-white border-2 border-G-dark focus-within:border-G-dark">
           <svg
-            class="fill-current hidden w-3 h-3 text-G-dark pointer-events-none"
+            className="hidden w-3 h-3 pointer-events-none fill-current text-G-dark"
             version="1.1"
             viewBox="0 0 17 12"
             xmlns="http://www.w3.org/2000/svg"

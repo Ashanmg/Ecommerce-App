@@ -87,7 +87,7 @@ function App() {
         </footer>
       </div>
       <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
-        <SignUpScreen />
+        <SignUpScreen OnClickModalClose={handleToggle} />
       </Modal>
       <Modal isOpen={showFundModal} onClickOverlay={handleFundModal} size="sm">
         <FundRaiseScreen />

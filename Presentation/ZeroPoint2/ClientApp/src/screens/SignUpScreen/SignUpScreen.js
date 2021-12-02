@@ -22,7 +22,7 @@ import Button from '../../components/Button/Button';
 
 import './SignUpScreen.scss';
 
-export const SignUpScreen = ({ className, ...restProps }) => {
+export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => {
   const SignUpScreenClasses = CN(
     'sign-up-screen w-full h-4/6 flex justify-center items-center',
     className,
@@ -87,6 +87,7 @@ export const SignUpScreen = ({ className, ...restProps }) => {
       const isSignup = await userSingUp({ name, email, password });
       dispatch(signupSuccess());
       SuccessToast('Registration Successful');
+      OnClickModalClose();
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) {
