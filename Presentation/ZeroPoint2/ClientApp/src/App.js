@@ -18,12 +18,14 @@ import { ToastContainer } from 'react-toastify';
 import { AuthRoute, PrivateRoute } from './routes';
 
 import './App.css';
+import SignInFrom from './components/SignInFrom/SignInFrom';
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
 
   const [showSignUpModal, setshowSingUpModal] = useState(false);
+  const [showSignInModal, setshowSignInModal] = useState(false);
   const [showFundModal, setshowFundModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
@@ -31,6 +33,10 @@ function App() {
 
   const handleToggle = () => {
     setshowSingUpModal(!showSignUpModal);
+  };
+
+  const handleToggleSignIn = () => {
+    setshowSignInModal(!showSignInModal);
   };
 
   const handleFundModal = () => {
@@ -60,6 +66,7 @@ function App() {
               handleToggle={handleToggle}
               handleFundModal={handleFundModal}
               handleSignIn={handleSignIn}
+              handleToggleSignIn={handleToggleSignIn}
             />
           ) : (
             <>
@@ -86,6 +93,13 @@ function App() {
           <Footer />
         </footer>
       </div>
+      <Modal
+        isOpen={showSignInModal}
+        onClickOverlay={handleToggleSignIn}
+        size="sm"
+      >
+        <SignInFrom OnClickModalClose={handleToggleSignIn} />
+      </Modal>
       <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen OnClickModalClose={handleToggle} />
       </Modal>

@@ -27,6 +27,7 @@ import './NavBar.scss';
 export const NavBar = ({
   className,
   handleToggle,
+  handleToggleSignIn,
   handleSignIn,
   handleFundModal,
   ...restProps
@@ -118,14 +119,32 @@ export const NavBar = ({
         animate={{ y: -10 }}
         transition={{ stiffness: 120 }}
       >
-        <div className="flex flex-col items-center pt-5">
-          <div className="mr-1 logo lg:mr-3">
-            <Link to="/" className="flex justify-center">
-              <img src={zeroLogo} alt="Logo" className="object-fill w-1/2" />
-            </Link>
+        <div className="flex flex-row items-start justify-around pt-5">
+          <div className="mr-1 signIn-btn lg:mr-3">
+            <Button
+              children={!isLoading ? 'Sign In' : ''}
+              className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+              isLoading={isLoading}
+              onClick={handleToggleSignIn}
+              // type="submit"
+            />
           </div>
-          <div className="text-xs italic logo_text text-G-dark">
-            Sustainable, socially responsible gifts
+          <div>
+            <div className="mr-1 logo lg:mr-3">
+              <Link to="/" className="flex justify-center">
+                <img src={zeroLogo} alt="Logo" className="object-fill w-auto h-7" />
+              </Link>
+            </div>
+            <div className="italic logo_text text-G-dark" style={{fontSize:'9px'}}>
+              Sustainable, socially responsible gifts
+            </div>
+          </div>
+          <div className="signUp-btn">
+            <Button
+              children="Sign Up"
+              className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+              onClick={handleToggle}
+            />
           </div>
         </div>
         <div className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-G-dark">
@@ -135,7 +154,7 @@ export const NavBar = ({
         <div>
           <form>
             <div className="flex justify-around flex-grow mb-2">
-              <div className="flex-1 mr-1 email-field">
+              {/* <div className="flex-1 mr-1 email-field">
                 <TextField
                   placeholder="Email"
                   autoComplete="off"
@@ -162,9 +181,9 @@ export const NavBar = ({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="flex items-center justify-center ml-9">
+            {/* <div className="flex items-center justify-center ml-9">
               <div className="mr-1 signIn-btn lg:mr-3">
                 <Button
                   children={!isLoading ? 'Sign In' : ''}
@@ -188,7 +207,7 @@ export const NavBar = ({
                   className="cursor-pointer text-G-dark"
                 />
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
       </motion.div>
@@ -266,7 +285,8 @@ export const NavBar = ({
       </div>
       <div className="flex items-center justify-between mt-2 text-base italic text-left nav-bar-buttom text-G-dark lg:text-base 2xl:text-xl">
         <span>
-          Sustainable, socially responsible gifts - your one stop shop for giving - 20% of every sale donated to the charity of your choice
+          Sustainable, socially responsible gifts - your one stop shop for
+          giving - 20% of every sale donated to the charity of your choice
         </span>
         <RiInformationLine
           className="cursor-pointer"
