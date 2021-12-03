@@ -13,12 +13,14 @@ import {
 import './HomeScreen.scss';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
-export const HomeScreen = ({ className, ...restProps }) => {
+export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
   const HomeScreenClasses = CN(
-    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-14 h-auto',
+    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-2 h-auto',
     className,
     {}
   );
+
+  console.log(isAuthenticated);
 
   const [largeWide, setLargeWide] = useState(false);
   const [mediumWide, setMediumWide] = useState(false);
@@ -91,11 +93,15 @@ export const HomeScreen = ({ className, ...restProps }) => {
     <div className={HomeScreenClasses} {...restProps}>
       <Helmet>
         <title>ZeroPoint2 - Sustainable, Socially Responsible Gifts</title>
-        <meta name="description" content="ZeroPoint2, Sustainable, socially responsible gifts - Your one-stop shop for giving - 20% of every sale donated to the charity of your choice." />
+        <meta
+          name="description"
+          content="ZeroPoint2, Sustainable, socially responsible gifts - Your one-stop shop for giving - 20% of every sale donated to the charity of your choice."
+        />
       </Helmet>
       {products.map((product, idx) => (
         <ProductCard
           onClick={() => console.log(idx)}
+          isAuthenticated={isAuthenticated}
           key={product.id || _.uniqueId}
           thumbnail={product.thumbnail}
           price={product.price}

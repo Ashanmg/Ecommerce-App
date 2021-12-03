@@ -55,11 +55,11 @@ export const LoginNavBar = ({
               <img
                 src={zeroLogo}
                 alt="Logo"
-                className="object-fill h-7 sm:h-8 lg:h-10 sm:w-full"
+                className="object-fill w-auto h-7 sm:h-8 lg:h-10 sm:w-full"
               />
             </Link>
           </div>
-          <div className="text-xs italic logo_text text-G-dark">
+          <div className="text-xs italic text-left logo_text text-G-dark" style={{fontSize: '10px'}}>
             Sustainable, socially responsible gifts
           </div>
         </div>
@@ -70,7 +70,7 @@ export const LoginNavBar = ({
         >
           <div className="flex w-full">
             <div className="flex justify-around flex-grow mr-1 lg:mr-3">
-              <div className="flex-1 mr-1 email-field lg:mr-3">
+              <div className="flex-1 mr-1 email-field">
                 <TextField
                   placeholder="Search for sustainable, socially responsible gifts"
                   iconAfter={<RiSearchLine size={24} />}

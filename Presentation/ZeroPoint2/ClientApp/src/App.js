@@ -86,7 +86,10 @@ function App() {
               element={<ProductUploadScreen />}
             ></Route>
             <Route path="/contact-info" element={<ContactInfo />}></Route>
-            <Route path="/" element={<HomeScreen />}></Route>
+            <Route
+              path="/"
+              element={<HomeScreen isAuthenticated={isAuthenticated} />}
+            ></Route>
           </Routes>
         </main>
         <footer className="flex">

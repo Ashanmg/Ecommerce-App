@@ -4,12 +4,11 @@
   font-family: var(--font-family);
 
   &__description {
-    background-color: #f0f5f1;
     &__title {
-      background-color: #f0f5f1;
-    }
-    &__price {
-      background-color: #f0f5f1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 }
