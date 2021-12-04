@@ -16,9 +16,10 @@ import { Modal } from './components/Modal/Modal';
 import LayoutHeader from './components/LayoutHeader/LayoutHeader';
 import { ToastContainer } from 'react-toastify';
 import { AuthRoute, PrivateRoute } from './routes';
+import SignInFrom from './components/SignInFrom/SignInFrom';
+import ProductScreen from './screens/ProductScreen/ProductScreen';
 
 import './App.css';
-import SignInFrom from './components/SignInFrom/SignInFrom';
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -81,6 +82,10 @@ function App() {
         <main className="container max-w-screen-xl">
           {/* <Riban /> */}
           <Routes>
+            <Route
+              path="/product/:id"
+              element={isAuthenticated ? <ProductScreen /> : <HomeScreen />}
+            />
             <Route
               path="/product-upload"
               element={<ProductUploadScreen />}

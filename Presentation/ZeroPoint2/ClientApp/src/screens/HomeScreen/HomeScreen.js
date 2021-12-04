@@ -4,6 +4,8 @@ import CN from 'classnames';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { css } from '@emotion/react';
+import { BeatLoader } from 'react-spinners';
+import { useNavigate } from 'react-router';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 import {
@@ -15,7 +17,6 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 import Loading from '../../components/Loading/Loading';
 
 import './HomeScreen.scss';
-import { BeatLoader } from 'react-spinners';
 
 const override = css`
   display: block;
@@ -31,6 +32,8 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
     className,
     {}
   );
+
+  const navigate = useNavigate();
 
   const [largeWide, setLargeWide] = useState(false);
   const [mediumWide, setMediumWide] = useState(false);
@@ -160,6 +163,8 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
               setTimeout(() => {
                 setMoveProduct(true);
               }, 1000);
+            } else {
+              navigate(`/product/${products[idx].id}`);
             }
           }}
           key={products[idx].id || _.uniqueId}
