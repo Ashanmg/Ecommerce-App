@@ -25,7 +25,7 @@ const override = css`
   align-items: center;
 `;
 
-export const HomeScreen = ({ className, ...restProps }) => {
+export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
   const HomeScreenClasses = CN(
     'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-2 h-auto',
     className,
@@ -52,6 +52,8 @@ export const HomeScreen = ({ className, ...restProps }) => {
   );
   const [hasMore, setHasMore] = useState(true);
   const [randomLimit, setRandomLimit] = useState(5);
+  const [moveProduct, setMoveProduct] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const fetchMoreData = () => {
     if (productLoadLength.length === products.length) {
@@ -151,10 +153,22 @@ export const HomeScreen = ({ className, ...restProps }) => {
       ))} */}
       {productLoadLength.map((i, idx) => (
         <ProductCard
-          onClick={() => console.log(idx)}
+          onClick={(e) => {
+            if (!isAuthenticated) {
+              setMoveProduct(false);
+              setSelectedProduct(products[idx]);
+              setTimeout(() => {
+                setMoveProduct(true);
+              }, 1000);
+            }
+          }}
           key={products[idx].id || _.uniqueId}
           thumbnail={products[idx].thumbnail}
           price={products[idx].price}
+          isAuthenticated={isAuthenticated}
+          moveProduct={
+            _.isEqual(selectedProduct, products[idx]) ? moveProduct : true
+          }
         />
       ))}
     </InfiniteScroll>

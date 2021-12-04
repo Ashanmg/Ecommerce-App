@@ -8,6 +8,7 @@ import './ProductCard.scss';
 export const ProductCard = ({
   className,
   isAuthenticated,
+  moveProduct,
   thumbnail,
   price,
   ...restProps
@@ -30,6 +31,14 @@ export const ProductCard = ({
       onMouseEnter={() => setIsFocus(true)}
       onMouseLeave={() => setIsFocus(false)}
     >
+      {!isAuthenticated && !moveProduct && (
+        <div
+          className="absolute py-6 italic font-bold top-1/4 text-G-dark"
+          style={{ backgroundColor: '#edf6f1' }}
+        >
+          <span>Please Sign-In or Sign-Up to see the product</span>
+        </div>
+      )}
       <img
         className="object-fill w-full h-fill md:h-full"
         src={thumbnail}
