@@ -20,8 +20,6 @@ export const ProductCard = ({
 
   const [isFocus, setIsFocus] = useState(false);
 
-  console.log(isAuthenticated);
-
   return (
     <motion.div
       className={ProductCardClasses}
