@@ -27,7 +27,7 @@ const override = css`
 
 export const HomeScreen = ({ className, ...restProps }) => {
   const HomeScreenClasses = CN(
-    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-14 h-auto',
+    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-2 h-auto',
     className,
     {}
   );
@@ -63,7 +63,7 @@ export const HomeScreen = ({ className, ...restProps }) => {
       setProductLoadLength(
         productLoadLength.concat(Array.from({ length: 12 }))
       );
-    }, 1000);
+    }, 1500);
   };
 
   let productCopy = [...products];
