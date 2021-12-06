@@ -8,16 +8,16 @@ import {
   RiShoppingCartFill,
   RiFilter2Fill,
 } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 
 import zeroLogo from '../../assets/zeroLogo.png';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
-import { useDispatch } from 'react-redux';
-import {logOut } from '../../features/userSlice';
+import { logOut } from '../../features/userSlice';
+import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './LoginNavBar.scss';
-
 
 export const LoginNavBar = ({
   className,
@@ -33,12 +33,13 @@ export const LoginNavBar = ({
 
   const dispatch = useDispatch();
 
+  const isSmallWide = useMediaQuery('(max-width: 640px)');
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     sessionStorage.clear();
     dispatch(logOut());
   };
-
 
   return (
     <motion.div
@@ -59,7 +60,10 @@ export const LoginNavBar = ({
               />
             </Link>
           </div>
-          <div className="text-xs italic text-left logo_text text-G-dark" style={{fontSize: '10px'}}>
+          <div
+            className="text-xs italic text-left logo_text text-G-dark"
+            style={{ fontSize: '10px' }}
+          >
             Sustainable, socially responsible gifts
           </div>
         </div>
@@ -72,8 +76,12 @@ export const LoginNavBar = ({
             <div className="flex justify-around flex-grow mr-1 lg:mr-3">
               <div className="flex-1 mr-1 email-field">
                 <TextField
-                  placeholder="Search for sustainable, socially responsible gifts"
-                  iconAfter={<RiSearchLine size={24} />}
+                  placeholder={
+                    !isSmallWide
+                      ? 'Search for sustainable, socially responsible gifts'
+                      : 'Search'
+                  }
+                  iconAfter={<RiSearchLine size={!isSmallWide ? 24 : 16} />}
                 />
               </div>
             </div>
@@ -81,15 +89,15 @@ export const LoginNavBar = ({
               <div className="search-btn">
                 <Button
                   children=""
-                  className="items-center px-2 py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
-                  afterIcon={<RiFilter2Fill size={32} />}
+                  className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
+                  afterIcon={<RiFilter2Fill size={ !isSmallWide ? 32 : 24} />}
                 />
               </div>
               <div className="search-btn">
                 <Button
                   children=""
                   className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
-                  afterIcon={<RiShoppingCartFill size={32} />}
+                  afterIcon={<RiShoppingCartFill size={ !isSmallWide ? 32 : 24} />}
                   onClick={handleSignIn}
                 />
               </div>
@@ -97,7 +105,7 @@ export const LoginNavBar = ({
                 <Button
                   children=""
                   className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
-                  afterIcon={<RiLogoutCircleRLine size={32} />}
+                  afterIcon={<RiLogoutCircleRLine size={ !isSmallWide ? 32 : 24} />}
                   onClick={handleLogout}
                 />
               </div>

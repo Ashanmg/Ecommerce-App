@@ -1,23 +1,97 @@
 import React, { useState } from 'react';
 import CN from 'classnames';
 import { Link } from 'react-router-dom';
+import { toast, Flip } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { emailValidation } from '../../config/utils/emailValidation';
 
 import TextField from '../TextField/TextField';
 import CheckBox from '../CheckBox/CheckBox';
 import Button from '../Button/Button';
 
 import './SignInFrom.scss';
+import {
+  loginFail,
+  loginPending,
+  loginSuccess,
+} from '../../features/userSlice';
+import { userLogin } from '../../api/userApi';
 
-export const SignInFrom = ({ className, ...restProps }) => {
+export const SignInFrom = ({
+  className,
+  OnClickModalClose,
+  showSignUpModal,
+  ...restProps
+}) => {
   const SignInFromClasses = CN(
     'sign-in-from w-full h-4/6 flex justify-center items-center',
     className,
     {}
   );
 
+  const errorToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'error',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  const SuccessToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'success',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: false,
+      theme: 'colored',
+      transition: Flip,
+    });
+  };
+
+  const dispatch = useDispatch();
+
+  const { isLoading, isAuthenticated, error } = useSelector(
+    (state) => state.user
+  );
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    if (email === '' || password === '') {
+      errorToast('Please fill the required fields');
+      return;
+    } else if (!emailValidation(email)) {
+      errorToast('Please enter a valid email');
+      return;
+    } else if (password.length < 6) {
+      errorToast('Password must be at least 6 characters');
+      return;
+    }
+    e.preventDefault();
+    dispatch(loginPending());
+
+    try {
+      const isAuth = await userLogin({ email, password });
+      dispatch(loginSuccess());
+      SuccessToast('Login successful.');
+      OnClickModalClose();
+    } catch (error) {
+      console.log(error);
+      errorToast('Login failed.');
+      dispatch(loginFail(error.message));
+    }
+  };
 
   return (
     <div
@@ -37,7 +111,7 @@ export const SignInFrom = ({ className, ...restProps }) => {
                 placeholder="Email"
                 autoComplete="off"
                 className="mb-4"
-                value={email}
+                alue={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <span className="mb-4 font-bold text-G-dark">Password</span>
@@ -57,19 +131,25 @@ export const SignInFrom = ({ className, ...restProps }) => {
               </div> */}
               <div className="text-center">
                 <Button
-                  children={!isLoading ? 'Sign-in' : ''}
+                  children={!isLoading ? 'Sign In' : ''}
                   className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
-                  // onClick={(e) => handleSubmit(e)}
+                  onClick={(e) => handleSubmit(e)}
                   isLoading={isLoading}
                 />
               </div>
               <div className="mt-1 text-center">
                 <span className="text-xs text-center text-G-dark">
                   If you don't have an account, you can{' '}
-                  <Link to="/" className="italic font-bold underline">
-                    Sign-up{' '}
-                  </Link>
-                  for free
+                  <span
+                    onKeyPress={()=>{showSignUpModal();}}
+                    onClick={()=>{showSignUpModal();}}
+                    role="link"
+                    tabIndex="0"
+                    className="italic font-bold underline"
+                  >
+                    Sign-Up{' '}
+                  </span>
+                  for free.
                 </span>
               </div>
             </form>

@@ -33,7 +33,7 @@ export const ProductCard = ({
     >
       {!isAuthenticated && !moveProduct && (
         <div
-          className="absolute py-6 italic font-bold top-1/4 text-G-dark"
+          className="absolute py-2 text-sm italic font-bold md:text-lg md:py-6 top-1/4 text-G-dark"
           style={{ backgroundColor: '#edf6f1' }}
         >
           <span>Please sign-in or sign-up to see product details and pricing</span>

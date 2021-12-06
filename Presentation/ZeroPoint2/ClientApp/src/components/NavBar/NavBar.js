@@ -41,8 +41,6 @@ export const NavBar = ({
   const [passwordShow, setPasswordShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const isSmallWide = useMediaQuery('(max-width: 640px)');
 

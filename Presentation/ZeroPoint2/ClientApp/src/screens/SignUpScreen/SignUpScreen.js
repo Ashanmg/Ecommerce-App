@@ -3,6 +3,7 @@ import CN from 'classnames';
 import { Link } from 'react-router-dom';
 import { toast, Flip } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
   signupFail,
@@ -12,9 +13,6 @@ import {
 import { userSingUp } from '../../api/userApi';
 
 import { emailValidation } from '../../config/utils/emailValidation';
-import { useSelector } from 'react-redux';
-
-import zeroLogo from '../../assets/zeroLogo.png';
 
 import TextField from '../../components/TextField/TextField';
 import CheckBox from '../../components/CheckBox/CheckBox';
