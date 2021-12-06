@@ -107,7 +107,7 @@ function App() {
         onClickOverlay={handleToggleSignIn}
         size="sm"
       >
-        <SignInFrom OnClickModalClose={handleToggleSignIn} />
+        <SignInFrom OnClickModalClose={handleToggleSignIn} showSignUpModal={handleToggle} />
       </Modal>
       <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen OnClickModalClose={handleToggle} />

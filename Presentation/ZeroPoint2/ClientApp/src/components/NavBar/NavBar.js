@@ -120,7 +120,7 @@ export const NavBar = ({
         <div className="flex flex-row items-start justify-around pt-5">
           <div className="mr-1 signIn-btn lg:mr-3">
             <Button
-              children={!isLoading ? 'Sign In' : ''}
+              children={!isLoading ? 'Sign-in' : ''}
               className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
               isLoading={isLoading}
               onClick={handleToggleSignIn}
@@ -139,7 +139,7 @@ export const NavBar = ({
           </div>
           <div className="signUp-btn">
             <Button
-              children="Sign Up"
+              children="Sign-up"
               className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
               onClick={handleToggle}
             />
@@ -263,7 +263,7 @@ export const NavBar = ({
           <div className="flex">
             <div className="mr-1 signIn-btn lg:mr-3">
               <Button
-                children={!isLoading ? 'Sign In' : ''}
+                children={!isLoading ? 'Sign-in' : ''}
                 className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
                 color="text-G-dark"
                 // type="submit"
@@ -273,7 +273,7 @@ export const NavBar = ({
             </div>
             <div className="signUp-btn">
               <Button
-                children="Sign Up"
+                children="Sign-up"
                 className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
                 onClick={handleToggle}
               />

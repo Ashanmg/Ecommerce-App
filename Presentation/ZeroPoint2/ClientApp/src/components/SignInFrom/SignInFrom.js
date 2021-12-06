@@ -11,10 +11,19 @@ import CheckBox from '../CheckBox/CheckBox';
 import Button from '../Button/Button';
 
 import './SignInFrom.scss';
-import { loginFail, loginPending, loginSuccess } from '../../features/userSlice';
+import {
+  loginFail,
+  loginPending,
+  loginSuccess,
+} from '../../features/userSlice';
 import { userLogin } from '../../api/userApi';
 
-export const SignInFrom = ({ className, OnClickModalClose, ...restProps }) => {
+export const SignInFrom = ({
+  className,
+  OnClickModalClose,
+  showSignUpModal,
+  ...restProps
+}) => {
   const SignInFromClasses = CN(
     'sign-in-from w-full h-4/6 flex justify-center items-center',
     className,
@@ -93,7 +102,7 @@ export const SignInFrom = ({ className, OnClickModalClose, ...restProps }) => {
       <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-6 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
-            SignIn
+            Sign-In
           </div>
           <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
@@ -131,10 +140,16 @@ export const SignInFrom = ({ className, OnClickModalClose, ...restProps }) => {
               <div className="mt-1 text-center">
                 <span className="text-xs text-center text-G-dark">
                   If you don't have an account, you can{' '}
-                  <Link to="/" className="italic font-bold underline">
-                    sign up{' '}
-                  </Link>
-                  for free
+                  <span
+                    onKeyPress={()=>{showSignUpModal();}}
+                    onClick={()=>{showSignUpModal();}}
+                    role="link"
+                    tabIndex="0"
+                    className="italic font-bold underline"
+                  >
+                    Sign-Up{' '}
+                  </span>
+                  for free.
                 </span>
               </div>
             </form>
