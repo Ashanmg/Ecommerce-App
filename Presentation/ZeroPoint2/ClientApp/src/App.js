@@ -22,7 +22,6 @@ import ProductScreen from './screens/ProductScreen/ProductScreen';
 import './App.css';
 
 function App() {
-  
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
 
@@ -107,7 +106,10 @@ function App() {
         onClickOverlay={handleToggleSignIn}
         size="sm"
       >
-        <SignInFrom OnClickModalClose={handleToggleSignIn} showSignUpModal={handleToggle} />
+        <SignInFrom
+          OnClickModalClose={handleToggleSignIn}
+          showSignUpModal={handleToggle}
+        />
       </Modal>
       <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen OnClickModalClose={handleToggle} />

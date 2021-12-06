@@ -164,7 +164,7 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
                 setMoveProduct(true);
               }, 5000);
             } else {
-              navigate(`/product/${products[idx].id}`);
+              // navigate(`/product/${products[idx].id}`);
             }
           }}
           key={products[idx].id || _.uniqueId}

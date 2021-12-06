@@ -8,7 +8,7 @@ import './LayoutHeader.scss';
 
 export const LayoutHeader = ({ className, ...restProps }) => {
   const LayoutHeaderClasses = CN(
-    'layout-header px-1 lg:px-3 mb-1 w-auto justify-between text-xs md:text-base text-G-dark flex overflow-scroll',
+    'layout-header container max-w-screen-xl px-1 lg:px-3 mb-1 w-full justify-between text-xs md:text-base text-G-dark',
     className,
     {}
   );
@@ -17,9 +17,7 @@ export const LayoutHeader = ({ className, ...restProps }) => {
 
   return (
     <div className={LayoutHeaderClasses} {...restProps}>
-      <Link className="text-" to="./">
-        Favorites
-      </Link>
+      <Link className='text-' to="./">Favorites</Link>
       <a href="./">New</a>
       <a href="./">Home & Living</a>
       <a href="./">Beauty & Wellness</a>
