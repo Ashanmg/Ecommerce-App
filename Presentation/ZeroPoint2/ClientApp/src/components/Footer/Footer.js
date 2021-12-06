@@ -8,7 +8,7 @@ import './Footer.scss';
 
 export const Footer = ({ className, ...restProps }) => {
   const FooterClasses = CN(
-    'footer container max-w-screen-xl flex px-1 md:px-3 flex-row flex-wrap justify-center md:justify-between items-center lg:items-end max-w-screen-xl',
+    'footer container max-w-screen-xl flex px-1 md:px-3 flex-row flex-wrap justify-center md:justify-between items-center lg:items-end max-w-screen-xl mb-4',
     className,
     {}
   );
@@ -18,7 +18,10 @@ export const Footer = ({ className, ...restProps }) => {
   if (isSmallWide) {
     return (
       <div className={FooterClasses} {...restProps}>
-        <div className="flex flex-col items-center justify-between w-full">
+        <div
+          className="flex flex-col items-center justify-between w-full"
+          style={{ backgroundColor: '#e5fbe8' }}
+        >
           <div className="my-1 text-xs italic copyRight text-G-dark">
             Copyright © 2021 zeropoint2.com. All rights reserved.
           </div>
@@ -40,7 +43,10 @@ export const Footer = ({ className, ...restProps }) => {
 
   return (
     <div className={FooterClasses} {...restProps}>
-      <div className="flex flex-row items-center justify-between w-full">
+      <div
+        className="flex flex-row items-center justify-between w-full px-2 py-2"
+        style={{ backgroundColor: '#e5fbe8' }}
+      >
         <div className="text-xs italic copyRight text-G-dark">
           Copyright © 2021 zeropoint2.com. All rights reserved.
         </div>

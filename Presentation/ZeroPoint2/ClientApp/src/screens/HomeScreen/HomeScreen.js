@@ -162,7 +162,7 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
               setSelectedProduct(products[idx]);
               setTimeout(() => {
                 setMoveProduct(true);
-              }, 1000);
+              }, 5000);
             } else {
               navigate(`/product/${products[idx].id}`);
             }
