@@ -153,7 +153,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
               />
               <div className="text-center">
                 <Button
-                  children={!isLoading ? 'Sign Up' : ''}
+                  children={!isLoading ? 'Sign-up' : ''}
                   className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
                   onClick={(e) => handleSubmit(e)}
                   isLoading={isLoading}

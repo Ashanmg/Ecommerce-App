@@ -28,7 +28,7 @@ export const SignInFrom = ({ className, ...restProps }) => {
       <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-6 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
-            SignIn
+            Sign-In
           </div>
           <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
@@ -57,7 +57,7 @@ export const SignInFrom = ({ className, ...restProps }) => {
               </div> */}
               <div className="text-center">
                 <Button
-                  children={!isLoading ? 'Sign Up' : ''}
+                  children={!isLoading ? 'Sign-in' : ''}
                   className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
                   // onClick={(e) => handleSubmit(e)}
                   isLoading={isLoading}
@@ -67,7 +67,7 @@ export const SignInFrom = ({ className, ...restProps }) => {
                 <span className="text-xs text-center text-G-dark">
                   If you don't have an account, you can{' '}
                   <Link to="/" className="italic font-bold underline">
-                    sign up{' '}
+                    Sign-up{' '}
                   </Link>
                   for free
                 </span>
