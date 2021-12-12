@@ -9,7 +9,7 @@ export const userLogin = (fromData) => {
         Email: email,
         Password: password,
       });
-
+      console.log(res);
       resolve(res.data);
 
       if (res.status === 200) {

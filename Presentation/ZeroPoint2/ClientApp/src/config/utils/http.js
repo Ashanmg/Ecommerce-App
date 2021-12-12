@@ -19,21 +19,22 @@ const responseInterceptor = ({ data }) => {
   };
 };
 
-// const requestInterceptor = (config) => {
-//   const token = sessionStorage.getItem('token');
-//   config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-//   return config;
-// };
+const requestInterceptor = (config) => {
+  const token = sessionStorage.getItem('token');
+  config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+  return config;
+};
 
 export const init = () => {
-  axios.defaults.baseURL = 'https://zeropoint2.com/api';
+  axios.defaults.baseURL = apiBaseUrl;
   axios.defaults.headers['Content-Type'] = 'application/json';
   axios.defaults.headers['X-Request-With'] = 'XMLHTTPRequest';
   axios.interceptors.response.use(responseInterceptor);
-  //   axios.interceptors.request.use(requestInterceptor);
+  axios.interceptors.request.use(requestInterceptor);
 };
 
-export const post = (url, data, options = null) =>
+export const post = (url, data, options = null) => {
   axios.post(url, data, options);
+};
 
 export const get = (url, options = null) => axios.get(url, options);
