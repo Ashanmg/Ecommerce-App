@@ -9,8 +9,6 @@ import { useNavigate } from 'react-router';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 import {
-  hiddenProds,
-  initialMProducts,
   initialFProducts,
 } from '../../config/product';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
@@ -71,56 +69,6 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
     }, 1500);
   };
 
-  let productCopy = [...products];
-  let randomFirst, randomSecond, randomThird;
-
-  // useEffect(() => {
-  //   if (isLargeWide && isMediumWide && isSmallWide) {
-  //     setProducts(initialFProducts);
-  //     setRandomLimit(6);
-  //   } else if (!isLargeWide && isMediumWide && isSmallWide) {
-  //     setProducts(initialMProducts);
-  //     setRandomLimit(4);
-  //   } else if (!isLargeWide && !isMediumWide && !isSmallWide) {
-  //     setProducts(initialMProducts);
-  //     setRandomLimit(4);
-  //   }
-  // }, [isLargeWide, isMediumWide, isSmallWide]);
-
-  // useEffect(() => {
-  //   const pro = setInterval(() => {
-  //     let first = Math.floor(Math.random() * randomLimit);
-  //     let second = Math.floor(Math.random() * randomLimit + randomLimit);
-  //     let third = Math.floor(Math.random() * randomLimit + randomLimit * 2);
-
-  //     randomFirst = Math.floor(Math.random() * hiddenProds.length);
-  //     let randomFElement = hiddenProds[randomFirst];
-  //     hiddenProds.splice(randomFirst, 1);
-
-  //     randomSecond = Math.floor(Math.random() * hiddenProds.length);
-  //     let randomSElement = hiddenProds[randomSecond];
-  //     hiddenProds.splice(randomSecond, 1);
-
-  //     randomThird = Math.floor(Math.random() * hiddenProds.length);
-  //     let randomTElement = hiddenProds[randomThird];
-  //     hiddenProds.splice(randomThird, 1);
-
-  //     hiddenProds.push(productCopy[first]);
-  //     hiddenProds.push(productCopy[second]);
-  //     hiddenProds.push(productCopy[third]);
-
-  //     productCopy[first] = randomFElement;
-  //     productCopy[second] = randomSElement;
-  //     productCopy[third] = randomTElement;
-
-  //     setProducts(productCopy);
-  //   }, 3000);
-
-  //   return () => {
-  //     clearInterval(pro);
-  //   };
-  // }, [products]);
-
   return (
     <InfiniteScroll
       className={HomeScreenClasses}
@@ -143,17 +91,9 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
         <title>ZeroPoint2 - Sustainable, Socially Responsible Gifts</title>
         <meta
           name="description"
-          content="ZeroPoint2, Sustainable, socially responsible gifts - Your one-stop shop for giving - 20% of every sale donated to the charity of your choice."
+          content="ZeroPoint2 – Awesome handmade, sustainable, ethically conscious gifts for amazing people like you - PLUS we donate 20% of every sale to charity"
         />
       </Helmet>
-      {/* {products.map((product, idx) => (
-        <ProductCard
-          onClick={() => console.log(idx)}
-          key={product.id || _.uniqueId}
-          thumbnail={product.thumbnail}
-          price={product.price}
-        />
-      ))} */}
       {productLoadLength.map((i, idx) => (
         <ProductCard
           onClick={(e) => {
@@ -169,6 +109,7 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
           }}
           key={products[idx].id || _.uniqueId}
           thumbnail={products[idx].thumbnail}
+          shortDescription={products[idx].shortDescription}
           price={products[idx].price}
           isAuthenticated={isAuthenticated}
           moveProduct={
