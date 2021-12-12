@@ -10,6 +10,7 @@ export const ProductCard = ({
   isAuthenticated,
   moveProduct,
   thumbnail,
+  shortDescription,
   price,
   ...restProps
 }) => {
@@ -40,7 +41,7 @@ export const ProductCard = ({
         </div>
       )}
       <img
-        className="object-fill w-full h-fill md:h-full"
+        className="object-fill w-full h-fill" style={{ height: '77%' }}
         src={thumbnail}
         alt=""
       />
@@ -50,7 +51,7 @@ export const ProductCard = ({
       >
         {/* {isFocus && ( */}
         <span className="text-sm product-card__description__title">
-          Leather Dog Collar with Hand Made Ornament
+          {shortDescription}
         </span>
         {/* )} */}
         {isAuthenticated && (
