@@ -30,6 +30,8 @@ export const NavBar = ({
   handleToggleSignIn,
   handleSignIn,
   handleFundModal,
+  progressed,
+  setProgressed,
   ...restProps
 }) => {
   const NavBarClasses = CN(
@@ -80,14 +82,18 @@ export const NavBar = ({
   };
 
   const handleSubmit = async (e) => {
+    setProgressed(progressed + 80);
     if (email === '' || password === '') {
       errorToast('Please fill the required fields');
+      setProgressed(100);
       return;
     } else if (!emailValidation(email)) {
       errorToast('Please enter a valid email');
+      setProgressed(100);
       return;
     } else if (password.length < 6) {
       errorToast('Password must be at least 6 characters');
+      setProgressed(100);
       return;
     }
     e.preventDefault();
@@ -95,10 +101,12 @@ export const NavBar = ({
 
     try {
       const isAuth = await userLogin({ email, password });
+      setProgressed(progressed + 100);
       dispatch(loginSuccess());
       SuccessToast('Login successful.');
     } catch (error) {
       errorToast('Login failed.');
+      setProgressed(100);
       dispatch(loginFail(error.message));
     }
   };
@@ -130,10 +138,17 @@ export const NavBar = ({
           <div>
             <div className="mr-1 logo lg:mr-3">
               <Link to="/" className="flex justify-center">
-                <img src={zeroLogo} alt="Logo" className="object-fill w-auto h-7" />
+                <img
+                  src={zeroLogo}
+                  alt="Logo"
+                  className="object-fill w-auto h-7"
+                />
               </Link>
             </div>
-            <div className="italic logo_text text-G-dark" style={{fontSize:'9px'}}>
+            <div
+              className="italic logo_text text-G-dark"
+              style={{ fontSize: '9px' }}
+            >
               Sustainable, socially responsible gifts
             </div>
           </div>
