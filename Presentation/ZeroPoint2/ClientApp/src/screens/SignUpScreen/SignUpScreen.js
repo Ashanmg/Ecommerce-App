@@ -138,10 +138,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
                 onChange={() => setSubscribe(!subscribe)}
               />
               <div className="mb-4 text-justify">
-                Newsletter subscribers stay up to date with recent projects
-                product reviews, interviews with amazing sustainability people
-                around the world. new product listings, and of course, the cause
-                we are funding right now.
+                Newsletter subscribers stay up to date with recent projects product reviews, interviews with amazing sustainability people around the world, new product listings, and of course, the cause we are funding right now.
               </div>
               <CheckBox
                 title="Maybe later."
