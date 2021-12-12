@@ -37,17 +37,20 @@ export const ProductCard = ({
           className="absolute py-2 text-xs italic font-bold md:text-base md:py-6 top-5 md:top-10 text-G-dark"
           style={{ backgroundColor: '#edf6f1' }}
         >
-          <span>Please sign-in or sign-up to see product details and pricing</span>
+          <span>
+            Please sign-in or sign-up to see product details and pricing
+          </span>
         </div>
       )}
       <img
-        className="object-fill w-full h-fill" style={{ height: '77%' }}
+        className="object-fill w-full h-fill"
+        style={{ height: '77%' }}
         src={thumbnail}
         alt=""
       />
       <div
         className="bottom-0 flex flex-col w-full py-2 text-sm h-13 product-card__description text-G-dark"
-        style={{ transition: 'height 1s ease-in' }}
+        style={{ transition: 'height 1s ease-in', height: '35%' }}
       >
         {/* {isFocus && ( */}
         <span className="text-sm product-card__description__title">
