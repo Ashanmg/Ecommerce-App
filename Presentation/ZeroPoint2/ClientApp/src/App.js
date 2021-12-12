@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoadingBar from 'react-top-loading-bar';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import { HomeScreen } from './screens/HomeScreen';
 import ContactInfo from './screens/ContactInfo/ContactInfo';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import FundRaiseScreen from './screens/FundRaiseScreen/FundRaiseScreen';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import ProductUploadScreen from './screens/ProductUploadScreen/ProductUploadScreen';
 
@@ -14,7 +16,6 @@ import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Footer from './components/Footer/Footer';
 import { Modal } from './components/Modal/Modal';
 import LayoutHeader from './components/LayoutHeader/LayoutHeader';
-import { ToastContainer } from 'react-toastify';
 import { AuthRoute, PrivateRoute } from './routes';
 import SignInFrom from './components/SignInFrom/SignInFrom';
 import ProductScreen from './screens/ProductScreen/ProductScreen';
@@ -29,6 +30,7 @@ function App() {
   const [showSignInModal, setshowSignInModal] = useState(false);
   const [showFundModal, setshowFundModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [progressed, setProgressed] = useState(0);
 
   const { isAuthenticated } = useSelector((state) => state.user);
 
@@ -61,6 +63,11 @@ function App() {
   return (
     <Router>
       <div className="h-screen font-sans App">
+        <LoadingBar
+          color="#01A453"
+          progress={progressed}
+          onLoaderFinished={() => setProgressed(0)}
+        />
         <header>
           {!isAuthenticated ? (
             <NavBar
@@ -68,6 +75,8 @@ function App() {
               handleFundModal={handleFundModal}
               handleSignIn={handleSignIn}
               handleToggleSignIn={handleToggleSignIn}
+              setProgressed={setProgressed}
+              progressed={progressed}
             />
           ) : (
             <>
