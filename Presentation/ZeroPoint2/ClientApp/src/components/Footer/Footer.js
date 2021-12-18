@@ -37,6 +37,7 @@ export const Footer = ({ className, ...restProps }) => {
             </a>
           </div>
         </div>
+        <hr style={{ width: '100%', height: '4px', border: 'none' }} size="3" color="white"/>
       </div>
     );
   }
@@ -62,6 +63,7 @@ export const Footer = ({ className, ...restProps }) => {
           </a>
         </div>
       </div>
+      <hr style={{ width: '100%', height: '10px', border: 'none' }} size="3" color="white"/>  
     </div>
   );
 };

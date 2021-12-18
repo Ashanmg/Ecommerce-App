@@ -27,5 +27,14 @@ namespace ZeroPoint2.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("getcategoriesforproductupload")]
+        public async Task<IActionResult> GetCategoryDataForUploadProducts()
+        {
+            var response = await _categoryService.GetCategoryDataForUploadProducts();
+
+            return Ok(response);
+        }
     }
 }

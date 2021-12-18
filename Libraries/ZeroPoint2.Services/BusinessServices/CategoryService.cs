@@ -60,5 +60,46 @@ namespace ZeroPoint2.Services
 
             return response;
         }
+
+
+        public async Task<ExecutionResponse<List<CategoryForProductUploadDto>>> GetCategoryDataForUploadProducts()
+        {
+            ExecutionResponse<List<CategoryForProductUploadDto>> response = new ExecutionResponse<List<CategoryForProductUploadDto>>();
+            try
+            {
+                var result = await _categoryRepository.GetProductCategoriesAsync();
+
+                var mainCategories = result.Where(c => c.ParentCategoryId == 0).ToList();
+
+                var mainCategoryDtoList = _mapper.Map<List<CategoryForProductUploadDto>>(mainCategories);
+
+                foreach (var category in mainCategoryDtoList)
+                {
+                    var secondCategories = result.Where(s => s.ParentCategoryId == category.Id).ToList();
+
+                    category.ChildCategoryList = _mapper.Map<List<CategoryForProductUploadDto>>(secondCategories);
+
+                    if (category.ChildCategoryList != null && category.ChildCategoryList.Count > 0)
+                    {
+                        foreach (var childCategory in category.ChildCategoryList)
+                        {
+                            var childCategories = result.Where(s => s.ParentCategoryId == childCategory.Id).ToList();
+
+                            childCategory.ChildCategoryList = _mapper.Map<List<CategoryForProductUploadDto>>(childCategories);
+                        }
+                    }
+                }
+                response.RequestStatus = ExecutionStatus.Success;
+                response.Result = mainCategoryDtoList;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
     }
 }

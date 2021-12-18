@@ -11,5 +11,7 @@ namespace ZeroPoint2.Services
     public interface ICategoryService
     {
         Task<ExecutionResponse<List<CategoryForMenuDto>>> GetTopMenuCategoriesAsync();
+
+        Task<ExecutionResponse<List<CategoryForProductUploadDto>>> GetCategoryDataForUploadProducts();
     }
 }

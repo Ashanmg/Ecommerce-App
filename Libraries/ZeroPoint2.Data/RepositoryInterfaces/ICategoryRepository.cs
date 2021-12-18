@@ -10,5 +10,7 @@ namespace ZeroPoint2.Data
     public interface ICategoryRepository
     {
         Task<List<Category>> GetTopMenuCategoriesAsync();
+
+        Task<List<Category>> GetProductCategoriesAsync();
     }
 }

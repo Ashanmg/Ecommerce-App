@@ -106,7 +106,7 @@ function App() {
             ></Route>
           </Routes>
         </main>
-        <footer className="flex mt-4">
+        <footer className="flex mt-4 mb-4">
           <Footer />
         </footer>
       </div>

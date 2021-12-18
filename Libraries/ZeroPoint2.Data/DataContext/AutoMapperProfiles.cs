@@ -15,6 +15,10 @@ namespace ZeroPoint2.Data
                     opt.MapFrom(src => src.Picture.ImageUrl))
                 .ForMember(des => des.ChildCategoryList, opt =>
                     opt.Ignore());
+
+            CreateMap<Category, CategoryForProductUploadDto>()
+                .ForMember(des => des.ChildCategoryList, opt =>
+                    opt.Ignore());
         }
     }
 }
