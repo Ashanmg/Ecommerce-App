@@ -25,6 +25,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.1",
     "react-scripts": "4.0.3",
+    "react-select": "^5.2.1",
     "react-shuffle": "^2.1.0",
     "react-spinners": "^0.11.0",
     "react-toastify": "^8.1.0",

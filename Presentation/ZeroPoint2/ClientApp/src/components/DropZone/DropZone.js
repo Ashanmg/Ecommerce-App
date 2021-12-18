@@ -55,7 +55,7 @@ export const DropZone = ({ className, ...restProps }) => {
       </div>
       <header>Drag & Drop to Upload File</header>
       <span>OR</span>
-      <label htmlFor className="underline cursor-pointer">
+      <label className="underline cursor-pointer">
         <input type="file" onChange={(e) => handleUpload(e)} hidden />
         Browse File
       </label>

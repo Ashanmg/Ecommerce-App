@@ -22,12 +22,12 @@ export const TextArea = ({
         disabled={false}
         readOnly={false}
         placeholder={placeholder}
-        maxlength={maxLength}
+        maxLength={maxLength}
         rows={rows}
-        className="placeholder-G-dark pl-2 border-G-dark border-solid border-2 w-full focus:border-G-dark"
+        className="w-full pl-2 border-2 border-solid placeholder-G-dark border-G-dark focus:border-G-dark"
       />
       {textRules && (
-        <div className="text-right text-xs text-G-light italic">{textRules}</div>
+        <div className="text-xs italic text-right text-G-light">{textRules}</div>
       )}
     </div>
   );

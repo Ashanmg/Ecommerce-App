@@ -34,7 +34,7 @@ export const init = () => {
 };
 
 export const post = (url, data, options = null) => {
-  axios.post(url, data, options);
+  return axios.post(url, data, options);
 };
 
 export const get = (url, options = null) => axios.get(url, options);

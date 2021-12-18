@@ -70,7 +70,7 @@ export const TextField = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={CN('w-full h-full pl-2 focus:outline-none')}
+        className={CN('w-full h-full pl-2 focus:outline-none placeholder-G-dark')}
         autoComplete={autoComplete}
       />
       {iconAfter && (
@@ -84,15 +84,6 @@ export const TextField = ({
           tabIndex={0}
         >
           {iconAfter}
-        </div>
-      )}
-      {textRules && (
-        <div
-          className={CN('text-xs italic text-right text-G-light', {
-            colorRules: colorRules ? colorRules : 'text-G-light',
-          })}
-        >
-          {textRules}
         </div>
       )}
     </div>

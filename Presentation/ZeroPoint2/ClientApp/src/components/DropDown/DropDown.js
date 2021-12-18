@@ -24,6 +24,7 @@ export const DropDown = ({ className, options, ...restProps }) => {
 
 DropDown.defaultProps = {
   className: undefined,
+  option: undefined,
 };
 
 export default DropDown;
