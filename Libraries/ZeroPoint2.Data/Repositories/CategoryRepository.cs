@@ -19,7 +19,7 @@ namespace ZeroPoint2.Data
 
         public async Task<List<Category>> GetTopMenuCategoriesAsync()
         {
-            return await _context.Categories.Include(src => src.Picture).Where(cat => cat.IncludeInTopMenu).ToListAsync();
+            return await _context.Categories.Include(src => src.ProductImage).Where(cat => cat.IncludeInTopMenu).ToListAsync();
         }
 
         public async Task<List<Category>> GetProductCategoriesAsync()

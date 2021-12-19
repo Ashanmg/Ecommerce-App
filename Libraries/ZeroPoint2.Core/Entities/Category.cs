@@ -21,6 +21,6 @@ namespace ZeroPoint2.Core.Entities
         public bool Deleted { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public DateTime UpdatedOnUtc { get; set; }
-        public Picture Picture { get; set; }
+        public ProductImage ProductImage { get; set; }
     }
 }

@@ -9,5 +9,10 @@ namespace ZeroPoint2.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<ProductSize> productSizes { get; set; }
+        public DbSet<ProductCombination> ProductCombinations { get; set; }
     }
 }
