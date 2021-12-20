@@ -24,6 +24,9 @@ export const Modal = ({
         'modal--sm': size === 'sm',
         'modal--xl': size === 'xl',
         'modal--xs': size === 'xs',
+        'modal--xxs': size === 'xxs',
+        'modal--xxxs': size === 'xxxs',
+        'modal--xxxxs': size === 'xxxxs',
         'modal--is-inline': isInline,
       })
     : className;
