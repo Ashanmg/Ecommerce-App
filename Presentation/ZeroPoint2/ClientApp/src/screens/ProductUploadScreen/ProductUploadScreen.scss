@@ -1,2 +1,6 @@
-
-
+.product-upload-screen{
+    .required::after{
+        content: " *";
+        color: red;
+    }
+}

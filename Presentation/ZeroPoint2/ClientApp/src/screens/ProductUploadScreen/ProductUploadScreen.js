@@ -9,6 +9,7 @@ import DropZone from '../../components/DropZone/DropZone';
 import Button from '../../components/Button/Button';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import AutoSelect from '../../components/AutoSelect/AutoSelect';
+import CheckBox from '../../components/CheckBox/CheckBox';
 
 import { getProductCategoryForUpload } from '../../api/productApi';
 
@@ -98,8 +99,6 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     }
   };
 
-  console.log(subSelectedOption);
-
   return (
     <div className={ProductUploadScreenClasses} {...restProps}>
       <form action="" method="post">
@@ -107,7 +106,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
           <div className="w-8/12 mr-4 product-upload-screen__left">
             <div className="mb-5 product-upload-screen__left__top">
               <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-                <span className="w-2/5 text-left text-G-dark">
+                <span className="w-2/5 text-left required text-G-dark">
                   Product Category
                 </span>
                 <AutoSelect
@@ -124,7 +123,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 />
               </div>
               <div className="flex items-center mb-3 h-2/4 product-upload-screen__left__product-category">
-                <span className="w-2/5 text-left text-G-dark">
+                <span className="w-2/5 text-left required text-G-dark">
                   Product Sub-Category
                 </span>
                 <AutoSelect
@@ -141,7 +140,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 />
               </div>
               <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-                <span className="w-2/5 text-left text-G-dark">
+                <span className="w-2/5 text-left required text-G-dark">
                   Product Child-Category
                 </span>
                 <AutoSelect
@@ -157,7 +156,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 />
               </div>
               <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-                <span className="w-2/5 text-left text-G-dark">
+                <span className="w-2/5 text-left required text-G-dark">
                   Product Title
                 </span>
                 <TextField
@@ -209,11 +208,11 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               <span className="w-2/5 text-left text-G-dark">
                 WholeSale Price
               </span>
-              <TextField placeholder="USD" />
+              <TextField type='number' placeholder="USD" />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">Retail Price</span>
-              <TextField placeholder="USD" />
+              <TextField type='number' placeholder="USD" />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">
@@ -225,16 +224,16 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   className="mb-3"
                 />
                 <div className="grid grid-cols-2 gap-2 mb-3">
-                  <TextField placeholder="Length" />
-                  <TextField placeholder="Width" />
-                  <TextField placeholder="Height" />
+                  <TextField type='number' placeholder="Length" />
+                  <TextField type='number' placeholder="Width" />
+                  <TextField type='number' placeholder="Height" />
                   <fieldset id="length" className="flex justify-around">
                     <RadioButton id="cm" title="cm" name="length" />
                     <RadioButton id="inch" title="Inch" name="length" />
                   </fieldset>
 
                   {/* <DropDown className="w-1/4" /> */}
-                  <TextField placeholder="Weight" />
+                  <TextField type='number' placeholder="Weight" />
                   <fieldset id="weight" className="flex justify-around">
                     <RadioButton id="kg" title="kg" name="weight" />
                     <RadioButton id="Pou" title="Pou" name="weight" />
@@ -249,6 +248,13 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               <DropDown options={[]} />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
+              <span className="w-2/5 text-left text-G-dark">Company Name</span>
+              <TextField
+                placeholder="Company Name"
+                textRules="500 characters maximum"
+              />
+            </div>
+            <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">
                 Company Information
               </span>
@@ -256,6 +262,13 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 placeholder="Company Information"
                 maxLength={500}
                 rows={3}
+                textRules="500 characters maximum"
+              />
+            </div>
+            <div className="flex items-center mb-3 product-upload-screen__left__product-category">
+              <span className="w-2/5 text-left text-G-dark">Is Returnable</span>
+              <TextField
+                placeholder="Is Returnable"
                 textRules="500 characters maximum"
               />
             </div>
@@ -269,6 +282,12 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 rows={3}
                 textRules="500 characters maximum"
               />
+            </div>
+            <div className="flex items-center mb-3 product-upload-screen__left__product-category">
+              <span className="w-2/5 text-left text-G-dark">
+                Display On Home Page
+              </span>
+              <CheckBox />
             </div>
           </div>
         </div>
