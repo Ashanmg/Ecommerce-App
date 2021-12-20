@@ -12,7 +12,7 @@ namespace ZeroPoint2.Data
 
             CreateMap<Category, CategoryForMenuDto>()
                 .ForMember(des => des.CategoryImageUrl, opt =>
-                    opt.MapFrom(src => src.Picture.ImageUrl))
+                    opt.MapFrom(src => src.ProductImage.ImageUrl))
                 .ForMember(des => des.ChildCategoryList, opt =>
                     opt.Ignore());
 
