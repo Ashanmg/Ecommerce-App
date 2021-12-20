@@ -267,10 +267,9 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">Is Returnable</span>
-              <TextField
-                placeholder="Is Returnable"
-                textRules="500 characters maximum"
-              />
+              <div className="w-full">
+                <CheckBox />
+              </div>
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">
@@ -287,7 +286,9 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               <span className="w-2/5 text-left text-G-dark">
                 Display On Home Page
               </span>
-              <CheckBox />
+              <div className="w-full">
+                <CheckBox />
+              </div>
             </div>
           </div>
         </div>
