@@ -208,11 +208,11 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               <span className="w-2/5 text-left text-G-dark">
                 WholeSale Price
               </span>
-              <TextField type='number' placeholder="USD" />
+              <TextField type="number" placeholder="USD" />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">Retail Price</span>
-              <TextField type='number' placeholder="USD" />
+              <TextField type="number" placeholder="USD" />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">
@@ -224,16 +224,16 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   className="mb-3"
                 />
                 <div className="grid grid-cols-2 gap-2 mb-3">
-                  <TextField type='number' placeholder="Length" />
-                  <TextField type='number' placeholder="Width" />
-                  <TextField type='number' placeholder="Height" />
+                  <TextField type="number" placeholder="Length" />
+                  <TextField type="number" placeholder="Width" />
+                  <TextField type="number" placeholder="Height" />
                   <fieldset id="length" className="flex justify-around">
                     <RadioButton id="cm" title="cm" name="length" />
                     <RadioButton id="inch" title="Inch" name="length" />
                   </fieldset>
 
                   {/* <DropDown className="w-1/4" /> */}
-                  <TextField type='number' placeholder="Weight" />
+                  <TextField type="number" placeholder="Weight" />
                   <fieldset id="weight" className="flex justify-around">
                     <RadioButton id="kg" title="kg" name="weight" />
                     <RadioButton id="Pou" title="Pou" name="weight" />
