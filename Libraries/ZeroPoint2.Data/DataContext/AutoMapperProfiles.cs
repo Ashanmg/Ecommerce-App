@@ -19,6 +19,14 @@ namespace ZeroPoint2.Data
             CreateMap<Category, CategoryForProductUploadDto>()
                 .ForMember(des => des.ChildCategoryList, opt =>
                     opt.Ignore());
+
+            CreateMap<UploadProductForCreationDto, Product>()
+                .ForMember(des => des.ProductImages, opt =>
+                    opt.Ignore());
+
+            CreateMap<ProductImageForCreationDto, ProductImage>();
+
+            CreateMap<ProductColorForCreationDto, ProductColor>();
         }
     }
 }

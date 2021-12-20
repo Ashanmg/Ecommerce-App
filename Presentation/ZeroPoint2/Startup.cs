@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text;
 using ZeroPoint2.Data;
+using ZeroPoint2.Helper;
 using ZeroPoint2.Services;
 
 namespace ZeroPoint2
@@ -35,6 +36,8 @@ namespace ZeroPoint2
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer
             (Configuration.GetConnectionString("DefaultConnection")));
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
             services.AddControllers().AddNewtonsoftJson(option =>
             {
@@ -58,6 +61,8 @@ namespace ZeroPoint2
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             #endregion
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
