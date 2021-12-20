@@ -52,7 +52,7 @@ namespace ZeroPoint2.Services
                 // insert the product details
                 var product = _mapper.Map<Product>(productForCreationDto);
 
-                if (productForCreationDto.Colors.Count > 0)
+                if (productForCreationDto.Colors?.Count > 0)
                 {
                     product.IsVariant = true;
                 }
