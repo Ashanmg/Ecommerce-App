@@ -88,10 +88,10 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
       {...restProps}
     >
       <Helmet>
-        <title>ZeroPoint2 - Sustainable, Socially Responsible Gifts</title>
+        <title>Zeropoint2 – Gifts That Save The World</title>
         <meta
           name="description"
-          content="ZeroPoint2 – Awesome handmade, sustainable, ethically conscious gifts for amazing people like you - PLUS we donate 20% of every sale to charity"
+          content="Zeropoint2 – sustainable, socially responsible, handmade gifts – your one stop shop for giving – 20% of every purchase donated to the charity of your choice."
         />
       </Helmet>
       {productLoadLength.map((i, idx) => (
