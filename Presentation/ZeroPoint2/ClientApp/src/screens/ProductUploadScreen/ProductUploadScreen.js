@@ -83,7 +83,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [subSelectedOption, setSubSelectedOption] = useState();
   const [childCategories, setChildCategories] = useState([]);
-  const [childSelectedOption, setChildSelectedOption] = useState();
+  const [childSelectedOption, setChildSelectedOption] = useState('');
   const [colorSelectedOption, setColorSelectedOption] = useState([]);
 
   const [productName, setProductName] = useState('');
@@ -176,6 +176,43 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     }
   };
 
+  //reset
+  const resetFields = () => {
+    setMainSelectedOption(null);
+    setSubSelectedOption('');
+    setChildSelectedOption('');
+    setColorSelectedOption([]);
+    setProductName('');
+    setMetaKeyword('');
+    setMetaDescription('');
+    setShortProductDescription('');
+    setFullProductDescription('');
+    setWholeProductPrice('');
+    setRetailProductPrice('');
+    setProductQuantity('');
+    setProductWeight('');
+    setProductLength('');
+    setProductWidth('');
+    setProductHeight('');
+    setProductDimensionUnit('');
+    setProductWeightUnit('');
+    setShippingNote('');
+    setCompanyName('');
+    setCompanyInformation('');
+    setIsReturnable(false);
+    setReturnInformation('');
+    setColorSelectedOption(null);
+    setIsHomePage(false);
+    setImage1('');
+    setImage2('');
+    setImage3('');
+    setImage4('');
+    setImage5('');
+    setImage6('');
+    setImage7('');
+    setImage8('');
+  };
+
   //submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -232,7 +269,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
 
     try {
       const isAuth = await productUpload(formData);
-      // setProgressed(progressed + 100);
+      resetFields();
       dispatch(productUploadSuccess());
       SuccessToast('Product Upload successful.');
     } catch (error) {
@@ -300,6 +337,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 <AutoSelect
                   isLoading={isLoading}
                   options={subSelectedOption ? childCategories : []}
+                  value={subSelectedOption ? childSelectedOption : null}
                   onChange={(selectOption) => {
                     if (selectOption) {
                       setChildSelectedOption(selectOption);
@@ -315,6 +353,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   Product Title
                 </span>
                 <TextField
+                  value={productName}
                   placeholder="Product Title"
                   textRules="50 characters maximum"
                   onChange={(e) => setProductName(e.target.value)}
@@ -325,6 +364,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   Meta Keyword
                 </span>
                 <TextField
+                  value={metaKeyword}
                   placeholder="Meta Keyword"
                   textRules="50 characters maximum"
                   onChange={(e) => setMetaKeyword(e.target.value)}
@@ -335,6 +375,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   Meta Description
                 </span>
                 <TextArea
+                  value={metaDescription}
                   placeholder="Meta Description"
                   maxLength={150}
                   rows={2}
@@ -347,6 +388,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   Short Product Description
                 </span>
                 <TextArea
+                  value={shortProductDescription}
                   placeholder="Short Product Description"
                   maxLength={200}
                   rows={3}
@@ -359,6 +401,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   Full Product Description
                 </span>
                 <TextArea
+                  value={fullProductDescription}
                   placeholder="Full Product Description"
                   maxLength={500}
                   rows={5}
@@ -372,14 +415,14 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Images Drag & Drop Or Upload
               </span>
               <div className="grid grid-cols-4 gap-2">
-                <DropZone setImages={setImage1} />
-                <DropZone setImages={setImage2} />
-                <DropZone setImages={setImage3} />
-                <DropZone setImages={setImage4} />
-                <DropZone setImages={setImage5} />
-                <DropZone setImages={setImage6} />
-                <DropZone setImages={setImage7} />
-                <DropZone setImages={setImage8} />
+                <DropZone img={image1} setImages={setImage1} />
+                <DropZone img={image2} setImages={setImage2} />
+                <DropZone img={image3} setImages={setImage3} />
+                <DropZone img={image4} setImages={setImage4} />
+                <DropZone img={image5} setImages={setImage5} />
+                <DropZone img={image6} setImages={setImage6} />
+                <DropZone img={image7} setImages={setImage7} />
+                <DropZone img={image8} setImages={setImage8} />
               </div>
             </div>
           </div>
@@ -389,6 +432,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 WholeSale Price
               </span>
               <TextField
+                value={wholeProductPrice}
                 type="number"
                 placeholder="USD"
                 onChange={(e) => setWholeProductPrice(e.target.value)}
@@ -399,6 +443,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Retail Price
               </span>
               <TextField
+                value={RetailProductPrice}
                 type="number"
                 placeholder="USD"
                 onChange={(e) => setRetailProductPrice(e.target.value)}
@@ -410,22 +455,26 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               </span>
               <div className="flex flex-col w-full p-3 border-2 product-upload-screen__left__product-category__shipping-details border-G-dark">
                 <TextField
+                  value={productQuantity}
                   placeholder="Size:1 Description i.e, small"
                   className="mb-3"
                   onChange={(e) => setProductQuantity(e.target.value)}
                 />
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   <TextField
+                    value={productLength}
                     type="number"
                     placeholder="Length"
                     onChange={(e) => setProductLength(e.target.value)}
                   />
                   <TextField
+                    value={productWidth}
                     type="number"
                     placeholder="Width"
                     onChange={(e) => setProductWidth(e.target.value)}
                   />
                   <TextField
+                    value={productHeight}
                     type="number"
                     placeholder="Height"
                     onChange={(e) => setProductHeight(e.target.value)}
@@ -451,6 +500,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
 
                   {/* <DropDown className="w-1/4" /> */}
                   <TextField
+                    value={productWeight}
                     type="number"
                     placeholder="Weight"
                     onChange={(e) => setProductWeight(e.target.value)}
@@ -476,6 +526,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   {/* <DropDown className="w-1/4" /> */}
                 </div>
                 <TextField
+                  value={shippingNote}
                   placeholder="Notes (optional)"
                   onChange={(e) => setShippingNote(e.target.value)}
                 />
@@ -491,6 +542,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   { value: 'strawberry', label: 'Strawberry' },
                   { value: 'vanilla', label: 'Vanilla' },
                 ]}
+                value={colorSelectedOption !== null ? colorSelectedOption : []}
                 onChange={(selectOption) => {
                   if (selectOption) {
                     setColorSelectedOption(selectOption);
@@ -506,6 +558,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Company Name
               </span>
               <TextField
+                value={companyName}
                 placeholder="Company Name"
                 textRules="500 characters maximum"
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -516,6 +569,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Company Information
               </span>
               <TextArea
+                value={companyInformation}
                 placeholder="Company Information"
                 maxLength={500}
                 rows={3}
@@ -526,7 +580,10 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">Is Returnable</span>
               <div className="w-full">
-                <CheckBox onChange={(e) => setIsReturnable(e.target.checked)} />
+                <CheckBox
+                  value={isReturnable}
+                  onChange={(e) => setIsReturnable(e.target.checked)}
+                />
               </div>
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
@@ -534,6 +591,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Return Information
               </span>
               <TextArea
+                value={returnInformation}
                 placeholder="Return Information"
                 maxLength={500}
                 rows={3}
@@ -546,7 +604,10 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Display On Home Page
               </span>
               <div className="w-full">
-                <CheckBox onChange={(e) => setIsHomePage(e.target.checked)} />
+                <CheckBox
+                  value={isHomePage}
+                  onChange={(e) => setIsHomePage(e.target.checked)}
+                />
               </div>
             </div>
           </div>

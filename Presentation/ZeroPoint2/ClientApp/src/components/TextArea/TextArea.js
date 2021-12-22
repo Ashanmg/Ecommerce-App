@@ -10,6 +10,7 @@ export const TextArea = ({
   isCustom,
   textRules,
   maxLength,
+  value,
   rows,
   ...restProps
 }) => {
@@ -19,6 +20,8 @@ export const TextArea = ({
     <div className={TextAreaClasses} {...restProps}>
       <textarea
         type={type}
+        value={value}
+        onChange={(e) => {}}
         disabled={false}
         readOnly={false}
         placeholder={placeholder}
@@ -27,7 +30,9 @@ export const TextArea = ({
         className="w-full pl-2 border-2 border-solid placeholder-G-dark border-G-dark focus:border-G-dark"
       />
       {textRules && (
-        <div className="text-xs italic text-right text-G-light">{textRules}</div>
+        <div className="text-xs italic text-right text-G-light">
+          {textRules}
+        </div>
       )}
     </div>
   );

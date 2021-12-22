@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
-import {
-  RiCloseCircleLine,
-  RiCloseFill,
-  RiUploadCloud2Fill,
-} from 'react-icons/ri';
+import { RiCloseFill, RiUploadCloud2Fill } from 'react-icons/ri';
 
 import './DropZone.scss';
-import Button from '../Button/Button';
 
-export const DropZone = ({ className, setImages, ...restProps }) => {
+export const DropZone = ({ className, img, setImages, ...restProps }) => {
   const DropZoneClasses = CN(
     'drop-zone flex flex-col items-center justify-center border-2 border-G-dark p-2 text-xs text-G-dark w-full',
     className,
@@ -35,7 +30,7 @@ export const DropZone = ({ className, setImages, ...restProps }) => {
     e.preventDefault();
     const files = e.dataTransfer.files[0];
     setImage(files);
-    setImages([files]);
+    setImages(files);
     setPreviewUrl(URL.createObjectURL(files));
   };
 
@@ -46,6 +41,13 @@ export const DropZone = ({ className, setImages, ...restProps }) => {
     setImages(files);
     setPreviewUrl(URL.createObjectURL(files));
   };
+
+  useEffect(() => {
+    if (img === '') {
+      setPreviewUrl(null);
+      setImage(null);
+    }
+  }, [img]);
 
   return (
     <div

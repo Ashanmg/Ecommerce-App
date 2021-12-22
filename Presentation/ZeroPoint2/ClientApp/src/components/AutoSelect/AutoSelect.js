@@ -13,6 +13,7 @@ export const AutoSelect = ({
   isLoading,
   isMultiple,
   onChange,
+  value,
   options,
   placeHolder,
   ...restProps
@@ -53,6 +54,7 @@ export const AutoSelect = ({
       <Select
         components={{ DropdownIndicator }}
         isClearable={isClearable}
+        value={value}
         isSearchable={isSearchable}
         isLoading={isLoading}
         isMulti={isMultiple}

@@ -3,7 +3,7 @@ import CN from 'classnames';
 
 import './CheckBox.scss';
 
-export const CheckBox = ({ className, title, ...restProps }) => {
+export const CheckBox = ({ className, title, value, ...restProps }) => {
   const CheckBoxClasses = CN('check-box flex items-center', className, {});
 
   return (
@@ -13,7 +13,9 @@ export const CheckBox = ({ className, title, ...restProps }) => {
           type="checkbox"
           id={`A3-yes-${title}`}
           name="A3-confirmation"
-          value="yes"
+          value={"yes"}
+          checked={value}
+          onChange={() => {}}
           className="absolute w-4 h-4 opacity-0 text-G-dark"
         />
         <div className="flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 bg-white border-2 border-G-dark focus-within:border-G-dark">
