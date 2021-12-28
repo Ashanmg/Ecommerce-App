@@ -27,7 +27,7 @@ export const Footer = ({ className, ...restProps }) => {
           </div>
           <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
             <Link to="./contact-info" className="italic text-G-dark">
-              Info
+              About
             </Link>
             <a href="./" className="italic text-G-dark px-7">
               Support
@@ -37,7 +37,11 @@ export const Footer = ({ className, ...restProps }) => {
             </a>
           </div>
         </div>
-        <hr style={{ width: '100%', height: '4px', border: 'none' }} size="3" color="white"/>
+        <hr
+          style={{ width: '100%', height: '4px', border: 'none' }}
+          size="3"
+          color="white"
+        />
       </div>
     );
   }
@@ -53,7 +57,7 @@ export const Footer = ({ className, ...restProps }) => {
         </div>
         <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
           <Link to="./contact-info" className="italic text-G-dark">
-            Info
+            About
           </Link>
           <a href="./" className="italic text-G-dark px-7">
             Support
@@ -63,7 +67,11 @@ export const Footer = ({ className, ...restProps }) => {
           </a>
         </div>
       </div>
-      <hr style={{ width: '100%', height: '10px', border: 'none' }} size="3" color="white"/>  
+      <hr
+        style={{ width: '100%', height: '10px', border: 'none' }}
+        size="3"
+        color="white"
+      />
     </div>
   );
 };

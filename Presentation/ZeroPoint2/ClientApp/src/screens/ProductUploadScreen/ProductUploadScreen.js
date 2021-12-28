@@ -106,6 +106,8 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
   const [isReturnable, setIsReturnable] = useState(false);
   const [returnInformation, setReturnInformation] = useState('');
   const [isHomePage, setIsHomePage] = useState(false);
+  const [availableQty, setAvailableQty] = useState(0);
+  const [productionTime, setProductionTime] = useState('');
 
   const [image1, setImage1] = useState([]);
   const [image2, setImage2] = useState([]);
@@ -253,6 +255,8 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     formData.append('NotReturnable', isReturnable);
     formData.append('ReturnInformation', returnInformation);
     formData.append('ShowOnHomePage', isHomePage);
+    formData.append('AvailableQty', availableQty);
+    formData.append('ProductionTime', productionTime);
 
     colorSelectedOption.map((color, idx) => {
       formData.append(`Colors[${idx}].ColorName`, color.label);
@@ -551,6 +555,27 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   }
                 }}
                 isMultiple={true}
+              />
+            </div>
+            <div className="flex items-center mb-3 product-upload-screen__left__product-category">
+              <span className="w-2/5 text-left text-G-dark required">
+                Available Quantity
+              </span>
+              <TextField
+                value={RetailProductPrice}
+                type="number"
+                placeholder="Enter Quantity"
+                onChange={(e) => setAvailableQty(e.target.value)}
+              />
+            </div>
+            <div className="flex items-center mb-3 product-upload-screen__left__product-category">
+              <span className="w-2/5 text-left text-G-dark required">
+                Production time
+              </span>
+              <TextField
+                value={RetailProductPrice}
+                placeholder="Eg: 1d 2h 40m"
+                onChange={(e) => setProductionTime(e.target.value)}
               />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
