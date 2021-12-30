@@ -18,8 +18,9 @@ export const userLogin = (fromData) => {
       });
 
       resolve(res.data);
-
+      console.log((res));
       if (res.status === 200) {
+        console.log('login success');
         sessionStorage.setItem('token', res.data.token);
         localStorage.setItem(
           'token',

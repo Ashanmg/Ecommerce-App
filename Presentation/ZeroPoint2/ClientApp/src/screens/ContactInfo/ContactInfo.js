@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import CN from 'classnames';
-import Founder from '../../assets/founder_ccexpress.png';
+import Founder from '../../assets/Founder-remove-bg.png';
 
 import './ContactInfo.scss';
 
@@ -13,11 +13,11 @@ export const ContactInfo = ({ className, ...restProps }) => {
 
   return (
     <div className={ContactInfoClasses} {...restProps}>
-      <div className='flex flex-col items-center mb-12'>
+      <div className="flex flex-col items-center mb-12">
         <img
           src={Founder}
           alt=""
-          className="w-40 w-full h-56 h-full max-w-xs mb-2 mr-5 shadow"
+          className="w-40 h-56 max-w-xs mb-2 mr-5 md:h-full md:w-full"
         />
         <h1 className="text-xl italic text-center font-base">Richard Croome</h1>
         <h1 className="text-xl italic text-center font-base">
