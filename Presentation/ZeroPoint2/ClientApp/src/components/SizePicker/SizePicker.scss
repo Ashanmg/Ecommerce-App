@@ -1,0 +1,18 @@
+.size-picker {
+  display: flex;
+  font-family: var(--font-family);
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 12px;
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgba(0, 92, 39, var(--tw-border-opacity));
+  }
+
+  .active {
+    color: white;
+    background-color: rgba(0, 92, 39, var(--tw-border-opacity));
+  }
+}

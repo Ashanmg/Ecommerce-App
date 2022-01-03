@@ -17,7 +17,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
         <img
           src={Founder}
           alt=""
-          className="w-40 h-56 max-w-xs mb-2 mr-5 md:h-full md:w-full"
+          className="w-40 h-56 max-w-xs mb-2 mr-5 md:max-w-sm md:h-full"
         />
         <h1 className="text-xl italic text-center font-base">Richard Croome</h1>
         <h1 className="text-xl italic text-center font-base">

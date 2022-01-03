@@ -255,7 +255,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     formData.append('NotReturnable', isReturnable);
     formData.append('ReturnInformation', returnInformation);
     formData.append('ShowOnHomePage', isHomePage);
-    formData.append('AvailableQty', availableQty);
+    formData.append('AvailableQuantity', availableQty);
     formData.append('ProductionTime', productionTime);
 
     colorSelectedOption.map((color, idx) => {
