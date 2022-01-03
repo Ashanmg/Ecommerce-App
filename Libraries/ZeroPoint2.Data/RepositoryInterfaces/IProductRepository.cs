@@ -14,5 +14,6 @@ namespace ZeroPoint2.Data
         Task<List<ProductColor>> InsertProductColorData(List<ProductColor> productColors, int productId);
         Task<bool> InsertProductSizeData(List<ProductSize> productSizeList);
         Task<bool> InsertProductCombinationData(List<ProductCombination> productCombinationList);
+        Task<List<ColorType>> GetColorList();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ZeroPoint2.Core.Dtos;
 using ZeroPoint2.Helper;
@@ -27,6 +28,14 @@ namespace ZeroPoint2.Controllers
         public async Task<IActionResult> UploadSingleProduct([FromForm]UploadProductForCreationDto productForCreationDto)
         {
             ExecutionResponse<bool> response = await _productService.UploadSingleProduct(productForCreationDto);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("getcolors")]
+        public async Task<IActionResult> GetColorList()
+        {
+            ExecutionResponse<List<ColorTypeforListDto>> response = await _productService.GetColorList();
             return Ok(response);
         }
         #endregion

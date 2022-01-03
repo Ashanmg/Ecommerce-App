@@ -44,6 +44,9 @@ namespace ZeroPoint2.Core.Entities
         public bool Published { get; set; }
         public bool Deleted { get; set; }
         public bool IsVariant { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal AvailableQuantity { get; set; }
+        public string ProductionTime { get; set; }
         [MaxLength(200)]
         public string CompanyName { get; set; }
         [MaxLength(500)]
