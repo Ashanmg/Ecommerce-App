@@ -27,6 +27,8 @@ namespace ZeroPoint2.Data
             CreateMap<ProductImageForCreationDto, ProductImage>();
 
             CreateMap<ProductColorForCreationDto, ProductColor>();
+
+            CreateMap<ColorType, ColorTypeforListDto>();
         }
     }
 }

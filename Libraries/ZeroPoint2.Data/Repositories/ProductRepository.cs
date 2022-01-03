@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,6 +69,11 @@ namespace ZeroPoint2.Data
             }
 
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<List<ColorType>> GetColorList()
+        {
+            return await _context.ColorTypes.ToListAsync();
         }
         #endregion
     }

@@ -196,7 +196,7 @@ namespace ZeroPoint2.Services
                 response.RequestStatus = ExecutionStatus.Success;
                 response.Message = "Product data were inserted successfully.";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Message = "Internal server error.";
                 response.ExceptionData = ex.Message;
@@ -205,6 +205,27 @@ namespace ZeroPoint2.Services
 
             return response;
         }
-        #endregion
+
+        public async Task<ExecutionResponse<List<ColorTypeforListDto>>> GetColorList()
+        {
+            ExecutionResponse<List<ColorTypeforListDto>> response = new ExecutionResponse<List<ColorTypeforListDto>>();
+
+            try
+            {
+                List<ColorType> colorsList = await _productRepository.GetColorList();
+
+                response.Result = _mapper.Map<List<ColorTypeforListDto>>(colorsList);
+                response.RequestStatus = ExecutionStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+            #endregion
+        }
     }
 }

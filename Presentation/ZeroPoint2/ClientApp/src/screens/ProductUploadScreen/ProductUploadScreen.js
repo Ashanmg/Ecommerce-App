@@ -14,6 +14,7 @@ import CheckBox from '../../components/CheckBox/CheckBox';
 import { Modal } from '../../components/Modal/Modal';
 
 import {
+  getColorTypesForUpload,
   getProductCategoryForUpload,
   productUpload,
 } from '../../api/productApi';
@@ -23,6 +24,12 @@ import {
   getProductCategoryPending,
   getProductCategorySuccess,
 } from '../../features/productCategoryforUploadSlice';
+
+import {
+  getColorTypesPending,
+  getColorTypesSuccess,
+  getColorTypesFail,
+} from '../../features/colorTypesForUploadSlice';
 
 import {
   productUploadFail,
@@ -70,15 +77,22 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
   const dispatch = useDispatch();
 
   const { isLoading, isSuccessFull, error } = useSelector(
-    (state) => state.getProductCategoryForUpload
+    (state) => state.getProductCategoryForUpload,
+    (state) => state.getColorTypesForUpload
   );
+
+  // const { isLoading, isSuccessFull, error } = useSelector(
+  //   (state) => state.getColorTypesForUpload
+  // );
 
   const { isUploadLoading, isUploadSuccessFull, uploadError } = useSelector(
     (state) => state.productUpload
   );
 
   const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([]);
   const [mainCategories, setMainCategories] = useState([]);
+  const [selectColors, setColorSelectOptions] = useState([]);
   const [mainSelectedOption, setMainSelectedOption] = useState();
   const [subCategories, setSubCategories] = useState([]);
   const [subSelectedOption, setSubSelectedOption] = useState();
@@ -125,8 +139,18 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       setCategories(productCategories);
       dispatch(getProductCategorySuccess());
     } catch (error) {
-      console.log(error);
       dispatch(getProductCategoryFail(error.message));
+    }
+  }, []);
+
+  useEffect(async () => {
+    dispatch(getColorTypesPending());
+    try {
+      const colors = await getColorTypesForUpload();
+      setColors(colors);
+      dispatch(getColorTypesSuccess());
+    } catch (error) {
+      dispatch(getColorTypesFail(error.message));
     }
   }, []);
 
@@ -139,6 +163,17 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       });
     }
   }, [categories, mainSelectedOption]);
+
+  useEffect(() => {
+    if (colors.length !== 0) {
+      const colorsData = [];
+      colors?.map((color) => {
+        colorsData.push({ value: color.colorHashValue, label: color.colorName, code: color.colorCode});
+        setColorSelectOptions(colorsData);
+      });
+      console.log(colorsData);
+    }
+  }, []);
 
   const handleMainCategoryChange = (selectedOption) => {
     if (selectedOption) {
@@ -541,11 +576,8 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 Colours
               </span>
               <AutoSelect
-                options={[
-                  { value: '#FF0000', label: 'Red' },
-                  { value: 'strawberry', label: 'Strawberry' },
-                  { value: 'vanilla', label: 'Vanilla' },
-                ]}
+                isLoading={isLoading}
+                options={selectColors}
                 value={colorSelectedOption !== null ? colorSelectedOption : []}
                 onChange={(selectOption) => {
                   if (selectOption) {

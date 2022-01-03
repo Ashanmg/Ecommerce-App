@@ -24,6 +24,8 @@ namespace ZeroPoint2.Core.Dtos
         public decimal Height { get; set; }
         public string LengthWidthHeightType { get; set; }
         public string WeightType { get; set; }
+        public decimal AvailableQuantity { get; set; }
+        public string ProductionTime { get; set; }
         public string CompanyName { get; set; }
         public string CompanyInformation { get; set; }
         public bool NotReturnable { get; set; }
