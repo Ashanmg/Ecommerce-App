@@ -38,6 +38,14 @@ namespace ZeroPoint2.Controllers
             ExecutionResponse<List<ColorTypeforListDto>> response = await _productService.GetColorList();
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("getproductlist")]
+        public async Task<IActionResult> GetProductListByLazyLoad(int pageNumber = 0)
+        {
+            ExecutionResponse<List<ProductForListDto>> response = await _productService.GetProductListByLazyLoad(pageNumber);
+            return Ok(response);
+        }
         #endregion
     }
 }

@@ -225,7 +225,27 @@ namespace ZeroPoint2.Services
             }
 
             return response;
-            #endregion
         }
+
+        public async Task<ExecutionResponse<List<ProductForListDto>>> GetProductListByLazyLoad(int pageNumber)
+        {
+            ExecutionResponse<List<ProductForListDto>> response = new ExecutionResponse<List<ProductForListDto>>();
+            try
+            {
+                List<Product> productList = await _productRepository.GetProductListByLazyLoad(pageNumber);
+
+                response.Result = _mapper.Map<List<ProductForListDto>>(productList);
+                response.RequestStatus = ExecutionStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
+        #endregion
     }
 }
