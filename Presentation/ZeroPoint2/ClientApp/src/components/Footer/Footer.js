@@ -71,7 +71,7 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
         </div>
       </div>
       <hr
-        style={{ width: '100%', height: '10px', border: 'none' }}
+        style={{ width: '100%', height: '5px', border: 'none' }}
         size="3"
         color="white"
       />

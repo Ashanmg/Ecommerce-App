@@ -13,22 +13,25 @@ import { useDispatch } from 'react-redux';
 import zeroLogo from '../../assets/zeroLogo.png';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
+import LayoutHeader from '../LayoutHeader/LayoutHeader';
 
 import { logOut } from '../../features/userSlice';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './LoginNavBar.scss';
 
+
 export const LoginNavBar = ({
   className,
   handleToggle,
   handleSignIn,
+  isScrolling,
   ...restProps
 }) => {
   const LoginNavBarClasses = CN(
-    'login-nav-bar nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3',
+    'login-nav-bar nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3 fixed left-0 right-0 w-full z-10 bg-white',
     className,
-    {}
+    { 'shadow-md': isScrolling === true }
   );
 
   const dispatch = useDispatch();
@@ -49,7 +52,7 @@ export const LoginNavBar = ({
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="flex items-start pt-5">
+      <div className='flex items-start pt-5 '>
         <div className="flex flex-col items-center">
           <div className="mr-1 logo lg:mr-3">
             <Link to="/" className="flex justify-center">
@@ -90,14 +93,16 @@ export const LoginNavBar = ({
                 <Button
                   children=""
                   className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
-                  afterIcon={<RiFilter2Fill size={ !isSmallWide ? 32 : 24} />}
+                  afterIcon={<RiFilter2Fill size={!isSmallWide ? 32 : 24} />}
                 />
               </div>
               <div className="search-btn">
                 <Button
                   children=""
                   className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
-                  afterIcon={<RiShoppingCartFill size={ !isSmallWide ? 32 : 24} />}
+                  afterIcon={
+                    <RiShoppingCartFill size={!isSmallWide ? 32 : 24} />
+                  }
                   onClick={handleSignIn}
                 />
               </div>
@@ -105,14 +110,18 @@ export const LoginNavBar = ({
                 <Button
                   children=""
                   className="items-center py-1 text-xs text-G-dark h-7 w-max md:h-8 lg:h-10 md:py-2"
-                  afterIcon={<RiLogoutCircleRLine size={ !isSmallWide ? 32 : 24} />}
+                  afterIcon={
+                    <RiLogoutCircleRLine size={!isSmallWide ? 32 : 24} />
+                  }
                   onClick={handleLogout}
                 />
               </div>
             </div>
           </div>
-          <div></div>
         </form>
+      </div>
+      <div className="layout-hader">
+        <LayoutHeader />
       </div>
     </motion.div>
   );
