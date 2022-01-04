@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CN from 'classnames';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -6,9 +6,9 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './Footer.scss';
 
-export const Footer = ({ className, ...restProps }) => {
+export const Footer = ({ className, isScrolling, ...restProps }) => {
   const FooterClasses = CN(
-    'footer container max-w-screen-xl flex px-1 md:px-3 flex-row flex-wrap justify-center md:justify-between items-center lg:items-end max-w-screen-xl pb-4 fixed bottom-0 left-0 right-0 w-full z-10 shadow-lg bg-white',
+    'footer container max-w-screen-xl flex px-1 md:px-3 flex-row flex-wrap justify-center md:justify-between items-center lg:items-end max-w-screen-xl pb-0 fixed bottom-0 left-0 right-0 w-full z-10 bg-white',
     className,
     {}
   );
@@ -17,7 +17,10 @@ export const Footer = ({ className, ...restProps }) => {
 
   if (isSmallWide) {
     return (
-      <div className={FooterClasses} {...restProps}>
+      <div
+        className={CN(FooterClasses, { 'shadow-md': isScrolling === true })}
+        {...restProps}
+      >
         <div
           className="flex flex-col items-center justify-between w-full"
           style={{ backgroundColor: '#e5fbe8' }}

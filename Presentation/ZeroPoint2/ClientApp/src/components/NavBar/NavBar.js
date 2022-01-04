@@ -32,12 +32,13 @@ export const NavBar = ({
   handleFundModal,
   progressed,
   setProgressed,
+  isScrolling,
   ...restProps
 }) => {
   const NavBarClasses = CN(
-    'nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3',
+    'nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3 fixed top-0 left-0 right-0 z-10 bg-white',
     className,
-    {}
+    {'shadow-md': isScrolling === true}
   );
 
   const [passwordShow, setPasswordShow] = useState(false);
@@ -230,7 +231,7 @@ export const NavBar = ({
 
   return (
     <motion.div
-      className={CN(NavBarClasses, 'fixed top-0 left-0 right-0 z-10 bg-white shadow-sm')}
+      className={NavBarClasses}
       {...restProps}
       initial={{ y: -250 }}
       animate={{ y: -10 }}

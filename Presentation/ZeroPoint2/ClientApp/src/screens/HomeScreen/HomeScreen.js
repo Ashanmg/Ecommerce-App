@@ -8,9 +8,7 @@ import { BeatLoader } from 'react-spinners';
 import { useNavigate } from 'react-router';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
-import {
-  initialFProducts,
-} from '../../config/product';
+import { initialFProducts } from '../../config/product';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 import Loading from '../../components/Loading/Loading';
 
@@ -26,7 +24,7 @@ const override = css`
 
 export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
   const HomeScreenClasses = CN(
-    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-2 h-auto',
+    'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-2 h-auto mb-10',
     className,
     {}
   );
@@ -78,7 +76,7 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
       loader={
         <BeatLoader
           css={override}
-          // size={15}
+          // size={15}"
           color={'#005C27'}
           on
           loading={true}

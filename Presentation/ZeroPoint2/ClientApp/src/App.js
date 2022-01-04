@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
@@ -60,6 +60,38 @@ function App() {
     setIsLogin(!isLogin);
   };
 
+  const [y, setY] = useState(window.scrollY);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  const handleNavigation = useCallback(
+    (e) => {
+      const window = e.currentTarget;
+      
+      if (y > window.scrollY) {
+        setIsScrolling(true);
+        if (window.scrollY === 0) {
+          setIsScrolling(false);
+        }
+      } else if (y < window.scrollY) {
+        setIsScrolling(true);
+        if (window.scrollY === 0) {
+          setIsScrolling(false);
+        }
+      }
+      setY(window.scrollY);
+    },
+    [y]
+  );
+
+  useEffect(() => {
+    setY(window.scrollY);
+    window.addEventListener('scroll', handleNavigation);
+
+    return () => {
+      window.removeEventListener('scroll', handleNavigation);
+    };
+  }, [handleNavigation]);
+
   return (
     <Router>
       <div className="h-screen font-sans App">
@@ -77,6 +109,7 @@ function App() {
               handleToggleSignIn={handleToggleSignIn}
               setProgressed={setProgressed}
               progressed={progressed}
+              isScrolling={isScrolling}
             />
           ) : (
             <>
@@ -107,7 +140,7 @@ function App() {
           </Routes>
         </main>
         <footer className="flex mt-4 mb-4">
-          <Footer />
+          <Footer isScrolling={isScrolling} />
         </footer>
       </div>
       <Modal
