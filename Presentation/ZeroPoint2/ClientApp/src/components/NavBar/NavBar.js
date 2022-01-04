@@ -230,7 +230,7 @@ export const NavBar = ({
 
   return (
     <motion.div
-      className={NavBarClasses}
+      className={CN(NavBarClasses, 'fixed top-0 left-0 right-0 z-10 bg-white shadow-sm')}
       {...restProps}
       initial={{ y: -250 }}
       animate={{ y: -10 }}
