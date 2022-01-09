@@ -4,10 +4,8 @@ import { RiHeart3Line } from 'react-icons/ri';
 
 import PriceCard from '../../components/priceCard/priceCard';
 import ProductCorasal from '../../components/ProductCorasal/ProductCorasal';
-import SizePicker from '../../components/SizePicker/SizePicker';
 
 import './ProductScreen.scss';
-import ColorChipsPicker from '../../components/ColorChipsPicker/ColorChipsPicker';
 
 export const ProductScreen = ({ className, ...restProps }) => {
   const ProductScreenClasses = CN(
