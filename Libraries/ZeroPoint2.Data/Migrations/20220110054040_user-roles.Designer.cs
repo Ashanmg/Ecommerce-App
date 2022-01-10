@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZeroPoint2.Data;
 
 namespace ZeroPoint2.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220110054040_user-roles")]
+    partial class userroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -493,13 +495,13 @@ namespace ZeroPoint2.Data.Migrations
 
             modelBuilder.Entity("ZeroPoint2.Core.Entities.User", b =>
                 {
-                    b.HasOne("ZeroPoint2.Core.Entities.UserRole", "UserRole")
+                    b.HasOne("ZeroPoint2.Core.Entities.UserRole", "UserRoles")
                         .WithMany()
                         .HasForeignKey("UserRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserRole");
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("ZeroPoint2.Core.Entities.Product", b =>

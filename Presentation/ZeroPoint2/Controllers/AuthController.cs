@@ -57,6 +57,7 @@ namespace ZeroPoint2.Controllers
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Name),
                 new Claim(ClaimTypes.Email, userFromRepo.Email),
+                new Claim(ClaimTypes.Role, userFromRepo.UserRole.SystemName)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.

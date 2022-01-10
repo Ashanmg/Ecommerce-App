@@ -19,7 +19,7 @@ namespace ZeroPoint2.Data
 
         public async Task<User> LoginAsync(string email, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _context.Users.Include(u => u.UserRole).FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {
@@ -59,6 +59,7 @@ namespace ZeroPoint2.Data
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             user.CreatedOnUtc = DateTime.UtcNow;
+            user.UserRoleId = 3; // registered
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
