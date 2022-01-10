@@ -1,20 +1,27 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Route, useLocation } from 'react-router-dom';
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoute = ({ children, accessRoles, ...rest }) => {
   let location = useLocation();
 
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const userData = JSON.parse(localStorage.getItem('user'));
 
-  if (loading) {
-    return <p>Checking authenticaton..</p>;
-  }
+  console.log(userData.user.userRoleId, accessRoles);
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/" state={{ from: location }} />;
   }
 
-  return children;
+  if (accessRoles && accessRoles.includes(userData.user.userRoleId)) {
+    // console.log(accessRoles.includes(userData.user.userRoleId));
+    return children;
+   }else {
+      return <Navigate to="/" state={{ from: location }} />;
+  };
+  
+
+  // return children;
 };
 
 export default PrivateRoute;

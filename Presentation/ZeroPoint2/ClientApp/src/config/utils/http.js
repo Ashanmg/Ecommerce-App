@@ -25,6 +25,14 @@ const requestInterceptor = (config) => {
   return config;
 };
 
+/* Initialize Axios as http */
+export const http = axios.create({
+  baseURL: apiBaseUrl,
+  headers: {
+    'Content-type': 'application/json',
+  },
+});
+
 export const init = () => {
   axios.defaults.baseURL = apiBaseUrl;
   axios.defaults.headers['Content-Type'] = 'application/json';
@@ -33,8 +41,8 @@ export const init = () => {
   axios.interceptors.request.use(requestInterceptor);
 };
 
-export const post = (url, data, options = null) => {
-  return axios.post(url, data, options);
+export const post = async (url, data, options = null) => {
+  return await http.post(url, data, options);
 };
 
 export const get = (url, options = null) => axios.get(url, options);

@@ -107,7 +107,7 @@ export const NavBar = ({
       SuccessToast('Login successful.');
     } catch (error) {
       console.log(error);
-      errorToast('Login failed.');
+      errorToast(error);
       setProgressed(100);
       dispatch(loginFail(error.message));
     }

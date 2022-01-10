@@ -8,7 +8,7 @@ import {
   RiShoppingCartFill,
   RiFilter2Fill,
 } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import zeroLogo from '../../assets/zeroLogo.png';
 import TextField from '../TextField/TextField';
@@ -20,9 +20,9 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './LoginNavBar.scss';
 
-
 export const LoginNavBar = ({
   className,
+  handleLogout,
   handleToggle,
   handleSignIn,
   isScrolling,
@@ -34,16 +34,8 @@ export const LoginNavBar = ({
     { 'shadow-md': isScrolling === true }
   );
 
-  const dispatch = useDispatch();
-
   const isSmallWide = useMediaQuery('(max-width: 640px)');
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    sessionStorage.clear();
-    dispatch(logOut());
-  };
-
+  
   return (
     <motion.div
       className={LoginNavBarClasses}
@@ -52,7 +44,7 @@ export const LoginNavBar = ({
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className='flex items-start pt-5 '>
+      <div className="flex items-start pt-5 ">
         <div className="flex flex-col items-center">
           <div className="mr-1 logo lg:mr-3">
             <Link to="/" className="flex justify-center">

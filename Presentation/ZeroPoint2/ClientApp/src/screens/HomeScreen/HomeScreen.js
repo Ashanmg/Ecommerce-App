@@ -13,6 +13,7 @@ import useMediaQuery from '../../config/customHooks/useMediaQuery';
 import Loading from '../../components/Loading/Loading';
 
 import './HomeScreen.scss';
+import { useSelector } from 'react-redux';
 
 const override = css`
   display: block;
@@ -22,18 +23,21 @@ const override = css`
   align-items: center;
 `;
 
-export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
+export const HomeScreen = ({ className, ...restProps }) => {
   const HomeScreenClasses = CN(
     'home-screen container max-w-screen-xl px-1 lg:px-3 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-6 md:gap-y-2 h-auto',
     className,
     {}
   );
 
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
 
   const [largeWide, setLargeWide] = useState(false);
   const [mediumWide, setMediumWide] = useState(false);
   const [smallWide, setSmallWide] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
 
   const isLargeWide = useMediaQuery('(min-width: 1024px)');
   const isMediumWide = useMediaQuery('(min-width: 768px)');
@@ -44,6 +48,11 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
     setMediumWide(isMediumWide);
     setSmallWide(isSmallWide);
   }, [isLargeWide, isMediumWide, smallWide]);
+
+  useEffect(() => {
+    const auth = localStorage.getItem('isAuthenticated');
+    isAuthenticated || auth ? setIsAuth(true) : setIsAuth(false);
+  }, [isAuthenticated]);
 
   const [products, setProducts] = useState(initialFProducts);
   const [productLoadLength, setProductLoadLength] = useState(
@@ -95,7 +104,7 @@ export const HomeScreen = ({ className, isAuthenticated, ...restProps }) => {
       {productLoadLength.map((i, idx) => (
         <ProductCard
           onClick={(e) => {
-            if (!isAuthenticated) {
+            if (!isAuth) {
               setMoveProduct(false);
               setSelectedProduct(products[idx]);
               setTimeout(() => {

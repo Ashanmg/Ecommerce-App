@@ -1,7 +1,9 @@
 export default {
-  SUPER_ADMIN: 'SUPER_ADMIN',
-  ADMIN: 'ADMIN',
-  MANAGER: 'MANAGER',
-  CUSTOMER: 'CUSTOMER',
-  GUEST: 'GUEST',
+  1: 'SUPER_ADMIN',
+  2: 'ADMIN',
+  3: 'FORUM_MODERATOR',
+  3: 'FORUM_MODERATOR',
+  4: 'GUEST',
+  5: 'VENDOR',
+  6: 'CONTENT_WRIER',
 };

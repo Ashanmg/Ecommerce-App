@@ -8,7 +8,7 @@ import { post, get } from '../config/utils/http';
 const loginUrl = `${apiBaseUrl}api/Auth/login`;
 const signupUrl = `${apiBaseUrl}api/Auth/register`;
 
-export const userLogin = (fromData) => {
+export const userLogin = async (fromData) => {
   return new Promise(async (resolve, reject) => {
     try {
       const { email, password } = fromData;
@@ -17,15 +17,21 @@ export const userLogin = (fromData) => {
         Password: password,
       });
 
-      resolve(res.data);
-      console.log((res));
+      resolve(res);
+
       if (res.status === 200) {
-        console.log('login success');
         sessionStorage.setItem('token', res.data.token);
+        sessionStorage.setItem('user', JSON.stringify(res.data.userData));
+        sessionStorage.setItem('isAuthenticated', true);
         localStorage.setItem(
           'token',
           JSON.stringify({ token: res.data.token })
         );
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ user: res.data.userData })
+        );
+        localStorage.setItem('isAuthenticated', true);
       }
     } catch (error) {
       reject(error);
