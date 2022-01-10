@@ -293,12 +293,6 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     ) {
       errorToast('Short product description is required');
       return;
-    } else if (
-      fullProductDescription === '' ||
-      fullProductDescription === null
-    ) {
-      errorToast('Full product description is required');
-      return;
     } else if (wholeProductPrice === '' || wholeProductPrice === null) {
       errorToast('Whole product price is required');
       return;
