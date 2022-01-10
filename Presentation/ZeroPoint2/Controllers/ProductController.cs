@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ZeroPoint2.Core.Dtos;
@@ -25,6 +26,7 @@ namespace ZeroPoint2.Controllers
         #region public API methods
         [HttpPost]
         [Route("uploadproduct")]
+        [Authorize(Roles = "Administrators, ContentWriters")]
         public async Task<IActionResult> UploadSingleProduct([FromForm]UploadProductForCreationDto productForCreationDto)
         {
             ExecutionResponse<bool> response = await _productService.UploadSingleProduct(productForCreationDto);
