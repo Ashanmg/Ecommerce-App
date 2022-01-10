@@ -7,14 +7,11 @@ const PrivateRoute = ({ children, accessRoles, ...rest }) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   const userData = JSON.parse(localStorage.getItem('user'));
 
-  console.log(userData.user.userRoleId, accessRoles);
-
   if (!isAuthenticated) {
     return <Navigate to="/" state={{ from: location }} />;
   }
 
   if (accessRoles && accessRoles.includes(userData.user.userRoleId)) {
-    // console.log(accessRoles.includes(userData.user.userRoleId));
     return children;
    }else {
       return <Navigate to="/" state={{ from: location }} />;

@@ -168,12 +168,15 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     if (colors.length !== 0) {
       const colorsData = [];
       colors?.map((color) => {
-        colorsData.push({ value: color.colorHashValue, label: color.colorName, code: color.colorCode});
+        colorsData.push({
+          value: color.colorHashValue,
+          label: color.colorName,
+          code: color.colorCode,
+        });
         setColorSelectOptions(colorsData);
       });
-      console.log(colorsData);
     }
-  }, []);
+  }, [colors, colorSelectedOption]);
 
   const handleMainCategoryChange = (selectedOption) => {
     if (selectedOption) {

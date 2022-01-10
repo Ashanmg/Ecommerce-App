@@ -4,7 +4,8 @@ export const getProductCategoryForUpload = (fromData) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await get('/api/category/getcategoriesforproductupload');
-      resolve(res.data);
+
+      resolve(res.data.result);
 
       if (res.status === 200) {
         sessionStorage.setItem('token', res.data.token);
@@ -23,7 +24,7 @@ export const getColorTypesForUpload = (fromData) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await get('/api/product/getcolors');
-      resolve(res.data);
+      resolve(res.data.result);
 
       if (res.status === 200) {
         sessionStorage.setItem('token', res.data.token);
@@ -45,7 +46,7 @@ export const productUpload = (fromData) => {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
       });
-      console.log(res);
+      
       resolve(res.data);
 
       if (res.status === 200) {

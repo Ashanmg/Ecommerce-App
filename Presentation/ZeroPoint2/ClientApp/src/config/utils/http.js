@@ -45,4 +45,4 @@ export const post = async (url, data, options = null) => {
   return await http.post(url, data, options);
 };
 
-export const get = (url, options = null) => axios.get(url, options);
+export const get = (url, options = null) => http.get(url, options);
