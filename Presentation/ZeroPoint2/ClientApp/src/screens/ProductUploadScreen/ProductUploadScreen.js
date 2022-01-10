@@ -272,53 +272,91 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
 
     const formData = new FormData();
 
-    formData.append('Name', productName);
-    formData.append('CategoryId', childSelectedOption.value);
-    formData.append('MetaKeywords', metaKeyword);
-    formData.append('MetaDescription', metaDescription);
-    formData.append('ShortDescription', shortProductDescription);
-    formData.append('FullDescription', fullProductDescription);
-    formData.append('WholeSalePrice', wholeProductPrice);
-    formData.append('RetailPrice', RetailProductPrice);
-    formData.append('Sizes', productQuantity);
-    formData.append('Weight', productWeight);
-    formData.append('Length', productLength);
-    formData.append('Width', productWidth);
-    formData.append('Height', productHeight);
-    formData.append('LengthWidthHeightType', productDimensionUnit);
-    formData.append('WeightType', productWeightUnit);
-    formData.append('shippingNote', shippingNote);
-    formData.append('CompanyName', companyName);
-    formData.append('CompanyInformation', companyInformation);
-    formData.append('NotReturnable', isReturnable);
-    formData.append('ReturnInformation', returnInformation);
-    formData.append('ShowOnHomePage', isHomePage);
-    formData.append('AvailableQuantity', availableQty);
-    formData.append('ProductionTime', productionTime);
+    if (productName === '' || productName === null) {
+      errorToast('Product name is required');
+      return;
+    } else if (
+      childSelectedOption.value === '' ||
+      childSelectedOption.value === null
+    ) {
+      errorToast('Child category is required');
+      return;
+    } else if (metaKeyword === '' || metaKeyword === null) {
+      errorToast('Meta keyword is required');
+      return;
+    } else if (metaDescription === '' || metaDescription === null) {
+      errorToast('Meta description is required');
+      return;
+    } else if (
+      shortProductDescription === '' ||
+      shortProductDescription === null
+    ) {
+      errorToast('Short product description is required');
+      return;
+    } else if (
+      fullProductDescription === '' ||
+      fullProductDescription === null
+    ) {
+      errorToast('Full product description is required');
+      return;
+    } else if (wholeProductPrice === '' || wholeProductPrice === null) {
+      errorToast('Whole product price is required');
+      return;
+    } else if (RetailProductPrice === '' || RetailProductPrice === null) {
+      errorToast('Retail product price is required');
+      return;
+    } else if (productQuantity === '' || productQuantity === null) {
+      errorToast('Product quantity is required');
+      return;
+    } else {
+      formData.append('Name', productName);
+      formData.append('CategoryId', childSelectedOption.value);
+      formData.append('MetaKeywords', metaKeyword);
+      formData.append('MetaDescription', metaDescription);
+      formData.append('ShortDescription', shortProductDescription);
+      formData.append('FullDescription', fullProductDescription);
+      formData.append('WholeSalePrice', wholeProductPrice);
+      formData.append('RetailPrice', RetailProductPrice);
+      formData.append('Sizes', productQuantity);
+      formData.append('Weight', productWeight);
+      formData.append('Length', productLength);
+      formData.append('Width', productWidth);
+      formData.append('Height', productHeight);
+      formData.append('LengthWidthHeightType', productDimensionUnit);
+      formData.append('WeightType', productWeightUnit);
+      formData.append('shippingNote', shippingNote);
+      formData.append('CompanyName', companyName);
+      formData.append('CompanyInformation', companyInformation);
+      formData.append('NotReturnable', isReturnable);
+      formData.append('ReturnInformation', returnInformation);
+      formData.append('ShowOnHomePage', isHomePage);
+      formData.append('AvailableQuantity', availableQty);
+      formData.append('ProductionTime', productionTime);
 
-    colorSelectedOption.map((color, idx) => {
-      formData.append(`Colors[${idx}].ColorName`, color.label);
-      formData.append(`Colors[${idx}].ColorHashValue`, color.value);
-    });
+      colorSelectedOption.map((color, idx) => {
+        formData.append(`Colors[${idx}].ColorName`, color.label);
+        formData.append(`Colors[${idx}].ColorHashValue`, color.value);
+      });
 
-    imageList[0].map((image, idx) => {
-      if (image.length !== 0) {
-        formData.append(`ProductImages`, image, image.name);
+      imageList[0].map((image, idx) => {
+        if (image.length !== 0) {
+          formData.append(`ProductImages`, image, image.name);
+        }
+      });
+
+      dispatch(productUploadPending());
+
+      try {
+        const isAuth = await productUpload(formData);
+        resetFields();
+        dispatch(productUploadSuccess());
+        SuccessToast('Product Upload successful.');
+      } catch (error) {
+        console.log(error);
+        errorToast('Product Upload failed.');
+        // setProgressed(100);
+        dispatch(productUploadFail(error.message));
       }
-    });
-
-    dispatch(productUploadPending());
-
-    try {
-      const isAuth = await productUpload(formData);
-      resetFields();
-      dispatch(productUploadSuccess());
-      SuccessToast('Product Upload successful.');
-    } catch (error) {
-      console.log(error);
-      errorToast('Product Upload failed.');
-      // setProgressed(100);
-      dispatch(productUploadFail(error.message));
     }
   };
 
@@ -492,7 +530,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-              <span className="w-2/5 text-left text-G-dark required">
+              <span className="w-2/5 text-left text-G-dark">
                 Shipping Size & Weight
               </span>
               <div className="flex flex-col w-full p-3 border-2 product-upload-screen__left__product-category__shipping-details border-G-dark">
@@ -575,9 +613,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               </div>
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-              <span className="w-2/5 text-left text-G-dark required">
-                Colours
-              </span>
+              <span className="w-2/5 text-left text-G-dark">Colours</span>
               <AutoSelect
                 isLoading={isLoading}
                 options={selectColors}
@@ -593,30 +629,28 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-              <span className="w-2/5 text-left text-G-dark required">
+              <span className="w-2/5 text-left text-G-dark">
                 Available Quantity
               </span>
               <TextField
-                value={RetailProductPrice}
+                value={availableQty}
                 type="number"
                 placeholder="Enter Quantity"
                 onChange={(e) => setAvailableQty(e.target.value)}
               />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-              <span className="w-2/5 text-left text-G-dark required">
+              <span className="w-2/5 text-left text-G-dark">
                 Production time
               </span>
               <TextField
-                value={RetailProductPrice}
+                value={productionTime}
                 placeholder="Eg: 1d 2h 40m"
                 onChange={(e) => setProductionTime(e.target.value)}
               />
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
-              <span className="w-2/5 text-left text-G-dark required">
-                Company Name
-              </span>
+              <span className="w-2/5 text-left text-G-dark">Company Name</span>
               <TextField
                 value={companyName}
                 placeholder="Company Name"

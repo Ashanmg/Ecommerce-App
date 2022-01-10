@@ -23,10 +23,7 @@ export const userLogin = async (fromData) => {
         sessionStorage.setItem('token', res.data.token);
         sessionStorage.setItem('user', JSON.stringify(res.data.userData));
         sessionStorage.setItem('isAuthenticated', true);
-        localStorage.setItem(
-          'token',
-          JSON.stringify({ token: res.data.token })
-        );
+        localStorage.setItem('token', res.data.token);
         localStorage.setItem(
           'user',
           JSON.stringify({ user: res.data.userData })
