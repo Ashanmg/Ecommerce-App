@@ -238,6 +238,8 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     setProductWeightUnit('');
     setShippingNote('');
     setCompanyName('');
+    setAvailableQty(0);
+    setProductionTime('');
     setCompanyInformation('');
     setIsReturnable(false);
     setReturnInformation('');
@@ -298,9 +300,6 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       return;
     } else if (RetailProductPrice === '' || RetailProductPrice === null) {
       errorToast('Retail product price is required');
-      return;
-    } else if (productQuantity === '' || productQuantity === null) {
-      errorToast('Product quantity is required');
       return;
     } else {
       formData.append('Name', productName);
