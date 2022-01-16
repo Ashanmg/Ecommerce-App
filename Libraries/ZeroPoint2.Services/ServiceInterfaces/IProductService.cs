@@ -12,6 +12,6 @@ namespace ZeroPoint2.Services
     {
         Task<ExecutionResponse<bool>> UploadSingleProduct(UploadProductForCreationDto productForCreationDto);
         Task<ExecutionResponse<List<ColorTypeforListDto>>> GetColorList();
-        Task<ExecutionResponse<List<ProductForListDto>>> GetProductListByLazyLoad(int pageNumber);
+        Task<ExecutionResponse<List<ProductForListDto>>> GetProductListByLazyLoad(int pageNumber, int pageSize);
     }
 }

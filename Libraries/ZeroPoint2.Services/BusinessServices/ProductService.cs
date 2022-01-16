@@ -227,12 +227,12 @@ namespace ZeroPoint2.Services
             return response;
         }
 
-        public async Task<ExecutionResponse<List<ProductForListDto>>> GetProductListByLazyLoad(int pageNumber)
+        public async Task<ExecutionResponse<List<ProductForListDto>>> GetProductListByLazyLoad(int pageNumber, int pageSize)
         {
             ExecutionResponse<List<ProductForListDto>> response = new ExecutionResponse<List<ProductForListDto>>();
             try
             {
-                List<Product> productList = await _productRepository.GetProductListByLazyLoad(pageNumber);
+                List<Product> productList = await _productRepository.GetProductListByLazyLoad(pageNumber, pageSize);
 
                 response.Result = _mapper.Map<List<ProductForListDto>>(productList);
                 response.RequestStatus = ExecutionStatus.Success;

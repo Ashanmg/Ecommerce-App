@@ -42,11 +42,18 @@ namespace ZeroPoint2.Controllers
         }
 
         [HttpGet]
-        [Route("getproductlist")]
-        public async Task<IActionResult> GetProductListByLazyLoad(int pageNumber = 0)
+        [Route("getproductlist/{pageNumber}/{pagesize}")]
+        public async Task<IActionResult> GetProductListByLazyLoad(int pageNumber = 0, int pagesize = 18)
         {
-            ExecutionResponse<List<ProductForListDto>> response = await _productService.GetProductListByLazyLoad(pageNumber);
+            ExecutionResponse<List<ProductForListDto>> response = await _productService.GetProductListByLazyLoad(pageNumber, pagesize);
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{productId}")]
+        public async Task<IActionResult> GetProductDetail(int productId)
+        {
+            return Ok();
         }
         #endregion
     }

@@ -76,18 +76,16 @@ namespace ZeroPoint2.Data
             return await _context.ColorTypes.ToListAsync();
         }
 
-        public async Task<List<Product>> GetProductListByLazyLoad(int pageNumber)
+        public async Task<List<Product>> GetProductListByLazyLoad(int pageNumber, int pageSize)
         {
-            int pageSize = 12;
-
             if (pageNumber != 0)
-            {
-                if (pageNumber - 1 == 0)
-                {
-                    pageSize = 24;
-                }
-               
-                return await _context.Products.OrderBy(p => p.Id).Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToListAsync();
+            {             
+                return await _context.Products.Include(src => src.ProductImages).
+                    Where(p => p.ShowOnHomePage)
+                    .OrderBy(p => p.Id)
+                    .Skip(pageSize * (pageNumber - 1))
+                    .Take(pageSize)
+                    .ToListAsync();
             }
             else
             {
