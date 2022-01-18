@@ -10,7 +10,7 @@ import {
 } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 
-import zeroLogo from '../../assets/zeroLogo.png';
+import zeroLogo from '../../assets/zeroLogo1.svg';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import LayoutHeader from '../LayoutHeader/LayoutHeader';
