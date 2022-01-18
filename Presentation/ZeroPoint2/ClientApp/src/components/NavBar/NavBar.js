@@ -298,7 +298,7 @@ export const NavBar = ({
           </div>
         </form>
       </div>
-      <div className="flex items-center justify-between mt-2 text-base italic text-left nav-bar-buttom text-G-dark lg:text-base xl:text-xl">
+      <div className="flex items-center justify-between mt-2 text-base italic text-left nav-bar-buttom text-G-dark lg:text-xs xl:text-base">
         <span>
         Gifts that change the world - sustainable, socially responsible gifts - your one stop shop for giving - 20% of every sale donated to the charity of your choice
         </span>
