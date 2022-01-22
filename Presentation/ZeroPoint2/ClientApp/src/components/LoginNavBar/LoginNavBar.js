@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -35,7 +35,10 @@ export const LoginNavBar = ({
   );
 
   const isSmallWide = useMediaQuery('(max-width: 640px)');
-  
+
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const data = JSON.parse(localStorage.getItem('user'));
+
   return (
     <motion.div
       className={LoginNavBarClasses}
@@ -44,7 +47,13 @@ export const LoginNavBar = ({
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="flex items-start pt-5 ">
+      { isAuthenticated && data.user.userRoleId == 1 &&
+        <Link to='/product-upload' 
+          style = {{padding: '5px' , marginTop: '15px', marginBottom: '10px', backgroundColor: '#e5fbe8', cursor: 'pointer'}}>
+          Administrator
+        </Link>
+      } 
+      <div className={"flex items-start" +  (isAuthenticated && data.user.userRoleId != 1 ? " pt-5" : "") }>
         <div className="flex flex-col items-center">
           <div className="mr-1 logo lg:mr-3">
             <Link to="/" className="flex justify-center">

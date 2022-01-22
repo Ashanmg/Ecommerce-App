@@ -20,7 +20,6 @@ export const MainLayout = ({
   children,
   ...restProps
 }) => {
-  const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
 
   const [showSignUpModal, setshowSingUpModal] = useState(false);
@@ -31,7 +30,7 @@ export const MainLayout = ({
   const [isAuth, setIsAuth] = useState(false);
 
   const { isAuthenticated } = useSelector((state) => state.user);
-
+  const userData = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,8 +40,7 @@ export const MainLayout = ({
 
   const handleLogout = () => {
     setIsAuth(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('isAuthenticated');
+    localStorage.clear();
     sessionStorage.clear();
     navigate('/');
     dispatch(logOut());
@@ -58,11 +56,6 @@ export const MainLayout = ({
 
   const handleFundModal = () => {
     setshowFundModal(!showFundModal);
-  };
-
-  const handleSignup = (data) => {
-    setUserData(data);
-    setIsAuthenticated(true);
   };
 
   const handleSignIn = () => {
@@ -126,7 +119,8 @@ export const MainLayout = ({
             </>
           )}
         </header>
-        <div className="flex main-layout__container">
+        
+        <div className={"flex main-layout__container" + (isAuthenticated && userData.user.userRoleId == 1 ? " pt-12" : "")}>
           <main className="container max-w-screen-xl">{children}</main>
         </div>
         <footer className="flex mt-4 mb-4">
