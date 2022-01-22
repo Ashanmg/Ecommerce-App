@@ -9,7 +9,7 @@ import { emailValidation } from '../../config/utils/emailValidation';
 import TextField from '../TextField/TextField';
 import CheckBox from '../CheckBox/CheckBox';
 import Button from '../Button/Button';
-
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import './SignInFrom.scss';
 import {
   loginFail,
@@ -66,6 +66,7 @@ export const SignInFrom = ({
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordShow, setPasswordShow] = useState(false);
 
   const handleSubmit = async (e) => {
     if (email === '' || password === '') {
@@ -118,8 +119,18 @@ export const SignInFrom = ({
               <TextField
                 placeholder="Password"
                 className="mb-4"
-                type="password"
+                type={passwordShow ? 'text' : 'password'}
                 autoComplete="new-password"
+                onClickIconAfter={() => {
+                  setPasswordShow(!passwordShow);
+                }}
+                iconAfter={
+                  passwordShow ? (
+                    <RiEyeOffLine size={20} />
+                  ) : (
+                    <RiEyeLine size={20} />
+                  )
+                }
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

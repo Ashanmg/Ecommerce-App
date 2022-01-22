@@ -38,7 +38,7 @@ export const ProductCard = ({
           style={{ backgroundColor: '#edf6f1' }}
         >
           <span>
-            Please sign-in or sign-up to see product details and pricing
+            Please sign-in or sign-up to see product details and pricing.
           </span>
         </div>
       )}

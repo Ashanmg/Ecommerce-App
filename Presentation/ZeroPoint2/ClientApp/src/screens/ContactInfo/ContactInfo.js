@@ -13,18 +13,16 @@ export const ContactInfo = ({ className, ...restProps }) => {
 
   return (
     <div className={ContactInfoClasses} {...restProps}>
-      <div className="flex flex-col items-center mb-12">
+      <div className="w-full px-2 leading-9 text-justify top md:px-5">
         <img
           src={Founder}
           alt=""
           className="w-40 h-56 max-w-xs mb-2 mr-5 md:max-w-sm md:h-full"
         />
-        <h1 className="text-xl italic text-center font-base">Richard Croome</h1>
-        <h1 className="text-xl italic text-center font-base">
+        <h4 className="text-xl font-base">Richard Croome</h4>
+        <h6 className="mb-5">
           richard.croome@zeropoint2.com
-        </h1>
-      </div>
-      <div className="w-full px-2 leading-9 text-justify top md:px-5">
+        </h6>
         <h6>
           <strong>
             ZeroPoint2 sells handmade goods and donates 20% of all sales to
@@ -89,17 +87,9 @@ export const ContactInfo = ({ className, ...restProps }) => {
           </li>
           <li>• tell your friends about this site.</li>
         </ul>
-        <h6>
+        <h6 className="mb-5">
           <strong>Thank you.</strong>
         </h6>
-        {/* <img
-          src={Founder}
-          alt=""
-          className="w-40 h-56 mb-2 mr-5 shadow"
-          style={{ width: '100%', height: '100%', maxWidth: '90px', maxHeight: '100px' }}
-        />
-        <h6 style={{ marginBottom: '0px !important' }}>Richard Croome</h6>
-        <h6>ceo@zeropoint2.com</h6> */}
       </div>
     </div>
   );
