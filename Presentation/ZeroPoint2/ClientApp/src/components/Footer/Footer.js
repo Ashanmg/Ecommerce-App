@@ -26,7 +26,7 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           style={{ backgroundColor: '#e5fbe8' }}
         >
           <div className="my-1 text-xs italic copyRight text-G-dark">
-            Copyright © 2021 zeropoint2.com. All rights reserved.
+            Copyright © 2022 zeropoint2.com. All rights reserved.
           </div>
           <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
             <Link to="./contact-info" className="italic text-G-dark">
@@ -56,10 +56,10 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
         style={{ backgroundColor: '#e5fbe8' }}
       >
         <div className="text-xs italic copyRight text-G-dark">
-          Copyright © 2021 zeropoint2.com. All rights reserved.
+          Copyright © 2022 zeropoint2.com. All rights reserved.
         </div>
         <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
-          <Link to="./contact-info" className="italic text-G-dark">
+          <Link to="/contact-info" className="italic text-G-dark">
             About
           </Link>
           <a href="./" className="italic text-G-dark px-7">

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast, Flip } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 
 import {
   signupFail,
@@ -64,7 +65,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
   const [password, setPassword] = useState('');
   const [subscribe, setSubscribe] = useState(false);
   const [isLater, setIsLater] = useState(false);
-
+  const [passwordShow, setPasswordShow] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -128,8 +129,18 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
               <TextField
                 placeholder="Password"
                 className="mb-4"
-                type="password"
+                type={passwordShow ? 'text' : 'password'}
                 autoComplete="new-password"
+                onClickIconAfter={() => {
+                  setPasswordShow(!passwordShow);
+                }}
+                iconAfter={
+                  passwordShow ? (
+                    <RiEyeOffLine size={20} />
+                  ) : (
+                    <RiEyeLine size={20} />
+                  )
+                }
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
