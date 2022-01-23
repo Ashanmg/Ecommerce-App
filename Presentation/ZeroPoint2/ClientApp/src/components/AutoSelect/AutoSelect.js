@@ -24,6 +24,7 @@ export const AutoSelect = ({
     control: (base) => ({
       ...base,
       border: '2px solid #005C27',
+      color: '#005C27',
       borderRadius: '0px',
       boxShadow: '0px 1px 2px rgba(0, 45, 71, 0.05)',
       '&:hover': {
@@ -33,11 +34,15 @@ export const AutoSelect = ({
         border: '2px solid #005C27',
       },
     }),
+    singleValue: (base) => ({
+      ...base,
+      color: '#005C27',
+    }),
     menuPortal: (base) => ({ ...base, zIndex: 9999 }),
     option: (base, { isFocused }) => ({
       ...base,
       backgroundColor: isFocused ? '#EEF3F8' : '#fff',
-      color: '#2E3849',
+      color: '#005C27',
     }),
   };
 
@@ -62,7 +67,7 @@ export const AutoSelect = ({
         onChange={onChange}
         menuPosition="fixed"
         placeholder={
-          <span className="select-placeholder-text text-G-dark">
+          <span className="select-placeholder-text text-G-500">
             {placeHolder}
           </span>
         }

@@ -27,7 +27,7 @@ export const TextArea = ({
         placeholder={placeholder}
         maxLength={maxLength}
         rows={rows}
-        className="w-full pl-2 border-2 border-solid placeholder-G-dark border-G-dark focus:border-G-dark"
+        className="w-full pl-2 border-2 border-solid placeholder-G-500 border-G-dark focus:border-G-dark"
       />
       {textRules && (
         <div className="text-xs italic text-right text-G-light">

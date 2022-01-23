@@ -70,7 +70,7 @@ export const TextField = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={CN('w-full h-full pl-2 focus:outline-none placeholder-G-dark')}
+        className={CN('w-full h-full pl-2 focus:outline-none placeholder-G-500 text-G-dark')}
         autoComplete={autoComplete}
       />
       {iconAfter && (

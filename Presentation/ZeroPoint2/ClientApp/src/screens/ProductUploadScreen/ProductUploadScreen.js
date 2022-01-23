@@ -139,6 +139,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       setCategories(productCategories);
       dispatch(getProductCategorySuccess());
     } catch (error) {
+      errorToast('Product category fetching failed');
       dispatch(getProductCategoryFail(error.message));
     }
   }, []);
@@ -414,7 +415,6 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   onChange={(selectOption) => {
                     if (selectOption) {
                       setChildSelectedOption(selectOption);
-                      setSubSelectedOption(selectOption);
                     } else {
                       setChildSelectedOption();
                     }
@@ -456,16 +456,14 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   onChange={(e) => setMetaDescription(e.target.value)}
                 />
               </div>
-              <div className="flex items-center product-upload-screen__left__product-category">
+              <div className="flex items-center product-upload-screen__left__product-category mb-3">
                 <span className="w-2/5 text-left text-G-dark required">
                   Short Product Description
                 </span>
                 <TextArea
                   value={shortProductDescription}
                   placeholder="Short Product Description"
-                  maxLength={200}
                   rows={3}
-                  textRules="200 characters maximum"
                   onChange={(e) => setShortProductDescription(e.target.value)}
                 />
               </div>
@@ -476,9 +474,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                 <TextArea
                   value={fullProductDescription}
                   placeholder="Full Product Description"
-                  maxLength={500}
                   rows={5}
-                  textRules="500 characters maximum"
                   onChange={(e) => setFullProductDescription(e.target.value)}
                 />
               </div>
@@ -680,9 +676,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               <TextArea
                 value={returnInformation}
                 placeholder="Return Information"
-                maxLength={500}
                 rows={3}
-                textRules="500 characters maximum"
                 onChange={(e) => setReturnInformation(e.target.value)}
               />
             </div>

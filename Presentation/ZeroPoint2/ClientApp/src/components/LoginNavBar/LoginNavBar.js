@@ -8,14 +8,11 @@ import {
   RiShoppingCartFill,
   RiFilter2Fill,
 } from 'react-icons/ri';
-import { useDispatch, useSelector } from 'react-redux';
 
 import zeroLogo from '../../assets/zeroLogo1.svg';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import LayoutHeader from '../LayoutHeader/LayoutHeader';
-
-import { logOut } from '../../features/userSlice';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './LoginNavBar.scss';

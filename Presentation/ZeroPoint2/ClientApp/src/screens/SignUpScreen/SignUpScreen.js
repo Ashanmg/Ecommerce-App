@@ -94,6 +94,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
         }
       }
       dispatch(signupFail(error.message));
+      errorToast('Registration failed. Please try again.');
     }
   };
 
