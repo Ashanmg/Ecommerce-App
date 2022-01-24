@@ -23,7 +23,6 @@ export const getColorTypesForUpload = (fromData) => {
       resolve(res.data.result);
 
       if (res.status === 200) {
-        
         // sessionStorage.setItem('token', res.data.token);
       }
     } catch (error) {
@@ -34,14 +33,14 @@ export const getColorTypesForUpload = (fromData) => {
 
 export const productUpload = (fromData) => {
   return new Promise(async (resolve, reject) => {
-   const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     try {
       const res = await post('/api/product/uploadproduct', fromData, {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       });
-      
+
       resolve(res.data);
 
       if (res.status === 200) {

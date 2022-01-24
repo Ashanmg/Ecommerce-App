@@ -25,14 +25,12 @@ const requestInterceptor = (config) => {
   return config;
 };
 
-const token = localStorage.getItem('token');
-
 /* Initialize Axios as http */
 export const http = axios.create({
   baseURL: apiBaseUrl,
   headers: {
     'Content-type': 'application/json',
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
 });
 
