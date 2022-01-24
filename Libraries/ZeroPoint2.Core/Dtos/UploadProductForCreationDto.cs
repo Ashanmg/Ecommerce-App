@@ -33,6 +33,8 @@ namespace ZeroPoint2.Core.Dtos
         public List<ProductColorForCreationDto> Colors { get; set; }
         public string Sizes { get; set; }
         public bool ShowOnHomePage { get; set; }
+        public bool MadeToOrder { get; set; }
+        public string AdditionalNotes { get; set; }
         public List<IFormFile> ProductImages { get; set; }
     }
 }

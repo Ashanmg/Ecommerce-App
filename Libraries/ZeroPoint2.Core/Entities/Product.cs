@@ -8,14 +8,10 @@ namespace ZeroPoint2.Core.Entities
     public class Product
     {
         public int Id { get; set; }
-        [MaxLength(200)]
         public string Name { get; set; }
         public string MetaKeywords { get; set; }
-        [MaxLength(500)]
         public string MetaDescription { get; set; }
-        [MaxLength(9)]
         public string Sku { get; set; }
-        [MaxLength(500)]
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
         public bool ShowOnHomePage { get; set; }
@@ -47,13 +43,12 @@ namespace ZeroPoint2.Core.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal AvailableQuantity { get; set; }
         public string ProductionTime { get; set; }
-        [MaxLength(200)]
         public string CompanyName { get; set; }
-        [MaxLength(500)]
         public string CompanyInformation { get; set; }
         public bool NotReturnable { get; set; }
-        [MaxLength(500)]
         public string ReturnInformation { get; set; }
+        public bool MadeToOrder { get; set; }
+        public string AdditionalNotes { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public DateTime UpdatedOnUtc { get; set; }
         public Category Category { get; set; }
