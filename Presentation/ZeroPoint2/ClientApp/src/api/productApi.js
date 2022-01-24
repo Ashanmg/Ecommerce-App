@@ -8,7 +8,7 @@ export const getProductCategoryForUpload = (fromData) => {
       resolve(res.data.result);
 
       if (res.status === 200) {
-        sessionStorage.setItem('token', res.data.token);
+        // sessionStorage.setItem('token', res.data.token);
       }
     } catch (error) {
       reject(error);
@@ -23,7 +23,8 @@ export const getColorTypesForUpload = (fromData) => {
       resolve(res.data.result);
 
       if (res.status === 200) {
-        sessionStorage.setItem('token', res.data.token);
+        
+        // sessionStorage.setItem('token', res.data.token);
       }
     } catch (error) {
       reject(error);
@@ -44,7 +45,7 @@ export const productUpload = (fromData) => {
       resolve(res.data);
 
       if (res.status === 200) {
-        sessionStorage.setItem('token', res.data.token);
+        // sessionStorage.setItem('token', res.data.token);
         // localStorage.setItem(
         //   'token',
         //   JSON.stringify({ token: res.data.token })
