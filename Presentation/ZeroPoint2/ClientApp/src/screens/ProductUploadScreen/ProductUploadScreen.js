@@ -456,7 +456,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
                   onChange={(e) => setMetaDescription(e.target.value)}
                 />
               </div>
-              <div className="flex items-center product-upload-screen__left__product-category mb-3">
+              <div className="flex items-center mb-3 product-upload-screen__left__product-category">
                 <span className="w-2/5 text-left text-G-dark required">
                   Short Product Description
                 </span>

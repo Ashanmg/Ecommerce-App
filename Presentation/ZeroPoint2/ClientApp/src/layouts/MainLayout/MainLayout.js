@@ -119,8 +119,12 @@ export const MainLayout = ({
             </>
           )}
         </header>
-        
-        <div className={"flex main-layout__container" + (isAuthenticated && userData.user.userRoleId == 1 ? " pt-12" : "")}>
+
+        <div
+          className={CN('flex main-layout__container', {
+            'pt-12': isAuthenticated,
+          })}
+        >
           <main className="container max-w-screen-xl">{children}</main>
         </div>
         <footer className="flex mt-4 mb-4">
