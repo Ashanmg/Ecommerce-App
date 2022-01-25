@@ -107,11 +107,11 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
   const [fullProductDescription, setFullProductDescription] = useState('');
   const [wholeProductPrice, setWholeProductPrice] = useState('');
   const [RetailProductPrice, setRetailProductPrice] = useState('');
-  const [productQuantity, setProductQuantity] = useState('');
-  const [productWeight, setProductWeight] = useState('');
-  const [productLength, setProductLength] = useState('');
-  const [productWidth, setProductWidth] = useState('');
-  const [productHeight, setProductHeight] = useState('');
+  const [productSizes, setProductSizes] = useState('');
+  const [productWeight, setProductWeight] = useState(0);
+  const [productLength, setProductLength] = useState(0);
+  const [productWidth, setProductWidth] = useState(0);
+  const [productHeight, setProductHeight] = useState(0);
   const [productDimensionUnit, setProductDimensionUnit] = useState('');
   const [productWeightUnit, setProductWeightUnit] = useState('');
   const [shippingNote, setShippingNote] = useState('');
@@ -122,6 +122,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
   const [isHomePage, setIsHomePage] = useState(false);
   const [availableQty, setAvailableQty] = useState(0);
   const [productionTime, setProductionTime] = useState('');
+  const [madeToOrder, setMadeForOrder] = useState(false);
 
   const [image1, setImage1] = useState([]);
   const [image2, setImage2] = useState([]);
@@ -230,11 +231,11 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     setFullProductDescription('');
     setWholeProductPrice('');
     setRetailProductPrice('');
-    setProductQuantity('');
-    setProductWeight('');
-    setProductLength('');
-    setProductWidth('');
-    setProductHeight('');
+    setProductSizes('');
+    setProductWeight(0);
+    setProductLength(0);
+    setProductWidth(0);
+    setProductHeight(0);
     setProductDimensionUnit('');
     setProductWeightUnit('');
     setShippingNote('');
@@ -246,6 +247,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
     setReturnInformation('');
     setColorSelectedOption(null);
     setIsHomePage(false);
+    setMadeForOrder(false);
     setImage1('');
     setImage2('');
     setImage3('');
@@ -311,14 +313,13 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       formData.append('FullDescription', fullProductDescription);
       formData.append('WholeSalePrice', wholeProductPrice);
       formData.append('RetailPrice', RetailProductPrice);
-      formData.append('Sizes', productQuantity);
+      formData.append('Sizes', productSizes);
       formData.append('Weight', productWeight);
       formData.append('Length', productLength);
       formData.append('Width', productWidth);
       formData.append('Height', productHeight);
       formData.append('LengthWidthHeightType', productDimensionUnit);
       formData.append('WeightType', productWeightUnit);
-      formData.append('shippingNote', shippingNote);
       formData.append('CompanyName', companyName);
       formData.append('CompanyInformation', companyInformation);
       formData.append('NotReturnable', isReturnable);
@@ -326,6 +327,8 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       formData.append('ShowOnHomePage', isHomePage);
       formData.append('AvailableQuantity', availableQty);
       formData.append('ProductionTime', productionTime);
+      formData.append('MadeToOrder', madeToOrder);
+      formData.append('AdditionalNotes', shippingNote);
 
       colorSelectedOption.map((color, idx) => {
         formData.append(`Colors[${idx}].ColorName`, color.label);
@@ -524,10 +527,10 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               </span>
               <div className="flex flex-col w-full p-3 border-2 product-upload-screen__left__product-category__shipping-details border-G-dark">
                 <TextField
-                  value={productQuantity}
+                  value={productSizes}
                   placeholder="Size:1 Description i.e, small"
                   className="mb-3"
-                  onChange={(e) => setProductQuantity(e.target.value)}
+                  onChange={(e) => setProductSizes(e.target.value)}
                 />
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   <TextField
@@ -630,13 +633,24 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">
-                Production time
+                Production Time
               </span>
               <TextField
                 value={productionTime}
                 placeholder="Eg: 1d 2h 40m"
                 onChange={(e) => setProductionTime(e.target.value)}
               />
+            </div>
+            <div className="flex items-center mb-3 product-upload-screen__left__product-category">
+              <span className="w-2/5 text-left text-G-dark">
+                Made For Order
+              </span>
+              <div className="w-full">
+                <CheckBox
+                  value={madeToOrder}
+                  onChange={(e) => setMadeForOrder(e.target.checked)}
+                />
+              </div>
             </div>
             <div className="flex items-center mb-3 product-upload-screen__left__product-category">
               <span className="w-2/5 text-left text-G-dark">Company Name</span>
