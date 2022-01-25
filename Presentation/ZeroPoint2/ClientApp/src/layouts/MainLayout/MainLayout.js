@@ -94,6 +94,8 @@ export const MainLayout = ({
     };
   }, [handleNavigation]);
 
+  console.log(isAuthenticated);
+
   return (
     <>
       <div className="App">
@@ -122,7 +124,7 @@ export const MainLayout = ({
 
         <div
           className={CN('flex main-layout__container', {
-            'pt-12': isAuthenticated,
+            'mt-12': isAuth,
           })}
         >
           <main className="container max-w-screen-xl">{children}</main>

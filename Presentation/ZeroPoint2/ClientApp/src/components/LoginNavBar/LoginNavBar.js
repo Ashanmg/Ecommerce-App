@@ -44,7 +44,7 @@ export const LoginNavBar = ({
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      { isAuthenticated && data.user.userRoleId == 1 &&
+      { isAuthenticated && data.user.userRoleId === 1 &&
         <Link to='/product-upload' 
           style = {{padding: '5px' , marginTop: '15px', marginBottom: '10px', backgroundColor: '#e5fbe8', cursor: 'pointer'}}>
           Administrator
