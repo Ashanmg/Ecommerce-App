@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ZeroPoint2.Core;
 using ZeroPoint2.Core.Dtos;
+using ZeroPoint2.Core.Dtos.Admin;
 using ZeroPoint2.Helper;
 using ZeroPoint2.Services;
 
@@ -54,6 +56,16 @@ namespace ZeroPoint2.Controllers
         public async Task<IActionResult> GetProductDetail(int productId)
         {
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("getallproducts/{pageNumber}/{pagesize}")]
+        //[Authorize(Roles = "Administrators")]
+        public async Task<IActionResult> GetAllProducts(int pageNumber = 1, int pageSize = 20)
+        {
+            ExecutionResponse<GridData<List<ProductListForViewDto>>> response = await _productService.GetAllProducts(pageNumber, pageSize);
+
+            return Ok(response);
         }
         #endregion
     }

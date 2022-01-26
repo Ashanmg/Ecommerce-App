@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZeroPoint2.Core;
 using ZeroPoint2.Core.Entities;
 
 namespace ZeroPoint2.Data
@@ -16,5 +17,6 @@ namespace ZeroPoint2.Data
         Task<bool> InsertProductCombinationData(List<ProductCombination> productCombinationList);
         Task<List<ColorType>> GetColorList();
         Task<List<Product>> GetProductListByLazyLoad(int pageNumber, int pageSize);
+        Task<GridData<List<Product>>> GetAllProducts(int pageNumber, int pageSize);
     }
 }

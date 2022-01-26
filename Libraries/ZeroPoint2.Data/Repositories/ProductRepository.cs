@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZeroPoint2.Core;
 using ZeroPoint2.Core.Entities;
 
 namespace ZeroPoint2.Data
@@ -91,6 +92,20 @@ namespace ZeroPoint2.Data
             {
                 return await _context.Products.OrderBy(p => p.Id).ToListAsync();
             }
+        }
+
+        public async Task<GridData<List<Product>>> GetAllProducts(int pageNumber, int pageSize)
+        {
+            var query = _context.Products.Include(src => src.ProductImages).Include(src => src.ProductColors).
+                    Where(p => p.ShowOnHomePage)
+                    .OrderBy(p => p.Id);
+
+            var productlist = await query
+                    .Skip(pageSize * (pageNumber - 1))
+                    .Take(pageSize)
+                    .ToListAsync();
+
+            return new GridData<List<Product>>().CreateGridData(productlist, pageNumber, pageSize, query.Count());
         }
         #endregion
     }
