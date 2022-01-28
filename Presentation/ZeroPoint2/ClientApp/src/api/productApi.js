@@ -55,3 +55,20 @@ export const productUpload = (fromData) => {
     }
   });
 };
+
+export const getAllProducts = (pagesize) => {
+  console.log(pagesize);
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await get(`/api/product/getallproducts/1/${pagesize}`);
+
+      resolve(res.data.result);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

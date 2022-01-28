@@ -4,6 +4,7 @@ import signupReducer from '../features/signupSlice';
 import getProductCategoryForUploadSlice from '../features/productCategoryforUploadSlice';
 import productUploadSlice from '../features/ProductUploadSlice';
 import colorTypesForUploadSlice from '../features/colorTypesForUploadSlice';
+import getAllProductSlice from '../features/getAllProductSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     signup: signupReducer,
     getProductCategoryForUpload: getProductCategoryForUploadSlice,
     productUpload: productUploadSlice,
-    getColorTypesForUpload: colorTypesForUploadSlice
+    getColorTypesForUpload: colorTypesForUploadSlice,
+    getAllProduct: getAllProductSlice,
   },
 });

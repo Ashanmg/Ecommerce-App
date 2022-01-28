@@ -38,10 +38,12 @@ import {
 } from '../../features/ProductUploadSlice';
 
 import './ProductUploadScreen.scss';
+import { RiArrowRightSLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductUploadScreen = ({ className, ...restProps }) => {
   const ProductUploadScreenClasses = CN(
-    'product-upload-screen flex container max-w-screen-xl px-1 lg:px-3',
+    'product-upload-screen flex px-1 lg:px-3',
     className,
     {}
   );
@@ -75,6 +77,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { isLoading, isSuccessFull, error } = useSelector(
     (state) => state.getProductCategoryForUpload,
@@ -368,6 +371,15 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
       )}
 
       <form action="" method="post">
+        <div className="dashboard_title text-G-dark font-bold text-3xl w-full mb-6 flex justify-between">
+          Products Upload
+          <Button
+            children="Move to the Products"
+            className="flex gap-x-3 items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark rounded-sm"
+            onClick={() => navigate('/admin/products')}
+            afterIcon={<RiArrowRightSLine />}
+          />
+        </div>
         <div className="flex mb-6">
           <div className="w-8/12 mr-4 product-upload-screen__left">
             <div className="mb-5 product-upload-screen__left__top">

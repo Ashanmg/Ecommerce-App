@@ -15,6 +15,7 @@ export const Button = ({
   className,
   children,
   type,
+  disabled,
   isLoading,
   afterIcon,
   beforeIcon,
@@ -23,7 +24,7 @@ export const Button = ({
   const ButtonClasses = CN('button', className, {});
 
   return (
-    <button type={type} className={ButtonClasses} {...restProps}>
+    <button type={type} disabled={disabled} className={ButtonClasses} {...restProps}>
       {beforeIcon && beforeIcon}
       {children}
       {isLoading && (
@@ -44,6 +45,8 @@ export const Button = ({
 
 Button.defaultProps = {
   className: undefined,
+  children: undefined,
+  disabled: false,
   type: 'button',
 };
 

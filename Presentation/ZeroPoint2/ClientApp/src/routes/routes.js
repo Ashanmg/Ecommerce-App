@@ -5,6 +5,9 @@ import { HomeScreen } from '../screens/HomeScreen';
 import NoResults from '../screens/NoResults/NoResults';
 import ProductUploadScreen from '../screens/ProductUploadScreen/ProductUploadScreen';
 import ProductScreen from '../screens/ProductScreen/ProductScreen';
+import { CMSLayout } from '../layouts/CMSLayout';
+import { Dashboard } from '../CMS-screens/Dashboard';
+import Products from '../CMS-screens/Products/Products';
 
 export const routes = [
   {
@@ -19,13 +22,6 @@ export const routes = [
     layout: MainLayout,
     private: false,
     accessRoles: [],
-  },
-  {
-    path: '/product-upload',
-    component: ProductUploadScreen,
-    layout: MainLayout,
-    private: true,
-    accessRoles: [1, 6],
   },
   {
     path: '/product/:id',
@@ -47,6 +43,27 @@ export const routes = [
     private: false,
     accessRoles: [],
   },
+  {
+    path: '/admin/dashboard',
+    component: Dashboard,
+    layout: CMSLayout,
+    private: true,
+    accessRoles: [1, 6],
+  },
+  {
+    path: '/admin/products',
+    component: Products,
+    layout: CMSLayout,
+    private: true,
+    accessRoles: [1, 6],
+  },
+  {
+    path: '/admin/product-upload',
+    component: ProductUploadScreen,
+    layout: CMSLayout,
+    private: true,
+    accessRoles: [1, 6],
+  }
 ];
 
 export default routes;
