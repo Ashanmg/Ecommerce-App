@@ -495,7 +495,7 @@ export const ProductUploadScreen = ({ className, ...restProps }) => {
               </div>
             </div>
             <div className="flex product-upload-screen__left__bottom">
-              <span className="w-2/6 text-left text-G-dark">
+              <span className="w-72 text-left text-G-dark">
                 Images Drag & Drop Or Upload
               </span>
               <div className="grid grid-cols-4 gap-2">

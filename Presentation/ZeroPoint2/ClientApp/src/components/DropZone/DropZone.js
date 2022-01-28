@@ -63,7 +63,7 @@ export const DropZone = ({ className, img, setImages, ...restProps }) => {
           <div className="icon">
             <RiUploadCloud2Fill size={50} className="text-G-dark" />
           </div>
-          <header>Drag & Drop to Upload File</header>
+          <header className='text-center'>Drag & Drop to Upload File</header>
           <span>OR</span>
           <label className="underline cursor-pointer">
             <input type="file" onChange={(e) => handleUpload(e)} hidden />

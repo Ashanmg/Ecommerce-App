@@ -56,11 +56,11 @@ export const productUpload = (fromData) => {
   });
 };
 
-export const getAllProducts = (pagesize) => {
+export const getAllProducts = (pagesize, pageNumber) => {
   console.log(pagesize);
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await get(`/api/product/getallproducts/1/${pagesize}`);
+      const res = await get(`/api/product/getallproducts/${pageNumber}/${pagesize}`);
 
       resolve(res.data.result);
 

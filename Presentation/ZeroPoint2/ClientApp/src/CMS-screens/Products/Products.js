@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import CN from 'classnames';
 import Button from '../../components/Button/Button';
+import Loader from 'react-spinners/PuffLoader';
 
 import './Products.scss';
 import UITable from '../../components/CMS-components/UITable/UITable';
@@ -68,20 +69,20 @@ export const Products = ({ className, ...restProps }) => {
   useEffect(async () => {
     dispatch(getAllProductPending());
     try {
-      const products = await getAllProducts(pageSize);
+      const products = await getAllProducts(pageSize, pageNumber);
       setProducts(products);
       dispatch(getAllProductSuccess(products));
     } catch (error) {
       errorToast('Product category fetching failed');
       dispatch(getAllProductFail(error.message));
     }
-  }, [pageSize]);
+  }, [pageSize, pageNumber]);
 
   //pagination handle
   const handlePageSizeChange = async (e) => {
     setPageSize(e.target.value);
+    setPageNumber(1);
   };
-  console.log(products);
 
   useEffect(() => {
     //page count
@@ -118,7 +119,11 @@ export const Products = ({ className, ...restProps }) => {
         />
       </div>
       <div className="product__table">
-        {!isLoading && (
+        {isLoading ? (
+          <div className='w-full h-auto flex justify-center items-center'>
+            <Loader type="Grid" color="#1c473c" size={60} />
+          </div>
+        ) : (
           <UITable
             COLUMNS={COLUMNS}
             DATA={products?.data || []}
