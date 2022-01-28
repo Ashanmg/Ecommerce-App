@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZeroPoint2.Core;
 using ZeroPoint2.Core.Dtos;
+using ZeroPoint2.Core.Dtos.Admin;
 using ZeroPoint2.Core.Entities;
 using ZeroPoint2.Data;
 using ZeroPoint2.Helper;
@@ -235,6 +237,26 @@ namespace ZeroPoint2.Services
                 List<Product> productList = await _productRepository.GetProductListByLazyLoad(pageNumber, pageSize);
 
                 response.Result = _mapper.Map<List<ProductForListDto>>(productList);
+                response.RequestStatus = ExecutionStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
+
+        public async Task<ExecutionResponse<GridData<List<ProductListForViewDto>>>> GetAllProducts(int pageNumber, int pageSize)
+        {
+            ExecutionResponse<GridData<List<ProductListForViewDto>>> response = new ExecutionResponse<GridData<List<ProductListForViewDto>>>();
+            try
+            {
+                GridData<List<Product>> productList = await _productRepository.GetAllProducts(pageNumber, pageSize);
+
+                response.Result = _mapper.Map<GridData<List<ProductListForViewDto>>>(productList);
                 response.RequestStatus = ExecutionStatus.Success;
             }
             catch (Exception ex)

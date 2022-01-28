@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Linq;
+using ZeroPoint2.Core;
 using ZeroPoint2.Core.Dtos;
+using ZeroPoint2.Core.Dtos.Admin;
 using ZeroPoint2.Core.Entities;
 
 namespace ZeroPoint2.Data
@@ -36,6 +39,14 @@ namespace ZeroPoint2.Data
                     opt.MapFrom(src => src.ProductImages.First(p => p.IsMain).ImageUrl))
                 .ForMember(des => des.Price, opt =>
                     opt.MapFrom(src => string.Format("{0:C}", src.RetailPrice)));
+
+            CreateMap<Product, ProductListForViewDto>()
+                .ForMember(des => des.ProductImageUrls, opt =>
+                    opt.MapFrom(src => src.ProductImages.Select(p => p.ImageUrl)))
+                .ForMember(des => des.ProductColors, opt =>
+                    opt.MapFrom(src => src.ProductColors.Select(p => p.ColorName)));
+
+            CreateMap<GridData<List<Product>>, GridData<List<ProductListForViewDto>>>();
         }
     }
 }

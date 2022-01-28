@@ -24,7 +24,6 @@ import product23 from '../assets/products/23.JPG';
 import product24 from '../assets/products/24.JPG';
 import product25 from '../assets/products/25.JPG';
 import product26 from '../assets/products/26.JPG';
-import product27 from '../assets/products/27.JPG';
 import product28 from '../assets/products/28.JPG';
 import product29 from '../assets/products/29.JPG';
 import product30 from '../assets/products/30.JPG';
@@ -205,12 +204,6 @@ export const initialFProducts = [
     price: '$49.00',
   },
   {
-    id: 27,
-    thumbnail: product27,
-    shortDescription: 'Wooden Wine Drinking Glasses – Set of 3',
-    price: '$79.00',
-  },
-  {
     id: 28,
     thumbnail: product28,
     shortDescription: 'Abstract Glass Art',
@@ -335,6 +328,12 @@ export const initialFProducts = [
     thumbnail: product48,
     shortDescription: 'Stylish Coffee Mugs – Set of Four',
     price: '$59.00',
+  },
+  {
+    id: 27,
+    thumbnail: product28,
+    shortDescription: 'Abstract Glass Art',
+    price: '$479.00',
   }
 ];
 
