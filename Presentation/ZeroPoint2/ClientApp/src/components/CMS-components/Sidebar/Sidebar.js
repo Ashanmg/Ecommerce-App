@@ -59,6 +59,7 @@ export const Sidebar = ({ className, ...restProps }) => {
                   { id: 2, title: 'Categories', link: '/categories' },
                   { id: 3, title: 'Brands', link: '/brands' },
                   { id: 4, title: 'Tags', link: '/tags' },
+                  { id: 5, title: 'Companies', link: '/admin/companies' }
                 ]}
               />
             ),
