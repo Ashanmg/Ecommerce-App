@@ -69,9 +69,15 @@ export const HomeScreen = ({ className, ...restProps }) => {
       return;
     }
 
+    let concatLength = 12;
+
+    if (products.length - productLoadLength.length < 12) {
+      concatLength = products.length - productLoadLength.length;
+    }
+
     setTimeout(() => {
       setProductLoadLength(
-        productLoadLength.concat(Array.from({ length: 12 }))
+        productLoadLength.concat(Array.from({ length: concatLength }))
       );
     }, 1500);
   };
