@@ -124,7 +124,7 @@ export const HomeScreen = ({ className, ...restProps }) => {
           thumbnail={products[idx].thumbnail}
           shortDescription={products[idx].shortDescription}
           price={products[idx].price}
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isAuth}
           moveProduct={
             _.isEqual(selectedProduct, products[idx]) ? moveProduct : true
           }

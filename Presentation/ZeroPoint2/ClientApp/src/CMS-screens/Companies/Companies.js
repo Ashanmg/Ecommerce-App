@@ -56,23 +56,23 @@ export const Companies = ({ className, ...restProps }) => {
 
   const array1 = [
     {
-      companyLogoUrl:"",
-      name:"Company1",
-      published:"Yes"
+      companyLogoUrl: '',
+      name: 'Company1',
+      published: 'Yes',
     },
     {
-      companyLogoUrl:"",
-      name:"Company2",
-      published:"Yes"
+      companyLogoUrl: '',
+      name: 'Company2',
+      published: 'Yes',
     },
     {
-      companyLogoUrl:"",
-      name:"Company3",
-      published:"Yes"
-    }
-  ]
+      companyLogoUrl: '',
+      name: 'Company3',
+      published: 'Yes',
+    },
+  ];
   return (
-    <div className={CompaniesClasses, "flex flex-col"} {...restProps}>
+    <div className={(CompaniesClasses, 'flex flex-col')} {...restProps}>
       <div className="dashboard_title text-G-dark font-bold text-3xl w-full mb-2">
         Companies
       </div>

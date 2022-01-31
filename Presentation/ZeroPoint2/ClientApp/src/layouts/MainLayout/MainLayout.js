@@ -94,8 +94,6 @@ export const MainLayout = ({
     };
   }, [handleNavigation]);
 
-  console.log(isAuthenticated);
-
   return (
     <>
       <div className="App">

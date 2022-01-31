@@ -29,7 +29,7 @@ const palette = {
     paletteName: 'Greens',
     base: '#01A453',
     light: '#80BF9B',
-    dark: '#005C27',
+    dark: '#013919',
     100: '#C8FACD',
     200: '#94F5A7',
     300: '#5BE385',
