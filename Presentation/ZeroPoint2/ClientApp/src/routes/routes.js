@@ -9,6 +9,7 @@ import { CMSLayout } from '../layouts/CMSLayout';
 import { Dashboard } from '../CMS-screens/Dashboard';
 import Products from '../CMS-screens/Products/Products';
 import { Companies } from '../CMS-screens/Companies';
+import CompanyRegistration from '../CMS-screens/CompanyRegistration/CompanyRegistration';
 
 export const routes = [
   {
@@ -68,6 +69,13 @@ export const routes = [
   {
     path: '/admin/companies',
     component: Companies,
+    layout: CMSLayout,
+    private: true,
+    accessRoles: [1, 6]
+  },
+  {
+    path: '/admin/company-registration',
+    component: CompanyRegistration,
     layout: CMSLayout,
     private: true,
     accessRoles: [1, 6]

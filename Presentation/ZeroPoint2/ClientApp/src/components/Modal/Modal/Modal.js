@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Overlay from '../../Overlay/Overlay';
 
 import './Modal.scss';
+import { RiCloseLine } from 'react-icons/ri';
 
 export const Modal = ({
   children,
@@ -61,6 +62,15 @@ export const Modal = ({
             onClick={(e) => e.stopPropagation()}
             {...restProps}
           >
+            <div
+              className="absolute rounded-sm cursor-pointer right-10 top-10 text-G-light hover:bg-N-100"
+              onClick={onClickOverlay}
+              onKeyPress={onClickOverlay}
+              role="button"
+              tabIndex={0}
+            >
+              <RiCloseLine size={24} />
+            </div>
             {children}
           </motion.div>
         </Overlay>

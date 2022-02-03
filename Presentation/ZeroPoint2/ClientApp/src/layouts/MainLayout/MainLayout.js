@@ -144,8 +144,12 @@ export const MainLayout = ({
       <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen OnClickModalClose={handleToggle} />
       </Modal>
-      <Modal isOpen={showFundModal} onClickOverlay={handleFundModal} size="sm">
-        <FundRaiseScreen />
+      <Modal
+        isOpen={showFundModal}
+        onClickOverlay={handleFundModal}
+        size="sm"
+      >
+        <FundRaiseScreen onClose={handleFundModal} handleSignUpModal={handleToggle} />
       </Modal>
     </>
   );
