@@ -23,19 +23,19 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
       >
         <div
           className="flex flex-col items-center justify-between w-full"
-          style={{ backgroundColor: '#e5fbe8' }}
+          style={{ backgroundColor: '#80bf9b' }}
         >
-          <div className="my-1 text-xs italic copyRight text-G-dark">
+          <div className="my-1 text-xs italic copyRight text-white">
             Copyright © 2022 zeropoint2.com. All rights reserved.
           </div>
           <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
-            <Link to="./contact-info" className="italic text-G-dark">
+            <Link to="./contact-info" className="italic text-white hover:text-G-dark">
               About
             </Link>
-            <a href="./" className="italic text-G-dark px-7">
+            <a href="./" className="italic text-white hover:text-G-dark px-7">
               Support
             </a>
-            <a href="./" className="italic text-G-dark">
+            <a href="./" className="italic text-white hover:text-G-dark">
               Connect
             </a>
           </div>
@@ -53,19 +53,19 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
     <div className={FooterClasses} {...restProps}>
       <div
         className="flex flex-row items-center justify-between w-full px-2 py-2"
-        style={{ backgroundColor: '#e5fbe8' }}
+        style={{ backgroundColor: '#80bf9b' }}
       >
-        <div className="text-xs italic copyRight text-G-dark">
+        <div className="text-xs italic copyRight text-white">
           Copyright © 2022 zeropoint2.com. All rights reserved.
         </div>
         <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5 md:text-lg">
-          <Link to="/contact-info" className="italic text-G-dark">
+          <Link to="/contact-info" className="italic text-white hover:text-G-dark">
             About
           </Link>
-          <a href="./" className="italic text-G-dark px-7">
+          <a href="./" className="italic text-white hover:text-G-dark px-7">
             Support
           </a>
-          <a href="./" className="italic text-G-dark">
+          <a href="./" className="italic text-white hover:text-G-dark">
             Connect
           </a>
         </div>
