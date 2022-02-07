@@ -15,6 +15,7 @@ export const TextField = ({
   iconAfter,
   iconBefore,
   isCustomStyles,
+  name,
   onClickIconAfter,
   onClickIconBefore,
   onChange,
@@ -67,6 +68,7 @@ export const TextField = ({
         type={type}
         disabled={false}
         readOnly={false}
+        name={name}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

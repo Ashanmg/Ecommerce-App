@@ -10,6 +10,7 @@ export const TextArea = ({
   isCustom,
   textRules,
   maxLength,
+  name,
   value,
   rows,
   ...restProps
@@ -21,6 +22,7 @@ export const TextArea = ({
       <textarea
         type={type}
         value={value}
+        name={name}
         onChange={(e) => {}}
         disabled={false}
         readOnly={false}

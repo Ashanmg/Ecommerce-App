@@ -4,7 +4,7 @@ import { RiCloseFill, RiUploadCloud2Fill } from 'react-icons/ri';
 
 import './DropZone.scss';
 
-export const DropZone = ({ className, img, setImages, ...restProps }) => {
+export const DropZone = ({ className, img, setImages, style, width, ...restProps }) => {
   const DropZoneClasses = CN(
     'drop-zone flex flex-col items-center justify-center border-2 border-G-dark p-2 text-xs text-G-dark w-full',
     className,
@@ -57,6 +57,7 @@ export const DropZone = ({ className, img, setImages, ...restProps }) => {
       onDragEnter={dragEnter}
       onDragLeave={dragLeave}
       onDrop={fileDrop}
+      style={style}
     >
       {image === null && (
         <>
@@ -84,7 +85,7 @@ export const DropZone = ({ className, img, setImages, ...restProps }) => {
               }}
             />
           </div>
-          <img className="w-32 h-32 close-icon" src={previewUrl} alt="" />
+          <img className="w-32 h-32 close-icon" style={{width: width}} src={previewUrl} alt="" />
         </>
       )}
     </div>
