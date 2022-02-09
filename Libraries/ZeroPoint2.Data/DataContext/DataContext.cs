@@ -16,5 +16,8 @@ namespace ZeroPoint2.Data
         public DbSet<ProductCombination> ProductCombinations { get; set; }
         public DbSet<ColorType> ColorTypes { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyFeature> CompanyFeatures { get; set; }
+        public DbSet<CompanyImage> CompanyImages { get; set; }
     }
 }

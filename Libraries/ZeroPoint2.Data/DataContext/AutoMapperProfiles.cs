@@ -47,6 +47,18 @@ namespace ZeroPoint2.Data
                     opt.MapFrom(src => src.ProductColors.Select(p => p.ColorName)));
 
             CreateMap<GridData<List<Product>>, GridData<List<ProductListForViewDto>>>();
+
+            CreateMap<Company, CompanyListForViewDto>()
+                .ForMember(des => des.LogoImageUrl, opt =>
+                    opt.MapFrom(src => src.LogoImage.ImageUrl));
+
+            CreateMap<GridData<List<Company>>, GridData<List<CompanyListForViewDto>>>();
+
+            CreateMap<CompanyForCreationDto, Company>();
+
+            CreateMap<CompanyFeatureForCreationDto, CompanyFeature>();
+
+            CreateMap<CompanyImageForCreationDto, CompanyImage>();
         }
     }
 }
