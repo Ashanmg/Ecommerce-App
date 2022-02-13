@@ -4,6 +4,7 @@ import Error404 from '../screens/Error404/Error404';
 import { HomeScreen } from '../screens/HomeScreen';
 import NoResults from '../screens/NoResults/NoResults';
 import ProductUploadScreen from '../screens/ProductUploadScreen/ProductUploadScreen';
+import ProductUpload from '../CMS-screens/product-upload/ProductUpload/ProductUpload';
 import ProductScreen from '../screens/ProductScreen/ProductScreen';
 import { CMSLayout } from '../layouts/CMSLayout';
 import { Dashboard } from '../CMS-screens/Dashboard';
@@ -62,6 +63,13 @@ export const routes = [
   {
     path: '/admin/product-upload',
     component: ProductUploadScreen,
+    layout: CMSLayout,
+    private: true,
+    accessRoles: [1, 6],
+  },
+  {
+    path: '/admin/product-uploads',
+    component: ProductUpload,
     layout: CMSLayout,
     private: true,
     accessRoles: [1, 6],

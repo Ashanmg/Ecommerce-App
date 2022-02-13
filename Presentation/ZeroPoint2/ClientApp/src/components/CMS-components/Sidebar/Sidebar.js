@@ -54,7 +54,7 @@ export const Sidebar = ({ className, ...restProps }) => {
             content: (
               <SidebarSubMenu
                 subMenu={[
-                  {id: 0, title: 'Products Upload', link: '/admin/product-upload'},
+                  { id: 1, title: 'Products Upload', link: '/admin/product-uploads'},
                   { id: 1, title: 'Products', link: '/admin/products' },
                   { id: 2, title: 'Categories', link: '/categories' },
                   { id: 3, title: 'Brands', link: '/brands' },
