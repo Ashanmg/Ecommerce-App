@@ -12,25 +12,25 @@ export const PriceForm = ({ className, ...restProps }) => {
   return (
     <div className={PriceFormClasses} {...restProps}>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Whole Price :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Retail Price :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Discount :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Tax Category :
         </span>
         <AutoSelect placeHolder='' />
@@ -38,7 +38,7 @@ export const PriceForm = ({ className, ...restProps }) => {
       <div className="w-full flex items-center">
         <span
           className=" text-sm text-G-dark font-semibold"
-          style={{ width: '305px' }}
+          style={{ width: '217px' }}
         >
           Tax exempt :
         </span>

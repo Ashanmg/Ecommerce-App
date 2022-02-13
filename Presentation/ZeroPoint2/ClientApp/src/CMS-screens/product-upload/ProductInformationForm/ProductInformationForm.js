@@ -17,85 +17,85 @@ export const ProductInformationForm = ({ className, ...restProps }) => {
   return (
     <div className={ProductInformationFormClasses} {...restProps}>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Name :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Category :
         </span>
         <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Sub Category :
         </span>
         <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Child Category :
         </span>
         <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Meta Keyword :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Meta Description :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Short Description :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Full Description :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Available Quantity :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Company
         </span>
         <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Made For Order :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Time :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Product Type :
         </span>
         <TextField className="border border-G-dark" />
       </div>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-3/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12">
           Unit of Measure :
         </span>
         <AutoSelect placeHolder='' />
@@ -103,7 +103,7 @@ export const ProductInformationForm = ({ className, ...restProps }) => {
       <div className="w-full flex items-center">
         <span
           className=" text-sm text-G-dark font-semibold"
-          style={{ width: '305px' }}
+          style={{ width: '217px' }}
         >
           Unit of Measure :
         </span>
