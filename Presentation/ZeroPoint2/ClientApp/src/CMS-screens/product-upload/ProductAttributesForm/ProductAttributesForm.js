@@ -6,6 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import TextField from '../../../components/TextField/TextField';
 
 import './ProductAttributesForm.scss';
+import AutoSelect from '../../../components/AutoSelect/AutoSelect';
 
 export const ProductAttributesForm = ({ className, ...restProps }) => {
   const ProductAttributesFormClasses = CN(
@@ -20,13 +21,13 @@ export const ProductAttributesForm = ({ className, ...restProps }) => {
         <span className=" text-sm text-G-dark font-semibold w-2/12">
           Colors :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span className=" text-sm text-G-dark font-semibold w-2/12">
           Sizes :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full items-center">
         <span className=" text-sm text-G-dark font-semibold w-2/12">

@@ -13,7 +13,7 @@ import SidebarSubMenu from '../SidebarSubMenu/SidebarSubMenu';
 
 export const Sidebar = ({ className, ...restProps }) => {
   const SidebarClasses = CN(
-    'sidebar flex flex-row w-72 bg-G-dark h-full flex-shrink-0 p-5',
+    'sidebar flex flex-row w-72 bg-G-dark h-auto flex-shrink-0 p-5',
     className,
     {}
   );

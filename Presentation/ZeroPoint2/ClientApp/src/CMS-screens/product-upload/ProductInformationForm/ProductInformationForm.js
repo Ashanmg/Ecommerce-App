@@ -5,6 +5,7 @@ import './ProductInformationForm.scss';
 import TextField from '../../../components/TextField/TextField';
 import { Checkbox } from '../../../components/CMS-components/Checkbox';
 import RadioButton from '../../../components/RadioButton/RadioButton';
+import AutoSelect from '../../../components/AutoSelect/AutoSelect';
 
 export const ProductInformationForm = ({ className, ...restProps }) => {
   const ProductInformationFormClasses = CN(
@@ -25,19 +26,19 @@ export const ProductInformationForm = ({ className, ...restProps }) => {
         <span className=" text-sm text-G-dark font-semibold w-3/12">
           Product Category :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span className=" text-sm text-G-dark font-semibold w-3/12">
           Product Sub Category :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span className=" text-sm text-G-dark font-semibold w-3/12">
           Product Child Category :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span className=" text-sm text-G-dark font-semibold w-3/12">
@@ -73,7 +74,7 @@ export const ProductInformationForm = ({ className, ...restProps }) => {
         <span className=" text-sm text-G-dark font-semibold w-3/12">
           Company
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span className=" text-sm text-G-dark font-semibold w-3/12">
@@ -97,7 +98,7 @@ export const ProductInformationForm = ({ className, ...restProps }) => {
         <span className=" text-sm text-G-dark font-semibold w-3/12">
           Unit of Measure :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span

@@ -4,6 +4,7 @@ import CN from 'classnames';
 import './PriceForm.scss';
 import TextField from '../../../components/TextField/TextField';
 import RadioButton from '../../../components/RadioButton/RadioButton';
+import AutoSelect from '../../../components/AutoSelect/AutoSelect';
 
 export const PriceForm = ({ className, ...restProps }) => {
   const PriceFormClasses = CN('price-form px-3 py-7 border-t border-N-100 flex flex-col gap-y-3', className, {});
@@ -32,7 +33,7 @@ export const PriceForm = ({ className, ...restProps }) => {
         <span className=" text-sm text-G-dark font-semibold w-3/12">
           Tax Category :
         </span>
-        <TextField className="border border-G-dark" />
+        <AutoSelect placeHolder='' />
       </div>
       <div className="w-full flex items-center">
         <span

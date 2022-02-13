@@ -23,15 +23,15 @@ export const AutoSelect = ({
   const styles = {
     control: (base) => ({
       ...base,
-      border: '2px solid #005C27',
+      border: '1px solid #005C27',
       color: '#005C27',
       borderRadius: '0px',
       boxShadow: '0px 1px 2px rgba(0, 45, 71, 0.05)',
       '&:hover': {
-        border: '2px solid #005C27',
+        border: '1px solid #005C27',
       },
       '&:focus': {
-        border: '2px solid #005C27',
+        border: '1px solid #005C27',
       },
     }),
     singleValue: (base) => ({

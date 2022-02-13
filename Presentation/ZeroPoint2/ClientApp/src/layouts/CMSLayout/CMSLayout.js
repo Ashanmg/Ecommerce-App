@@ -49,7 +49,7 @@ export const CMSLayout = ({ className, children, ...restProps }) => {
     <>
       <CMSHeader className="fixed left-0 right-0 top-0 h-16" />
 
-      <div className="cms-layout-layout__container fixed top-16 left-0 right-0 bottom-0 flex overflow-scroll">
+      <div className="cms-layout-layout__container fixed top-16 left-0 right-0 bottom-0 flex overflow-y-auto overflow-x-hidden">
         <Sidebar />
 
         <main className="flex flex-col w-full cms-layout-layout__wrapper">
