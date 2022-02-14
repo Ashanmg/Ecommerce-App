@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import Founder from '../../assets/Founder-remove-bg.png';
 
 import './ContactInfo.scss';
 
 export const ContactInfo = ({ className, ...restProps }) => {
+  const [isAuth, setIsAuth] = useState(false);
+  const userData = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    const auth = localStorage.getItem('isAuthenticated');
+    auth ? setIsAuth(true) : setIsAuth(false);
+  }, []);
+  
   const ContactInfoClasses = CN(
-    'contact-info max-w-screen-xl flex flex-col text-G-dark',
+    'contact-info max-w-screen-xl flex flex-col text-G-dark mt-contact',
     className,
-    {}
+    {
+      'mt-contact-admin': isAuth && userData.user.userRoleId === 1,
+    }
   );
 
   return (
