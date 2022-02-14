@@ -28,7 +28,7 @@ namespace ZeroPoint2.Controllers.Admin
 
         #region public APIs
         [HttpGet]
-        [Route("getallcompanies/{pageNumber}/{pagesize")]
+        [Route("getallcompanies/{pageNumber}/{pagesize}")]
         public async Task<IActionResult> GetAllCompanies(int pageNumber = 1, int pageSize = 20)
         {
             ExecutionResponse<GridData<List<CompanyListForViewDto>>> response = await _companyService.GetAllCompanies(pageNumber, pageSize);
