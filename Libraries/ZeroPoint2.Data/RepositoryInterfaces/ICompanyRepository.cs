@@ -14,5 +14,6 @@ namespace ZeroPoint2.Data
         Task<Company> InsertCompanyDataAsync(Company company);
         Task<List<CompanyFeature>> InsertCompanyFeatureDataAsync(List<CompanyFeature> companyFeatureList, int companyId);
         Task<bool> InsertCompanyImageDataAsync(List<CompanyImage> companyImageList);
+        Task<List<Company>> GetCompanyListForSelect();
     }
 }

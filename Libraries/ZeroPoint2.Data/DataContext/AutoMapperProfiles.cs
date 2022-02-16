@@ -59,6 +59,8 @@ namespace ZeroPoint2.Data
             CreateMap<CompanyFeatureForCreationDto, CompanyFeature>();
 
             CreateMap<CompanyImageForCreationDto, CompanyImage>();
+
+            CreateMap<Company, CompanyListForSelectDto>();
         }
     }
 }

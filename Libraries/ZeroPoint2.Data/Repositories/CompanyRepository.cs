@@ -62,6 +62,11 @@ namespace ZeroPoint2.Data
 
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<List<Company>> GetCompanyListForSelect()
+        {
+            return await _context.Companies.OrderBy(p => p.Id).ToListAsync();
+        }
         #endregion
     }
 }
