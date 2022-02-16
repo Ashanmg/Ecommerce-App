@@ -5,6 +5,7 @@ import getProductCategoryForUploadSlice from '../features/productCategoryforUplo
 import productUploadSlice from '../features/ProductUploadSlice';
 import colorTypesForUploadSlice from '../features/colorTypesForUploadSlice';
 import getAllProductSlice from '../features/getAllProductSlice';
+import companyRegisterSlice from '../features/companyRegisterSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     productUpload: productUploadSlice,
     getColorTypesForUpload: colorTypesForUploadSlice,
     getAllProduct: getAllProductSlice,
+    companyRegister: companyRegisterSlice,
   },
 });

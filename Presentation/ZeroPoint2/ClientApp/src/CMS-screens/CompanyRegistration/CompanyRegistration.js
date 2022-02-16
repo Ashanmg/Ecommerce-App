@@ -10,6 +10,14 @@ import RadioButton from '../../components/RadioButton/RadioButton';
 import Chip from '../../components/Chip/Chip';
 
 import './CompanyRegistration.scss';
+import { toast, Flip } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  companyRegisterFail,
+  companyRegisterPending,
+  companyRegisterSuccessful,
+} from '../../features/companyRegisterSlice';
+import { companyRegister } from '../../api/companyApi';
 
 export const CompanyRegistration = ({ className, ...restProps }) => {
   const CompanyRegistrationClasses = CN(
@@ -18,8 +26,43 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     {}
   );
 
+  const errorToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'error',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: 'dark',
+      // transition: Flip,
+    });
+  };
+
+  const SuccessToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'success',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: 'dark',
+      // transition: Flip,
+    });
+  };
+
+  const { isUploadLoading } = useSelector((state) => state.companyRegister);
+
+  console.log(isUploadLoading);
+
+  const dispatch = useDispatch();
+
   const [companyName, setCompanyName] = useState('');
   const [companyDescription, setCompanyDescription] = useState('');
+  const [returnablePolicy, setReturnablePolicy] = useState(false);
   const [logo, setLogo] = useState([]);
   const [logoUrl, setLogoUrl] = useState('');
   const [inputList, setInputList] = useState([
@@ -66,12 +109,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     ]);
   };
 
-  //handle submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(companyName, companyDescription, logo, addedItemList);
-  };
-
   const handleAddItemList = (e, idx) => {
     e.preventDefault();
     const list = [...addedItemList, inputList[idx]]; // add inputList to addedItemList
@@ -79,6 +116,58 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     const inputListCopy = [...inputList];
     inputListCopy.splice(idx, 1);
     setInputList(inputListCopy);
+  };
+
+  //handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (companyName === '') {
+      errorToast('Please enter company name');
+    } else if (companyDescription === '') {
+      errorToast('Please enter company description');
+    } else if (logo.length === 0) {
+      errorToast('Please upload company logo');
+    } else {
+      const formData = new FormData();
+
+      formData.append('CompanyName', companyName);
+      formData.append('CompanySummary', companyDescription);
+      formData.append('ReturnablePolicy', returnablePolicy);
+      formData.append('Logo', logo, logo.name);
+
+      for (let i = 0; i < addedItemList.length; i++) {
+        formData.append(`CompanyFeatures[${i}].id`, 0);
+        formData.append(
+          `CompanyFeatures[${i}].FeatureTitle`,
+          addedItemList[i].title
+        );
+        formData.append(
+          `CompanyFeatures[${i}].FeatureSummary`,
+          addedItemList[i].description
+        );
+        formData.append(
+          `CompanyFeatures[${i}].FeatureImage`,
+          addedItemList[i].image,
+          addedItemList[i].image.name
+        );
+        formData.append(
+          `CompanyFeatures[${i}].IsImageLeftAligned`,
+          addedItemList[i].isLeftAlign
+        );
+      }
+
+      dispatch(companyRegisterPending());
+
+      try {
+        const companyRegistered = await companyRegister(formData);
+        dispatch(companyRegisterSuccessful());
+        SuccessToast('Product Upload successful.');
+      } catch (error) {
+        console.log(error);
+        errorToast('Product Upload failed.');
+        dispatch(companyRegisterFail(error.message));
+      }
+    }
   };
 
   return (
@@ -108,8 +197,16 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
               <span className="text-base text-G-dark">Company Info</span>
               <TextArea
                 rows={3}
-                textRules="max length 200"
+                textRules="max length 500"
                 onChange={(e) => setCompanyDescription(e.target.value)}
+              />
+            </div>
+            <div className="company-registration__form__company-name">
+              <span className="text-base text-G-dark">Returnable Policy</span>
+              <TextArea
+                rows={3}
+                textRules="max length 500"
+                onChange={(e) => setReturnablePolicy(e.target.value)}
               />
             </div>
           </div>
