@@ -14,6 +14,8 @@ namespace ZeroPoint2.Core.Entities
         public string CompanyName { get; set; }
         [MaxLength(500)]
         public string CompanySummary { get; set; }
+        [MaxLength(500)]
+        public string ReturnablePolicy { get; set; }
         public bool IsPublished { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public DateTime? UpdatedOnUtc { get; set; }

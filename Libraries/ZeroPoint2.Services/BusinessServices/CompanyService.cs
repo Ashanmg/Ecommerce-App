@@ -148,8 +148,9 @@ namespace ZeroPoint2.Services
                     productImagesForCreationDto2.ImageUrl = uploadResult.Url.ToString();
                     productImagesForCreationDto2.PublicId = uploadResult.PublicId;
                     productImagesForCreationDto2.CompanyFeatureId = companyFeature.Id;
+                    productImagesForCreationDto.IsLogo = false;
 
-                    var companyImage2 = _mapper.Map<CompanyImage>(productImagesForCreationDto);
+                    var companyImage2 = _mapper.Map<CompanyImage>(productImagesForCreationDto2);
                     companyImage2.DateAddedOnUtc = DateTime.UtcNow;
                     companyImageList.Add(companyImage2);
                 }
