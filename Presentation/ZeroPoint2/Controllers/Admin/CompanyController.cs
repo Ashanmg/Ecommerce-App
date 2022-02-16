@@ -43,6 +43,15 @@ namespace ZeroPoint2.Controllers.Admin
             ExecutionResponse<bool> response = await _companyService.RegisterCompany(companyForCreationDto);
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("getcompanylistforselect")]
+        public async Task<IActionResult> GetCompanyListForSelect()
+        {
+            ExecutionResponse<List<CompanyListForSelectDto>> response = await _companyService.GetCompanyListForSelect();
+
+            return Ok(response);
+        }
         #endregion
     }
 }

@@ -178,6 +178,27 @@ namespace ZeroPoint2.Services
 
             return response;
         }
+
+
+        public async Task<ExecutionResponse<List<CompanyListForSelectDto>>> GetCompanyListForSelect()
+        {
+            ExecutionResponse<List<CompanyListForSelectDto>> response = new ExecutionResponse<List<CompanyListForSelectDto>>();
+            try
+            {
+                List<Company> productList = await _companyRepository.GetCompanyListForSelect();
+
+                response.Result = _mapper.Map<List<CompanyListForSelectDto>>(productList);
+                response.RequestStatus = ExecutionStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
         #endregion
     }
 }

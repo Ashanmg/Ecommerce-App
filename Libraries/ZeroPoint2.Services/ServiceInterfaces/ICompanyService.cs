@@ -13,5 +13,6 @@ namespace ZeroPoint2.Services
     {
         Task<ExecutionResponse<GridData<List<CompanyListForViewDto>>>> GetAllCompanies(int pageNumber, int pageSize);
         Task<ExecutionResponse<bool>> RegisterCompany(CompanyForCreationDto companyForCreationDto);
+        Task<ExecutionResponse<List<CompanyListForSelectDto>>> GetCompanyListForSelect();
     }
 }
