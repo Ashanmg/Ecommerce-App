@@ -125,7 +125,7 @@ namespace ZeroPoint2.Services
 
                 foreach(var companyFeature in companyFeatureList)
                 {
-                    file = companyForCreationDto.CompanyLogoImage;
+                    file = companyFeature.FeatureImage;
 
                     uploadResult = new ImageUploadResult();
 
