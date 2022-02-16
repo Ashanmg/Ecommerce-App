@@ -13,7 +13,7 @@ export const Chip = ({ className, title, onClose, ...restProps }) => {
 
   return (
     <div className={ChipClasses} {...restProps}>
-      <div className="font-medium text-white">{title}</div>
+      <p className="font-medium text-white truncate ...">{title}</p>
       {onClose && (
         <div>
           <RiCloseLine

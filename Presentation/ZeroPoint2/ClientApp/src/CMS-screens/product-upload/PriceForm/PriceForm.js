@@ -7,37 +7,41 @@ import RadioButton from '../../../components/RadioButton/RadioButton';
 import AutoSelect from '../../../components/AutoSelect/AutoSelect';
 
 export const PriceForm = ({ className, ...restProps }) => {
-  const PriceFormClasses = CN('price-form px-3 py-7 border-t border-N-100 flex flex-col gap-y-3', className, {});
+  const PriceFormClasses = CN(
+    'price-form px-3 py-7 border-t border-N-100 flex flex-col gap-y-3',
+    className,
+    {}
+  );
 
   return (
     <div className={PriceFormClasses} {...restProps}>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold  text-G-dark">
           Whole Price :
         </span>
         <TextField className="border border-G-dark" />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold  text-G-dark">
           Retail Price :
         </span>
         <TextField className="border border-G-dark" />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold  text-G-dark">
           Discount :
         </span>
         <TextField className="border border-G-dark" />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold  text-G-dark">
           Tax Category :
         </span>
-        <AutoSelect placeHolder='' />
+        <AutoSelect placeHolder="" />
       </div>
-      <div className="w-full flex items-center">
+      <div className="flex items-center w-full">
         <span
-          className=" text-sm text-G-dark font-semibold"
+          className="text-sm font-semibold  text-G-dark"
           style={{ width: '217px' }}
         >
           Tax exempt :

@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CN from 'classnames';
 import { RiCloseFill, RiUploadCloud2Fill } from 'react-icons/ri';
 
 import './DropZone.scss';
 
-export const DropZone = ({ className, img, setImages, style, width, ...restProps }) => {
+export const DropZone = ({
+  className,
+  img = [],
+  setImages,
+  style,
+  width,
+  onChange,
+  fileDrop,
+  onClickCloseImg,
+  ...restProps
+}) => {
   const DropZoneClasses = CN(
     'drop-zone flex flex-col items-center justify-center border-2 border-G-dark p-2 text-xs text-G-dark w-full',
     className,
     {}
   );
-
-  const [image, setImage] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState('');
 
   const dragOver = (e) => {
     e.preventDefault();
@@ -26,29 +33,6 @@ export const DropZone = ({ className, img, setImages, style, width, ...restProps
     e.preventDefault();
   };
 
-  const fileDrop = (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files[0];
-    setImage(files);
-    setImages(files);
-    setPreviewUrl(URL.createObjectURL(files));
-  };
-
-  const handleUpload = (e) => {
-    e.preventDefault();
-    const files = e.target.files[0];
-    setImage(files);
-    setImages(files);
-    setPreviewUrl(URL.createObjectURL(files));
-  };
-
-  useEffect(() => {
-    if (img === '') {
-      setPreviewUrl(null);
-      setImage(null);
-    }
-  }, [img]);
-
   return (
     <div
       className={DropZoneClasses}
@@ -59,33 +43,33 @@ export const DropZone = ({ className, img, setImages, style, width, ...restProps
       onDrop={fileDrop}
       style={style}
     >
-      {image === null && (
+      {img?.length === 0 ? (
         <>
           <div className="icon">
             <RiUploadCloud2Fill size={50} className="text-G-dark" />
           </div>
-          <header className='text-center'>Drag & Drop to Upload File</header>
+          <header className="text-center">Drag & Drop to Upload File</header>
           <span>OR</span>
           <label className="underline cursor-pointer">
-            <input type="file" onChange={(e) => handleUpload(e)} hidden />
+            <input type="file" name="image" onChange={onChange} hidden />
             Browse File
           </label>
         </>
-      )}
-
-      {previewUrl && (
+      ) : (
         <>
           <div>
             <RiCloseFill
               size={20}
               className="cursor-pointer text-G-dark"
-              onClick={() => {
-                setImage(null);
-                setPreviewUrl('');
-              }}
+              onClick={onClickCloseImg}
             />
           </div>
-          <img className="w-32 h-32 close-icon" style={{width: width}} src={previewUrl} alt="" />
+          <img
+            className="w-32 h-32 close-icon"
+            style={{ width: width }}
+            src={img}
+            alt=""
+          />
         </>
       )}
     </div>
