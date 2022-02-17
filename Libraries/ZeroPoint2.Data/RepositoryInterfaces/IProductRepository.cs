@@ -19,5 +19,6 @@ namespace ZeroPoint2.Data
         Task<List<Product>> GetProductListByLazyLoad(int pageNumber, int pageSize);
         Task<GridData<List<Product>>> GetAllProducts(int pageNumber, int pageSize);
         Task<List<TaxCategory>> GetTaxCategoriesForSelect();
+        Task<bool> InsertProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList);
     }
 }

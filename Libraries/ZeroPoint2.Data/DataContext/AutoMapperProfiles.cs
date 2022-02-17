@@ -26,7 +26,9 @@ namespace ZeroPoint2.Data
 
             CreateMap<UploadProductForCreationDto, Product>()
                 .ForMember(des => des.ProductImages, opt =>
-                    opt.Ignore());
+                    opt.Ignore())
+                .ForMember(des => des.IsVariant, opt =>
+                    opt.MapFrom(src => !src.ProductType.ToUpper().Equals("SIMPLE")));
 
             CreateMap<ProductImageForCreationDto, ProductImage>();
 

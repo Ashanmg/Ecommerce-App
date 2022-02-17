@@ -195,6 +195,48 @@ namespace ZeroPoint2.Services
                     return response;
                 }
 
+                // then insert product specification
+                List<ProductSpecification> productSpecificationList = new List<ProductSpecification>();
+
+                if (!string.IsNullOrEmpty(productForCreationDto.SizeGuide))
+                {
+                    ProductSpecification productSpecification = new ProductSpecification()
+                    {
+                        SpecificationType = "SizeGuide",
+                        SpecificationValue = productForCreationDto.SizeGuide,
+                        CreatedOnUtc = DateTime.UtcNow,
+                        ProductId = product.Id
+                    };
+
+                    productSpecificationList.Add(productSpecification);
+                }
+
+                if (!string.IsNullOrEmpty(productForCreationDto.ProductSpecification))
+                {
+                    ProductSpecification productSpecification = new ProductSpecification()
+                    {
+                        SpecificationType = "ProductSpecification",
+                        SpecificationValue = productForCreationDto.ProductSpecification,
+                        CreatedOnUtc = DateTime.UtcNow,
+                        ProductId = product.Id
+                    };
+
+                    productSpecificationList.Add(productSpecification);
+                }
+
+                if (productSpecificationList.Count > 0)
+                {
+                    response.Result = await _productRepository.InsertProductSpecificationDataAsync(productSpecificationList);
+
+                    if (!response.Result)
+                    {
+                        response.RequestStatus = ExecutionStatus.Error;
+                        response.Message = "Product specifications could not be inserted successfully.";
+
+                        return response;
+                    }
+                }
+
                 response.RequestStatus = ExecutionStatus.Success;
                 response.Message = "Product data were inserted successfully.";
             }

@@ -106,9 +106,19 @@ namespace ZeroPoint2.Data
             return new GridData<List<Product>>().CreateGridData(productlist, pageNumber, pageSize, query.Count());
         }
 
-        public Task<List<TaxCategory>> GetTaxCategoriesForSelect()
+        public async Task<List<TaxCategory>> GetTaxCategoriesForSelect()
         {
-            return _context.TaxCategories.ToListAsync();
+            return await _context.TaxCategories.ToListAsync();
+        }
+
+        public async Task<bool> InsertProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList)
+        {
+            foreach (var productSpecification in productSpecificationList)
+            {
+                await _context.ProductSpecifications.AddAsync(productSpecification);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
         }
         #endregion
     }

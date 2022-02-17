@@ -15,13 +15,19 @@ namespace ZeroPoint2.Core.Entities
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
         public bool ShowOnHomePage { get; set; }
-        public int OrderMinimumQuantity { get; set; }
-        public int OrderMaximumQuantity { get; set; }
+        public string UnitOfMeasure { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal OrderMinimumQuantity { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal OrderMaximumQuantity { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal RetailPrice { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal WholeSalePrice { get; set; }
-        public int TaxCategoryId { get; set; }
+        public int? TaxCategoryId { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Discount { get; set; }
+        public bool IstaxIncluded { get; set; }
         public int CategoryId { get; set; }
         public bool MarkAsNew { get; set; }
         [Column(TypeName = "decimal(18,4)")]
@@ -36,6 +42,8 @@ namespace ZeroPoint2.Core.Entities
         public string LengthWidthHeightType { get; set; }
         [MaxLength(20)]
         public string WeightType { get; set; }
+        public string ShippingNote { get; set; }
+        public string ShippingDescription { get; set; }
         public int DisplayOrder { get; set; }
         public bool Published { get; set; }
         public bool Deleted { get; set; }
@@ -43,16 +51,19 @@ namespace ZeroPoint2.Core.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal AvailableQuantity { get; set; }
         public string ProductionTime { get; set; }
-        public string CompanyName { get; set; }
-        public string CompanyInformation { get; set; }
+        public int CompanyId { get; set; }
         public bool NotReturnable { get; set; }
-        public string ReturnInformation { get; set; }
-        public bool MadeToOrder { get; set; }
+        public bool MadeForOrder { get; set; }
         public string AdditionalNotes { get; set; }
+        public bool IsInventoryTracked { get; set; }
+        public string AllowedQuantity { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public DateTime UpdatedOnUtc { get; set; }
         public Category Category { get; set; }
+        public Company Company { get; set; }
+        public TaxCategory TaxCategory { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
         public ICollection<ProductColor> ProductColors { get; set; }
+        public ICollection<ProductSpecification> ProductSpecifications { get; set; }
     }
 }
