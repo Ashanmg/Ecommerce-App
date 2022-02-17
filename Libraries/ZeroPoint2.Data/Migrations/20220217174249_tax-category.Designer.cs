@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZeroPoint2.Data;
 
 namespace ZeroPoint2.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220217174249_tax-category")]
+    partial class taxcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,26 +226,23 @@ namespace ZeroPoint2.Data.Migrations
                     b.Property<string>("AdditionalNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AllowedQuantity")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("AvailableQuantity")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("CompanyInformation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOnUtc")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
-
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
@@ -254,13 +253,7 @@ namespace ZeroPoint2.Data.Migrations
                     b.Property<decimal>("Height")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<bool>("IsInventoryTracked")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsVariant")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IstaxIncluded")
                         .HasColumnType("bit");
 
                     b.Property<decimal>("Length")
@@ -270,7 +263,7 @@ namespace ZeroPoint2.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<bool>("MadeForOrder")
+                    b.Property<bool>("MadeToOrder")
                         .HasColumnType("bit");
 
                     b.Property<bool>("MarkAsNew")
@@ -288,11 +281,11 @@ namespace ZeroPoint2.Data.Migrations
                     b.Property<bool>("NotReturnable")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("OrderMaximumQuantity")
-                        .HasColumnType("decimal(18,4)");
+                    b.Property<int>("OrderMaximumQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("OrderMinimumQuantity")
-                        .HasColumnType("decimal(18,4)");
+                    b.Property<int>("OrderMinimumQuantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductionTime")
                         .HasColumnType("nvarchar(max)");
@@ -303,10 +296,7 @@ namespace ZeroPoint2.Data.Migrations
                     b.Property<decimal>("RetailPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ShippingDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingNote")
+                    b.Property<string>("ReturnInformation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShortDescription")
@@ -318,11 +308,8 @@ namespace ZeroPoint2.Data.Migrations
                     b.Property<string>("Sku")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TaxCategoryId")
+                    b.Property<int>("TaxCategoryId")
                         .HasColumnType("int");
-
-                    b.Property<string>("UnitOfMeasure")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedOnUtc")
                         .HasColumnType("datetime2");
@@ -343,10 +330,6 @@ namespace ZeroPoint2.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("TaxCategoryId");
 
                     b.ToTable("Products");
                 });
@@ -490,32 +473,6 @@ namespace ZeroPoint2.Data.Migrations
                     b.ToTable("productSizes");
                 });
 
-            modelBuilder.Entity("ZeroPoint2.Core.Entities.ProductSpecification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOnUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SpecificationType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpecificationValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductSpecifications");
-                });
-
             modelBuilder.Entity("ZeroPoint2.Core.Entities.TaxCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -647,21 +604,7 @@ namespace ZeroPoint2.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZeroPoint2.Core.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ZeroPoint2.Core.Entities.TaxCategory", "TaxCategory")
-                        .WithMany()
-                        .HasForeignKey("TaxCategoryId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("Company");
-
-                    b.Navigation("TaxCategory");
                 });
 
             modelBuilder.Entity("ZeroPoint2.Core.Entities.ProductColor", b =>
@@ -708,17 +651,6 @@ namespace ZeroPoint2.Data.Migrations
                     b.Navigation("ProductColor");
                 });
 
-            modelBuilder.Entity("ZeroPoint2.Core.Entities.ProductSpecification", b =>
-                {
-                    b.HasOne("ZeroPoint2.Core.Entities.Product", "Product")
-                        .WithMany("ProductSpecifications")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("ZeroPoint2.Core.Entities.User", b =>
                 {
                     b.HasOne("ZeroPoint2.Core.Entities.UserRole", "UserRole")
@@ -740,8 +672,6 @@ namespace ZeroPoint2.Data.Migrations
                     b.Navigation("ProductColors");
 
                     b.Navigation("ProductImages");
-
-                    b.Navigation("ProductSpecifications");
                 });
 
             modelBuilder.Entity("ZeroPoint2.Core.Entities.ProductColor", b =>

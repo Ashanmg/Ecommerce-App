@@ -195,6 +195,48 @@ namespace ZeroPoint2.Services
                     return response;
                 }
 
+                // then insert product specification
+                List<ProductSpecification> productSpecificationList = new List<ProductSpecification>();
+
+                if (!string.IsNullOrEmpty(productForCreationDto.SizeGuide))
+                {
+                    ProductSpecification productSpecification = new ProductSpecification()
+                    {
+                        SpecificationType = "SizeGuide",
+                        SpecificationValue = productForCreationDto.SizeGuide,
+                        CreatedOnUtc = DateTime.UtcNow,
+                        ProductId = product.Id
+                    };
+
+                    productSpecificationList.Add(productSpecification);
+                }
+
+                if (!string.IsNullOrEmpty(productForCreationDto.ProductSpecification))
+                {
+                    ProductSpecification productSpecification = new ProductSpecification()
+                    {
+                        SpecificationType = "ProductSpecification",
+                        SpecificationValue = productForCreationDto.ProductSpecification,
+                        CreatedOnUtc = DateTime.UtcNow,
+                        ProductId = product.Id
+                    };
+
+                    productSpecificationList.Add(productSpecification);
+                }
+
+                if (productSpecificationList.Count > 0)
+                {
+                    response.Result = await _productRepository.InsertProductSpecificationDataAsync(productSpecificationList);
+
+                    if (!response.Result)
+                    {
+                        response.RequestStatus = ExecutionStatus.Error;
+                        response.Message = "Product specifications could not be inserted successfully.";
+
+                        return response;
+                    }
+                }
+
                 response.RequestStatus = ExecutionStatus.Success;
                 response.Message = "Product data were inserted successfully.";
             }
@@ -257,6 +299,26 @@ namespace ZeroPoint2.Services
                 GridData<List<Product>> productList = await _productRepository.GetAllProducts(pageNumber, pageSize);
 
                 response.Result = _mapper.Map<GridData<List<ProductListForViewDto>>>(productList);
+                response.RequestStatus = ExecutionStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
+
+        public async Task<ExecutionResponse<List<TaxCategoriesForSelectDto>>> GetTaxCategoriesForSelect()
+        {
+            ExecutionResponse<List<TaxCategoriesForSelectDto>> response = new ExecutionResponse<List<TaxCategoriesForSelectDto>>();
+            try
+            {
+                List<TaxCategory> taxCategories = await _productRepository.GetTaxCategoriesForSelect();
+
+                response.Result = _mapper.Map<List<TaxCategoriesForSelectDto>>(taxCategories);
                 response.RequestStatus = ExecutionStatus.Success;
             }
             catch (Exception ex)
