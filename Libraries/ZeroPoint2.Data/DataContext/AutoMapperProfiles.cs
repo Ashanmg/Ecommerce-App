@@ -61,6 +61,8 @@ namespace ZeroPoint2.Data
             CreateMap<CompanyImageForCreationDto, CompanyImage>();
 
             CreateMap<Company, CompanyListForSelectDto>();
+
+            CreateMap<TaxCategory, TaxCategoriesForSelectDto>();
         }
     }
 }

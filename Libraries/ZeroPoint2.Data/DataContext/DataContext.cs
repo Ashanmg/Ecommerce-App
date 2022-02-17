@@ -19,5 +19,6 @@ namespace ZeroPoint2.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyFeature> CompanyFeatures { get; set; }
         public DbSet<CompanyImage> CompanyImages { get; set; }
+        public DbSet<TaxCategory> TaxCategories { get; set; }
     }
 }

@@ -268,6 +268,26 @@ namespace ZeroPoint2.Services
 
             return response;
         }
+
+        public async Task<ExecutionResponse<List<TaxCategoriesForSelectDto>>> GetTaxCategoriesForSelect()
+        {
+            ExecutionResponse<List<TaxCategoriesForSelectDto>> response = new ExecutionResponse<List<TaxCategoriesForSelectDto>>();
+            try
+            {
+                List<TaxCategory> taxCategories = await _productRepository.GetTaxCategoriesForSelect();
+
+                response.Result = _mapper.Map<List<TaxCategoriesForSelectDto>>(taxCategories);
+                response.RequestStatus = ExecutionStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
         #endregion
     }
 }

@@ -67,6 +67,14 @@ namespace ZeroPoint2.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("gettaxcategories")]
+        public async Task<IActionResult> GetTaxCategoriesForSelect()
+        {
+            ExecutionResponse<List<TaxCategoriesForSelectDto>> response = await _productService.GetTaxCategoriesForSelect();
+            return Ok(response);
+        }
         #endregion
     }
 }

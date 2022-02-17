@@ -105,6 +105,11 @@ namespace ZeroPoint2.Data
 
             return new GridData<List<Product>>().CreateGridData(productlist, pageNumber, pageSize, query.Count());
         }
+
+        public Task<List<TaxCategory>> GetTaxCategoriesForSelect()
+        {
+            return _context.TaxCategories.ToListAsync();
+        }
         #endregion
     }
 }
