@@ -13,6 +13,13 @@ import {
   getProductCategoryPending,
   getProductCategorySuccess,
 } from '../../../features/productCategoryforUploadSlice';
+import {
+  getAllCompaniesFail,
+  getAllCompaniesPending,
+  getAllCompaniesSuccess,
+} from '../../../features/getCompanySlice';
+import { getAllCompaniesToSelect } from '../../../api/companyApi';
+import CheckBox from '../../../components/CheckBox/CheckBox';
 
 export const ProductInformationForm = ({
   className,
@@ -36,9 +43,15 @@ export const ProductInformationForm = ({
   const [subCategories, setSubCategories] = useState([]);
   const [subSelectedCategory, setSubSelectedCategory] = useState([]);
   const [childCategories, setChildCategories] = useState([]);
+  const [companies, setCompanies] = useState([]);
+  const [companySelected, setCompanySelected] = useState([]);
 
   const { isLoading } = useSelector(
     (state) => state.getProductCategoryForUpload
+  );
+
+  const { isLoading: isLoadingCompanies } = useSelector(
+    (state) => state.getCompanies
   );
 
   useEffect(async () => {
@@ -101,13 +114,29 @@ export const ProductInformationForm = ({
     }
   }, [subSelectedCategory]);
 
-  console.log(childCategories);
+  useEffect(async () => {
+    dispatch(getAllCompaniesPending());
+    try {
+      const companiesDetails = await getAllCompaniesToSelect();
+      const companiesDetailsCopy = [];
+      companiesDetails.map((company) => {
+        companiesDetailsCopy.push({
+          value: company.id,
+          label: company.companyName,
+        });
+      });
+      setCompanies(companiesDetailsCopy);
+      dispatch(getAllCompaniesSuccess());
+    } catch (error) {
+      dispatch(getAllCompaniesFail(error.message));
+    }
+  }, []);
 
   return (
     <div className={ProductInformationFormClasses} {...restProps}>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Product Name :
+          Product Name<span className="required"></span> :
         </span>
         <TextField
           id="productName"
@@ -120,7 +149,7 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Product Category :
+          Product Category <span className="required"></span> :
         </span>
         <AutoSelect
           id="productCategory"
@@ -138,7 +167,7 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Product Sub Category :
+          Product Sub Category<span className="required"></span> :
         </span>
         <AutoSelect
           id="productSubCategory"
@@ -156,7 +185,7 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Product Child Category :
+          Product Child Category<span className="required"></span> :
         </span>
         <AutoSelect
           id="productChildCategory"
@@ -173,7 +202,7 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Meta Keyword :
+          Meta Keyword<span className="required"></span> :
         </span>
         <TextField
           id="metaKeyword"
@@ -239,42 +268,89 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Company
+          Company<span className="required"></span>:
         </span>
-        <AutoSelect placeHolder="" />
+        <AutoSelect
+          id="company"
+          isLoading={isLoadingCompanies}
+          onChange={(selectedOption) => {
+            setFieldValue('company', selectedOption);
+            setCompanySelected(selectedOption);
+          }}
+          onBlur={handleBlur}
+          name="company"
+          options={companies || []}
+          value={values.company}
+          placeHolder=""
+        />
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
           Made For Order :
         </span>
-        <TextField className="border border-G-dark" />
+        <TextField
+          id="madeForOrder"
+          className="border border-G-dark"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="madeForOrder"
+          value={values.madeForOrder}
+        />
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
           Product Time :
         </span>
-        <TextField className="border border-G-dark" />
+        <TextField
+          id="productTime"
+          className="border border-G-dark"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="productTime"
+          value={values.productTime}
+        />
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
           Product Type :
         </span>
-        <TextField className="border border-G-dark" />
+        <TextField
+          id="productType"
+          className="border border-G-dark"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="productType"
+          value={values.productType}
+        />
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
           Unit of Measure :
         </span>
-        <AutoSelect placeHolder="" />
+        <TextField
+          id="unitOfMeasure"
+          className="border border-G-dark"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="unitOfMeasure"
+          value={values.unitOfMeasure}
+        />
       </div>
       <div className="flex items-center w-full">
         <span
           className="text-sm font-semibold text-G-dark"
           style={{ width: '217px' }}
         >
-          Unit of Measure :
+          Display on Home page :
         </span>
-        <RadioButton className="" />
+        <CheckBox
+          id="displayOnHomePage"
+          name="displayOnHomePage"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          type="checkbox"
+          value={values.displayOnHomePage}  
+        />
       </div>
     </div>
   );

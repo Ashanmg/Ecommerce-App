@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import CN from 'classnames';
 import { RiAddLine } from 'react-icons/ri';
+import Loader from 'react-spinners/PuffLoader';
+import { toast, Flip } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TextField from '../../components/TextField/TextField';
 import TextArea from '../../components/TextArea/TextArea';
@@ -8,16 +11,16 @@ import DropZone from '../../components/DropZone/DropZone';
 import Button from '../../components/Button/Button';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import Chip from '../../components/Chip/Chip';
-
-import './CompanyRegistration.scss';
-import { toast, Flip } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   companyRegisterFail,
   companyRegisterPending,
   companyRegisterSuccessful,
 } from '../../features/companyRegisterSlice';
 import { companyRegister } from '../../api/companyApi';
+import { Modal } from '../../components/Modal/Modal';
+
+import './CompanyRegistration.scss';
+import Overlay from '../../components/Overlay/Overlay';
 
 export const CompanyRegistration = ({ className, ...restProps }) => {
   const CompanyRegistrationClasses = CN(
@@ -118,6 +121,24 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     setInputList(inputListCopy);
   };
 
+  const resetForm = () => {
+    setCompanyName('');
+    setCompanyDescription('');
+    setReturnablePolicy('');
+    setLogo([]);
+    setLogoUrl('');
+    setInputList([
+      {
+        title: '',
+        image: [],
+        imageUrl: '',
+        description: '',
+        isLeftAlign: true,
+      },
+    ]);
+    setAddedItemList([]);
+  };
+
   //handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -133,10 +154,12 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
       formData.append('CompanyName', companyName);
       formData.append('CompanySummary', companyDescription);
       formData.append('ReturnablePolicy', returnablePolicy);
-      formData.append('Logo', logo, logo.name);
+      formData.append('CompanyLogoImage', logo, logo.name);
+      console.log(logo);
 
       for (let i = 0; i < addedItemList.length; i++) {
-        formData.append(`CompanyFeatures[${i}].id`, 0);
+        console.log(addedItemList[i].image, addedItemList[i].image.name);
+        formData.append(`CompanyFeatures[${i}].Id`, 0);
         formData.append(
           `CompanyFeatures[${i}].FeatureTitle`,
           addedItemList[i].title
@@ -162,6 +185,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
         const companyRegistered = await companyRegister(formData);
         dispatch(companyRegisterSuccessful());
         SuccessToast('Product Upload successful.');
+        // resetForm();
       } catch (error) {
         console.log(error);
         errorToast('Product Upload failed.');
@@ -172,6 +196,13 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
 
   return (
     <div className={CompanyRegistrationClasses} {...restProps}>
+      {isUploadLoading && (
+        <Overlay isOpen={true}>
+          <div className="absolute left-0 right-0 m-auto">
+            <Loader type="Grid" color="#1c473c" size={60} />
+          </div>
+        </Overlay>
+      )}
       <div className="flex justify-between dashboard__top">
         <div className="w-auto mb-10 text-3xl font-bold dashboard_title text-G-dark">
           Company Registration

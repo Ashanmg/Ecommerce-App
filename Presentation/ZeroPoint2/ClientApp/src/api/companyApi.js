@@ -1,4 +1,4 @@
-import { post } from "../config/utils/http";
+import { get, post } from "../config/utils/http";
 
 export const companyRegister = (fromData) => {
   return new Promise(async (resolve, reject) => {
@@ -18,6 +18,22 @@ export const companyRegister = (fromData) => {
         //   'token',
         //   JSON.stringify({ token: res.data.token })
         // );
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const getAllCompaniesToSelect = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await get(`/api/admin/company/getcompanylistforselect`);
+
+      resolve(res.data.result);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
       }
     } catch (error) {
       reject(error);

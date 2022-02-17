@@ -1,19 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-import TextField from '../../../components/TextField/TextField';
+import { useDispatch } from 'react-redux';
 
 import './ProductAttributesForm.scss';
 import AutoSelect from '../../../components/AutoSelect/AutoSelect';
+import {
+  getColorTypesFail,
+  getColorTypesPending,
+  getColorTypesSuccess,
+} from '../../../features/colorTypesForUploadSlice';
+import { getColorTypesForUpload } from '../../../api/productApi';
 
-export const ProductAttributesForm = ({ className, ...restProps }) => {
+export const ProductAttributesForm = ({
+  className,
+  handleBlur,
+  handleChange,
+  setFieldValue,
+  values,
+  ...restProps
+}) => {
   const ProductAttributesFormClasses = CN(
     'product-attributes-form flex flex-col px-3 py-7 border-t border-N-100  gap-3',
     className,
     {}
   );
+
+  const dispatch = useDispatch();
+  const [colors, setColors] = useState([]);
+
+  useEffect(async () => {
+    dispatch(getColorTypesPending());
+    try {
+      const colors = await getColorTypesForUpload();
+      console.log(colors);
+      const colorsCopy = [];
+      colors.map((color) => {
+        colorsCopy.push({
+          value: color.id,
+          label: color.colorName,
+        });
+      });
+      setColors(colorsCopy);
+      dispatch(getColorTypesSuccess());
+    } catch (error) {
+      dispatch(getColorTypesFail(error.message));
+    }
+  }, []);
 
   return (
     <div className={ProductAttributesFormClasses} {...restProps}>
@@ -21,13 +55,24 @@ export const ProductAttributesForm = ({ className, ...restProps }) => {
         <span className=" text-sm text-G-dark font-semibold w-2/12">
           Colors :
         </span>
-        <AutoSelect placeHolder='' />
+        <AutoSelect
+          id="colors"
+          onChange={(selectedOption) => {
+            setFieldValue('colors', selectedOption);
+          }}
+          isMultiple={true}
+          onBlur={handleBlur}
+          name="colors"
+          options={colors || []}
+          value={values.colors}
+          placeHolder=""
+        />
       </div>
       <div className="w-full flex items-center">
         <span className=" text-sm text-G-dark font-semibold w-2/12">
           Sizes :
         </span>
-        <AutoSelect placeHolder='' />
+        <AutoSelect placeHolder="" />
       </div>
       <div className="w-full items-center">
         <span className=" text-sm text-G-dark font-semibold w-2/12">

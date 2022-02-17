@@ -33,6 +33,30 @@ export const ProductUpload = ({ className, ...restProps }) => {
           productShortDescription: '',
           productFullDescription: '',
           availableQuantity: '',
+          company: '',
+          madeForOrder: '',
+          productTime: '',
+          productType: '',
+          unitOfMeasure: '',
+          displayOnHomePage: false,
+          wholePrice: '',
+          retailPrice: '',
+          discount: '',
+          taxExempt: false,
+          shippingDescription: '',
+          shippingLength: '',
+          shippingWidth: '',
+          shippingHeight: '',
+          shippingWeight: '',
+          ShippingUnitStrength: 'cm',
+          ShippingUnitWeight: 'kg',
+          shippingNote: '',
+          inventoryMethod: '',
+          minimumCartQuantity: '',
+          maximumCartQuantity: '',
+          allowedQuantity: '',
+          notReturnable: false,
+          productImages: [],
         }}
         onSubmit={(values, { setSubmitting }) => {
           //need to store the values and submit them to the server
@@ -85,7 +109,15 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       </span>
                     </div>
                   ),
-                  content: <PriceForm className="w-full" />,
+                  content: (
+                    <PriceForm
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      setFieldValue={setFieldValue}
+                      values={values}
+                      className="w-full"
+                    />
+                  ),
                 },
               ]}
             />
@@ -101,7 +133,15 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       </span>
                     </div>
                   ),
-                  content: <ShippingForm className="w-full" />,
+                  content: (
+                    <ShippingForm
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      setFieldValue={setFieldValue}
+                      values={values}
+                      className="w-full"
+                    />
+                  ),
                 },
               ]}
             />
@@ -117,7 +157,15 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       </span>
                     </div>
                   ),
-                  content: <InventoryForm className="w-full" />,
+                  content: (
+                    <InventoryForm
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      setFieldValue={setFieldValue}
+                      values={values}
+                      className="w-full"
+                    />
+                  ),
                 },
               ]}
             />
@@ -133,7 +181,15 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       </span>
                     </div>
                   ),
-                  content: <ImagesForm className="w-full" />,
+                  content: (
+                    <ImagesForm
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      setFieldValue={setFieldValue}
+                      values={values}
+                      className="w-full"
+                    />
+                  ),
                 },
               ]}
             />
@@ -149,7 +205,15 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       </span>
                     </div>
                   ),
-                  content: <ProductAttributesForm className="w-full" />,
+                  content: (
+                    <ProductAttributesForm
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      setFieldValue={setFieldValue}
+                      values={values}
+                      className="w-full"
+                    />
+                  ),
                 },
               ]}
             />

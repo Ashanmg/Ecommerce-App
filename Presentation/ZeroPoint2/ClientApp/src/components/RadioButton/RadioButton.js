@@ -9,6 +9,7 @@ export const RadioButton = ({
   title,
   id,
   isChecked,
+  type,
   name,
   ...restProps
 }) => {
@@ -18,7 +19,7 @@ export const RadioButton = ({
     <div className={RadioButtonClasses} {...restProps}>
       <input
         id={id}
-        type="radio"
+        type={type}
         defaultChecked={defaultChecked}
         name={name}
         className="hidden"
@@ -40,6 +41,7 @@ RadioButton.defaultProps = {
   isChecked: undefined,
   name: undefined,
   title: '',
+  type: 'radio',
 };
 
 export default RadioButton;
