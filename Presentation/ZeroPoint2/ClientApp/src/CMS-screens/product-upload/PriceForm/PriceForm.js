@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CN from 'classnames';
+import { useDispatch } from 'react-redux';
 
-import './PriceForm.scss';
 import TextField from '../../../components/TextField/TextField';
-import RadioButton from '../../../components/RadioButton/RadioButton';
 import AutoSelect from '../../../components/AutoSelect/AutoSelect';
 import CheckBox from '../../../components/CheckBox/CheckBox';
+
+import {
+  getTaxFail,
+  getTaxPending,
+  getTaxSuccess,
+} from '../../../features/taxSlice';
+import { getProductsTax } from '../../../api/productApi';
+
+import './PriceForm.scss';
 
 export const PriceForm = ({
   className,
   handleChange,
   handleBlur,
+  setFieldValue,
   values,
   ...restProps
 }) => {
@@ -20,10 +29,31 @@ export const PriceForm = ({
     {}
   );
 
+  const dispatch = useDispatch();
+  const [taxes, setTaxes] = useState([]);
+
+  useEffect(async () => {
+    dispatch(getTaxPending());
+    try {
+      const taxes = await getProductsTax();
+      const taxCopy = [];
+      taxes.map((tax) => {
+        taxCopy.push({
+          value: tax.id,
+          label: tax.name,
+        });
+      });
+      setTaxes(taxCopy);
+      dispatch(getTaxSuccess());
+    } catch (error) {
+      dispatch(getTaxFail(error.message));
+    }
+  }, []);
+
   return (
     <div className={PriceFormClasses} {...restProps}>
       <div className="flex items-center w-full">
-        <span className="w-2/12 text-sm font-semibold text-G-dark">
+        <span className="w-2/12 text-sm font-semibold text-G-dark required">
           Whole Price :
         </span>
         <TextField
@@ -36,7 +66,7 @@ export const PriceForm = ({
         />
       </div>
       <div className="flex items-center w-full">
-        <span className="w-2/12 text-sm font-semibold text-G-dark">
+        <span className="w-2/12 text-sm font-semibold text-G-dark required">
           Retail Price :
         </span>
         <TextField
@@ -61,10 +91,21 @@ export const PriceForm = ({
         />
       </div>
       <div className="flex items-center w-full">
-        <span className="w-2/12 text-sm font-semibold text-G-dark">
+        <span className="w-2/12 text-sm font-semibold text-G-dark required">
           Tax Category :
         </span>
-        <AutoSelect placeHolder="" />
+        <AutoSelect
+          id="tax"
+          onChange={(selectedOption) => {
+            setFieldValue('tax', selectedOption);
+          }}
+          isMultiple={false}
+          onBlur={handleBlur}
+          name="tax"
+          options={taxes || []}
+          value={values.tax}
+          placeHolder=""
+        />
       </div>
       <div className="flex items-center w-full">
         <span

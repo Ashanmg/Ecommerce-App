@@ -1,4 +1,4 @@
-import { get, post } from "../config/utils/http";
+import { get, post } from '../config/utils/http';
 
 export const companyRegister = (fromData) => {
   return new Promise(async (resolve, reject) => {

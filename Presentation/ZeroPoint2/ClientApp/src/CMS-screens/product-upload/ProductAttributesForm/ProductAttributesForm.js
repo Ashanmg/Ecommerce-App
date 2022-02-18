@@ -12,6 +12,7 @@ import {
   getColorTypesSuccess,
 } from '../../../features/colorTypesForUploadSlice';
 import { getColorTypesForUpload } from '../../../api/productApi';
+import TextField from '../../../components/TextField/TextField';
 
 export const ProductAttributesForm = ({
   className,
@@ -34,7 +35,6 @@ export const ProductAttributesForm = ({
     dispatch(getColorTypesPending());
     try {
       const colors = await getColorTypesForUpload();
-      console.log(colors);
       const colorsCopy = [];
       colors.map((color) => {
         colorsCopy.push({
@@ -72,7 +72,14 @@ export const ProductAttributesForm = ({
         <span className=" text-sm text-G-dark font-semibold w-2/12">
           Sizes :
         </span>
-        <AutoSelect placeHolder="" />
+        <TextField
+          id="sizes"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="sizes"
+          value={values.sizes}
+          className="border border-G-dark"
+        />
       </div>
       <div className="w-full items-center">
         <span className=" text-sm text-G-dark font-semibold w-2/12">
@@ -81,14 +88,18 @@ export const ProductAttributesForm = ({
         <div className="flex-auto">
           <CKEditor
             editor={ClassicEditor}
-            data="<p>Hello from CKEditor 5!</p>"
+            data=""
+            config={{
+              removePlugins: ['EasyImage', 'ImageUpload', 'MediaEmbed'],
+            }}
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
               console.log('Editor is ready to use!', editor);
-            }}
+            }}            
             onChange={(event, editor) => {
               const data = editor.getData();
-              console.log({ event, editor, data });
+              // console.log({ event, editor, data });
+              setFieldValue('sizeGuide', data);
             }}
             onBlur={(event, editor) => {
               console.log('Blur.', editor);
@@ -106,14 +117,18 @@ export const ProductAttributesForm = ({
         <div className="flex-auto">
           <CKEditor
             editor={ClassicEditor}
-            data="<p>Hello from CKEditor 5!</p>"
+            data=""
+            config={{
+              removePlugins: ['EasyImage', 'ImageUpload', 'MediaEmbed'],
+            }}
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
               console.log('Editor is ready to use!', editor);
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
-              console.log({ event, editor, data });
+              // console.log({ event, editor, data });
+              setFieldValue('productSpecification', data);
             }}
             onBlur={(event, editor) => {
               console.log('Blur.', editor);

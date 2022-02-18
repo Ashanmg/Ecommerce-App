@@ -71,3 +71,19 @@ export const getAllProducts = (pagesize, pageNumber) => {
     }
   });
 };
+
+export const getProductsTax = (pagesize, pageNumber) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await get(`/api/product/gettaxcategories`);
+
+      resolve(res.data.result);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

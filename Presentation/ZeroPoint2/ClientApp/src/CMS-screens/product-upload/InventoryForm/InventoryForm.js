@@ -24,13 +24,13 @@ export const InventoryForm = ({
   return (
     <div className={InventoryFormClasses} {...restProps}>
       <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+        <span className=" text-sm text-G-dark font-semibold w-2/12 required">
           Inventory method :
         </span>
         <AutoSelect
           id="inventoryMethod"
           onChange={(selectedOption) => {
-            setFieldValue('productChildCategory', selectedOption);
+            setFieldValue('inventoryMethod', selectedOption);
           }}
           onBlur={handleBlur}
           name="inventoryMethod"
@@ -38,7 +38,7 @@ export const InventoryForm = ({
             { value: '1', label: 'Do not track inventory' },
             { value: '2', label: 'Track inventory' },
           ]}
-          value={values.productChildCategory}
+          value={values.inventoryMethod}
           placeHolder=""
         />
       </div>

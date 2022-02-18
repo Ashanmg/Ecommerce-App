@@ -7,6 +7,7 @@ import colorTypesForUploadSlice from '../features/colorTypesForUploadSlice';
 import getAllProductSlice from '../features/getAllProductSlice';
 import companyRegisterSlice from '../features/companyRegisterSlice';
 import getCompanySlice from '../features/getCompanySlice';
+import getTaxTypeSlice from '../features/taxSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     getAllProduct: getAllProductSlice,
     companyRegister: companyRegisterSlice,
     getCompanies: getCompanySlice,
+    getTaxType: getTaxTypeSlice,
   },
 });

@@ -286,19 +286,6 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Made For Order :
-        </span>
-        <TextField
-          id="madeForOrder"
-          className="border border-G-dark"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          name="madeForOrder"
-          value={values.madeForOrder}
-        />
-      </div>
-      <div className="flex items-center w-full">
-        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Product Time :
         </span>
         <TextField
@@ -311,16 +298,24 @@ export const ProductInformationForm = ({
         />
       </div>
       <div className="flex items-center w-full">
-        <span className="w-2/12 text-sm font-semibold text-G-dark">
+        <span className="w-2/12 text-sm font-semibold text-G-dark required">
           Product Type :
         </span>
-        <TextField
+        <AutoSelect
           id="productType"
-          className="border border-G-dark"
-          onChange={handleChange}
+          isLoading={isLoadingCompanies}
+          onChange={(selectedOption) => {
+            setFieldValue('productType', selectedOption);
+            setCompanySelected(selectedOption);
+          }}
           onBlur={handleBlur}
           name="productType"
+          options={[
+            {value: '1', label: 'variant'},
+            {value: '2', label: 'simple'},
+          ]}
           value={values.productType}
+          placeHolder=""
         />
       </div>
       <div className="flex items-center w-full">
@@ -336,21 +331,33 @@ export const ProductInformationForm = ({
           value={values.unitOfMeasure}
         />
       </div>
-      <div className="flex items-center w-full">
-        <span
-          className="text-sm font-semibold text-G-dark"
-          style={{ width: '217px' }}
-        >
-          Display on Home page :
-        </span>
-        <CheckBox
-          id="displayOnHomePage"
-          name="displayOnHomePage"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="checkbox"
-          value={values.displayOnHomePage}  
-        />
+      <div className="flex gap-x-3 items-center">
+        <div className="flex justify-center gap-x-2">
+          <span className="text-sm font-semibold text-G-dark">
+            Made For Order : 
+          </span>
+          <CheckBox
+            id="madeForOrder"
+            name="madeForOrder"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type="checkbox"
+            value={values.madeForOrder}
+          />
+        </div>
+        <div className="flex gap-x-2">
+          <span className="text-sm font-semibold text-G-dark">
+            Display on Home page :
+          </span>
+          <CheckBox
+            id="displayOnHomePage"
+            name="displayOnHomePage"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type="checkbox"
+            value={values.displayOnHomePage}
+          />
+        </div>
       </div>
     </div>
   );

@@ -26,12 +26,12 @@ export const ShippingForm = ({
           Description :
         </span>
         <TextField
-          id="ShippingDescription"
+          id="shippingDescription"
           className="border border-G-dark"
-          name="ShippingDescription"
+          name="shippingDescription"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.ShippingDescription}
+          value={values.shippingDescription}
         />
       </div>
       <div className="w-full flex items-center">
@@ -39,12 +39,12 @@ export const ShippingForm = ({
           Length :
         </span>
         <TextField
-          id="ShippingLength"
+          id="shippingLength"
           className="border border-G-dark w-5/12"
-          name="ShippingLength"
+          name="shippingLength"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.ShippingLength}
+          value={values.shippingLength}
         />
       </div>
       <div className="w-full flex items-center">
@@ -52,12 +52,12 @@ export const ShippingForm = ({
           Width :
         </span>
         <TextField
-          id="ShippingWidth"
+          id="shippingWidth"
           className="border border-G-dark"
-          name="ShippingWidth"
+          name="shippingWidth"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.ShippingWidth}
+          value={values.shippingWidth}
         />
       </div>
       <div className="w-full flex items-center">
@@ -65,12 +65,12 @@ export const ShippingForm = ({
           Height :
         </span>
         <TextField
-          id="ShippingHeight"
+          id="shippingHeight"
           className="border border-G-dark"
-          name="ShippingHeight"
+          name="shippingHeight"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.ShippingHeight}
+          value={values.shippingHeight}
         />
       </div>
       <div className="w-full flex items-center">
@@ -78,12 +78,12 @@ export const ShippingForm = ({
           Weight :
         </span>
         <TextField
-          id="ShippingWeight"
+          id="shippingWeight"
           className="border border-G-dark"
-          name="ShippingWeight"
+          name="shippingWeight"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.ShippingWeight}
+          value={values.shippingWeight}
         />
       </div>
       <div className="flex gap-3">
@@ -132,12 +132,12 @@ export const ShippingForm = ({
           Note (Optional) :
         </span>
         <TextField
-          id="ShippingNote"
+          id="shippingNote"
           className="border border-G-dark"
-          name="ShippingNote"
+          name="shippingNote"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.ShippingNote}
+          value={values.shippingNote}
         />
       </div>
     </div>

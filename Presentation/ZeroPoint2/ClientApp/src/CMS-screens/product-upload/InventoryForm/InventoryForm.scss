@@ -2,4 +2,9 @@
   box-sizing: border-box;
   display: flex;
   font-family: var(--font-family);
+
+  .required::after {
+    content: ' *';
+    color: red;
+  }
 }
