@@ -45,7 +45,7 @@ export const LoginNavBar = ({
       transition={{ stiffness: 120 }}
     >
       { isAuthenticated && data.user.userRoleId === 1 &&
-        <Link to='/admin/product-upload' className="text-white hover:text-G-dark"
+        <Link to='/admin/product-uploads' className="text-white hover:text-G-dark"
           style = {{padding: '5px' , marginTop: '15px', marginBottom: '10px', backgroundColor: '#80bf9b', cursor: 'pointer'}}>
           Administrator
         </Link>

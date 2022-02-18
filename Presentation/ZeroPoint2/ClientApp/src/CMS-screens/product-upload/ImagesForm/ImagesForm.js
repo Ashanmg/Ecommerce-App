@@ -40,8 +40,6 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
       image8,
     ]);
   }, [image1, image2, image3, image4, image5, image6, image7, image8]);
-
-  const [image, setImages] = useState(null);
   return (
     <div className={ImagesFormClasses} {...restProps}>
       <DropZone

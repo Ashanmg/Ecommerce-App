@@ -1,6 +1,7 @@
 import React from 'react';
 import CN from 'classnames';
 import { Formik } from 'formik';
+import Loader from 'react-spinners/PuffLoader';
 
 import Accordion from '../../../components/Accordion/Accordion';
 import ProductInformationForm from '../ProductInformationForm/ProductInformationForm';
@@ -9,6 +10,7 @@ import ShippingForm from '../ShippingForm/ShippingForm';
 import InventoryForm from '../InventoryForm/InventoryForm';
 import ImagesForm from '../ImagesForm/ImagesForm';
 import ProductAttributesForm from '../ProductAttributesForm/ProductAttributesForm';
+import Overlay from '../../../components/Overlay/Overlay';
 
 import './ProductUpload.scss';
 import Button from '../../../components/Button/Button';
@@ -19,7 +21,7 @@ import {
   productUploadSuccess,
 } from '../../../features/ProductUploadSlice';
 import { productUpload } from '../../../api/productApi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const ProductUpload = ({ className, ...restProps }) => {
   const ProductUploadClasses = CN(
@@ -55,6 +57,8 @@ export const ProductUpload = ({ className, ...restProps }) => {
       // transition: Flip,
     });
   };
+
+  const { isUploadLoading } = useSelector((state) => state.productUpload);
 
   const dispatch = useDispatch();
 
@@ -128,9 +132,6 @@ export const ProductUpload = ({ className, ...restProps }) => {
     } else if (retailPrice === '') {
       errorToast('Retail Price is required');
       return;
-    } else if (tax === '') {
-      errorToast('Tax is required');
-      return;
     } else if (inventoryMethod === '') {
       errorToast('Inventory Method is required');
       return;
@@ -138,7 +139,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
       const formData = new FormData();
 
       formData.append('Name', productName);
-      formData.append('SubCategoryId', productChildCategory.value);
+      formData.append('CategoryId', productChildCategory.value);
       formData.append('MetaKeywords', metaKeyword);
       formData.append('MetaDescription', metaDescription);
       formData.append('ShortDescription', productShortDescription);
@@ -157,8 +158,9 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('ShowOnHomePage', displayOnHomePage);
 
       productImages.map((image) => {
-        if (image.length !== 0)
+        if (image.length !== 0) {
           formData.append('ProductImages', image, image.name);
+        }
       });
 
       colors.map((color, idx) => {
@@ -172,7 +174,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('UnitOfMeasure', unitOfMeasure);
       formData.append('Discount', discount);
       formData.append('TaxCategoryId', tax.value);
-      formData.append('isTaxIncluded', taxExempt);
+      formData.append('istaxIncluded', taxExempt);
       formData.append('ShippingDescription', shippingDescription);
       formData.append('ShippingNote', shippingNote);
       formData.append(
@@ -188,8 +190,8 @@ export const ProductUpload = ({ className, ...restProps }) => {
       dispatch(productUploadPending());
 
       try {
-        const isAuth = await productUpload(formData);
-        // resetFields();
+        const isUploaded = await productUpload(formData);
+        resetFields();
         dispatch(productUploadSuccess());
         SuccessToast('Product Upload successful.');
       } catch (error) {
@@ -203,6 +205,13 @@ export const ProductUpload = ({ className, ...restProps }) => {
 
   return (
     <div className={ProductUploadClasses} {...restProps}>
+      {isUploadLoading && (
+        <Overlay isOpen={true}>
+          <div className="absolute left-0 right-0 m-auto">
+            <Loader type="Grid" color="#1c473c" size={60} />
+          </div>
+        </Overlay>
+      )}
       <Formik
         initialValues={{
           productName: '',
@@ -244,9 +253,10 @@ export const ProductUpload = ({ className, ...restProps }) => {
           sizeGuide: '',
           productSpecification: '',
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { resetForm, setSubmitting }) => {
           //need to store the values and submit them to the server
           handleProductUpload(values);
+          resetForm({ values: '' });
         }}
       >
         {({
@@ -369,10 +379,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                   ),
                   content: (
                     <ImagesForm
-                      handleChange={handleChange}
-                      handleBlur={handleBlur}
                       setFieldValue={setFieldValue}
-                      values={values}
                       className="w-full"
                     />
                   ),

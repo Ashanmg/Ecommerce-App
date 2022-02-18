@@ -17,7 +17,6 @@ import {
   companyRegisterSuccessful,
 } from '../../features/companyRegisterSlice';
 import { companyRegister } from '../../api/companyApi';
-import { Modal } from '../../components/Modal/Modal';
 
 import './CompanyRegistration.scss';
 import Overlay from '../../components/Overlay/Overlay';
@@ -254,7 +253,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
               }}
               onClickCloseImg={(e) => {
                 e.preventDefault();
-                setLogo(null);
+                setLogo([]);
                 setLogoUrl('');
               }}
             />

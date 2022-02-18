@@ -33,12 +33,12 @@ export const getColorTypesForUpload = (fromData) => {
 
 export const productUpload = (fromData) => {
   return new Promise(async (resolve, reject) => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
       const res = await post('/api/product/uploadproduct', fromData, {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
       });
 
       resolve(res.data);

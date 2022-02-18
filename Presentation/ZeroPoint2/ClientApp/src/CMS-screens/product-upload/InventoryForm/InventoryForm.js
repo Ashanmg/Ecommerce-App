@@ -53,6 +53,7 @@ export const InventoryForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.minimumCartQuantity}
+          type="number"
         />
       </div>
       <div className="w-full flex items-center">
@@ -66,6 +67,7 @@ export const InventoryForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.maximumCartQuantity}
+          type="number"
         />
       </div>
       <div className="w-full flex items-center">
@@ -79,6 +81,7 @@ export const InventoryForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.allowedQuantity}
+          type={'number'}
         />
       </div>
       <div className="w-full flex items-center">

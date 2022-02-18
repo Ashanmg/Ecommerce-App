@@ -45,6 +45,7 @@ export const ShippingForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.shippingLength}
+          type="number"
         />
       </div>
       <div className="w-full flex items-center">
@@ -58,6 +59,7 @@ export const ShippingForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.shippingWidth}
+          type="number"
         />
       </div>
       <div className="w-full flex items-center">
@@ -71,6 +73,7 @@ export const ShippingForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.shippingHeight}
+          type="number"
         />
       </div>
       <div className="w-full flex items-center">
@@ -84,6 +87,7 @@ export const ShippingForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.shippingWeight}
+          type="number"
         />
       </div>
       <div className="flex gap-3">

@@ -62,6 +62,7 @@ export const PriceForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="wholePrice"
+          type={'number'}
           value={values.wholePrice}
         />
       </div>
@@ -75,6 +76,7 @@ export const PriceForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="retailPrice"
+          type={'number'}
           value={values.retailPrice}
         />
       </div>
@@ -88,10 +90,11 @@ export const PriceForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="discount"
+          type={'number'}
         />
       </div>
       <div className="flex items-center w-full">
-        <span className="w-2/12 text-sm font-semibold text-G-dark required">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Tax Category :
         </span>
         <AutoSelect
