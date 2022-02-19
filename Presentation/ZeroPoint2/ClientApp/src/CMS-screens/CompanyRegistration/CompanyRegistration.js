@@ -19,7 +19,6 @@ import {
 import { companyRegister } from '../../api/companyApi';
 
 import './CompanyRegistration.scss';
-import Overlay from '../../components/Overlay/Overlay';
 import { Modal } from '../../components/Modal/Modal';
 
 export const CompanyRegistration = ({ className, ...restProps }) => {

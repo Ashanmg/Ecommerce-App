@@ -63,8 +63,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
 
   const dispatch = useDispatch();
 
-  const handleProductUpload = async (values) => {
-    console.log(values);
+  const handleProductUpload = async (values, resetForm) => {
     const {
       productName,
       productCategory,
@@ -192,7 +191,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
 
       try {
         const isUploaded = await productUpload(formData);
-        resetFields();
+        resetForm({ values: '' });
         dispatch(productUploadSuccess());
         SuccessToast('Product Upload successful.');
       } catch (error) {
@@ -256,8 +255,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
         }}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           //need to store the values and submit them to the server
-          handleProductUpload(values);
-          resetForm({ values: '' });
+          handleProductUpload(values, resetForm);
         }}
       >
         {({
