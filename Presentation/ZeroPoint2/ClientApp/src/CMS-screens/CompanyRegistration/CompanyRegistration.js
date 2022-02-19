@@ -20,6 +20,7 @@ import { companyRegister } from '../../api/companyApi';
 
 import './CompanyRegistration.scss';
 import Overlay from '../../components/Overlay/Overlay';
+import { Modal } from '../../components/Modal/Modal';
 
 export const CompanyRegistration = ({ className, ...restProps }) => {
   const CompanyRegistrationClasses = CN(
@@ -196,11 +197,11 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
   return (
     <div className={CompanyRegistrationClasses} {...restProps}>
       {isUploadLoading && (
-        <Overlay isOpen={true}>
-          <div className="absolute left-0 right-0 m-auto">
-            <Loader type="Grid" color="#1c473c" size={60} />
+        <Modal isOpen={true} size="xxxxs">
+          <div className="flex items-center justify-center py-4 align-middle">
+            <Loader type="Grid" color="#1c473c" size={100} />
           </div>
-        </Overlay>
+        </Modal>
       )}
       <div className="flex justify-between dashboard__top">
         <div className="w-auto mb-10 text-3xl font-bold dashboard_title text-G-dark">

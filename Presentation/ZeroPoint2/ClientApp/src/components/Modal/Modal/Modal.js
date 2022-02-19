@@ -62,15 +62,18 @@ export const Modal = ({
             onClick={(e) => e.stopPropagation()}
             {...restProps}
           >
-            <div
-              className="absolute rounded-sm cursor-pointer right-10 top-10 text-G-light hover:bg-N-100"
-              onClick={onClickOverlay}
-              onKeyPress={onClickOverlay}
-              role="button"
-              tabIndex={0}
-            >
-              <RiCloseLine size={24} />
-            </div>
+            {onClose && (
+              <div
+                className="absolute rounded-sm cursor-pointer right-10 top-10 text-G-light hover:bg-N-100 modal-close"
+                onClick={onClickOverlay}
+                onKeyPress={onClickOverlay}
+                role="button"
+                tabIndex={0}
+              >
+                <RiCloseLine size={24} />
+              </div>
+            )}
+
             {children}
           </motion.div>
         </Overlay>

@@ -133,6 +133,7 @@ export const MainLayout = ({
       </div>
       <Modal
         isOpen={showSignInModal}
+        onClose={true}
         onClickOverlay={handleToggleSignIn}
         size="sm"
       >
@@ -141,11 +142,12 @@ export const MainLayout = ({
           showSignUpModal={handleToggle}
         />
       </Modal>
-      <Modal isOpen={showSignUpModal} onClickOverlay={handleToggle} size="sm">
+      <Modal isOpen={showSignUpModal} onClose={true} onClickOverlay={handleToggle} size="sm">
         <SignUpScreen OnClickModalClose={handleToggle} />
       </Modal>
       <Modal
         isOpen={showFundModal}
+        onClose={true}
         onClickOverlay={handleFundModal}
         size="sm"
       >
