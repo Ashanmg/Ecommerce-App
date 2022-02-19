@@ -6,6 +6,9 @@ import Button from '../../Button/Button';
 import zeroLogo from '../../../assets/zeroLogo1.svg';
 
 import './CMSHeader.scss';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../../features/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const CMSHeader = ({ className, ...restProps }) => {
   const CMSHeaderClasses = CN(
@@ -13,6 +16,9 @@ export const CMSHeader = ({ className, ...restProps }) => {
     className,
     {}
   );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <header className={CMSHeaderClasses} {...restProps}>
@@ -27,7 +33,16 @@ export const CMSHeader = ({ className, ...restProps }) => {
         ></Button>
       </div>
       <div className="header__right flex gap-x-4 items-center">
-        <Button type="button">
+        <Button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            localStorage.clear();
+            sessionStorage.clear();
+            navigate('/');
+            dispatch(logOut());
+          }}
+        >
           <span className="text-G-dark">Logout</span>
         </Button>
         <Button>

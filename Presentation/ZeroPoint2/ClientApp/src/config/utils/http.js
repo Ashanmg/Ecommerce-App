@@ -30,7 +30,7 @@ export const http = axios.create({
   baseURL: apiBaseUrl,
   headers: {
     'Content-type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
   },
 });
 
@@ -43,6 +43,7 @@ export const init = () => {
 };
 
 export const post = async (url, data, options = null) => {
+  console.log(options);
   return await http.post(url, data, options);
 };
 

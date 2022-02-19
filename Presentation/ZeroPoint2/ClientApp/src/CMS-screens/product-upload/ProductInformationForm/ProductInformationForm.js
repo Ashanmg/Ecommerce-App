@@ -202,6 +202,19 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
+          supplier Product Code<span className="required"></span> :
+        </span>
+        <TextField
+          id="supplierProductCode"
+          className="border border-G-dark"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="supplierProductCode"
+          value={values.supplierProductCode}
+        />
+      </div>
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Meta Keyword<span className="required"></span> :
         </span>
         <TextField

@@ -9,7 +9,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
   const userData = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    const auth = localStorage.getItem('isAuthenticated');
+    const auth = sessionStorage.getItem('isAuthenticated');
     auth ? setIsAuth(true) : setIsAuth(false);
   }, []);
   

@@ -69,6 +69,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
       productCategory,
       productSubCategory,
       productChildCategory,
+      supplierProductCode,
       metaKeyword,
       metaDescription,
       productShortDescription,
@@ -120,6 +121,8 @@ export const ProductUpload = ({ className, ...restProps }) => {
     } else if (metaKeyword === '') {
       errorToast('Meta Keyword is required');
       return;
+    } else if (supplierProductCode === '') {
+      errorToast('Supplier Product Code is required');
     } else if (company === '') {
       errorToast('Company is required');
       return;
@@ -140,6 +143,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
 
       formData.append('Name', productName);
       formData.append('CategoryId', productChildCategory.value);
+      formData.append('supplierProductCode', supplierProductCode);
       formData.append('MetaKeywords', metaKeyword);
       formData.append('MetaDescription', metaDescription);
       formData.append('ShortDescription', productShortDescription);
@@ -173,8 +177,10 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('ProductType', productType.label);
       formData.append('UnitOfMeasure', unitOfMeasure);
       formData.append('Discount', discount);
-      debugger;
-      formData.append('TaxCategoryId', tax.value === undefined ? '' : tax.value);
+      formData.append(
+        'TaxCategoryId',
+        tax.value === undefined ? '' : tax.value
+      );
       formData.append('istaxIncluded', taxExempt);
       formData.append('ShippingDescription', shippingDescription);
       formData.append('ShippingNote', shippingNote);
@@ -189,7 +195,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('ProductSpecification', productSpecification);
 
       dispatch(productUploadPending());
-
+      console.log('formData');
       try {
         const isUploaded = await productUpload(formData);
         resetForm({ values: '' });
@@ -219,6 +225,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
           productCategory: '',
           productSubCategory: '',
           productChildCategory: '',
+          supplierProductCode: '',
           metaKeyword: '',
           metaDescription: '',
           productShortDescription: '',

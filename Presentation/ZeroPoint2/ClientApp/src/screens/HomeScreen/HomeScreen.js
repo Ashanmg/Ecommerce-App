@@ -50,7 +50,7 @@ export const HomeScreen = ({ className, ...restProps }) => {
   }, [isLargeWide, isMediumWide, smallWide]);
 
   useEffect(() => {
-    const auth = localStorage.getItem('isAuthenticated');
+    const auth = sessionStorage.getItem('isAuthenticated');
     isAuthenticated || auth ? setIsAuth(true) : setIsAuth(false);
   }, [isAuthenticated]);
 
