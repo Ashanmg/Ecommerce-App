@@ -17,7 +17,7 @@ namespace ZeroPoint2.Core.Dtos
         public string MetaDescription { get; set; }
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
-        public decimal AvailableQuantity { get; set; }
+        public decimal? AvailableQuantity { get; set; }
         public int CompanyId { get; set; }
         public bool MadeForOrder { get; set; }
         public string ProductionTime { get; set; }
@@ -29,17 +29,17 @@ namespace ZeroPoint2.Core.Dtos
         // product price section
         public decimal RetailPrice { get; set; }
         public decimal WholeSalePrice { get; set; }
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
         public bool IstaxIncluded { get; set; }
-        public int TaxCategoryId { get; set; }
+        public int? TaxCategoryId { get; set; }
 
 
         //proudct shipping section
         public string ShippingDescription { get; set; }
-        public decimal Weight { get; set; }
-        public decimal Length { get; set; }
-        public decimal Width { get; set; }
-        public decimal Height { get; set; }
+        public decimal? Weight { get; set; }
+        public decimal? Length { get; set; }
+        public decimal? Width { get; set; }
+        public decimal? Height { get; set; }
         public string LengthWidthHeightType { get; set; }
         public string WeightType { get; set; }
         public string ShippingNote { get; set; }
@@ -47,8 +47,8 @@ namespace ZeroPoint2.Core.Dtos
 
         //product inventory section
         public bool IsInventoryTracked { get; set; }
-        public decimal MinCartQuantity { get; set; }
-        public decimal MaxCartQuantity { get; set; }
+        public decimal? MinCartQuantity { get; set; }
+        public decimal? MaxCartQuantity { get; set; }
         public string AllowedQuantity { get; set; }
         public bool IsReturnable { get; set; }
 

@@ -173,7 +173,8 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('ProductType', productType.label);
       formData.append('UnitOfMeasure', unitOfMeasure);
       formData.append('Discount', discount);
-      formData.append('TaxCategoryId', tax.value);
+      debugger;
+      formData.append('TaxCategoryId', tax.value === undefined ? '' : tax.value);
       formData.append('istaxIncluded', taxExempt);
       formData.append('ShippingDescription', shippingDescription);
       formData.append('ShippingNote', shippingNote);

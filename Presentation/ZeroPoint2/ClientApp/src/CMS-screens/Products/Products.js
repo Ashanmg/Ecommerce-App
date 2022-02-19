@@ -53,7 +53,7 @@ export const Products = ({ className, ...restProps }) => {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
-  const [pageSize, setPageSize] = useState(2);
+  const [pageSize, setPageSize] = useState(30);
   const [pageCount, setPageCount] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [canNextPage, setCanNextPage] = useState(false);
@@ -115,7 +115,7 @@ export const Products = ({ className, ...restProps }) => {
         <Button
           children="Add Product"
           className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark rounded-sm"
-          onClick={() => navigate('/admin/product-upload')}
+          onClick={() => navigate('/admin/product-uploads')}
         />
       </div>
       <div className="product__table">

@@ -17,27 +17,27 @@ namespace ZeroPoint2.Core.Entities
         public bool ShowOnHomePage { get; set; }
         public string UnitOfMeasure { get; set; }
         [Column(TypeName = "decimal(18,4)")]
-        public decimal OrderMinimumQuantity { get; set; }
+        public decimal? OrderMinimumQuantity { get; set; }
         [Column(TypeName = "decimal(18,4)")]
-        public decimal OrderMaximumQuantity { get; set; }
+        public decimal? OrderMaximumQuantity { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal RetailPrice { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal WholeSalePrice { get; set; }
         public int? TaxCategoryId { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
         public bool IstaxIncluded { get; set; }
         public int CategoryId { get; set; }
         public bool MarkAsNew { get; set; }
         [Column(TypeName = "decimal(18,4)")]
-        public decimal Weight { get; set; }
+        public decimal? Weight { get; set; }
         [Column(TypeName = "decimal(18,4)")]
-        public decimal Length { get; set; }
+        public decimal? Length { get; set; }
         [Column(TypeName = "decimal(18,4)")]
-        public decimal Width { get; set; }
+        public decimal? Width { get; set; }
         [Column(TypeName = "decimal(18,4)")]
-        public decimal Height { get; set; }
+        public decimal? Height { get; set; }
         [MaxLength(20)]
         public string LengthWidthHeightType { get; set; }
         [MaxLength(20)]
@@ -49,7 +49,7 @@ namespace ZeroPoint2.Core.Entities
         public bool Deleted { get; set; }
         public bool IsVariant { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal AvailableQuantity { get; set; }
+        public decimal? AvailableQuantity { get; set; }
         public string ProductionTime { get; set; }
         public int CompanyId { get; set; }
         public bool NotReturnable { get; set; }
