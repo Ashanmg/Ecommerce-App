@@ -8,6 +8,7 @@ import getAllProductSlice from '../features/getAllProductSlice';
 import companyRegisterSlice from '../features/companyRegisterSlice';
 import getCompanySlice from '../features/getCompanySlice';
 import getTaxTypeSlice from '../features/taxSlice';
+import getAllCompaniesSlice from '../features/getAllCompaniesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     companyRegister: companyRegisterSlice,
     getCompanies: getCompanySlice,
     getTaxType: getTaxTypeSlice,
+    getAllCompanies: getAllCompaniesSlice,
   },
 });

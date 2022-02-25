@@ -43,6 +43,7 @@ export const ProductInformationForm = ({
   const [subCategories, setSubCategories] = useState([]);
   const [subSelectedCategory, setSubSelectedCategory] = useState([]);
   const [childCategories, setChildCategories] = useState([]);
+  const [childSelectedCategory, setChildSelectedCategory] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [companySelected, setCompanySelected] = useState([]);
 
@@ -76,41 +77,52 @@ export const ProductInformationForm = ({
   }, [categories]);
 
   useEffect(() => {
-    const subOptionCopy = [];
-    categories?.filter((category) => {
-      if (category.id === mainSelectedCategory.value) {
-        category.childCategoryList?.map((subCategory) => {
-          subOptionCopy.push({
-            value: subCategory.id,
-            label: subCategory.name,
+    if (mainSelectedCategory !== null) {
+      const subOptionCopy = [];
+      categories?.filter((category) => {
+        if (category.id === mainSelectedCategory?.value) {
+          category.childCategoryList?.map((subCategory) => {
+            subOptionCopy.push({
+              value: subCategory.id,
+              label: subCategory.name,
+            });
+            setSubCategories(subOptionCopy);
           });
-          setSubCategories(subOptionCopy);
-        });
-      }
-    });
+        }
+      });
+    } else {
+      setSubCategories([]);
+      setChildCategories([]);
+      setSubSelectedCategory(null);
+    }
   }, [mainSelectedCategory]);
 
   useEffect(() => {
-    if (mainSelectedCategory.length !== 0) {
+    if (mainSelectedCategory?.length !== 0) {
       const childOptionCopy = [];
-      const sub = categories.filter(
-        (category) => category.id === mainSelectedCategory.value
+      const sub = categories?.filter(
+        (category) => category.id === mainSelectedCategory?.value
       );
 
-      const { childCategoryList } = sub[0];
-
-      const childCategory = childCategoryList.filter(
-        (category) => category.id === subSelectedCategory.value
-      );
+      let childCategory = [];
+      if (sub.length !== 0) {
+        childCategory = sub[0]?.childCategoryList.filter(
+          (category) => category.id === subSelectedCategory?.value
+        );
+      }
 
       if (childCategory) {
         const childOptionCopy = [];
-        childCategory[0].childCategoryList.map((category) => {
+        childCategory[0]?.childCategoryList.map((category) => {
           childOptionCopy.push({ value: category.id, label: category.name });
         });
 
         setChildCategories(childOptionCopy);
       }
+    }
+    if (subSelectedCategory === null) {
+      setChildCategories([]);
+      setChildSelectedCategory([]);
     }
   }, [subSelectedCategory]);
 
@@ -179,7 +191,7 @@ export const ProductInformationForm = ({
           onBlur={handleBlur}
           name="productSubCategory"
           options={subCategories}
-          value={values.productSubCategory}
+          value={subSelectedCategory}
           placeHolder=""
         />
       </div>
@@ -192,11 +204,12 @@ export const ProductInformationForm = ({
           isLoading={isLoading}
           onChange={(selectedOption) => {
             setFieldValue('productChildCategory', selectedOption);
+            setChildSelectedCategory(selectedOption);
           }}
           onBlur={handleBlur}
           name="productChildCategory"
           options={childCategories || []}
-          value={values.productChildCategory}
+          value={childSelectedCategory}
           placeHolder=""
         />
       </div>
@@ -299,7 +312,7 @@ export const ProductInformationForm = ({
       </div>
       <div className="flex items-center w-full">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
-          Product Time :
+          Production Time :
         </span>
         <TextField
           id="productTime"
@@ -324,8 +337,8 @@ export const ProductInformationForm = ({
           onBlur={handleBlur}
           name="productType"
           options={[
-            {value: '1', label: 'variant'},
-            {value: '2', label: 'simple'},
+            { value: '1', label: 'variant' },
+            { value: '2', label: 'simple' },
           ]}
           value={values.productType}
           placeHolder=""
@@ -347,7 +360,7 @@ export const ProductInformationForm = ({
       <div className="flex gap-x-3 items-center">
         <div className="flex justify-center gap-x-2">
           <span className="text-sm font-semibold text-G-dark">
-            Made For Order : 
+            Made For Order :
           </span>
           <CheckBox
             id="madeForOrder"

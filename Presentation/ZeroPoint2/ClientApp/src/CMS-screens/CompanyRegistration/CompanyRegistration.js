@@ -58,8 +58,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
 
   const { isUploadLoading } = useSelector((state) => state.companyRegister);
 
-  console.log(isUploadLoading);
-
   const dispatch = useDispatch();
 
   const [companyName, setCompanyName] = useState('');
@@ -154,10 +152,8 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
       formData.append('CompanySummary', companyDescription);
       formData.append('ReturnablePolicy', returnablePolicy);
       formData.append('CompanyLogoImage', logo, logo.name);
-      console.log(logo);
 
       for (let i = 0; i < addedItemList.length; i++) {
-        console.log(addedItemList[i].image, addedItemList[i].image.name);
         formData.append(`CompanyFeatures[${i}].Id`, 0);
         formData.append(
           `CompanyFeatures[${i}].FeatureTitle`,
@@ -178,16 +174,18 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
         );
       }
 
+      console.log('ejejejej', formData);
+
       dispatch(companyRegisterPending());
 
       try {
         const companyRegistered = await companyRegister(formData);
         dispatch(companyRegisterSuccessful());
-        SuccessToast('Product Upload successful.');
-        // resetForm();
+        SuccessToast('Company registered successfully');
+        resetForm();
       } catch (error) {
         console.log(error);
-        errorToast('Product Upload failed.');
+        errorToast('Something went wrong');
         dispatch(companyRegisterFail(error.message));
       }
     }

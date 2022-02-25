@@ -33,7 +33,7 @@ export const UITablePagination = ({
         <div className="flex items-center">
           <div className="ui-table__dropdown">
             <select value={pageSize} onChange={onChangePageSize}>
-              {[2, 30, 50, 100, 500].map((pageSizeValue) => {
+              {[30, 50, 100, 500].map((pageSizeValue) => {
                 return (
                   <option key={pageSizeValue} value={pageSizeValue}>
                     {pageSizeValue}

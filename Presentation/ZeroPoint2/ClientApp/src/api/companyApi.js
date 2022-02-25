@@ -35,3 +35,19 @@ export const getAllCompaniesToSelect = () => {
     }
   });
 };
+
+export const getAllCompanyList = (pageSize, pageNumber) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await get(`/api/admin/company/getallcompanies/${pageNumber}/${pageSize}`);
+
+      resolve(res.data.result);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

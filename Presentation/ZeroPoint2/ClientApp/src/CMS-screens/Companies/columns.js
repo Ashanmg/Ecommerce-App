@@ -5,18 +5,18 @@ import Button from '../../components/Button/Button';
 export const COLUMNS = [
   {
     Header: 'Company',
-    accessor: 'companyLogoUrl',
+    accessor: 'logoImageUrl',
     Cell: ({ value }) => {
       return <img src={value} className="w-12 h-12" alt="img" />;
     },
   },
   {
     Header: 'Company Name',
-    accessor: 'name',
+    accessor: 'companyName',
   },
   {
     Header: 'Published',
-    accessor: 'published',
+    accessor: 'isPublished',
     Cell: ({ value }) => {
       return value ? 'Yes' : 'No';
     },

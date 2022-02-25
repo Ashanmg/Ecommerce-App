@@ -7,7 +7,16 @@ export const COLUMNS = [
     Header: 'Product',
     accessor: 'productImageUrls[0]',
     Cell: ({ value }) => {
-      return <img src={value} className="w-12 h-12" alt="img" />;
+      return (
+        <img
+          src={
+            value ||
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmiZAtFi2gN6KL72opkl7HfU3bE72toRGKgVir_4qUNcH5ZJ6d-ILi3rXaAs1Ci4T3hxQ&usqp=CAU'
+          }
+          className="w-12 h-12"
+          alt="img"
+        />
+      );
     },
   },
   {
