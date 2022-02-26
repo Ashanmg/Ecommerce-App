@@ -174,15 +174,13 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
         );
       }
 
-      console.log('ejejejej', formData);
-
       dispatch(companyRegisterPending());
 
       try {
         const companyRegistered = await companyRegister(formData);
         dispatch(companyRegisterSuccessful());
-        SuccessToast('Company registered successfully');
         resetForm();
+        SuccessToast('Company registered successfully');
       } catch (error) {
         console.log(error);
         errorToast('Something went wrong');
@@ -219,6 +217,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                 placeholder="company name"
                 className="border border-G-dark"
                 onChange={(e) => setCompanyName(e.target.value)}
+                value={companyName}
               />
             </div>
             <div className="company-registration__form__company-name">
@@ -227,6 +226,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                 rows={3}
                 textRules="max length 500"
                 onChange={(e) => setCompanyDescription(e.target.value)}
+                value={companyDescription}
               />
             </div>
             <div className="company-registration__form__company-name">
@@ -235,6 +235,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                 rows={3}
                 textRules="max length 500"
                 onChange={(e) => setReturnablePolicy(e.target.value)}
+                value={returnablePolicy}
               />
             </div>
           </div>
