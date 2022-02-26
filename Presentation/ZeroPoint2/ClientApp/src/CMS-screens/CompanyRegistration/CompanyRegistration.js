@@ -425,6 +425,10 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                               list[idx].description !== ''
                             ) {
                               handleAddItemList(e, idx);
+                            } else {
+                              errorToast(
+                                'Please fill Content title and Content description'
+                              );
                             }
                           }}
                         />

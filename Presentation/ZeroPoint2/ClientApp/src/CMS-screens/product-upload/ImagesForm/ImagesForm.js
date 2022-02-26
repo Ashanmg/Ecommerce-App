@@ -51,6 +51,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
           setImage1(e.target.files[0]);
           setImageUrl1(URL.createObjectURL(e.target.files[0]));
         }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage1(e.dataTransfer.files[0]);
+          setImageUrl1(URL.createObjectURL(e.dataTransfer.files[0]));
+        }}
         onClickCloseImg={(e) => {
           e.preventDefault();
           setImage1(null);
@@ -65,6 +70,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
         onChange={(e) => {
           setImage2(e.target.files[0]);
           setImageUrl2(URL.createObjectURL(e.target.files[0]));
+        }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage2(e.dataTransfer.files[0]);
+          setImageUrl2(URL.createObjectURL(e.dataTransfer.files[0]));
         }}
         onClickCloseImg={(e) => {
           e.preventDefault();
@@ -81,6 +91,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
           setImage3(e.target.files[0]);
           setImageUrl3(URL.createObjectURL(e.target.files[0]));
         }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage3(e.dataTransfer.files[0]);
+          setImageUrl3(URL.createObjectURL(e.dataTransfer.files[0]));
+        }}
         onClickCloseImg={(e) => {
           e.preventDefault();
           setImage3(null);
@@ -95,6 +110,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
         onChange={(e) => {
           setImage4(e.target.files[0]);
           setImageUrl4(URL.createObjectURL(e.target.files[0]));
+        }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage4(e.dataTransfer.files[0]);
+          setImageUrl4(URL.createObjectURL(e.dataTransfer.files[0]));
         }}
         onClickCloseImg={(e) => {
           e.preventDefault();
@@ -111,6 +131,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
           setImage5(e.target.files[0]);
           setImageUrl5(URL.createObjectURL(e.target.files[0]));
         }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage5(e.dataTransfer.files[0]);
+          setImageUrl5(URL.createObjectURL(e.dataTransfer.files[0]));
+        }}
         onClickCloseImg={(e) => {
           e.preventDefault();
           setImage5(null);
@@ -125,6 +150,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
         onChange={(e) => {
           setImage6(e.target.files[0]);
           setImageUrl6(URL.createObjectURL(e.target.files[0]));
+        }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage6(e.dataTransfer.files[0]);
+          setImageUrl6(URL.createObjectURL(e.dataTransfer.files[0]));
         }}
         onClickCloseImg={(e) => {
           e.preventDefault();
@@ -141,6 +171,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
           setImage7(e.target.files[0]);
           setImageUrl7(URL.createObjectURL(e.target.files[0]));
         }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage7(e.dataTransfer.files[0]);
+          setImageUrl7(URL.createObjectURL(e.dataTransfer.files[0]));
+        }}
         onClickCloseImg={(e) => {
           e.preventDefault();
           setImage7(null);
@@ -155,6 +190,11 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
         onChange={(e) => {
           setImage8(e.target.files[0]);
           setImageUrl8(URL.createObjectURL(e.target.files[0]));
+        }}
+        fileDrop={(e) => {
+          e.preventDefault();
+          setImage7(e.dataTransfer.files[0]);
+          setImageUrl7(URL.createObjectURL(e.dataTransfer.files[0]));
         }}
         onClickCloseImg={(e) => {
           e.preventDefault();
