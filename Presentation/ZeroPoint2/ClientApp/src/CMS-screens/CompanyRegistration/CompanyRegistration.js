@@ -62,18 +62,23 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
 
   const [companyName, setCompanyName] = useState('');
   const [companyDescription, setCompanyDescription] = useState('');
-  const [returnablePolicy, setReturnablePolicy] = useState(false);
+  const [returnablePolicy, setReturnablePolicy] = useState('');
   const [logo, setLogo] = useState([]);
   const [logoUrl, setLogoUrl] = useState('');
   const [inputList, setInputList] = useState([
-    { title: '', image: [], imageUrl: '', description: '', isLeftAlign: true },
+    {
+      title: '',
+      image: null,
+      imageUrl: '',
+      description: '',
+      isLeftAlign: true,
+    },
   ]);
   const [addedItemList, setAddedItemList] = useState([]);
 
   // handle input change
   const handleInputChange = (e, index) => {
     const { id, name, value } = e.target;
-    value;
     const list = [...inputList];
     if (id === `left-align-${index}`) {
       list[index].isLeftAlign = true;
@@ -101,7 +106,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
       ...inputList,
       {
         title: '',
-        image: [],
+        image: null,
         imageUrl: '',
         description: '',
         isLeftAlign: true,
@@ -127,7 +132,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     setInputList([
       {
         title: '',
-        image: [],
+        image: null,
         imageUrl: '',
         description: '',
         isLeftAlign: true,
@@ -163,11 +168,15 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
           `CompanyFeatures[${i}].FeatureSummary`,
           addedItemList[i].description
         );
-        formData.append(
-          `CompanyFeatures[${i}].FeatureImage`,
-          addedItemList[i].image,
-          addedItemList[i].image.name
-        );
+        console.log(addedItemList[i].image);
+        if (addedItemList[i].image) {
+          formData.append(
+            `CompanyFeatures[${i}].FeatureImage`,
+            addedItemList[i].image,
+            addedItemList[i].image.name
+          );
+        }
+
         formData.append(
           `CompanyFeatures[${i}].IsImageLeftAligned`,
           addedItemList[i].isLeftAlign
@@ -255,6 +264,11 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                 setLogo([]);
                 setLogoUrl('');
               }}
+              fileDrop={(e) => {
+                e.preventDefault();
+                setLogo(e.dataTransfer.files[0]);
+                setLogoUrl(URL.createObjectURL(e.dataTransfer.files[0]));
+              }}
             />
           </div>
         </div>
@@ -308,10 +322,21 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                             style={{ height: '124px' }}
                             img={imageUrl}
                             onChange={(e) => handleInputChange(e, idx)}
+                            fileDrop={(e) => {
+                              e.preventDefault();
+                              const list = [...inputList];
+                              list[idx]['image'] = e.dataTransfer.files[0];
+                              list[idx]['imageUrl'] = URL.createObjectURL(
+                                e.dataTransfer.files[0]
+                              );
+
+                              setInputList(list);
+                            }}
                             onClickCloseImg={(e) => {
                               e.preventDefault();
                               const list = [...inputList];
                               list[idx].imageUrl = [];
+                              list[idx].image = null;
                               setInputList(list);
                             }}
                           />
@@ -344,10 +369,21 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                             style={{ height: '124px' }}
                             img={imageUrl}
                             onChange={(e) => handleInputChange(e, idx)}
+                            fileDrop={(e) => {
+                              e.preventDefault();
+                              const list = [...inputList];
+                              list[idx]['image'] = e.dataTransfer.files[0];
+                              list[idx]['imageUrl'] = URL.createObjectURL(
+                                e.dataTransfer.files[0]
+                              );
+
+                              setInputList(list);
+                            }}
                             onClickCloseImg={(e) => {
                               e.preventDefault();
                               const list = [...inputList];
                               list[idx].imageUrl = [];
+                              list[idx].image = null;
                               setInputList(list);
                             }}
                           />
@@ -361,13 +397,13 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                           id={`left-align-${idx}`}
                           title="Left Align"
                           defaultChecked={true}
-                          name={`align`}
+                          name={`align-${idx}`}
                           onChange={(e) => handleInputChange(e, idx)}
                         />
                         <RadioButton
                           id={`right-align-${idx}`}
                           title="Right Align"
-                          name={`align`}
+                          name={`align-${idx}`}
                           onChange={(e) => handleInputChange(e, idx)}
                         />
                       </div>

@@ -50,7 +50,7 @@ export const DropZone = ({
           </div>
           <header className="text-center">Drag & Drop to Upload File</header>
           <span>OR</span>
-          <label className="underline cursor-pointer">
+          <label className="underline cursor-pointer" name="image-drop">
             <input type="file" name="image" onChange={onChange} hidden />
             Browse File
           </label>
