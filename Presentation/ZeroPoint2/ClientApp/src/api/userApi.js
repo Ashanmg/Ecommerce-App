@@ -21,6 +21,8 @@ export const userLogin = async (fromData) => {
 
       if (res.status === 200) {
         sessionStorage.setItem('token', res.data.token);
+        window.axios.defaults.headers.common['Authorization'] =
+          'Bearer ' + sessionStorage.getItem('token');
         sessionStorage.setItem('user', JSON.stringify(res.data.userData));
         sessionStorage.setItem('isAuthenticated', true);
         localStorage.setItem('token', res.data.token);
