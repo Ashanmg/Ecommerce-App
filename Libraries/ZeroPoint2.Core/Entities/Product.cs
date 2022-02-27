@@ -12,6 +12,8 @@ namespace ZeroPoint2.Core.Entities
         public string MetaKeywords { get; set; }
         public string MetaDescription { get; set; }
         public string Sku { get; set; }
+        [MaxLength(25)]
+        public string SupplierProductCode { get; set; }
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
         public bool ShowOnHomePage { get; set; }

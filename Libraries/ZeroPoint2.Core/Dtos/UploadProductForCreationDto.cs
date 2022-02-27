@@ -13,6 +13,7 @@ namespace ZeroPoint2.Core.Dtos
         public int Id { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
+        public string SupplierProductCode { get; set; }
         public string MetaKeywords { get; set; }
         public string MetaDescription { get; set; }
         public string ShortDescription { get; set; }

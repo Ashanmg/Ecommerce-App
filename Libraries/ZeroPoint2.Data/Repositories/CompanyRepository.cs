@@ -22,7 +22,7 @@ namespace ZeroPoint2.Data
         #region Public data services
         public async Task<GridData<List<Company>>> GetAllProducts(int pageNumber, int pageSize)
         {
-            var query = _context.Companies.Include(src => src.LogoImage).OrderBy(p => p.Id);
+            var query = _context.Companies.Include(src => src.LogoImage).OrderByDescending(p => p.Id);
 
             var productlist = await query
                     .Skip(pageSize * (pageNumber - 1))
@@ -65,7 +65,7 @@ namespace ZeroPoint2.Data
 
         public async Task<List<Company>> GetCompanyListForSelect()
         {
-            return await _context.Companies.OrderBy(p => p.Id).ToListAsync();
+            return await _context.Companies.OrderByDescending(p => p.Id).ToListAsync();
         }
         #endregion
     }

@@ -131,7 +131,7 @@ namespace ZeroPoint2.Services
 
                     var productImagesForCreationDto2 = new CompanyImageForCreationDto();
 
-                    if (file.Length > 0)
+                    if (file != null && file.Length > 0)
                     {
                         using (var stream = file.OpenReadStream())
                         {
@@ -143,16 +143,18 @@ namespace ZeroPoint2.Services
 
                             uploadResult = await _cloudinary.UploadAsync(uploadParams);
                         }
+
+                        productImagesForCreationDto2.ImageUrl = uploadResult.Url.ToString();
+                        productImagesForCreationDto2.PublicId = uploadResult.PublicId;
+                        productImagesForCreationDto2.CompanyFeatureId = companyFeature.Id;
+                        productImagesForCreationDto.IsLogo = false;
+
+                        var companyImage2 = _mapper.Map<CompanyImage>(productImagesForCreationDto2);
+                        companyImage2.DateAddedOnUtc = DateTime.UtcNow;
+                        companyImageList.Add(companyImage2);
                     }
 
-                    productImagesForCreationDto2.ImageUrl = uploadResult.Url.ToString();
-                    productImagesForCreationDto2.PublicId = uploadResult.PublicId;
-                    productImagesForCreationDto2.CompanyFeatureId = companyFeature.Id;
-                    productImagesForCreationDto.IsLogo = false;
 
-                    var companyImage2 = _mapper.Map<CompanyImage>(productImagesForCreationDto2);
-                    companyImage2.DateAddedOnUtc = DateTime.UtcNow;
-                    companyImageList.Add(companyImage2);
                 }
 
                 // then insert company images.

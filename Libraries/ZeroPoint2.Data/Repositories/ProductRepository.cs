@@ -83,7 +83,7 @@ namespace ZeroPoint2.Data
             {             
                 return await _context.Products.Include(src => src.ProductImages).
                     Where(p => p.ShowOnHomePage)
-                    .OrderBy(p => p.Id)
+                    .OrderByDescending(p => p.Id)
                     .Skip(pageSize * (pageNumber - 1))
                     .Take(pageSize)
                     .ToListAsync();
@@ -96,7 +96,7 @@ namespace ZeroPoint2.Data
 
         public async Task<GridData<List<Product>>> GetAllProducts(int pageNumber, int pageSize)
         {
-            var query = _context.Products.Include(src => src.ProductImages).Include(src => src.ProductColors).OrderBy(p => p.Id);
+            var query = _context.Products.Include(src => src.ProductImages).Include(src => src.ProductColors).OrderByDescending(p => p.Id);
 
             var productlist = await query
                     .Skip(pageSize * (pageNumber - 1))

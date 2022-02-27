@@ -28,7 +28,7 @@ namespace ZeroPoint2.Controllers
         #region public API methods
         [HttpPost]
         [Route("uploadproduct")]
-        [Authorize(Roles = "Administrators, ContentWriters")]
+        //[Authorize(Roles = "Administrators, ContentWriters")]
         public async Task<IActionResult> UploadSingleProduct([FromForm]UploadProductForCreationDto productForCreationDto)
         {
             ExecutionResponse<bool> response = await _productService.UploadSingleProduct(productForCreationDto);
