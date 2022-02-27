@@ -21,7 +21,7 @@ const responseInterceptor = ({ data }) => {
 
 const requestInterceptor = (config) => {
   const token = sessionStorage.getItem('token');
-  config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+  config.headers.Authorization = `Bearer ${token}`;
   return config;
 };
 
@@ -30,20 +30,33 @@ export const http = axios.create({
   baseURL: apiBaseUrl,
   headers: {
     'Content-type': 'application/json',
-    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Authorization',
+    'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+    // Authorization: `Bearer ${sessionStorage.getItem('token')}`,
   },
 });
 
-export const init = () => {
-  axios.defaults.baseURL = apiBaseUrl;
-  axios.defaults.headers['Content-Type'] = 'application/json';
-  axios.defaults.headers['X-Request-With'] = 'XMLHTTPRequest';
-  axios.interceptors.response.use(responseInterceptor);
-  axios.interceptors.request.use(requestInterceptor);
-};
+http.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// export const init = () => {
+//   axios.defaults.baseURL = apiBaseUrl;
+//   axios.defaults.headers['Content-Type'] = 'application/json';
+//   axios.defaults.headers['X-Request-With'] = 'XMLHTTPRequest';
+//   axios.interceptors.response.use(responseInterceptor);
+//   axios.interceptors.request.use(requestInterceptor);
+// };
 
 export const post = async (url, data, options = null) => {
-  console.log(options);
   return await http.post(url, data, options);
 };
 

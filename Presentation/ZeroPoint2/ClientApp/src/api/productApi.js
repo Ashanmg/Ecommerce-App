@@ -33,7 +33,6 @@ export const getColorTypesForUpload = (fromData) => {
 
 export const productUpload = (fromData) => {
   return new Promise(async (resolve, reject) => {
-    console.log('formdata');
     try {
       const res = await post('/api/product/uploadproduct', fromData);
       resolve(res.data);

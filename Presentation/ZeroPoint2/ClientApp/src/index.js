@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 import { init as httpInit } from './config/utils/http';
 
-httpInit();
+// httpInit();
 
 ReactDOM.render(
   <React.StrictMode>
