@@ -31,36 +31,24 @@ export const FundRaiseScreen = ({
             </h6>
             <br />
             <h6>
-              Every two weeks, from February to December, we focus on
-              fundraising for different projects that have an immediate positive
-              effect on people and the environment.
+              We work with sustainability influencers who nominate a charity
+              they would like to donate to.
             </h6>
             <br />
             <h6>
-              We also fund raise for The Water Project throughout the year.
+              Together we create a two week campaign to promote the artists on
+              this website and the charity the influencer has nominated.
             </h6>
             <br />
             <h6>
-              The Water Project is a world class charity that oversees community
-              clean water projects in sub Saharan Africa so that women and
-              children no longer have to walk up to 10km a day to fetch dirty
-              water that makes them sick.
+              At the end of the two weeks, we donate 20% of the sales to the
+              charity.
             </h6>
             <br />
             <h6>
-              Having clean water gives the children the health they need to
-              attend school, whilst their mothers have the time and resources to
-              grow the food needed to live well.
-            </h6>
-            <br />
-            <h6>
-              You can choose to donate your gift to either The Water Project or
-              to our focus project no matter when you make your purchase during
-              the year. The choice is yours.
-            </h6>
-            <br />
-            <h6>
-              To find out who will benefit from our next focus project, please{' '}
+              Currently zeropoint2 is in Beta mode and we will be launching
+              soon. If you would like to know more bout the influencers and the
+              charities we have lined up for the future, please{' '}
               <strong
                 className="underline cursor-pointer text-G-dark"
                 onClick={() => {
@@ -74,14 +62,14 @@ export const FundRaiseScreen = ({
                 role={'button'}
                 tabIndex={0}
               >
-                register
-              </strong>{' '}
-              and join our newsletter group.
+                sign-up
+              </strong>{' '} to our
+              monthly newsletter.
             </h6>
             <br />
-            <h6>Many thanks,</h6>
+            <h6>Thank you,</h6>
             <h6>
-              <strong>Richard</strong>
+              <strong>Richard Croome</strong>
             </h6>
           </div>
         </div>

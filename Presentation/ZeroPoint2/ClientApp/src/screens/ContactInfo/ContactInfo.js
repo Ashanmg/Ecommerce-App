@@ -12,7 +12,7 @@ export const ContactInfo = ({ className, ...restProps }) => {
     const auth = sessionStorage.getItem('isAuthenticated');
     auth ? setIsAuth(true) : setIsAuth(false);
   }, []);
-  
+
   const ContactInfoClasses = CN(
     'contact-info max-w-screen-xl flex flex-col text-G-dark mt-contact',
     className,
@@ -24,72 +24,54 @@ export const ContactInfo = ({ className, ...restProps }) => {
   return (
     <div className={ContactInfoClasses} {...restProps}>
       <div className="text-justify w-full px-2 mt-8 leading-9 top md:px-5">
-        <img
+        {/* <img
           src={Founder}
           alt=""
           className="w-32 h-auto max-w-xs mb-2 mr-5 md:max-w-sm md:h-full"
           style={{
             float: 'left'
           }}
-        />
+        /> */}
         <h6 className="mb-5">
-          I started Zeropoint2 because it combines my love of retail with my
-          desire to save the planet.
+          Zeropoint2 is a company focussed on helping people and animals.
         </h6>
+        <h6 className="mb-5">We do this in a number of ways.</h6>
         <h6 className="mb-5">
-          When I was 17, I started my first market business at Flemington in
-          Sydney selling my own hand-painted designs.
-        </h6>
-        <h6 className="mb-5">Then I went to uni.</h6>
-        <h6 className="mb-5">
-          In 1995 I started another hand-painted business, this time focusing on
-          dinosaur designs for children. I was in Cairns, and we operated out of
-          three shopping centers and several markets, including Kuranda.
-        </h6>
-        <h6 className="mb-5">Then I became a teacher.</h6>
-        <h6 className="mb-5">
-          Throughout my life though, my love for art and quality handmade
-          products has always stayed with me. And over the years my desire to
-          give back and do something to stop the destruction of the planet
-          (probably something to do with studying and teaching geography), has
-          just grown and grown.
+          Firstly we donate 20% of every sale to charity. The charities we
+          donate to vary during the course of the year and every charity is
+          chosen by a sustainability influencer. Once a sustainability
+          influencer agrees to work with us, we create a two-week program to
+          promote their charity (and the artists at Zeropoint2), to their
+          followers. At the end of the two-week period, we donate 20% of all the
+          sales to the influencer's nominated charity.
         </h6>
         <h6 className="mb-5">
-          So, Zeropoint2 is my way of feeding my desire to surround myself with
-          beautiful handmade art and help communities and ecosystems in need.
+          Usually, we fundraise to build a well in a community, pay rangers in a
+          wildlife reserve or help purchase X number of acres of rain forest
+          somewhere in the world to protect endangered species.
+        </h6>
+        <h6 className="mb-5">We repeat this process about 20 times a year.</h6>
+        <h6 className="mb-5">
+          The second way we help people is by supporting artisan makers. At
+          least 50% of any purchase on Zeropoint2 is paid to an artisanal
+          business somewhere in the world. Quite often the makers live in
+          developing countries and the money makes a big difference to the
+          quality of their lives and the communities they live in.
         </h6>
         <h6 className="mb-5">
-          I make a point of not inflating the retail prices of any of the
-          artisans I promote on Zeropoint2 because otherwise the 20% donation
-          wouldn't be real. The focus of the business is firmly on helping, not
-          profit.
+          The third way we help people is by employing professionals from low
+          income countries. This provides professionals in developing nations
+          with opportunites they might not have previously had, and also allows
+          them to make a living without having to move away from their families
+          and friends.
         </h6>
         <h6 className="mb-5">
-          Usually, I work with influencers who choose the charity they would
-          like to donate to. Together we ask our followers to consider
-          purchasing something they need, and in doing so, support one or more
-          of the artisans on this site, as well as the charity.
+          Lastly, we never inflate the prices of the products we sell on
+          Zeropoint2. Everything we sell is exactly the same price as listed on
+          the artisan's website. That way you can be sure the donation is real
+          and that together we're making a positive contribution to the future
+          of the planet.
         </h6>
-        <h6 className="mb-5">
-          Zeropoint2 is a totally online business, so I also make the point of
-          employing people from low income countries. That way, almost every
-          cent that passes through the business helps an underserved community
-          somewhere in the world.
-        </h6>
-        <h6 className="mb-5">
-          My dream is to make Zeropoint2 the biggest private donor company,
-          supporting the greatest number of home-based artisans, employing the
-          greatest number of staff from low income countries, whilst selling the
-          most beautiful handmade products in the world.
-        </h6>
-        <h6 className="mb-5">
-          I encourage you to join me in making this a reality.
-        </h6>
-        <h6 className="mb-5">Thank you,</h6>
-        <h6>
-          <strong>Richard Croome</strong>
-        </h6>
-        <h6 className="mb-5">richard.croome@zeropoint2.com</h6>
       </div>
     </div>
   );
