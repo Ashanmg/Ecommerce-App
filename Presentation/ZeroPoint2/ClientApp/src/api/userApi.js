@@ -20,16 +20,15 @@ export const userLogin = async (fromData) => {
       resolve(res);
 
       if (res.status === 200) {
-        sessionStorage.setItem('token', res.data.token);
-        window.axios.defaults.headers.common['Authorization'] =
-          'Bearer ' + sessionStorage.getItem('token');
-        sessionStorage.setItem('user', JSON.stringify(res.data.userData));
-        sessionStorage.setItem('isAuthenticated', true);
-        localStorage.setItem('token', res.data.token);
         localStorage.setItem(
           'user',
           JSON.stringify({ user: res.data.userData })
         );
+        sessionStorage.setItem('isAuthenticated', true);
+        sessionStorage.setItem('token', res.data.token);
+        sessionStorage.setItem('user', JSON.stringify(res.data.userData));        
+        localStorage.setItem('token', res.data.token);
+
         localStorage.setItem('isAuthenticated', true);
       }
     } catch (error) {
