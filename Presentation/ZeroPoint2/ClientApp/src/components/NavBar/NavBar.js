@@ -13,6 +13,9 @@ import {
   loginFail,
   loginSuccess,
 } from '../../features/userSlice';
+
+import { RiSearchLine } from 'react-icons/ri';
+
 import { emailValidation } from '../../config/utils/emailValidation';
 import { userLogin } from '../../api/userApi';
 
@@ -38,7 +41,7 @@ export const NavBar = ({
   const NavBarClasses = CN(
     'nav-bar h-[72px] flex flex-col container max-w-screen-xl px-1 md:px-3 fixed top-0 left-0 right-0 z-10 bg-white',
     className,
-    {'shadow-md': isScrolling === true}
+    { 'shadow-md': isScrolling === true }
   );
 
   const [passwordShow, setPasswordShow] = useState(false);
@@ -161,8 +164,8 @@ export const NavBar = ({
             />
           </div>
         </div>
-        <div className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-G-dark">
-        Gifts that change the world - your one stop shop for giving - 20% of every sale donated to the charity of your choice.
+        <div style={{ backgroundColor: '#80bf9b' }} className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-white">
+          20% of every sale donated to the charity of your choice.
         </div>
         <div>
           <form>
@@ -235,8 +238,47 @@ export const NavBar = ({
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="flex flex-col items-center pt-5">
-        <form className="flex w-full" onSubmit={(e) => handleSubmit(e)}>
+      <div className="flex w-full items-center pt-5">
+        <div className="mr-1 logo lg:mr-3">
+          <Link to="/" className="flex justify-center">
+            <img
+              src={zeroLogo}
+              alt="Logo"
+              className="object-fill h-7 sm:h-8 lg:h-10 sm:w-full"
+            />
+          </Link>
+        </div>
+        <div className="flex justify-around flex-grow mr-1 lg:mr-3">
+          <div className="flex-1 mr-1 email-field">
+            <TextField
+              placeholder={
+                !isSmallWide
+                  ? 'Search for sustainable, socially responsible gifts'
+                  : 'Search'
+              }
+              iconAfter={<RiSearchLine size={!isSmallWide ? 24 : 16} />}
+            />
+          </div>
+        </div>
+        <div className="flex">
+          <div className="mr-1 signIn-btn lg:mr-3">
+            <Button
+              children={'Sign-in'}
+              className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+              color="text-G-dark"
+              // type="submit"
+              onClick={handleToggleSignIn}
+            />
+          </div>
+          <div className="signUp-btn">
+            <Button
+              children="Sign-up"
+              className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+              onClick={handleToggle}
+            />
+          </div>
+        </div>
+        {/* <form className="flex w-full" onSubmit={(e) => handleSubmit(e)}>
           <div className="mr-1 logo lg:mr-3">
             <Link to="/" className="flex justify-center">
               <img
@@ -275,30 +317,12 @@ export const NavBar = ({
               />
             </div>
           </div>
-          <div className="flex">
-            <div className="mr-1 signIn-btn lg:mr-3">
-              <Button
-                children={!isLoading ? 'Sign-in' : ''}
-                className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
-                color="text-G-dark"
-                // type="submit"
-                onClick={handleSubmit}
-                isLoading={isLoading}
-              />
-            </div>
-            <div className="signUp-btn">
-              <Button
-                children="Sign-up"
-                className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
-                onClick={handleToggle}
-              />
-            </div>
-          </div>
-        </form>
+        </form> */}
       </div>
-      <div className="flex items-center justify-between mt-2 text-base italic text-left nav-bar-buttom text-G-dark lg:text-xs xl:text-base">
+      <div style={{ backgroundColor: '#80bf9b', height: '41px' }} className="flex items-center justify-center mt-2 text-base italic text-center nav-bar-buttom text-white lg:text-xs xl:text-base">
         <span>
-        Gifts that change the world - sustainable, socially responsible gifts - your one stop shop for giving - 20% of every sale donated to the charity of your choice.
+          Sustainable, socially responsible gifts - 20% of every sale donated to
+          the charity of your choice.
         </span>
         <RiInformationLine
           className="cursor-pointer"

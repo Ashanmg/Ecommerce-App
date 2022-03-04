@@ -44,24 +44,20 @@ export const ProductCard = ({
       )}
       <img
         className="object-fill w-full h-fill"
-        style={{ height: '77%' }}
+        style={{ height: '82%' }}
         src={thumbnail}
         alt=""
       />
       <div
         className="bottom-0 flex flex-col w-full py-2 text-sm h-13 product-card__description text-G-dark"
-        style={{ transition: 'height 1s ease-in', height: '35%' }}
+        style={{ transition: 'height 1s ease-in', height: '18%', backgroundColor: '#f6f8f7' }}
       >
-        {/* {isFocus && ( */}
-        <span className="text-sm product-card__description__title">
+        {/* <span className="text-sm product-card__description__title">
           {shortDescription}
+        </span> */}
+        <span className="font-bold product-card__description__price text-G-dark">
+          {price}
         </span>
-        {/* )} */}
-        {isAuthenticated && (
-          <span className="font-bold product-card__description__price text-G-dark">
-            {price}
-          </span>
-        )}
       </div>
     </motion.div>
   );
