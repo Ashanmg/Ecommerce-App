@@ -79,7 +79,7 @@ export const LoginNavBar = ({
                 <TextField
                   placeholder={
                     !isSmallWide
-                      ? 'Search for sustainable, socially responsible gifts'
+                      ? 'Search for gifts that change the world'
                       : 'Search'
                   }
                   iconAfter={<RiSearchLine size={!isSmallWide ? 24 : 16} />}

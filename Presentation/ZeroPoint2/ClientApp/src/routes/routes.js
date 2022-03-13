@@ -1,5 +1,6 @@
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import ContactInfo from '../screens/ContactInfo/ContactInfo';
+import Support from '../screens/Support/Support';
 import Error404 from '../screens/Error404/Error404';
 import { HomeScreen } from '../screens/HomeScreen';
 import NoResults from '../screens/NoResults/NoResults';
@@ -22,6 +23,13 @@ export const routes = [
   {
     path: '/contact-info',
     component: ContactInfo,
+    layout: MainLayout,
+    private: false,
+    accessRoles: [],
+  },
+  {
+    path: '/support',
+    component: Support,
     layout: MainLayout,
     private: false,
     accessRoles: [],

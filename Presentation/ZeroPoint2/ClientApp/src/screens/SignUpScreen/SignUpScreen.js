@@ -184,7 +184,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
           </div>
           <div className="flex flex-row items-center mb-8 italic font-medium text-center h-7 md:h-10 text-G-dark text-md md:text-base xl:text-lg">
             Your one-stop shop for giving - 20% of every sale donated to the
-            charity of your choice.&nbsp;{' '}
+            charity.&nbsp;{' '}
             <RiInformationLine className="hidden lg:flex" />
           </div>
           <div className="text-center">

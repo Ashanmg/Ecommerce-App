@@ -51,9 +51,9 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
             >
               About
             </Link>
-            <a href="./" className="italic text-white hover:text-G-dark px-7">
+            <Link to="./support" className="italic text-white hover:text-G-dark px-7">
               Support
-            </a>
+            </Link>
             <a href="./" className="italic text-white hover:text-G-dark">
               Connect
             </a>
@@ -84,9 +84,9 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           >
             About
           </Link>
-          <a href="./" className="italic text-white hover:text-G-dark px-7">
+          <Link to="/support" className="italic text-white hover:text-G-dark px-7">
             Support
-          </a>
+          </Link>
           <span className="relative flex items-center italic text-white cursor-pointer hover:text-G-dark">
             <motion.div
               initial={false}

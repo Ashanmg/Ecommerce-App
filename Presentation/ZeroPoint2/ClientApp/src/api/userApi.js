@@ -7,6 +7,7 @@ import { post, get } from '../config/utils/http';
 
 const loginUrl = `${apiBaseUrl}api/Auth/login`;
 const signupUrl = `${apiBaseUrl}api/Auth/register`;
+const connectEmailUrl = `${apiBaseUrl}/api/common/contactbyemail`;
 
 export const userLogin = async (fromData) => {
   return new Promise(async (resolve, reject) => {
@@ -45,6 +46,27 @@ export const userSingUp = (fromData) => {
         Name: name,
         Email: email,
         Password: password,
+      });
+
+      resolve(res.data);
+
+      if (res.status === 201) {
+        return res.data;
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const contactEmailRegister = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { name, email, message } = data;
+      const res = await post(connectEmailUrl, {
+        Name: name,
+        Email: email,
+        message: message,
       });
 
       resolve(res.data);

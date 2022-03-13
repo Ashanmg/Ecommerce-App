@@ -5,17 +5,66 @@ import './ConnectEmailModal.scss';
 import TextField from '../../components/TextField/TextField';
 import TextArea from '../../components/TextArea/TextArea';
 import Button from '../../components/Button/Button';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { emailRegisterFail, emailRegisterSuccessful, emailRegistrationPending } from '../../features/contactFormSlice';
+import { contactEmailRegister } from '../../api/userApi';
 
 export const ConnectEmailModal = ({ className, ...restProps }) => {
   const ConnectEmailModalClasses = CN('connect-email-modal', className, {});
+
+  const errorToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'error',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+  };
+
+  const SuccessToast = (message) => {
+    toast(message, {
+      position: 'top-right',
+      type: 'success',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+  };
+
+  const dispatch = useDispatch();
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, message);
+    if (name === '') {
+      errorToast('Name is required');
+    } else if (email === '') {
+      errorToast('Email is required');
+    } else if (message === '') {
+      errorToast('Message is required');
+    } else {
+      dispatch(emailRegistrationPending());
+      try {
+        const data = await contactEmailRegister({name, email, message});
+        // setCompanies(data);
+        dispatch(emailRegisterSuccessful());
+      } catch (error) {
+        console.log(error);
+        dispatch(emailRegisterFail(error));
+        errorToast('Error loading companies list');
+      }
+    }
   };
 
   return (
@@ -42,6 +91,7 @@ export const ConnectEmailModal = ({ className, ...restProps }) => {
                 placeholder="Email"
                 autoComplete="off"
                 className="mb-4 border"
+                type='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -55,14 +105,14 @@ export const ConnectEmailModal = ({ className, ...restProps }) => {
                 onChange={(e) => setMessage(e.target.value)}
               />
               {/* <div className="flex items-end justify-end w-full mt-1"> */}
-                <Button
-                  children="Submit"
-                  className="flex items-center justify-center w-full px-5 mt-1 text-xs text-white border-2 rounded-sm gap-x-3 h-7 md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSubmit(e);
-                  }}
-                />
+              <Button
+                children="Submit"
+                className="flex items-center justify-center w-full px-5 mt-1 text-xs text-white border-2 rounded-sm gap-x-3 h-7 md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }}
+              />
               {/* </div> */}
             </form>
           </div>
