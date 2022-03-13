@@ -45,12 +45,18 @@ export const ConnectEmailModal = ({ className, ...restProps }) => {
   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState('');
 
+  const reset = () => {
+    setName('');
+    setEmail('');
+    setMessage('');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (name === '') {
       errorToast('Name is required');
-    } else if (email === '') {
-      errorToast('Email is required');
+    } else if (email === '' || !email.includes('@')) {
+      errorToast('Email is Required and must be a valid email');
     } else if (message === '') {
       errorToast('Message is required');
     } else {
@@ -58,11 +64,12 @@ export const ConnectEmailModal = ({ className, ...restProps }) => {
       try {
         const data = await contactEmailRegister({name, email, message});
         // setCompanies(data);
+        reset();
         dispatch(emailRegisterSuccessful());
       } catch (error) {
         console.log(error);
         dispatch(emailRegisterFail(error));
-        errorToast('Error loading companies list');
+        errorToast('Please try again later');
       }
     }
   };

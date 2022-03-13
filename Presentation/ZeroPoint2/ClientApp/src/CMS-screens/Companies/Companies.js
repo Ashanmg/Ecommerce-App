@@ -60,7 +60,6 @@ export const Companies = ({ className, ...restProps }) => {
 
   useEffect(async () => {
     dispatch(getAllCompaniesListPending());
-
     try {
       const data = await getAllCompanyList(pageSize, pageNumber);
       setCompanies(data);
@@ -101,19 +100,19 @@ export const Companies = ({ className, ...restProps }) => {
 
   return (
     <div className={(CompaniesClasses, 'flex flex-col')} {...restProps}>
-      <div className="dashboard_title text-G-dark font-bold text-3xl w-full mb-2">
+      <div className="w-full mb-2 text-3xl font-bold dashboard_title text-G-dark">
         Companiesss
       </div>
-      <div className="product__add -item-btn flex justify-end mb-2">
+      <div className="flex justify-end mb-2 product__add -item-btn">
         <Button
           children="Add Company"
-          className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark rounded-sm"
+          className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           onClick={() => navigate('/admin/company-registration')}
         />
       </div>
       <div className="product__table">
         {isLoading ? (
-          <div className="w-full h-auto flex justify-center items-center">
+          <div className="flex items-center justify-center w-full h-auto">
             <Loader type="Grid" color="#1c473c" size={60} />
           </div>
         ) : (
