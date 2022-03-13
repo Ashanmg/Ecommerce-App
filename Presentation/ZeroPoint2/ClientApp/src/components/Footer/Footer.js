@@ -1,10 +1,18 @@
 import React from 'react';
 import CN from 'classnames';
-
+import { RiArrowDropUpLine } from 'react-icons/ri';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
+import { Instagram } from '../icons/Instagram';
+import Email from '../icons/Email';
+import Button from '../Button/Button';
+import { Modal } from '../Modal/Modal';
 
 import './Footer.scss';
+import ConnectEmailModal from '../../screens/ConnectEmailModal/ConnectEmailModal';
+
 
 export const Footer = ({ className, isScrolling, ...restProps }) => {
   const FooterClasses = CN(
@@ -14,6 +22,13 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
   );
 
   const isSmallWide = useMediaQuery('(max-width: 640px)');
+
+  const [expanded, setExpanded] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
   if (isSmallWide) {
     return (
@@ -25,11 +40,15 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           className="flex flex-col items-center justify-between w-full"
           style={{ backgroundColor: '#80bf9b' }}
         >
-          <div className="my-1 text-xs italic copyRight text-white">
-            Copyright © 2022 zeropoint2.com. All rights reserved.
+          <div className="my-1 text-xs italic text-white copyRight">
+            Copyrights © 2022 zeropoint2.com. All rights
+            reserved.sfsafdasfsafsafd
           </div>
           <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5">
-            <Link to="./contact-info" className="italic text-white hover:text-G-dark">
+            <Link
+              to="./contact-info"
+              className="italic text-white hover:text-G-dark"
+            >
               About
             </Link>
             <a href="./" className="italic text-white hover:text-G-dark px-7">
@@ -55,21 +74,68 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
         className="flex flex-row items-center justify-between w-full px-2 py-2"
         style={{ backgroundColor: '#80bf9b' }}
       >
-        <div className="text-xs italic copyRight text-white">
+        <div className="text-xs italic text-white copyRight">
           Copyright © 2022 zeropoint2.com. All rights reserved.
         </div>
-        <div className="mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5">
-          <Link to="/contact-info" className="italic text-white hover:text-G-dark">
+        <div className="flex items-center mb-3 mr-0 text-sm font-medium md:mb-0 md:mr-5">
+          <Link
+            to="/contact-info"
+            className="italic text-white hover:text-G-dark"
+          >
             About
           </Link>
           <a href="./" className="italic text-white hover:text-G-dark px-7">
             Support
           </a>
-          <a href="./" className="italic text-white hover:text-G-dark">
-            Connect
-          </a>
+          <span className="relative flex items-center italic text-white cursor-pointer hover:text-G-dark">
+            <motion.div
+              initial={false}
+              onClick={() => setExpanded(!expanded)}
+              onKeyPress={() => setExpanded(!expanded)}
+              role="button"
+              tabIndex={0}
+            >
+              Connect
+            </motion.div>
+
+            {expanded && (
+              <motion.div
+                key="content"
+                initial="collapsed"
+                animate="open"
+                exit="collapsed"
+                variants={{
+                  open: { opacity: 1, height: 'auto' },
+                  collapsed: { opacity: 0, height: 0 },
+                }}
+                transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className="absolute flex flex-col float-right p-2 left-1 bottom-7 gap-y-1"
+                style={{ backgroundColor: 'rgb(128, 191, 155)' }}
+              >
+                <Button
+                  onClick={() => {
+                    setIsOpen(true);
+                  }}
+                >
+                  <Email size={32} />
+                </Button>
+                <Button>
+                  <Instagram size={32} />
+                </Button>
+              </motion.div>
+            )}
+          </span>
         </div>
+        <Modal
+          isOpen={isOpen}
+          onClose={true}
+          onClickOverlay={handleIsOpen}
+          size="sm"
+        >
+          <ConnectEmailModal />
+        </Modal>
       </div>
+
       <hr
         style={{ width: '100%', height: '5px', border: 'none' }}
         size="3"

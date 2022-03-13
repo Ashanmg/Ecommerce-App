@@ -164,7 +164,7 @@ export const NavBar = ({
             />
           </div>
         </div>
-        <div style={{ backgroundColor: '#80bf9b' }} className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-white">
+        <div style={{ backgroundColor: '#80bf9b' }} className="flex pb-2 mt-2 text-sm italic text-white nav-bar-buttom">
           20% of every sale donated to the charity of your choice.
         </div>
         <div>
@@ -238,7 +238,7 @@ export const NavBar = ({
       animate={{ y: -10 }}
       transition={{ stiffness: 120 }}
     >
-      <div className="flex w-full items-center pt-5">
+      <div className="flex items-center w-full pt-5">
         <div className="mr-1 logo lg:mr-3">
           <Link to="/" className="flex justify-center">
             <img
@@ -278,48 +278,8 @@ export const NavBar = ({
             />
           </div>
         </div>
-        {/* <form className="flex w-full" onSubmit={(e) => handleSubmit(e)}>
-          <div className="mr-1 logo lg:mr-3">
-            <Link to="/" className="flex justify-center">
-              <img
-                src={zeroLogo}
-                alt="Logo"
-                className="object-fill h-7 sm:h-8 lg:h-10 sm:w-full"
-              />
-            </Link>
-          </div>
-          <div className="flex justify-around flex-grow mr-1 lg:mr-3">
-            <div className="flex-1 mr-1 email-field lg:mr-3">
-              <TextField
-                placeholder="Email"
-                autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="flex-1 password-field">
-              <TextField
-                placeholder="Password"
-                autoComplete="new-password"
-                onClickIconAfter={() => {
-                  setPasswordShow(!passwordShow);
-                }}
-                type={passwordShow ? 'text' : 'password'}
-                iconAfter={
-                  passwordShow ? (
-                    <RiEyeOffLine size={20} />
-                  ) : (
-                    <RiEyeLine size={20} />
-                  )
-                }
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-        </form> */}
       </div>
-      <div style={{ backgroundColor: '#80bf9b', height: '41px' }} className="flex items-center justify-center mt-2 text-base italic text-center nav-bar-buttom text-white lg:text-xs xl:text-base">
+      <div style={{ backgroundColor: '#80bf9b', height: '41px' }} className="flex items-center justify-center mt-2 text-base italic text-center text-white nav-bar-buttom lg:text-xs xl:text-base">
         <span>
           Sustainable, socially responsible gifts - 20% of every sale donated to
           the charity of your choice.
