@@ -165,7 +165,7 @@ export const NavBar = ({
           </div>
         </div>
         <div style={{ backgroundColor: '#80bf9b' }} className="flex pb-2 mt-2 text-sm italic nav-bar-buttom text-white">
-          20% of every sale donated to the charity of your choice.
+          20% of every sale donated to the charity.
         </div>
         <div>
           <form>
@@ -253,7 +253,7 @@ export const NavBar = ({
             <TextField
               placeholder={
                 !isSmallWide
-                  ? 'Search for sustainable, socially responsible gifts'
+                  ? 'Search for gifts that change the world'
                   : 'Search'
               }
               iconAfter={<RiSearchLine size={!isSmallWide ? 24 : 16} />}
@@ -322,7 +322,7 @@ export const NavBar = ({
       <div style={{ backgroundColor: '#80bf9b', height: '41px' }} className="flex items-center justify-center mt-2 text-base italic text-center nav-bar-buttom text-white lg:text-xs xl:text-base">
         <span>
           Sustainable, socially responsible gifts - 20% of every sale donated to
-          the charity of your choice.
+          the charity.
         </span>
         <RiInformationLine
           className="cursor-pointer"

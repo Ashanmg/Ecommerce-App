@@ -32,7 +32,7 @@ export const ProductCard = ({
       onMouseEnter={() => setIsFocus(true)}
       onMouseLeave={() => setIsFocus(false)}
     >
-      {!isAuthenticated && !moveProduct && (
+      {/* {!isAuthenticated && !moveProduct && (
         <div
           className="absolute py-2 text-xs italic font-medium md:text-base md:py-6 top-5 md:top-10 text-G-dark"
           style={{ backgroundColor: '#edf6f1' }}
@@ -41,20 +41,20 @@ export const ProductCard = ({
             Please sign-in or sign-up to see product details and pricing.
           </span>
         </div>
-      )}
+      )} */}
       <img
         className="object-fill w-full h-fill"
-        style={{ height: '82%' }}
+        style={{ height: '77%' }}
         src={thumbnail}
         alt=""
       />
       <div
         className="bottom-0 flex flex-col w-full py-2 text-sm h-13 product-card__description text-G-dark"
-        style={{ transition: 'height 1s ease-in', height: '18%', backgroundColor: '#f6f8f7' }}
+        style={{ transition: 'height 1s ease-in', height: '35%', backgroundColor: '#f6f8f7' }}
       >
-        {/* <span className="text-sm product-card__description__title">
+        <span className="text-sm product-card__description__title">
           {shortDescription}
-        </span> */}
+        </span>
         <span className="font-bold product-card__description__price text-G-dark">
           {price}
         </span>

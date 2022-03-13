@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
-import Founder from '../../assets/Founder-remove-bg.png';
 
 import './ContactInfo.scss';
 

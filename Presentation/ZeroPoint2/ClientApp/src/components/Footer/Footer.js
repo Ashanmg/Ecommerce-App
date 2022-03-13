@@ -32,9 +32,9 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
             <Link to="./contact-info" className="italic text-white hover:text-G-dark">
               About
             </Link>
-            <a href="./" className="italic text-white hover:text-G-dark px-7">
+            <Link to="./support" className="italic text-white hover:text-G-dark px-7">
               Support
-            </a>
+            </Link>
             <a href="./" className="italic text-white hover:text-G-dark">
               Connect
             </a>
@@ -62,9 +62,9 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           <Link to="/contact-info" className="italic text-white hover:text-G-dark">
             About
           </Link>
-          <a href="./" className="italic text-white hover:text-G-dark px-7">
+          <Link to="/support" className="italic text-white hover:text-G-dark px-7">
             Support
-          </a>
+          </Link>
           <a href="./" className="italic text-white hover:text-G-dark">
             Connect
           </a>

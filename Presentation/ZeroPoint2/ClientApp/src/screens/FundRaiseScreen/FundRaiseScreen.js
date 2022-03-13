@@ -67,10 +67,7 @@ export const FundRaiseScreen = ({
               monthly newsletter.
             </h6>
             <br />
-            <h6>Thank you,</h6>
-            <h6>
-              <strong>Richard Croome</strong>
-            </h6>
+            <h6>Thank you</h6>
           </div>
         </div>
       </div>
