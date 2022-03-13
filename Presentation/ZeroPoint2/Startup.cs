@@ -65,6 +65,7 @@ namespace ZeroPoint2
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IEmailService, BasicEmailService>();
             #endregion
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
