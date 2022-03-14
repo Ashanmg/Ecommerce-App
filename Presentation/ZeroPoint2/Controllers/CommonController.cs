@@ -27,7 +27,7 @@ namespace ZeroPoint2.Controllers
         {
 
             ExecutionResponse<bool> response = await _emailService.SendSimpleEmail(contactFormDto);
-            return Ok();
+            return Ok(response);
         }
     }
 }

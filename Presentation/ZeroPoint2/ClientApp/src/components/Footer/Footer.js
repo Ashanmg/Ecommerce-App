@@ -13,7 +13,6 @@ import { Modal } from '../Modal/Modal';
 import './Footer.scss';
 import ConnectEmailModal from '../../screens/ConnectEmailModal/ConnectEmailModal';
 
-
 export const Footer = ({ className, isScrolling, ...restProps }) => {
   const FooterClasses = CN(
     'footer container max-w-screen-xl flex px-1 md:px-3 flex-row flex-wrap justify-center md:justify-between items-center lg:items-end max-w-screen-xl pb-0 fixed bottom-0 left-0 right-0 w-full z-10 bg-white pt-1',
@@ -51,7 +50,10 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
             >
               About
             </Link>
-            <Link to="./support" className="italic text-white hover:text-G-dark px-7">
+            <Link
+              to="./support"
+              className="italic text-white hover:text-G-dark px-7"
+            >
               Support
             </Link>
             <a href="./" className="italic text-white hover:text-G-dark">
@@ -84,14 +86,18 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           >
             About
           </Link>
-          <Link to="/support" className="italic text-white hover:text-G-dark px-7">
+          <Link
+            to="/support"
+            className="italic text-white hover:text-G-dark px-7"
+          >
             Support
           </Link>
           <span className="relative flex items-center italic text-white cursor-pointer hover:text-G-dark">
             <motion.div
               initial={false}
-              onClick={() => setExpanded(!expanded)}
-              onKeyPress={() => setExpanded(!expanded)}
+              onMouseEnter={() => setExpanded(true)}
+              onKeyPress={() => setExpanded(true)}
+              //onMouseLeave={() => setExpanded(false)}
               role="button"
               tabIndex={0}
             >
@@ -115,11 +121,22 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
                 <Button
                   onClick={() => {
                     setIsOpen(true);
+                    setExpanded(false);
                   }}
                 >
                   <Email size={32} />
                 </Button>
-                <Button>
+                <Button
+                  onClick={() => {
+                    window
+                      .open(
+                        'https://www.instagram.com/zero_point_2_/',
+                        '_blank'
+                      )
+                      .focus();
+                    setExpanded(false);
+                  }}
+                >
                   <Instagram size={32} />
                 </Button>
               </motion.div>
