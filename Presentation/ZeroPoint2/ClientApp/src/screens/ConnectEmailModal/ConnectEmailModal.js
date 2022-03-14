@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { emailRegisterFail, emailRegisterSuccessful, emailRegistrationPending } from '../../features/contactFormSlice';
 import { contactEmailRegister } from '../../api/userApi';
 
-export const ConnectEmailModal = ({ className, onClose, ...restProps }) => {
+export const ConnectEmailModal = ({ className, onClose, setIsOpen, ...restProps }) => {
   const ConnectEmailModalClasses = CN('connect-email-modal', className, {});
 
   const errorToast = (message) => {
@@ -69,8 +69,8 @@ export const ConnectEmailModal = ({ className, onClose, ...restProps }) => {
         dispatch(emailRegisterSuccessful());
         SuccessToast(message);
         onClose();
+        setIsOpen(false);
       } catch (error) {
-        console.log(error);
         dispatch(emailRegisterFail(error));
         errorToast('Please try again later');
       }

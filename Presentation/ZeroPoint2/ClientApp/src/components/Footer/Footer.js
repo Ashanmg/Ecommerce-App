@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import CN from 'classnames';
 import { RiArrowDropUpLine } from 'react-icons/ri';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +12,7 @@ import { Modal } from '../Modal/Modal';
 
 import './Footer.scss';
 import ConnectEmailModal from '../../screens/ConnectEmailModal/ConnectEmailModal';
+import useOnClickOutside from '../../config/utils/useOnClickOutside';
 
 export const Footer = ({ className, isScrolling, ...restProps }) => {
   const FooterClasses = CN(
@@ -21,6 +22,11 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
   );
 
   const isSmallWide = useMediaQuery('(max-width: 640px)');
+
+  const dropdownRef = useRef(null);
+  useOnClickOutside(dropdownRef, () => {
+    setExpanded(false);
+  });
 
   const [expanded, setExpanded] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -95,9 +101,7 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           <span className="relative flex items-center italic text-white cursor-pointer hover:text-G-dark">
             <motion.div
               initial={false}
-              onMouseEnter={() => setExpanded(true)}
-              onKeyPress={() => setExpanded(true)}
-              //onMouseLeave={() => setExpanded(false)}
+              onClick={() => setExpanded(!expanded)}
               role="button"
               tabIndex={0}
             >
@@ -106,6 +110,7 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
 
             {expanded && (
               <motion.div
+                ref={dropdownRef}
                 key="content"
                 initial="collapsed"
                 animate="open"
@@ -149,7 +154,7 @@ export const Footer = ({ className, isScrolling, ...restProps }) => {
           onClickOverlay={handleIsOpen}
           size="sm"
         >
-          <ConnectEmailModal />
+          <ConnectEmailModal setIsOpen={setIsOpen} />
         </Modal>
       </div>
 
