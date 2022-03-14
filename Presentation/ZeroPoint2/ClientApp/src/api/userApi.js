@@ -7,7 +7,7 @@ import { post, get } from '../config/utils/http';
 
 const loginUrl = `${apiBaseUrl}api/Auth/login`;
 const signupUrl = `${apiBaseUrl}api/Auth/register`;
-const connectEmailUrl = `${apiBaseUrl}/api/common/contactbyemail`;
+const connectEmailUrl = `${apiBaseUrl}api/common/contactbyemail`;
 
 export const userLogin = async (fromData) => {
   return new Promise(async (resolve, reject) => {
@@ -70,8 +70,8 @@ export const contactEmailRegister = (data) => {
       });
 
       resolve(res.data);
-
-      if (res.status === 201) {
+      console.log(res);
+      if (res.status === 200) {
         return res.data;
       }
     } catch (error) {
