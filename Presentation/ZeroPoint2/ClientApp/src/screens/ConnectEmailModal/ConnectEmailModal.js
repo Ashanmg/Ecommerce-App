@@ -6,11 +6,11 @@ import TextField from '../../components/TextField/TextField';
 import TextArea from '../../components/TextArea/TextArea';
 import Button from '../../components/Button/Button';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { emailRegisterFail, emailRegisterSuccessful, emailRegistrationPending } from '../../features/contactFormSlice';
 import { contactEmailRegister } from '../../api/userApi';
 
-export const ConnectEmailModal = ({ className, onClose, setIsOpen, ...restProps }) => {
+export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
   const ConnectEmailModalClasses = CN('connect-email-modal', className, {});
 
   const errorToast = (message) => {
@@ -39,6 +39,10 @@ export const ConnectEmailModal = ({ className, onClose, setIsOpen, ...restProps 
     });
   };
 
+  const { isUploadLoading } = useSelector(
+    (state) => state.connectEmail
+  );
+
   const dispatch = useDispatch();
 
   const [name, setName] = React.useState('');
@@ -63,12 +67,10 @@ export const ConnectEmailModal = ({ className, onClose, setIsOpen, ...restProps 
       dispatch(emailRegistrationPending());
       try {
         const data = await contactEmailRegister({name, email, message});
-        console.log(data);
-        var message = data['message'];
+        var message2 = data['message'];
         reset();
         dispatch(emailRegisterSuccessful());
-        SuccessToast(message);
-        onClose();
+        SuccessToast(message2);
         setIsOpen(false);
       } catch (error) {
         dispatch(emailRegisterFail(error));
@@ -116,12 +118,13 @@ export const ConnectEmailModal = ({ className, onClose, setIsOpen, ...restProps 
               />
               {/* <div className="flex items-end justify-end w-full mt-1"> */}
               <Button
-                children="Submit"
+                children={!isUploadLoading ? 'Submit' : ''}
                 className="flex items-center justify-center w-full px-5 mt-1 text-xs text-white border-2 rounded-sm gap-x-3 h-7 md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   handleSubmit(e);
                 }}
+                isLoading = {isUploadLoading}
               />
               {/* </div> */}
             </form>

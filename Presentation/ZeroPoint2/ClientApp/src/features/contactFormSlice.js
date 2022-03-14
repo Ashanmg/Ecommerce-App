@@ -34,6 +34,6 @@ export const {
   emailRegisterFail,
 } = actions;
 
-export const selectCompany = (state) => state.connectEmail.connectEmail;
+export const selectcontactEmail = (state) => state.connectEmail.connectEmail;
 
 export default contactFormSlice.reducer;

@@ -65,8 +65,8 @@ export const contactEmailRegister = (data) => {
       const { name, email, message } = data;
       const res = await post(connectEmailUrl, {
         Name: name,
-        Email: email,
-        message: message,
+        EmailAddress: email,
+        Message: message,
       });
 
       resolve(res.data);

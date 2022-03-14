@@ -34,8 +34,8 @@ namespace ZeroPoint2.Services
             var mailMessage = new MailMessage
             {
                 From = new MailAddress(_config.GetSection("Smtp:Username").Value),
-                Subject = String.Format("Contact submission from: {0} : {1}",contactFormDto.Name, contactFormDto.EmailAddress),
-                Body = String.Format("<P>{0}</p>", contactFormDto.Message),
+                Subject = "Contact submission from",
+                Body = string.Format("<P>Name: {0}</p></br><P>Email: {1}</p></br><P>Message: {2}</p>", contactFormDto.Name, contactFormDto.EmailAddress, contactFormDto.Message),
                 IsBodyHtml = true,
             };
             mailMessage.To.Add(_config.GetSection("AppSettings:ContactEmail").Value);
