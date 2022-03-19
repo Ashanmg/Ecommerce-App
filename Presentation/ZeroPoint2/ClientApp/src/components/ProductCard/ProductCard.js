@@ -50,7 +50,7 @@ export const ProductCard = ({
       />
       <div
         className="bottom-0 flex flex-col w-full py-2 text-sm h-13 product-card__description text-G-dark"
-        style={{ transition: 'height 1s ease-in', height: '35%', backgroundColor: '#f6f8f7' }}
+        style={{ transition: 'height 1s ease-in', height: '35%', backgroundColor: '#ffffff' }}
       >
         <span className="text-sm product-card__description__title">
           {shortDescription}

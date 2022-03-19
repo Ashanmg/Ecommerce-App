@@ -165,7 +165,7 @@ export const NavBar = ({
           </div>
         </div>
         <div style={{ backgroundColor: '#80bf9b' }} className="flex pb-2 mt-2 text-sm italic text-white nav-bar-buttom">
-          20% of every sale donated to the charity.
+          20% of every sale donated to charity.
         </div>
         <div>
           <form>
@@ -282,10 +282,10 @@ export const NavBar = ({
       <div style={{ backgroundColor: '#80bf9b', height: '41px' }} className="flex items-center justify-center mt-2 text-base italic text-center text-white nav-bar-buttom lg:text-xs xl:text-base">
         <span>
           Sustainable, socially responsible gifts - 20% of every sale donated to
-          the charity.
+          charity.
         </span>
         <RiInformationLine
-          className="cursor-pointer"
+          className="cursor-pointer ml-5"
           onClick={handleFundModal}
           size={24}
         />

@@ -52,6 +52,14 @@ namespace ZeroPoint2.Controllers.Admin
 
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("deletecompanies")]
+        public async Task<IActionResult> DeleteBulkCompany(CompanyForDeleteDto companyForDeleteDto)
+        {
+            ExecutionResponse<bool> response = await _companyService.DeleteBulkCompany(companyForDeleteDto);
+            return Ok(response);
+        }
         #endregion
     }
 }

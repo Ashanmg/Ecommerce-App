@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZeroPoint2.Core;
+using ZeroPoint2.Core.Dtos.Admin;
 using ZeroPoint2.Core.Entities;
 
 namespace ZeroPoint2.Data
@@ -20,5 +21,6 @@ namespace ZeroPoint2.Data
         Task<GridData<List<Product>>> GetAllProducts(int pageNumber, int pageSize);
         Task<List<TaxCategory>> GetTaxCategoriesForSelect();
         Task<bool> InsertProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList);
+        Task<bool> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto);
     }
 }

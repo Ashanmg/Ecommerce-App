@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZeroPoint2.Core;
+using ZeroPoint2.Core.Dtos.Admin;
 using ZeroPoint2.Core.Entities;
 
 namespace ZeroPoint2.Data
@@ -116,6 +117,17 @@ namespace ZeroPoint2.Data
             foreach (var productSpecification in productSpecificationList)
             {
                 await _context.ProductSpecifications.AddAsync(productSpecification);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto)
+        {
+            foreach (var productId in productForDeleteDto.ProductIdList)
+            {
+                var product = await _context.Products.Where(p => p.Id == productId).FirstAsync();
+                _context.Products.Remove(product);
             }
 
             return await _context.SaveChangesAsync() > 0;

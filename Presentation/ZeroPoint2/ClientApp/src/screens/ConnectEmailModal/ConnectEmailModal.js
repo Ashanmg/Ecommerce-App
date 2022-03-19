@@ -6,8 +6,12 @@ import TextField from '../../components/TextField/TextField';
 import TextArea from '../../components/TextArea/TextArea';
 import Button from '../../components/Button/Button';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector} from 'react-redux';
-import { emailRegisterFail, emailRegisterSuccessful, emailRegistrationPending } from '../../features/contactFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  emailRegisterFail,
+  emailRegisterSuccessful,
+  emailRegistrationPending,
+} from '../../features/contactFormSlice';
 import { contactEmailRegister } from '../../api/userApi';
 
 export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
@@ -39,9 +43,7 @@ export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
     });
   };
 
-  const { isUploadLoading } = useSelector(
-    (state) => state.connectEmail
-  );
+  const { isUploadLoading } = useSelector((state) => state.connectEmail);
 
   const dispatch = useDispatch();
 
@@ -66,7 +68,7 @@ export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
     } else {
       dispatch(emailRegistrationPending());
       try {
-        const data = await contactEmailRegister({name, email, message});
+        const data = await contactEmailRegister({ name, email, message });
         var message2 = data['message'];
         reset();
         dispatch(emailRegisterSuccessful());
@@ -88,7 +90,7 @@ export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
       <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-8 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
-            Connect Your Email
+            Send us an Email
           </div>
           <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
@@ -103,16 +105,14 @@ export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
                 placeholder="Email"
                 autoComplete="off"
                 className="mb-4 border"
-                type='email'
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextArea
                 rows={5}
-                maxLength={500}
                 placeholder="Message"
                 className="border-1"
-                textRules="max length 500"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
@@ -124,7 +124,7 @@ export const ConnectEmailModal = ({ className, setIsOpen, ...restProps }) => {
                   e.preventDefault();
                   handleSubmit(e);
                 }}
-                isLoading = {isUploadLoading}
+                isLoading={isUploadLoading}
               />
               {/* </div> */}
             </form>

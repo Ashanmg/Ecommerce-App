@@ -75,6 +75,14 @@ namespace ZeroPoint2.Controllers
             ExecutionResponse<List<TaxCategoriesForSelectDto>> response = await _productService.GetTaxCategoriesForSelect();
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("deleteproducts")]
+        public async Task<IActionResult> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto)
+        {
+            ExecutionResponse<bool> response = await _productService.DeleteBulkProduct(productForDeleteDto);
+            return Ok(response);
+        }
         #endregion
     }
 }

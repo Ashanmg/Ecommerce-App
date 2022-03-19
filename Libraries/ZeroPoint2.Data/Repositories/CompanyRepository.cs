@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZeroPoint2.Core;
+using ZeroPoint2.Core.Dtos.Admin;
 using ZeroPoint2.Core.Entities;
 
 namespace ZeroPoint2.Data
@@ -66,6 +67,17 @@ namespace ZeroPoint2.Data
         public async Task<List<Company>> GetCompanyListForSelect()
         {
             return await _context.Companies.OrderByDescending(p => p.Id).ToListAsync();
+        }
+
+        public async Task<bool> DeleteBulkCompany(CompanyForDeleteDto companyForDeleteDto)
+        {
+            foreach (var companyId in companyForDeleteDto.CompanyIdList)
+            {
+                var company = await _context.Companies.Where(c => c.Id == companyId).FirstAsync();
+                _context.Companies.Remove(company);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
         }
         #endregion
     }

@@ -330,6 +330,35 @@ namespace ZeroPoint2.Services
 
             return response;
         }
+
+        public async Task<ExecutionResponse<bool>> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto)
+        {
+            ExecutionResponse<bool> response = new ExecutionResponse<bool>();
+            try
+            {
+                bool isDeleted = await _productRepository.DeleteBulkProduct(productForDeleteDto);
+
+                if (isDeleted)
+                {
+                    response.Result = isDeleted;
+                    response.RequestStatus = ExecutionStatus.Success;
+                }
+                else
+                {
+                    response.Result = isDeleted;
+                    response.RequestStatus = ExecutionStatus.Fail;
+                    response.Message = "One or more company can not be deleted. Please try again.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
         #endregion
     }
 }
