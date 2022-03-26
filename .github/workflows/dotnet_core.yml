@@ -24,15 +24,13 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish -c Release -o ../dotnet-packages -r win-x64 --self-contained true /p:UseAppHost=true
-    - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@3.0.0
+      run: dotnet publish -c Release -o ./Release -r win-x64 --self-contained true /p:UseAppHost=true
+    - name: FTP Deploy        
+      uses: sebastianpopp/ftp-action@releases/v2
       with:
-        # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
-        ftp-server: ftp.ph105.peopleshostshared.com/httpdocs/
-        # FTP account username
-        ftp-username: artizans
-        # FTP account password
-        ftp-password: Yidh&X1&4N32mP
-        # The local folder to copy, defaults to root project folder
-        local-dir: ../dotnet-packages/
+        host: ftp.ph105.peopleshostshared.com
+        user: artizans
+        password: Yidh&X1&4N32mP
+        localDir: "./Release"
+        remoteDir: "/httpdocs"
+        options: "--delete --asci"
