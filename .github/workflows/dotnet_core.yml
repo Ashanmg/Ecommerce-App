@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish -c Release -p:UseAppHost=false
+      run: dotnet publish -c Release -o ./Release -p:UseAppHost=false
     - name: FTP Deploy        
       uses: sebastianpopp/ftp-action@releases/v2
       with:
