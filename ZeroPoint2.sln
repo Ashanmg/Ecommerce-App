@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{123C8018
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeroPoint2", "Presentation\ZeroPoint2\ZeroPoint2.csproj", "{F70FC9FE-8B05-45CC-A74E-AC7A5BBBD2F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroPoint2.Core", "Libraries\ZeroPoint2.Core\ZeroPoint2.Core.csproj", "{50C19AED-3B68-4F07-92FC-7CAA9BED0E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeroPoint2.Core", "Libraries\ZeroPoint2.Core\ZeroPoint2.Core.csproj", "{50C19AED-3B68-4F07-92FC-7CAA9BED0E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroPoint2.Data", "Libraries\ZeroPoint2.Data\ZeroPoint2.Data.csproj", "{80FDC2F7-1957-4D2F-A933-7A53BB3064C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeroPoint2.Data", "Libraries\ZeroPoint2.Data\ZeroPoint2.Data.csproj", "{80FDC2F7-1957-4D2F-A933-7A53BB3064C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroPoint2.Helper", "Shared\ZeroPoint2.Helper\ZeroPoint2.Helper.csproj", "{59584E09-7EED-4FD0-B4FB-976E349F7DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeroPoint2.Helper", "Shared\ZeroPoint2.Helper\ZeroPoint2.Helper.csproj", "{59584E09-7EED-4FD0-B4FB-976E349F7DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroPoint2.Services", "Libraries\ZeroPoint2.Services\ZeroPoint2.Services.csproj", "{186E6CAA-6FE9-483B-B70E-1A32B0EBC1C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeroPoint2.Services", "Libraries\ZeroPoint2.Services\ZeroPoint2.Services.csproj", "{186E6CAA-6FE9-483B-B70E-1A32B0EBC1C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

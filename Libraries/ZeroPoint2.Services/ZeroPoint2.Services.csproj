@@ -4,4 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.15.2" />
+    <PackageReference Include="MailKit" Version="3.1.1" />
+    <PackageReference Include="MimeKit" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\ZeroPoint2.Helper\ZeroPoint2.Helper.csproj" />
+    <ProjectReference Include="..\ZeroPoint2.Core\ZeroPoint2.Core.csproj" />
+    <ProjectReference Include="..\ZeroPoint2.Data\ZeroPoint2.Data.csproj" />
+  </ItemGroup>
+
 </Project>

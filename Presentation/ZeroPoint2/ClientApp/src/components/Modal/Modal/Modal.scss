@@ -1,0 +1,56 @@
+@import '../../../styles/functions/map-deep-get';
+
+$sizing: (
+  xl: (
+    width: 1308px,
+  ),
+  lg: (
+    width: 996px,
+  ),
+  md: (
+    width: 740px,
+  ),
+  sm: (
+    width: 552px,
+  ),
+  xs: (
+    width: 456px,
+  ),
+  xxs: (
+    width: 360px,
+  ),
+  xxxs: (
+    width: 280px,
+  ),
+  xxxxs: (
+    width: 200px,
+  ),
+);
+
+.modal {
+  @apply bg-white;
+  border-radius: 3px;
+  color: var(--color-N800);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  max-width: 996px;
+  overflow: hidden;
+  width: 90%;
+
+  /* Modal sizes */
+  @each $name, $size in $sizing {
+    &.modal--#{$name} {
+      max-width: map-deep-get($size, 'width');
+    }
+  }
+
+  &:not(.modal--is-inline) {
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: var(--modal-z-index);
+  }
+}

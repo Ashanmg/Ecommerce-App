@@ -8,3 +8,38 @@
         src: url("./fonts/microsoft-yahei.ttf") format("ttf");
     }
 } */
+
+input:checked + div {
+  @apply border-G-dark;
+}
+input:checked + div svg {
+  @apply block;
+}
+
+.App {
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: 6.5rem 1fr 5rem;
+}
+
+@media (max-width: 1024px) {
+  .App {
+    grid-template-rows: 6.5rem 1fr 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    grid-template-rows: 7rem 1fr 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .App {
+    grid-template-rows: 8rem 1fr 3rem;
+  }
+}

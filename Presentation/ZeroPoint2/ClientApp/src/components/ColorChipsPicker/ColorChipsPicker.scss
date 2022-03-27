@@ -1,0 +1,11 @@
+.color-chips-picker {
+  display: flex;
+  font-family: var(--font-family);
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 12px;
+
+  &__color-chip:not(:last-of-type) {
+    margin-right: 12px;
+  }
+}
