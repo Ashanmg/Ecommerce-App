@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 5.0.*
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish -f net5.0 -c Release -o ./Release -r win-x64 --no-self-contained
+      run: dotnet publish -f net5.0 -c Release -o ./Release -r win-x64 --self-contained false
     - name: FTP Deploy        
       uses: sebastianpopp/ftp-action@releases/v2
       with:
@@ -33,4 +33,4 @@ jobs:
         password: Yidh&X1&4N32mP
         localDir: "./Release"
         remoteDir: "/httpdocs"
-        options: "--delete --asci"
+        options: "--delete"
