@@ -230,6 +230,55 @@ namespace ZeroPoint2.Services
 
             return response;
         }
+
+        public async Task<ExecutionResponse<GetCompanyDetailsForEditDto>> GetCompanyDetails(int id)
+        {
+            ExecutionResponse<GetCompanyDetailsForEditDto> response = new ExecutionResponse<GetCompanyDetailsForEditDto>();
+            try
+            {
+                Company companyDetails = await _companyRepository.GetCompanyDetails(id);
+
+                if (companyDetails != null)
+                {
+                    // get the company features related to company
+                    List<CompanyFeature> companyFeatures = await _companyRepository.GetCompanyFeaturesByCompanyId(companyDetails.Id);
+                    
+                    // first map the company feature list to get company features dto
+                    var companyFeaturesDtoList = _mapper.Map<List<GetCompanyFeatureForEditDto>>(companyFeatures);
+
+                    foreach (var companyFeature in companyFeaturesDtoList)
+                    {
+                        // get the feature image if exists
+                        CompanyImage companyImage = await _companyRepository.GetCompanyImageByCompanyFeatureId(companyFeature.Id);
+                        if (companyImage != null)
+                        {
+                            companyFeature.ImageUrl = companyImage.ImageUrl;
+                        }
+                    }
+
+                    var companyDetailDto = _mapper.Map<GetCompanyDetailsForEditDto>(companyDetails);
+
+                    companyDetailDto.CompanyContent = companyFeaturesDtoList;
+                    response.Result = companyDetailDto;
+                    response.RequestStatus = ExecutionStatus.Success;
+                }
+                else
+                {
+                    response.RequestStatus = ExecutionStatus.Fail;
+                    response.Message = "Can not found the company details. Please try again.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
+
+
         #endregion
     }
 }

@@ -79,6 +79,21 @@ namespace ZeroPoint2.Data
 
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Company> GetCompanyDetails(int id)
+        {
+            return await _context.Companies.Where(c => c.Id == id).Include(c => c.LogoImage).ThenInclude(l => l.CompanyFeature).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<CompanyFeature>> GetCompanyFeaturesByCompanyId(int id)
+        {
+            return await _context.CompanyFeatures.Where(cf => cf.CompanyId == id).ToListAsync();
+        }
+
+        public async Task<CompanyImage> GetCompanyImageByCompanyFeatureId(int id)
+        {
+            return await _context.CompanyImages.Where(ci => ci.CompanyFeatureId == id).FirstOrDefaultAsync();
+        }
         #endregion
     }
 }

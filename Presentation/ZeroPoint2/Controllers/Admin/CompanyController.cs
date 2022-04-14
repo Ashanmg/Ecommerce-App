@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZeroPoint2.Core;
 using ZeroPoint2.Core.Dtos.Admin;
+using ZeroPoint2.Core.Entities;
 using ZeroPoint2.Helper;
 using ZeroPoint2.Services;
 
@@ -58,6 +59,14 @@ namespace ZeroPoint2.Controllers.Admin
         public async Task<IActionResult> DeleteBulkCompany(CompanyForDeleteDto companyForDeleteDto)
         {
             ExecutionResponse<bool> response = await _companyService.DeleteBulkCompany(companyForDeleteDto);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("getcompanyDetails/{id}")]
+        public async Task<IActionResult> GetCompanyDetails(int id)
+        {
+            ExecutionResponse<GetCompanyDetailsForEditDto> response = await _companyService.GetCompanyDetails(id);
             return Ok(response);
         }
         #endregion
