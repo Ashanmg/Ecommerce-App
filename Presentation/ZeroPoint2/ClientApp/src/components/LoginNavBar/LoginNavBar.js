@@ -9,7 +9,7 @@ import {
   RiFilter2Fill,
 } from 'react-icons/ri';
 
-import zeroLogo from '../../assets/zeroLogo1.svg';
+import zeroLogo from '../../assets/zeropoint2mainlogo.svg';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import LayoutHeader from '../LayoutHeader/LayoutHeader';
