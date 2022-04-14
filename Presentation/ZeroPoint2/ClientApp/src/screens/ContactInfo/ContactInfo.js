@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 
 import './ContactInfo.scss';
-import Founder from '../../assets/Founder-remove-bg.png';
+import Founder from '../../assets/richardcroomeportraitpicture.png';
 import MainLogo from '../../assets/zeropoint2mainlogo.svg';
 
 export const ContactInfo = ({ className, ...restProps }) => {
