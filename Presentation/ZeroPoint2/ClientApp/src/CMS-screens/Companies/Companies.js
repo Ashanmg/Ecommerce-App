@@ -101,9 +101,14 @@ export const Companies = ({ className, ...restProps }) => {
   return (
     <div className={(CompaniesClasses, 'flex flex-col')} {...restProps}>
       <div className="w-full mb-2 text-3xl font-bold dashboard_title text-G-dark">
-        Companiesss
+        Companies
       </div>
-      <div className="flex justify-end mb-2 product__add -item-btn">
+      <div className="flex justify-end mb-2 gap-x-2 product__add -item-btn">
+        <Button
+          children="Delete Company"
+          className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-R-500 lg:text-sm border-R-500 hover:bg-white hover:text-R-500"
+          onClick={() => console.log('delete')}
+        />
         <Button
           children="Add Company"
           className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"

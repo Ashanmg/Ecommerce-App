@@ -69,12 +69,12 @@ export const ProductCorasal = ({ className, ...restProps }) => {
           </div>
         </Slider>
       </div>
-      <div className="w-2/12 flex items-center">
+      <div className="flex items-center w-2/12">
         <Slider
           {...settingsSlide}
           asNavFor={nav1}
           ref={(slider) => setSlider2(slider)}
-          slidesToShow={3}
+          slidesToShow={4}
           swipeToSlide={true}
           focusOnSelect={true}
         >

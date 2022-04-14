@@ -10,6 +10,7 @@ export const TextField = ({
   disabled,
   placeholder,
   type,
+  min,
   isCustom,
   textRules,
   iconAfter,
@@ -69,6 +70,7 @@ export const TextField = ({
         disabled={false}
         readOnly={false}
         name={name}
+        min={min}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
