@@ -10,6 +10,7 @@ import getCompanySlice from '../features/getCompanySlice';
 import getTaxTypeSlice from '../features/taxSlice';
 import getAllCompaniesSlice from '../features/getAllCompaniesSlice';
 import contactFormSlice from '../features/contactFormSlice';
+import companyRemoveSlice from '../features/companyRemoveSlice';
 
 export const store = configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
     getTaxType: getTaxTypeSlice,
     getAllCompanies: getAllCompaniesSlice,
     connectEmail: contactFormSlice,
+    companyRemove: companyRemoveSlice
   },
 });
