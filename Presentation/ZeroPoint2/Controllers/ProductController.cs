@@ -83,6 +83,14 @@ namespace ZeroPoint2.Controllers
             ExecutionResponse<bool> response = await _productService.DeleteBulkProduct(productForDeleteDto);
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("getProductDetails/{id}")]
+        public async Task<IActionResult> GetProductDetailForEdit(int id)
+        {
+            ExecutionResponse<GetProductDetailForEditDto> response = await _productService.GetProductDetailForEdit(id);
+            return Ok(response);
+        }
         #endregion
     }
 }

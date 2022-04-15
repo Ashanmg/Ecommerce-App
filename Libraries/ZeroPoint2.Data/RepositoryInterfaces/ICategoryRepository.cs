@@ -12,5 +12,7 @@ namespace ZeroPoint2.Data
         Task<List<Category>> GetTopMenuCategoriesAsync();
 
         Task<List<Category>> GetProductCategoriesAsync();
+
+        Task<int> GetParentCategoryIdByChildId(int? childId);
     }
 }

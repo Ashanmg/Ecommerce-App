@@ -18,5 +18,6 @@ namespace ZeroPoint2.Services
         Task<ExecutionResponse<GridData<List<ProductListForViewDto>>>> GetAllProducts(int pageNumber, int pageSize);
         Task<ExecutionResponse<List<TaxCategoriesForSelectDto>>> GetTaxCategoriesForSelect();
         Task<ExecutionResponse<bool>> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto);
+        Task<ExecutionResponse<GetProductDetailForEditDto>> GetProductDetailForEdit(int id);
     }
 }

@@ -22,7 +22,7 @@ import { userLogin } from '../../api/userApi';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
-import zeroLogo from '../../assets/zeroLogo1.svg';
+import zeroLogo from '../../assets/zeropoint2mainlogo.svg';
 import useMediaQuery from '../../config/customHooks/useMediaQuery';
 
 import './NavBar.scss';

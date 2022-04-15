@@ -26,5 +26,10 @@ namespace ZeroPoint2.Data
         {
             return await _context.Categories.ToListAsync();
         }
+
+        public async Task<int> GetParentCategoryIdByChildId(int? childId)
+        {
+            return await _context.Categories.Where( c => c.Id == childId).Select(c => c.ParentCategoryId).FirstOrDefaultAsync();
+        }
     }
 }

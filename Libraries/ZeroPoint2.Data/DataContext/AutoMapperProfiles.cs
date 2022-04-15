@@ -32,7 +32,7 @@ namespace ZeroPoint2.Data
 
             CreateMap<ProductImageForCreationDto, ProductImage>();
 
-            CreateMap<ProductColorForCreationDto, ProductColor>();
+            CreateMap<ProductColorForCreationDto, ProductColor>().ReverseMap();
 
             CreateMap<ColorType, ColorTypeforListDto>();
 
@@ -65,6 +65,16 @@ namespace ZeroPoint2.Data
             CreateMap<Company, CompanyListForSelectDto>();
 
             CreateMap<TaxCategory, TaxCategoriesForSelectDto>();
+
+            CreateMap<Company, GetCompanyDetailsForEditDto>()
+                .ForMember(des => des.CompanyInfo, opt =>
+                opt.MapFrom(src => src.CompanySummary))
+                .ForMember(des => des.ImageUrl, opt =>
+                opt.MapFrom(src => src.LogoImage != null ? src.LogoImage.ImageUrl : string.Empty))
+                .ForMember(des => des.CompanyContent, opt =>
+                opt.Ignore());
+
+            CreateMap<CompanyFeature, GetCompanyFeatureForEditDto>();
         }
     }
 }

@@ -3,7 +3,7 @@ import CN from 'classnames';
 import { RiMenuAddFill } from 'react-icons/ri';
 
 import Button from '../../Button/Button';
-import zeroLogo from '../../../assets/zeroLogo1.svg';
+import zeroLogo from '../../../assets/zeropoint2mainlogo.svg';
 
 import './CMSHeader.scss';
 import { useDispatch } from 'react-redux';

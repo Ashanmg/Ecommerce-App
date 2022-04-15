@@ -21,7 +21,11 @@ import Button from '../../components/Button/Button';
 
 import './SignUpScreen.scss';
 
-export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => {
+export const SignUpScreen = ({
+  className,
+  OnClickModalClose,
+  ...restProps
+}) => {
   const SignUpScreenClasses = CN(
     'sign-up-screen w-full h-4/6 flex justify-center items-center',
     className,
@@ -108,7 +112,7 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
       <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-8 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
-            Create Account
+            Create account
           </div>
           <div className="text-xs sign-up-screen__left__form">
             <form action="submit">
@@ -150,7 +154,14 @@ export const SignUpScreen = ({ className, OnClickModalClose, ...restProps }) => 
                 onChange={() => setSubscribe(!subscribe)}
               />
               <div className="mb-4 text-justify">
-                Newsletter subscribers stay up to date with recent projects product reviews, interviews with amazing sustainability people around the world, new product listings, and of course, the cause we are funding right now.
+                Newsletter subscribers stay up to date with recent projects,
+                product reviews, interviews with amazing sustainability people
+                around the world, new product listings, and of course, the
+                charity we are funding right now.
+              </div>
+              <div className="mb-4 text-justify">
+                Zeropoint2 will never share your personal information with
+                anyone unless required to by law.
               </div>
               <CheckBox
                 title="Maybe later."

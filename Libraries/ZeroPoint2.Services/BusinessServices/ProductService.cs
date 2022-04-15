@@ -19,6 +19,7 @@ namespace ZeroPoint2.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private readonly Cloudinary _cloudinary;
@@ -27,10 +28,12 @@ namespace ZeroPoint2.Services
 
         #region constructor
         public ProductService(IProductRepository productRepository,
+            ICategoryRepository categoryRepository,
             IMapper mapper,
             IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
             _cloudinaryConfig = cloudinaryConfig;
 
@@ -358,6 +361,174 @@ namespace ZeroPoint2.Services
             }
 
             return response;
+        }
+
+        public async Task<ExecutionResponse<GetProductDetailForEditDto>> GetProductDetailForEdit(int id)
+        {
+            ExecutionResponse<GetProductDetailForEditDto> response = new ExecutionResponse<GetProductDetailForEditDto>();
+            try
+            {
+                Product prodcutDetails = await _productRepository.GetProductDetailForEditByProductId(id);
+
+                if (prodcutDetails != null)
+                {
+                    var detailDto = new GetProductDetailForEditDto();
+
+                    // product information mapping
+                    detailDto.ProductInformation = await GetProductInformationDto(prodcutDetails);
+
+                    // product shipping
+                    detailDto.Shipping = GetShippingDto(prodcutDetails);
+
+                    // product price mapping
+                    detailDto.Price = GetPriceDto(prodcutDetails);
+
+                    // product inventory mapping
+                    detailDto.Inventory = GetInventoryDto(prodcutDetails);
+
+                    // product images mapping
+                    detailDto.Images = GetProductImageDto(prodcutDetails);
+
+                    // product specification mapping
+                    detailDto.ProductAttributes = GetProductAttributeDto(prodcutDetails);
+
+                    response.Result = detailDto;
+                    response.RequestStatus = ExecutionStatus.Success;
+                }
+                else
+                {
+                    response.RequestStatus = ExecutionStatus.Fail;
+                    response.Message = "Product can not be found. Please try again.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
+        #endregion
+
+        #region private Mapping
+        private async Task<ProductInformationDto> GetProductInformationDto(Product product)
+        {
+            var productInformationDto = new ProductInformationDto();
+
+            productInformationDto.Id = product.Id;
+            productInformationDto.Name = product.Name;
+            productInformationDto.FullDescription = product.FullDescription;
+            productInformationDto.MetaDescription = product.MetaDescription;
+            productInformationDto.ShortDescription = product.ShortDescription;
+            productInformationDto.SupplierProductCode = product.SupplierProductCode;
+            productInformationDto.MetaKeywords = product.MetaKeywords;
+            productInformationDto.AvailableQuantity = product.AvailableQuantity;
+            productInformationDto.CompanyId = product.CompanyId;
+            productInformationDto.MadeForOrder = product.MadeForOrder;
+            productInformationDto.UnitOfMeasure = product.UnitOfMeasure;
+            productInformationDto.ProductionTime = product.ProductionTime;
+            productInformationDto.ProductType = product.IsVariant ? "variant" : "simple";
+            productInformationDto.ShowOnHomePage = product.ShowOnHomePage;
+
+            // category mapping
+            productInformationDto.ProductChildCategoryId = product.CategoryId;
+            productInformationDto.ProductSubCategoryId = await _categoryRepository.GetParentCategoryIdByChildId(product.CategoryId);
+            productInformationDto.ProductCategoryId = await _categoryRepository.GetParentCategoryIdByChildId(product.CategoryId);
+
+            return productInformationDto;
+        }
+
+        private PriceDto GetPriceDto(Product product)
+        {
+            var priceDto = new PriceDto();
+
+            priceDto.RetailPrice = product.RetailPrice;
+            priceDto.WholeSalePrice = product.WholeSalePrice;
+            priceDto.IstaxIncluded = product.IstaxIncluded;
+            priceDto.Discount = product.Discount;
+            priceDto.TaxCategoryId = product.TaxCategoryId;
+
+            return priceDto;
+        }
+
+        private ShippingDto GetShippingDto(Product product)
+        {
+            var shippingDto = new ShippingDto();
+
+            shippingDto.ShippingDescription = product.ShippingDescription;
+            shippingDto.ShippingNote = product.ShippingNote;
+            shippingDto.Length = product.Length;
+            shippingDto.Width = product.Width;
+            shippingDto.Weight = product.Weight;
+            shippingDto.Height = product.Height;
+            shippingDto.LengthWidthHeightType = product.LengthWidthHeightType;
+            shippingDto.WeightType = product.WeightType;
+
+            return shippingDto;
+        }
+
+        private InventoryDto GetInventoryDto(Product product)
+        {
+            var inventoryDto = new InventoryDto();
+
+            inventoryDto.IsInventoryTracked = product.IsInventoryTracked;
+            inventoryDto.IsReturnable = product.NotReturnable;
+            inventoryDto.MaxCartQuantity = product.OrderMaximumQuantity;
+            inventoryDto.MinCartQuantity = product.OrderMinimumQuantity;
+            inventoryDto.AllowedQuantity = product.AllowedQuantity;
+
+            return inventoryDto;
+        }
+
+        private List<ProductImageDto> GetProductImageDto(Product product)
+        {
+            var list = new List<ProductImageDto>();
+
+            foreach(var productImage in product.ProductImages)
+            {
+                var dto = new ProductImageDto();
+
+                dto.Id = productImage.Id;
+                dto.ImageUrl = productImage.ImageUrl;
+
+                list.Add(dto);
+            }
+
+            return list;
+        }
+
+        private ProductAttributeDto GetProductAttributeDto(Product product)
+        {
+            ProductAttributeDto productAttributeDto = new ProductAttributeDto();
+
+            foreach(var specification in product.ProductSpecifications)
+            {
+                if(specification.SpecificationType == "SizeGuide")
+                {
+                    productAttributeDto.SizeGuide = specification.SpecificationValue;
+                }
+
+                if (specification.SpecificationType == "ProductSpecification")
+                {
+                    productAttributeDto.ProductSpecification = specification.SpecificationValue;
+                }
+            }
+            
+            if (product.IsVariant)
+            {
+                productAttributeDto.Colors = _mapper.Map<List<ProductColorForCreationDto>>(product.ProductColors);
+
+                if (product.ProductColors.Count > 0)
+                {
+                    var sizeList = product.ProductColors.FirstOrDefault().ProductSizes.Select(ps => ps.Size).ToList();
+
+                    productAttributeDto.Sizes = String.Join(",", sizeList);
+                }
+            }
+
+            return productAttributeDto;
         }
         #endregion
     }

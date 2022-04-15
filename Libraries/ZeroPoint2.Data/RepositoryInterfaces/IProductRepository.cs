@@ -22,5 +22,6 @@ namespace ZeroPoint2.Data
         Task<List<TaxCategory>> GetTaxCategoriesForSelect();
         Task<bool> InsertProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList);
         Task<bool> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto);
+        Task<Product> GetProductDetailForEditByProductId(int id);
     }
 }

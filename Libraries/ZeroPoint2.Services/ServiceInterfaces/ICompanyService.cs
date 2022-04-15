@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZeroPoint2.Core;
 using ZeroPoint2.Core.Dtos.Admin;
+using ZeroPoint2.Core.Entities;
 using ZeroPoint2.Helper;
 
 namespace ZeroPoint2.Services
@@ -15,5 +16,6 @@ namespace ZeroPoint2.Services
         Task<ExecutionResponse<bool>> RegisterCompany(CompanyForCreationDto companyForCreationDto);
         Task<ExecutionResponse<List<CompanyListForSelectDto>>> GetCompanyListForSelect();
         Task<ExecutionResponse<bool>> DeleteBulkCompany(CompanyForDeleteDto companyForDeleteDto);
+        Task<ExecutionResponse<GetCompanyDetailsForEditDto>> GetCompanyDetails(int id);
     }
 }
