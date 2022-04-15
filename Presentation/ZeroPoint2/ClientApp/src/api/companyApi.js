@@ -51,3 +51,25 @@ export const getAllCompanyList = (pageSize, pageNumber) => {
     }
   });
 };
+
+export const removeCompany = (deleteCompanies) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await post('/api/admin/company/deletecompanies', {
+        "CompanyIdList": deleteCompanies
+      });
+
+      resolve(res.data);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+        // localStorage.setItem(
+        //   'token',
+        //   JSON.stringify({ token: res.data.token })
+        // );
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

@@ -43,3 +43,7 @@ input:checked + div svg {
     grid-template-rows: 8rem 1fr 3rem;
   }
 }
+
+.slick-track{
+  height: fit-content !important;
+}

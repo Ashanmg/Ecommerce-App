@@ -8,6 +8,7 @@ import './priceCard.scss';
 import Button from '../Button/Button';
 import SizePicker from '../SizePicker/SizePicker';
 import ColorChipsPicker from '../ColorChipsPicker/ColorChipsPicker';
+import { TextField } from '../TextField';
 
 export const priceCard = ({ className, ...restProps }) => {
   const priceCardClasses = CN(
@@ -59,42 +60,43 @@ export const priceCard = ({ className, ...restProps }) => {
 
   return (
     <div className={priceCardClasses} {...restProps}>
-      <div className="price-card__title flex bg-G-light w-full justify-center p-2 font-semibold">
+      <div className="flex justify-center w-full p-2 font-semibold price-card__title bg-G-light">
         <span> East Coast Pets </span>
         <RiInformationLine className="cursor-pointer" size={24} />
       </div>
-      <div className="price-card__unit-price flex justify-between pt-4 font-semibold">
-        <div className="price-card__unit-price-lable text-lg text-G-dark">
+      <div className="flex justify-between pt-4 font-semibold price-card__unit-price">
+        <div className="text-lg price-card__unit-price-lable text-G-dark">
           Unit Price
         </div>
-        <div className="price-card__unit-price-value text-3xl text-G-dark">
+        <div className="text-3xl price-card__unit-price-value text-G-dark">
           $49.99
         </div>
       </div>
-      <div className="price-card__inputs flex justify-between pt-4">
-        <div className="price-card__inputs__qty flex items-center">
+      <div className="flex justify-between pt-4 gap-x-2 price-card__inputs">
+        <div className="flex items-center price-card__inputs__qty">
           <span className="pr-2">Qty</span>
-          <DropDown options={[1, 2, 3, 4, 5]} />
+          <TextField type={'number'} min='0' className='flex-1 mr-2' />
+          {/* <DropDown options={[1, 2, 3, 4, 5]} /> */}
         </div>
         <Button
           children="Add to Cart"
-          className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+          className="flex items-center px-3 py-1 text-xs text-white border-2 h-7 md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           // onClick={handleToggle}
         />
         <Button
           children="View Cart"
-          className="items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+          className="flex items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           // onClick={handleToggle}
         />
       </div>
-      <div className="product-screen__details-cart__product-details pt-4">
+      <div className="pt-4 product-screen__details-cart__product-details">
         <SizePicker
           sizeList={sizeList}
           defaultActive={1}
           onChange={(e) => console.log(e)}
         />
       </div>
-      <div className="product-screen__details-cart__product-details pt-4">
+      <div className="pt-4 product-screen__details-cart__product-details">
         <ColorChipsPicker
           colorChips={colorChips}
           defaultActive={1}

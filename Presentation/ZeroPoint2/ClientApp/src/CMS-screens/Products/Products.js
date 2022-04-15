@@ -108,19 +108,24 @@ export const Products = ({ className, ...restProps }) => {
 
   return (
     <div className={ProductsClasses} {...restProps}>
-      <div className="dashboard_title text-G-dark font-bold text-3xl w-full mb-2">
+      <div className="w-full mb-2 text-3xl font-bold dashboard_title text-G-dark">
         Products
       </div>
-      <div className="product__add -item-btn flex justify-end mb-2">
+      <div className="flex justify-end mb-2 product__add -item-btn gap-x-2">
+      <Button
+          children="Delete Products"
+          className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-R-500 lg:text-sm border-R-500 hover:bg-white hover:text-R-500"
+          onClick={() => console.log('delete')}
+        />
         <Button
           children="Add Product"
-          className="items-center px-5 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark rounded-sm"
+          className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           onClick={() => navigate('/admin/product-uploads')}
         />
       </div>
       <div className="product__table">
         {isLoading ? (
-          <div className='w-full h-auto flex justify-center items-center'>
+          <div className='flex items-center justify-center w-full h-auto'>
             <Loader type="Grid" color="#1c473c" size={60} />
           </div>
         ) : (

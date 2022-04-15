@@ -26,7 +26,7 @@ export const Button = ({
   return (
     <button type={type} disabled={disabled} className={ButtonClasses} {...restProps}>
       {beforeIcon && beforeIcon}
-      {children}
+      {!isLoading && children}
       {isLoading && (
         <BeatLoader
           css={override}

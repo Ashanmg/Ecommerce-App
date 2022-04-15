@@ -28,7 +28,7 @@ export const COLUMNS = [
         <Button
           children="Edit"
           beforeIcon={<RiBallPenFill />}
-          className="items-center flex gap-x-1 px-3 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark rounded-sm"
+          className="flex items-center h-auto px-3 text-xs text-white border-2 rounded-sm gap-x-1 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           onClick={() => {}}
         />
       );

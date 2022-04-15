@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useMountedLayoutEffect } from 'react';
 import CN from 'classnames';
 import { useSortBy, useTable, usePagination, useRowSelect } from 'react-table';
 
@@ -12,6 +12,7 @@ export const UITable = ({
   DATA,
   onChangePageSize,
   pageSize,
+  onChange,
   pageCount,
   pageNumber,
   canNextPage,
@@ -32,8 +33,10 @@ export const UITable = ({
     headerGroups,
     pageOptions,
     state,
+    selectedFlatRows,
     rows,
     prepareRow,
+    state: { pageIndex, selectedRowIds },
   } = useTable(
     {
       columns,
@@ -59,6 +62,13 @@ export const UITable = ({
       });
     }
   );
+
+  const [selectedRows, setSelectedRows] = React.useState([]);
+
+  useEffect(() => {
+    onChange && onChange(selectedFlatRows.map((row) => row.original));
+    setSelectedRows(selectedFlatRows.map((row) => row.original));
+  }, [selectedRowIds]);
 
   return (
     <div className="h-full bg-white ui-table__wrapper">

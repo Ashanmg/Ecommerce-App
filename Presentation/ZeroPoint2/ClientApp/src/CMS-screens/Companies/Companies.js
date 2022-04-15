@@ -14,7 +14,12 @@ import {
   getAllCompaniesListPending,
   getAllCompaniesListSuccess,
 } from '../../features/getAllCompaniesSlice';
-import { getAllCompanyList } from '../../api/companyApi';
+import { getAllCompanyList, removeCompany } from '../../api/companyApi';
+import {
+  companyRemoveFail,
+  companyRemovePending,
+  companyRemoveSuccessful,
+} from '../../features/companyRemoveSlice';
 
 export const Companies = ({ className, ...restProps }) => {
   const CompaniesClasses = CN('companies', className, {});
@@ -55,8 +60,10 @@ export const Companies = ({ className, ...restProps }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [canNextPage, setCanNextPage] = useState(false);
   const [canPreviousPage, setCanPreviousPage] = useState(false);
+  const [removeCompanies, setRemoveCompanies] = useState([]);
 
   const { isLoading } = useSelector((state) => state.getAllCompanies);
+  const {isLoading: companyRemoveLoading } = useSelector((state) => state.companyRemove); 
 
   useEffect(async () => {
     dispatch(getAllCompaniesListPending());
@@ -69,6 +76,19 @@ export const Companies = ({ className, ...restProps }) => {
       errorToast('Error loading companies list');
     }
   }, []);
+
+  /** handle remove company */
+  const handleRemoveCompany = async () => {
+    const removeIds = removeCompanies.map((company) => company.id);
+    dispatch(companyRemovePending());
+    try {
+      const data = await removeCompany(removeIds);
+      dispatch(companyRemoveSuccessful());
+    } catch (error) {
+      dispatch(companyRemoveFail(error));
+      errorToast('Error loading companies list');
+    }
+  };
 
   //pagination handle
   const handlePageSizeChange = async (e) => {
@@ -101,9 +121,18 @@ export const Companies = ({ className, ...restProps }) => {
   return (
     <div className={(CompaniesClasses, 'flex flex-col')} {...restProps}>
       <div className="w-full mb-2 text-3xl font-bold dashboard_title text-G-dark">
-        Companiesss
+        Companies
       </div>
-      <div className="flex justify-end mb-2 product__add -item-btn">
+      <div className="flex justify-end mb-2 gap-x-2 product__add -item-btn">
+        {removeCompanies.length > 0 && (
+          <Button
+            children="Delete Company"
+            isLoading={companyRemoveLoading}
+            className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-R-500 lg:text-sm border-R-500 hover:bg-white hover:text-R-500"
+            onClick={handleRemoveCompany}
+          />
+        )}
+
         <Button
           children="Add Company"
           className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
@@ -121,6 +150,7 @@ export const Companies = ({ className, ...restProps }) => {
               COLUMNS={COLUMNS}
               DATA={companies?.data || []}
               onChangePageSize={handlePageSizeChange}
+              onChange={(rows) => setRemoveCompanies(rows)}
               pageSize={pageSize}
               pageCount={pageCount}
               pageNumber={pageNumber - 1}
