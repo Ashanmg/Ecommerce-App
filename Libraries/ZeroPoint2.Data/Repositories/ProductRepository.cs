@@ -132,6 +132,16 @@ namespace ZeroPoint2.Data
 
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Product> GetProductDetailForEditByProductId(int id)
+        {
+            return await _context.Products.Where((p) => p.Id == id)
+                .Include(p => p.ProductImages)
+                .Include(p => p.ProductColors)
+                .ThenInclude(p => p.ProductSizes)
+                .Include(p => p.ProductSpecifications)
+                .FirstOrDefaultAsync();
+        }
         #endregion
     }
 }
