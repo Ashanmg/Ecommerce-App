@@ -435,7 +435,7 @@ namespace ZeroPoint2.Services
             // category mapping
             productInformationDto.ProductChildCategoryId = product.CategoryId;
             productInformationDto.ProductSubCategoryId = await _categoryRepository.GetParentCategoryIdByChildId(product.CategoryId);
-            productInformationDto.ProductCategoryId = await _categoryRepository.GetParentCategoryIdByChildId(product.CategoryId);
+            productInformationDto.ProductCategoryId = await _categoryRepository.GetParentCategoryIdByChildId(productInformationDto.ProductSubCategoryId);
 
             return productInformationDto;
         }
