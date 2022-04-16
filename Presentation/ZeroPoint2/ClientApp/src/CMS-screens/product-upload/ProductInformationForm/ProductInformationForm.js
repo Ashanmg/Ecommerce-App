@@ -27,6 +27,7 @@ export const ProductInformationForm = ({
   handleBlur,
   setFieldValue,
   values,
+  productInformation,
   ...restProps
 }) => {
   const ProductInformationFormClasses = CN(
@@ -37,6 +38,11 @@ export const ProductInformationForm = ({
 
   const dispatch = useDispatch();
 
+  const productTypes = [
+    { value: '1', label: 'variant' },
+    { value: '2', label: 'simple' },
+  ];
+
   const [categories, setCategories] = useState([]);
   const [mainCategories, setMainCategories] = useState([]);
   const [mainSelectedCategory, setMainSelectedCategory] = useState([]);
@@ -46,6 +52,7 @@ export const ProductInformationForm = ({
   const [childSelectedCategory, setChildSelectedCategory] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [companySelected, setCompanySelected] = useState([]);
+  const [selectedProductType, setSelectedProductType] = useState([]);
 
   const { isLoading } = useSelector(
     (state) => state.getProductCategoryForUpload
@@ -144,6 +151,37 @@ export const ProductInformationForm = ({
     }
   }, []);
 
+  useEffect(() => {
+    const filterMainValue = mainCategories.filter(
+      (category) => category.value === values?.productCategory
+    );
+    const filterSubValue = subCategories.filter(
+      (category) => category.value === values?.productSubCategory
+    );
+    const filterChildValue = childCategories.filter(
+      (category) => category.value === values?.productChildCategory
+    );
+    setMainSelectedCategory(filterMainValue[0]);
+    setSubSelectedCategory(filterSubValue[0]);
+    setChildSelectedCategory(filterChildValue[0]);
+  }, [mainCategories, subCategories, childCategories]);
+
+  useEffect(() => {
+    const filterCompanyValue = companies.filter(
+      (company) => company.value === values?.company
+    );
+    setCompanySelected(filterCompanyValue[0]);
+  }, [companies]);
+
+  useEffect(() => {
+    const filterProductType = productTypes.filter(
+      (productType) => productType.label === values?.productType
+    );
+    setSelectedProductType(filterProductType[0]);
+  }, [productInformation]);
+
+  console.log(values);
+
   return (
     <div className={ProductInformationFormClasses} {...restProps}>
       <div className="flex items-center w-full">
@@ -156,7 +194,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="productName"
-          value={values.productName}
+          value={values?.productName}
         />
       </div>
       <div className="flex items-center w-full">
@@ -173,7 +211,7 @@ export const ProductInformationForm = ({
           onBlur={handleBlur}
           name="productCategory"
           options={mainCategories}
-          value={values.productCategory}
+          value={mainSelectedCategory}
           placeHolder=""
         />
       </div>
@@ -223,7 +261,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="supplierProductCode"
-          value={values.supplierProductCode}
+          value={values?.supplierProductCode}
         />
       </div>
       <div className="flex items-center w-full">
@@ -236,7 +274,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="metaKeyword"
-          value={values.metaKeyword}
+          value={values?.metaKeyword}
         />
       </div>
       <div className="flex items-center w-full">
@@ -249,7 +287,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="metaDescription"
-          value={values.metaDescription}
+          value={values?.metaDescription}
         />
       </div>
       <div className="flex items-center w-full">
@@ -262,7 +300,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="productShortDescription"
-          value={values.productShortDescription}
+          value={values?.productShortDescription}
         />
       </div>
       <div className="flex items-center w-full">
@@ -275,7 +313,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="productFullDescription"
-          value={values.productFullDescription}
+          value={values?.productFullDescription}
         />
       </div>
       <div className="flex items-center w-full">
@@ -289,7 +327,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="availableQuantity"
-          value={values.availableQuantity}
+          value={values?.availableQuantity}
         />
       </div>
       <div className="flex items-center w-full">
@@ -306,7 +344,7 @@ export const ProductInformationForm = ({
           onBlur={handleBlur}
           name="company"
           options={companies || []}
-          value={values.company}
+          value={companySelected}
           placeHolder=""
         />
       </div>
@@ -320,7 +358,7 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="productTime"
-          value={values.productTime}
+          value={values?.productTime}
         />
       </div>
       <div className="flex items-center w-full">
@@ -332,15 +370,12 @@ export const ProductInformationForm = ({
           isLoading={isLoadingCompanies}
           onChange={(selectedOption) => {
             setFieldValue('productType', selectedOption);
-            setCompanySelected(selectedOption);
+            setSelectedProductType(selectedOption);
           }}
           onBlur={handleBlur}
           name="productType"
-          options={[
-            { value: '1', label: 'variant' },
-            { value: '2', label: 'simple' },
-          ]}
-          value={values.productType}
+          options={productTypes}
+          value={selectedProductType}
           placeHolder=""
         />
       </div>
@@ -354,10 +389,10 @@ export const ProductInformationForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="unitOfMeasure"
-          value={values.unitOfMeasure}
+          value={values?.unitOfMeasure}
         />
       </div>
-      <div className="flex gap-x-3 items-center">
+      <div className="flex items-center gap-x-3">
         <div className="flex justify-center gap-x-2">
           <span className="text-sm font-semibold text-G-dark">
             Made For Order :
@@ -368,7 +403,7 @@ export const ProductInformationForm = ({
             onChange={handleChange}
             onBlur={handleBlur}
             type="checkbox"
-            value={values.madeForOrder}
+            value={values?.madeForOrder}
           />
         </div>
         <div className="flex gap-x-2">
@@ -381,7 +416,7 @@ export const ProductInformationForm = ({
             onChange={handleChange}
             onBlur={handleBlur}
             type="checkbox"
-            value={values.displayOnHomePage}
+            value={values?.displayOnHomePage}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { Formik } from 'formik';
 import Loader from 'react-spinners/PuffLoader';
@@ -20,9 +20,11 @@ import {
   productUploadPending,
   productUploadSuccess,
 } from '../../../features/ProductUploadSlice';
-import { productUpload } from '../../../api/productApi';
+import { getProductById, productUpload } from '../../../api/productApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '../../../components/Modal/Modal';
+import { useParams } from 'react-router-dom';
+import { getProductFail, getProductPending, getProductSuccess } from '../../../features/getProductDetailsSlice';
 
 export const ProductUpload = ({ className, ...restProps }) => {
   const ProductUploadClasses = CN(
@@ -62,6 +64,31 @@ export const ProductUpload = ({ className, ...restProps }) => {
   const { isUploadLoading } = useSelector((state) => state.productUpload);
 
   const dispatch = useDispatch();
+
+  const [editData, setEditData] = useState([]);
+  const [productInformation, setProductInformation] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [shipping, setShipping] = useState([]);
+  const [inventory, setInventory] = useState([]);
+  const [images, setImages] = useState([]);
+  const [productAttributes, setProductAttributes] = useState([]);
+
+  const { id } = useParams();
+
+  useEffect( async() => {
+    if(id){
+      dispatch(getProductPending());
+      try {
+        const products = await getProductById(id);
+        console.log(products);
+        setEditData(products);
+        dispatch(getProductSuccess());
+      } catch (error) {
+        // setProgressed(100);
+        dispatch(getProductFail(error.message));
+      }
+    }
+  }, [id]);
 
   const handleProductUpload = async (values, resetForm) => {
     const {
@@ -195,7 +222,6 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('ProductSpecification', productSpecification);
 
       dispatch(productUploadPending());
-      console.log('formData');
       try {
         const isUploaded = await productUpload(formData);
         resetForm({ values: '' });
@@ -210,6 +236,20 @@ export const ProductUpload = ({ className, ...restProps }) => {
     }
   };
 
+  useEffect(() => {
+    if (editData !== undefined) {
+      const { productInformation, productAttributes, images, inventory, price, shipping } = editData;
+      setProductInformation(productInformation);
+      setProductAttributes(productAttributes);
+      setImages(images);
+      setInventory(inventory);
+      setPrice(price);
+      setShipping(shipping);
+    }
+  }, [editData]);
+
+  console.log(productInformation);
+
   return (
     <div className={ProductUploadClasses} {...restProps}>
       {isUploadLoading && (
@@ -219,52 +259,54 @@ export const ProductUpload = ({ className, ...restProps }) => {
           </div>
         </Modal>
       )}
+      {console.log(productInformation?.name)}
       <Formik
         initialValues={{
-          productName: '',
-          productCategory: '',
-          productSubCategory: '',
-          productChildCategory: '',
-          supplierProductCode: '',
-          metaKeyword: '',
-          metaDescription: '',
-          productShortDescription: '',
-          productFullDescription: '',
-          availableQuantity: '',
-          company: '',
-          madeForOrder: false,
-          productTime: '',
-          productType: '',
-          unitOfMeasure: '',
-          displayOnHomePage: false,
-          wholePrice: '',
-          retailPrice: '',
-          discount: '',
-          tax: '',
-          taxExempt: false,
-          shippingDescription: '',
-          shippingLength: '',
-          shippingWidth: '',
-          shippingHeight: '',
-          shippingWeight: '',
-          ShippingUnitStrength: 'cm',
-          ShippingUnitWeight: 'kg',
-          shippingNote: '',
-          inventoryMethod: '',
-          minimumCartQuantity: '',
-          maximumCartQuantity: '',
-          allowedQuantity: '',
-          notReturnable: false,
-          productImages: [],
-          colors: [],
-          sizes: '',
-          sizeGuide: '',
-          productSpecification: '',
+          productName: productInformation?.name || '',
+          productCategory: productInformation?.productCategoryId || '',
+          productSubCategory: productInformation?.productSubCategoryId || '',
+          productChildCategory: productInformation?.productChildCategoryId || '',
+          supplierProductCode: productInformation?.supplierProductCode || '',
+          metaKeyword: productInformation?.metaKeywords || '',
+          metaDescription: productInformation?.metaDescription || '',
+          productShortDescription: productInformation?.shortDescription || '',
+          productFullDescription: productInformation?.fullDescription || '',
+          availableQuantity: productInformation?.availableQuantity || '',
+          company: productInformation?.companyId || '',
+          madeForOrder: productInformation?.madeForOrder || false,
+          productTime: productInformation?.productTime || '',
+          productType: productInformation?.productType || '',
+          unitOfMeasure: productInformation?.unitOfMeasure || '',
+          displayOnHomePage: productInformation?.showOnHomePage || false,
+          wholePrice: price?.wholeSalePrice || '',
+          retailPrice: price?.retailPrice || '',
+          discount: price?.discount || '',
+          tax: price?.taxCategoryId || '',
+          taxExempt: price?.isTaxIncluded || false,
+          shippingDescription: shipping?.shippingDescription || '',
+          shippingLength: shipping?.length || '',
+          shippingWidth: shipping?.width || '',
+          shippingHeight: shipping?.height || '',
+          shippingWeight: shipping?.weight || '',
+          ShippingUnitStrength: shipping?.lengthWidthHeightType || 'cm',
+          ShippingUnitWeight: shipping?.weightType || 'kg',
+          shippingNote: shipping?.shippingNote || '',
+          inventoryMethod: inventory?.isInventoryTracked || '',
+          minimumCartQuantity: inventory?.minCartQuantity || '',
+          maximumCartQuantity: inventory?.maxCartQuantity || '',
+          allowedQuantity: inventory?.allowedQuantity || '',
+          notReturnable: inventory?.isReturnable || false,
+          productImages: images || [],
+          colors: productAttributes?.colors || [],
+          sizes: productAttributes?.sizes || [],
+          sizeGuide: productAttributes?.sizeGuide || '',
+          productSpecification: productAttributes?.productSpecification || '',
         }}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           //need to store the values and submit them to the server
           handleProductUpload(values, resetForm);
         }}
+        enableReinitialize
       >
         {({
           values,
@@ -294,6 +336,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       handleBlur={handleBlur}
                       setFieldValue={setFieldValue}
                       values={values}
+                      productInformation={productInformation}
                       className="w-full"
                     />
                   ),
@@ -318,6 +361,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       handleBlur={handleBlur}
                       setFieldValue={setFieldValue}
                       values={values}
+                      price={price}
                       className="w-full"
                     />
                   ),
@@ -342,6 +386,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       handleBlur={handleBlur}
                       setFieldValue={setFieldValue}
                       values={values}
+                      shipping={shipping}
                       className="w-full"
                     />
                   ),
@@ -366,6 +411,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       handleBlur={handleBlur}
                       setFieldValue={setFieldValue}
                       values={values}
+                      inventory={inventory}
                       className="w-full"
                     />
                   ),
@@ -387,6 +433,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                   content: (
                     <ImagesForm
                       setFieldValue={setFieldValue}
+                      images={images}
                       className="w-full"
                     />
                   ),
@@ -410,6 +457,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       setFieldValue={setFieldValue}
+                      productAttributes={productAttributes}
                       values={values}
                       className="w-full"
                     />
@@ -420,10 +468,10 @@ export const ProductUpload = ({ className, ...restProps }) => {
 
             <div className="flex justify-end my-5 flex-end">
               <Button
-                children="Create Product"
+                children={id ? "Edit Product" :"Create Product"}
                 className="items-center px-3 py-1 text-sm font-semibold h-7 md:h-10 md:py-2 xl:px-6 bg-G-light hover:text-white"
                 // onClick={(e) => handleSubmit(e)}
-                type="submit"
+                type={"submit"}
               />
             </div>
           </form>

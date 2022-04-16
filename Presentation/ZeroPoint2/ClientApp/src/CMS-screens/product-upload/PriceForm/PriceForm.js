@@ -21,6 +21,7 @@ export const PriceForm = ({
   handleBlur,
   setFieldValue,
   values,
+  price,
   ...restProps
 }) => {
   const PriceFormClasses = CN(
@@ -31,6 +32,7 @@ export const PriceForm = ({
 
   const dispatch = useDispatch();
   const [taxes, setTaxes] = useState([]);
+  const [selectedTax, setSelectedTax] = useState(null);
 
   useEffect(async () => {
     dispatch(getTaxPending());
@@ -50,6 +52,13 @@ export const PriceForm = ({
     }
   }, []);
 
+  useEffect(() => {
+    const filterMainValue = taxes.filter(
+      (tax) => tax.value === values?.tax
+    );
+    setSelectedTax(filterMainValue[0]);
+  }, [taxes]);
+
   return (
     <div className={PriceFormClasses} {...restProps}>
       <div className="flex items-center w-full">
@@ -63,7 +72,7 @@ export const PriceForm = ({
           onBlur={handleBlur}
           name="wholePrice"
           type={'number'}
-          value={values.wholePrice}
+          value={values?.wholePrice}
         />
       </div>
       <div className="flex items-center w-full">
@@ -77,7 +86,7 @@ export const PriceForm = ({
           onBlur={handleBlur}
           name="retailPrice"
           type={'number'}
-          value={values.retailPrice}
+          value={values?.retailPrice} 
         />
       </div>
       <div className="flex items-center w-full">
@@ -91,6 +100,7 @@ export const PriceForm = ({
           onBlur={handleBlur}
           name="discount"
           type={'number'}
+          value={values?.discount}
         />
       </div>
       <div className="flex items-center w-full">
@@ -106,7 +116,7 @@ export const PriceForm = ({
           onBlur={handleBlur}
           name="tax"
           options={taxes || []}
-          value={values.tax}
+          value={selectedTax}
           placeHolder=""
         />
       </div>
@@ -123,7 +133,7 @@ export const PriceForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           type="checkbox"
-          value={values.taxExempt}
+          value={values?.taxExempt}
         />
       </div>
     </div>

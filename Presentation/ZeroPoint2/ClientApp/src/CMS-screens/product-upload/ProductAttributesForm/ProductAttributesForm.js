@@ -20,6 +20,7 @@ export const ProductAttributesForm = ({
   handleChange,
   setFieldValue,
   values,
+  productAttributes,
   ...restProps
 }) => {
   const ProductAttributesFormClasses = CN(
@@ -30,6 +31,7 @@ export const ProductAttributesForm = ({
 
   const dispatch = useDispatch();
   const [colors, setColors] = useState([]);
+  const [selectedColor, setSelectedColor] = useState(null);
 
   useEffect(async () => {
     dispatch(getColorTypesPending());
@@ -49,10 +51,18 @@ export const ProductAttributesForm = ({
     }
   }, []);
 
+  useEffect( () => {
+    console.log(colors, productAttributes);
+    const filterColors = colors.filter(
+      (color) => color.value === values?.colors
+    );
+    setSelectedColor(filterColors);
+  }, [colors]);
+
   return (
     <div className={ProductAttributesFormClasses} {...restProps}>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Colors :
         </span>
         <AutoSelect
@@ -64,12 +74,12 @@ export const ProductAttributesForm = ({
           onBlur={handleBlur}
           name="colors"
           options={colors || []}
-          value={values.colors}
+          value={selectedColor}
           placeHolder=""
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Sizes :
         </span>
         <TextField
@@ -77,18 +87,18 @@ export const ProductAttributesForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           name="sizes"
-          value={values.sizes}
+          value={values?.sizes}
           className="border border-G-dark"
         />
       </div>
-      <div className="w-full items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Size Guid :
         </span>
         <div className="flex-auto">
           <CKEditor
             editor={ClassicEditor}
-            data=""
+            data={values?.sizeGuide}
             config={{
               removePlugins: ['EasyImage', 'ImageUpload', 'MediaEmbed'],
             }}
@@ -110,14 +120,14 @@ export const ProductAttributesForm = ({
           />
         </div>
       </div>
-      <div className="w-full items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Product Specification :
         </span>
         <div className="flex-auto">
           <CKEditor
             editor={ClassicEditor}
-            data=""
+            data={values?.productSpecification}
             config={{
               removePlugins: ['EasyImage', 'ImageUpload', 'MediaEmbed'],
             }}
