@@ -73,3 +73,21 @@ export const removeCompany = (deleteCompanies) => {
     }
   });
 };
+
+export const getCompanyById = (companyId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await get(
+        `/api/admin/company/getcompanyDetails/${companyId}`
+      );
+
+      resolve(res.data.result);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

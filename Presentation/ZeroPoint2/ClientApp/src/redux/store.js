@@ -12,6 +12,7 @@ import getAllCompaniesSlice from '../features/getAllCompaniesSlice';
 import contactFormSlice from '../features/contactFormSlice';
 import companyRemoveSlice from '../features/companyRemoveSlice';
 import getProductDetailsSlice from '../features/getProductDetailsSlice';
+import getCompanyDetailsSlice from '../features/getCompanyDetailsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     getAllCompanies: getAllCompaniesSlice,
     connectEmail: contactFormSlice,
     companyRemove: companyRemoveSlice,
-    ProductDetails: getProductDetailsSlice
+    ProductDetails: getProductDetailsSlice,
+    companyDetails: getCompanyDetailsSlice,
   },
 });

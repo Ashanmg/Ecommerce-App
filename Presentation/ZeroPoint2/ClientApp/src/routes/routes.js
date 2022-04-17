@@ -103,6 +103,13 @@ export const routes = [
     private: true,
     accessRoles: [1, 6],
   },
+  {
+    path: '/admin/company-edit/:id',
+    component: CompanyRegistration,
+    layout: CMSLayout,
+    private: false,
+    accessRoles: [1, 6],
+  },
 ];
 
 export default routes;
