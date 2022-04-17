@@ -16,11 +16,27 @@ namespace ZeroPoint2.Helper
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public static string GenerateVariantSku(string stylecode)
+        public static string GenerateVariantSku(string stylecode, string colorName, string sizeName)
         {
-            const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var variant = new string(Enumerable.Repeat(characters, 4)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+            var variant = string.Empty;
+            if (colorName.Length >= 2 && sizeName.Length >= 2)
+            {
+                variant = $"{colorName.Substring(0, 1)}{sizeName.Substring(0, 1)}";
+            }
+            else if (colorName.Length < 2 && sizeName.Length > 2)
+            {
+                var combination = $"{colorName}{sizeName}";
+                variant =  combination.Substring(0, 3);
+            }
+            else if (colorName.Length > 2 && sizeName.Length < 2)
+            {
+                var combination = $"{colorName}{sizeName}";
+                variant = combination.Substring(combination.Length - 4);
+            }
+            else
+            {
+                variant = $"{colorName}{sizeName}";
+            }
 
             return string.Format("{0}-{1}", stylecode, variant);
         }

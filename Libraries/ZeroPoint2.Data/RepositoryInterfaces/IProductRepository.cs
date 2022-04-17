@@ -23,5 +23,11 @@ namespace ZeroPoint2.Data
         Task<bool> InsertProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList);
         Task<bool> DeleteBulkProduct(ProductForDeleteDto productForDeleteDto);
         Task<Product> GetProductDetailForEditByProductId(int id);
+        Task<Product> UpdateSingleProductDataAsync(Product product);
+        Task<List<ProductColor>> DeleteAndUpdateProductColorData(List<ProductColor> productColors, int productId);
+        Task<bool> UpdateProductCombinationData(List<ProductCombination> productCombinationList, int productId);
+        Task<List<ProductImage>> GetProductImagesByProductId(int productId);
+        Task<bool> UpdateProductImageDataAsync(List<ProductImage> productImagesList, List<ProductImage> existingImages);
+        Task<bool> UpdateProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList, int productId);
     }
 }

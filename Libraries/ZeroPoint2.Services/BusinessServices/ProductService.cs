@@ -57,11 +57,6 @@ namespace ZeroPoint2.Services
                 // insert the product details
                 var product = _mapper.Map<Product>(productForCreationDto);
 
-                if (productForCreationDto.Colors?.Count > 0)
-                {
-                    product.IsVariant = true;
-                }
-
                 product.DisplayOrder = 1;
                 product.Published = true;
                 product.Sku = SkuGenerator.GenerateStyleCode(9);
@@ -117,7 +112,7 @@ namespace ZeroPoint2.Services
                                 productCombination.ColorValue = color.ColorHashValue;
                                 productCombination.ProductId = product.Id;
                                 productCombination.Size = size;
-                                productCombination.Sku = SkuGenerator.GenerateVariantSku(product.Sku);
+                                productCombination.Sku = SkuGenerator.GenerateVariantSku(product.Sku, color.ColorName, size);
                                 productCombination.CreatedOnUtc = DateTime.UtcNow;
 
                                 productSizeList.Add(productSize);
@@ -400,6 +395,223 @@ namespace ZeroPoint2.Services
                     response.RequestStatus = ExecutionStatus.Fail;
                     response.Message = "Product can not be found. Please try again.";
                 }
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
+        }
+
+        public async Task<ExecutionResponse<bool>> UpdateProduct(UploadProductForCreationDto productForCreationDto)
+        {
+            ExecutionResponse<bool> response = new ExecutionResponse<bool>();
+
+            try
+            {
+                //validate the product id is existed
+                var currentProductDetails = await _productRepository.GetProductDetailForEditByProductId(productForCreationDto.Id);
+
+                if (currentProductDetails != null)
+                {
+                    // insert the product details
+                    var product = _mapper.Map<UploadProductForCreationDto, Product>(productForCreationDto, currentProductDetails);
+
+                    product = await _productRepository.UpdateSingleProductDataAsync(product);
+
+                    // then update the colors and sizes if the product is variant
+                    if (product.IsVariant)
+                    {
+                        
+                        var productColors = _mapper.Map<List<ProductColor>>(productForCreationDto.Colors);
+
+                        // delete existing product colors and Insert update data.
+                        productColors = await _productRepository.DeleteAndUpdateProductColorData(productColors, product.Id);
+
+                        if (productColors.Any(pc => pc.Id == 0))
+                        {
+                            response.Result = false;
+                            response.RequestStatus = ExecutionStatus.Error;
+                            response.Message = "Product colors could not be updated successfully.";
+
+                            return response;
+                        }
+
+                        if (!string.IsNullOrEmpty(productForCreationDto.Sizes))
+                        {
+                            var sizeList = productForCreationDto.Sizes.Split(",");
+
+                            var productSizeList = new List<ProductSize>();
+                            var productCombinationList = new List<ProductCombination>();
+
+                            foreach (var color in productColors)
+                            {
+                                foreach (var size in sizeList)
+                                {
+                                    var productSize = new ProductSize();
+                                    var productCombination = new ProductCombination();
+
+                                    // create product size data
+                                    productSize.Size = size;
+                                    productSize.ProductColorId = color.Id;
+                                    productSize.CreatedOnUtc = DateTime.UtcNow;
+
+                                    // create product combination data
+                                    productCombination.ColorName = color.ColorName;
+                                    productCombination.ColorValue = color.ColorHashValue;
+                                    productCombination.ProductId = product.Id;
+                                    productCombination.Size = size;
+                                    productCombination.Sku = SkuGenerator.GenerateVariantSku(product.Sku, color.ColorName, size);
+                                    productCombination.CreatedOnUtc = DateTime.UtcNow;
+
+                                    productSizeList.Add(productSize);
+                                    productCombinationList.Add(productCombination);
+                                }
+                            }
+
+                            // insert product sizes
+                            response.Result = await _productRepository.InsertProductSizeData(productSizeList);
+
+                            if (!response.Result)
+                            {
+                                response.RequestStatus = ExecutionStatus.Error;
+                                response.Message = "Product sizes could not be updated successfully.";
+
+                                return response;
+                            }
+
+                            // update product combinations
+                            response.Result = await _productRepository.UpdateProductCombinationData(productCombinationList, product.Id);
+                            if (!response.Result)
+                            {
+                                response.RequestStatus = ExecutionStatus.Error;
+                                response.Message = "Product combinations could not be updated successfully.";
+
+                                return response;
+                            }
+                        }
+                    }
+
+                    // delete existing product images from db and cloudinary
+                    List<ProductImage> existingImages = await _productRepository.GetProductImagesByProductId(product.Id);
+
+                    if (existingImages != null && existingImages.Count > 0)
+                    {
+                        // first delete the images from cloudinary
+                        foreach(var image in existingImages)
+                        {
+                            DeletionParams destroyParams = new DeletionParams(image.PublicId)
+                            {
+                                ResourceType = ResourceType.Image
+                            };
+
+                            DeletionResult destroyResult = _cloudinary.Destroy(destroyParams);
+                        }
+                    }
+
+                    // then upload images to cloudinary and get the public ids
+                    var fileList = productForCreationDto.ProductImages;
+
+                    var productImagesList = new List<ProductImage>();
+
+                    foreach (var file in fileList)
+                    {
+                        var uploadResult = new ImageUploadResult();
+
+                        var productImagesForCreationDto = new ProductImageForCreationDto();
+
+                        if (file.Length > 0)
+                        {
+                            using (var stream = file.OpenReadStream())
+                            {
+                                var uploadParams = new ImageUploadParams()
+                                {
+                                    File = new FileDescription(file.Name, stream),
+                                    Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+                                };
+
+                                uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                            }
+                        }
+
+                        productImagesForCreationDto.ImageUrl = uploadResult.Url.ToString();
+                        productImagesForCreationDto.PublicId = uploadResult.PublicId;
+                        productImagesForCreationDto.DateAddedOnUtc = DateTime.UtcNow;
+                        productImagesForCreationDto.ProductId = product.Id;
+
+                        var productImage = _mapper.Map<ProductImage>(productImagesForCreationDto);
+
+                        if (!productImagesList.Any(p => p.IsMain))
+                        {
+                            productImage.IsMain = true;
+                        }
+
+                        productImagesList.Add(productImage);
+                    }
+
+                    response.Result = await _productRepository.UpdateProductImageDataAsync(productImagesList, existingImages);
+
+                    if (!response.Result)
+                    {
+                        response.RequestStatus = ExecutionStatus.Error;
+                        response.Message = "Product images could not be updated successfully.";
+
+                        return response;
+                    }
+
+                    // then update product specification
+                    List<ProductSpecification> productSpecificationList = new List<ProductSpecification>();
+
+                    if (!string.IsNullOrEmpty(productForCreationDto.SizeGuide))
+                    {
+                        ProductSpecification productSpecification = new ProductSpecification()
+                        {
+                            SpecificationType = "SizeGuide",
+                            SpecificationValue = productForCreationDto.SizeGuide,
+                            CreatedOnUtc = DateTime.UtcNow,
+                            ProductId = product.Id
+                        };
+
+                        productSpecificationList.Add(productSpecification);
+                    }
+
+                    if (!string.IsNullOrEmpty(productForCreationDto.ProductSpecification))
+                    {
+                        ProductSpecification productSpecification = new ProductSpecification()
+                        {
+                            SpecificationType = "ProductSpecification",
+                            SpecificationValue = productForCreationDto.ProductSpecification,
+                            CreatedOnUtc = DateTime.UtcNow,
+                            ProductId = product.Id
+                        };
+
+                        productSpecificationList.Add(productSpecification);
+                    }
+
+                    if (productSpecificationList.Count > 0)
+                    {
+                        response.Result = await _productRepository.UpdateProductSpecificationDataAsync(productSpecificationList, product.Id);
+
+                        if (!response.Result)
+                        {
+                            response.RequestStatus = ExecutionStatus.Error;
+                            response.Message = "Product specifications could not be updated successfully.";
+
+                            return response;
+                        }
+                    }
+
+                    response.RequestStatus = ExecutionStatus.Success;
+                    response.Message = "Product data were inserted successfully.";
+                }
+                else
+                {
+
+                }
+                
             }
             catch (Exception ex)
             {
