@@ -12,5 +12,7 @@ namespace ZeroPoint2.Data
         Task<User> RegisterAsync(User user, string password);
         Task<User> LoginAsync(string email, string password);
         Task<bool> UserExistsAsync(string email);
+        Task<User> GetUserByEmail(string email);
+        Task UpdateUser(User user);
     }
 }

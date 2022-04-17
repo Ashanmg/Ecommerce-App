@@ -13,5 +13,8 @@ namespace ZeroPoint2.Core.Entities
         public DateTime CreatedOnUtc { get; set; }
         public DateTime LastActiveOnUtc { get; set; }
         public UserRole UserRole { get; set; }
+        public Guid? PasswordResetToken { get; set; }
+        public bool IsTokenUsed { get; set; }
+        public DateTime? TokenCreatedOnUtc { get; set; }
     }
 }

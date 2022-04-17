@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using ZeroPoint2.Core.Dtos;
+using ZeroPoint2.Helper;
 using ZeroPoint2.Services;
 
 namespace ZeroPoint2.Controllers
@@ -83,6 +84,20 @@ namespace ZeroPoint2.Controllers
                 token = tokenHandler.WriteToken(token),
                 userData
             });
+        }
+
+        [HttpPost]
+        [Route("forgetpassword")]
+        public async Task<IActionResult> ForgetPassword(UserForLoginDto userForLoginDto)
+        {
+            if (await _authService.UserExistsAsync(userForLoginDto.Email))
+            {
+                return BadRequest("Email is invalid. Please try again");
+            }
+
+            ExecutionResponse<bool> response = await _authService.ForgetPassword(userForLoginDto.Email);
+
+            return Ok(response);
         }
     }
 }
