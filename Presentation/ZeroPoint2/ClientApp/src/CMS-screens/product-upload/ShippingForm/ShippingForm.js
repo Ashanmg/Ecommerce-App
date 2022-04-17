@@ -119,7 +119,7 @@ export const ShippingForm = ({
           <RadioButton
             id="ShippingUnitKg"
             name="ShippingUnitWeight"
-            defaultChecked={values.weightType === 'kg'}
+            defaultChecked={values.ShippingUnitWeight === 'kg'}
             onChange={() => setFieldValue('ShippingUnitWeight', 'kg')}
             checked={values?.ShippingUnitWeight === 'kg'}
           />

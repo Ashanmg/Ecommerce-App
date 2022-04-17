@@ -13,6 +13,7 @@ import {
 } from '../../../features/colorTypesForUploadSlice';
 import { getColorTypesForUpload } from '../../../api/productApi';
 import TextField from '../../../components/TextField/TextField';
+import { useParams } from 'react-router-dom';
 
 export const ProductAttributesForm = ({
   className,
@@ -29,6 +30,8 @@ export const ProductAttributesForm = ({
     {}
   );
 
+  const {id} = useParams();
+
   const dispatch = useDispatch();
   const [colors, setColors] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -42,6 +45,7 @@ export const ProductAttributesForm = ({
         colorsCopy.push({
           value: color.id,
           label: color.colorName,
+          hashValue: color.colorHashValue,
         });
       });
       setColors(colorsCopy);
@@ -52,11 +56,13 @@ export const ProductAttributesForm = ({
   }, []);
 
   useEffect( () => {
-    console.log(colors, productAttributes);
-    const filterColors = colors.filter(
-      (color) => color.value === values?.colors
-    );
-    setSelectedColor(filterColors);
+    if(id){
+      console.log(colors, productAttributes);
+      const filterColors = colors.filter(
+        (color) => color.value === values?.colors
+      );
+      setSelectedColor(filterColors);
+    }    
   }, [colors]);
 
   return (
@@ -69,6 +75,7 @@ export const ProductAttributesForm = ({
           id="colors"
           onChange={(selectedOption) => {
             setFieldValue('colors', selectedOption);
+            setSelectedColor(selectedOption);
           }}
           isMultiple={true}
           onBlur={handleBlur}

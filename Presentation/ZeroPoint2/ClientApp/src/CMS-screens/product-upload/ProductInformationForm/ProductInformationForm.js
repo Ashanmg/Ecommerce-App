@@ -20,6 +20,7 @@ import {
 } from '../../../features/getCompanySlice';
 import { getAllCompaniesToSelect } from '../../../api/companyApi';
 import CheckBox from '../../../components/CheckBox/CheckBox';
+import { useParams } from 'react-router-dom';
 
 export const ProductInformationForm = ({
   className,
@@ -37,6 +38,8 @@ export const ProductInformationForm = ({
   );
 
   const dispatch = useDispatch();
+
+  const { id } = useParams();
 
   const productTypes = [
     { value: '1', label: 'variant' },
@@ -110,6 +113,7 @@ export const ProductInformationForm = ({
       const sub = categories?.filter(
         (category) => category.id === mainSelectedCategory?.value
       );
+      console.log(mainSelectedCategory);
 
       let childCategory = [];
       if (sub.length !== 0) {
@@ -152,19 +156,24 @@ export const ProductInformationForm = ({
   }, []);
 
   useEffect(() => {
-    const filterMainValue = mainCategories.filter(
-      (category) => category.value === values?.productCategory
-    );
-    const filterSubValue = subCategories.filter(
-      (category) => category.value === values?.productSubCategory
-    );
-    const filterChildValue = childCategories.filter(
-      (category) => category.value === values?.productChildCategory
-    );
-    setMainSelectedCategory(filterMainValue[0]);
-    setSubSelectedCategory(filterSubValue[0]);
-    setChildSelectedCategory(filterChildValue[0]);
+    if (id) {
+      const filterMainValue = mainCategories.filter(
+        (category) => category.value === values?.productCategory
+      );
+      const filterSubValue = subCategories.filter(
+        (category) => category.value === values?.productSubCategory
+      );
+      const filterChildValue = childCategories.filter(
+        (category) => category.value === values?.productChildCategory
+      );
+      console.log(filterMainValue);
+      setMainSelectedCategory(filterMainValue[0]);
+      setSubSelectedCategory(filterSubValue[0]);
+      setChildSelectedCategory(filterChildValue[0]);
+    }
   }, [mainCategories, subCategories, childCategories]);
+
+  console.log(values);
 
   useEffect(() => {
     const filterCompanyValue = companies.filter(
@@ -179,8 +188,6 @@ export const ProductInformationForm = ({
     );
     setSelectedProductType(filterProductType[0]);
   }, [productInformation]);
-
-  console.log(values);
 
   return (
     <div className={ProductInformationFormClasses} {...restProps}>

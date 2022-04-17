@@ -196,6 +196,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
 
       colors.map((color, idx) => {
         formData.append(`Colors[${idx}].ColorName`, color.label);
+        formData.append(`Colors[${idx}].ColorHashValue`, color.hashValue);
       });
 
       formData.append('AvailableQuantity', availableQuantity);
@@ -257,7 +258,6 @@ export const ProductUpload = ({ className, ...restProps }) => {
           </div>
         </Modal>
       )}
-      {console.log(productInformation?.name)}
       <Formik
         initialValues={{
           productName: productInformation?.name || '',

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import Slider from 'react-slick';
-import product1 from '../../assets/products/1.JPG';
-import product2 from '../../assets/products/2.JPG';
-import product3 from '../../assets/products/3.JPG';
-import product4 from '../../assets/products/4.JPG';
-import product5 from '../../assets/products/5.JPG';
-import product6 from '../../assets/products/6.JPG';
 
 import './ProductCorasal.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const ProductCorasal = ({ className, ...restProps }) => {
-  const ProductCorasalClasses = CN('product-corasal flex', className, {});
+export const ProductCorasal = ({ className, images, ...restProps }) => {
+  const ProductCorasalClasses = CN(
+    'product-corasal flex relative',
+    {'justify-center': images?.length === 1},
+    className,
+    {}
+  );
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
@@ -47,6 +46,8 @@ export const ProductCorasal = ({ className, ...restProps }) => {
     verticalSwiping: true,
   };
 
+  console.log(images);
+
   return (
     <div className={ProductCorasalClasses} {...restProps}>
       <div className="w-10/12">
@@ -55,43 +56,31 @@ export const ProductCorasal = ({ className, ...restProps }) => {
           asNavFor={nav2}
           ref={(slider) => setSlider1(slider)}
         >
-          <div className="product-corasal__main-img">
-            <img src={product1} alt="" />
-          </div>
-          <div className="product-corasal__main-img">
-            <img src={product2} alt="" />
-          </div>
-          <div className="product-corasal__main-img">
-            <img src={product3} alt="" />
-          </div>
-          <div className="product-corasal__main-img">
-            <img src={product4} alt="" />
-          </div>
+          {images?.map((image) => (
+            <div className="product-corasal__main-img">
+              <img src={image?.imageUrl} alt="" />
+            </div>
+          ))}
         </Slider>
       </div>
-      <div className="flex items-center w-2/12">
-        <Slider
-          {...settingsSlide}
-          asNavFor={nav1}
-          ref={(slider) => setSlider2(slider)}
-          slidesToShow={4}
-          swipeToSlide={true}
-          focusOnSelect={true}
-        >
-          <div>
-            <img src={product1} alt="" />
-          </div>
-          <div>
-            <img src={product2} alt="" />
-          </div>
-          <div>
-            <img src={product3} alt="" />
-          </div>
-          <div>
-            <img src={product4} alt="" />
-          </div>
-        </Slider>
-      </div>
+      {images?.length > 1 && (
+        <div className="absolute right-0 flex items-center w-2/12 h-full overflow-y-auto">
+          <Slider
+            {...settingsSlide}
+            asNavFor={nav1}
+            ref={(slider) => setSlider2(slider)}
+            slidesToShow={images?.length}
+            swipeToSlide={true}
+            focusOnSelect={true}
+          >
+            {images?.map((image) => (
+              <div>
+                <img src={image?.imageUrl} alt="" />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
     </div>
   );
 };

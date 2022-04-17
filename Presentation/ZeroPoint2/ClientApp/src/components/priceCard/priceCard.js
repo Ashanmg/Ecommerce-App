@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { RiInformationLine } from 'react-icons/ri';
 
@@ -15,6 +15,8 @@ export const priceCard = ({
   productName,
   productPrice,
   productQuantity,
+  productColors,
+  productSizes,
   ...restProps
 }) => {
   const priceCardClasses = CN(
@@ -23,46 +25,35 @@ export const priceCard = ({
     {}
   );
 
-  const sizeList = [
-    {
-      id: 1,
-      size: 'S',
-      tooltip: 'S',
-    },
-    {
-      id: 2,
-      size: 'M',
-      tooltip: 'M',
-    },
-    {
-      id: 3,
-      size: 'L',
-      tooltip: 'L',
-    },
-    {
-      id: 4,
-      size: 'XL',
-      tooltip: 'xL',
-    },
-    {
-      id: 5,
-      size: '2XL',
-      tooltip: '2xL',
-    },
-  ];
+  const [colorList, setColorList] = useState([]);
+  const [sizeList, setSizeList] = useState([]);
 
-  const colorChips = [
-    { id: 1, name: 'Blue', hex: ['#00598D'], tooltip: 'Blue' },
-    { id: 2, name: 'Yellow', hex: ['#F28200'], tooltip: 'Yellow' },
-    { id: 3, name: 'Red', hex: ['#E63F3F'], tooltip: 'Red' },
-    {
-      id: 4,
-      name: 'Green',
-      hex: ['#39A26A', '#5B68D9', '#E63F3F'],
-      tooltip: 'Green',
-    },
-    { id: 5, name: 'Purple', hex: ['#5B68D9'], tooltip: 'Purple' },
-  ];
+  console.log(productColors);
+
+  useEffect(() => {
+    const colorChips = [];
+    productColors?.map((color) => {
+      colorChips.push({
+        id: color.id,
+        name: color.colorName,
+        hex: color.colorHashValue?.split('|') || [],
+        tooltip: color.colorName,
+      });
+    });
+    setColorList(colorChips);
+  }, [productColors]);
+
+  useEffect(() => {
+    const sizes = [];
+    productSizes?.split(',').map((size, idx) => {
+      sizes.push({
+        id: idx,
+        size: size,
+        tooltip: size,
+      });
+    });
+    setSizeList(sizes);
+  }, [productSizes]);
 
   return (
     <div className={priceCardClasses} {...restProps}>
@@ -70,7 +61,7 @@ export const priceCard = ({
         <span> {productName} </span>
         <RiInformationLine className="cursor-pointer" size={24} />
       </div>
-      <div className="flex justify-between pt-4 font-semibold price-card__unit-price">
+      <div className="flex items-center justify-between pt-4 font-semibold price-card__unit-price">
         <div className="text-lg price-card__unit-price-lable text-G-dark">
           Unit Price
         </div>
@@ -92,36 +83,40 @@ export const priceCard = ({
               />
             </>
           ) : (
-            <span className='font-bold text-R-500' > Not Available </span>
+            <span className="font-bold text-R-500"> Not Available </span>
           )}
 
           {/* <DropDown options={[1, 2, 3, 4, 5]} /> */}
         </div>
         <Button
           children="Add to Cart"
-          className="flex items-center px-3 py-1 text-xs text-white border-2 h-7 md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+          className="flex items-center flex-none px-3 py-1 text-xs text-white border-2 h-7 md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           // onClick={handleToggle}
         />
         <Button
           children="View Cart"
-          className="flex items-center px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
+          className="flex items-center flex-none px-3 py-1 text-xs text-white border-2 h-7 w-max md:h-8 lg:h-10 md:py-2 xl:px-8 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           // onClick={handleToggle}
         />
       </div>
-      <div className="pt-4 product-screen__details-cart__product-details">
-        <SizePicker
-          sizeList={sizeList}
-          defaultActive={1}
-          onChange={(e) => console.log(e)}
-        />
-      </div>
-      <div className="pt-4 product-screen__details-cart__product-details">
-        <ColorChipsPicker
-          colorChips={colorChips}
-          defaultActive={1}
-          onChange={(e) => console.log(e)}
-        />
-      </div>
+      {sizeList.length > 0 && (
+        <div className="pt-4 product-screen__details-cart__product-details">
+          <SizePicker
+            sizeList={sizeList}
+            defaultActive={1}
+            onChange={(e) => console.log(e)}
+          />
+        </div>
+      )}
+      {colorList.length > 0 && (
+        <div className="pt-4 product-screen__details-cart__product-details">
+          <ColorChipsPicker
+            colorChips={colorList.length !== undefined ? colorList : []}
+            defaultActive={1}
+            onChange={(e) => console.log(e)}
+          />
+        </div>
+      )}
     </div>
   );
 };
