@@ -84,3 +84,21 @@ export const getProductsTax = (pagesize, pageNumber) => {
     }
   });
 };
+
+export const getProductById = (productId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await get(
+        `/api/product/getProductDetails/${productId}`
+      );
+
+      resolve(res.data.result);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

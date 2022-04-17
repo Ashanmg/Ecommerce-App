@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 import { RiAddLine } from 'react-icons/ri';
 import Loader from 'react-spinners/PuffLoader';
@@ -16,10 +16,12 @@ import {
   companyRegisterPending,
   companyRegisterSuccessful,
 } from '../../features/companyRegisterSlice';
-import { companyRegister } from '../../api/companyApi';
+import { companyRegister, getCompanyById } from '../../api/companyApi';
 
 import './CompanyRegistration.scss';
 import { Modal } from '../../components/Modal/Modal';
+import { useParams } from 'react-router-dom';
+import { getCompanyFail, getCompanyPending, getCompanySuccess } from '../../features/getCompanyDetailsSlice';
 
 export const CompanyRegistration = ({ className, ...restProps }) => {
   const CompanyRegistrationClasses = CN(
@@ -67,23 +69,44 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
   const [logoUrl, setLogoUrl] = useState('');
   const [inputList, setInputList] = useState([
     {
-      title: '',
-      image: null,
+      FeatureTitle: '',
+      featureImage: null,
       imageUrl: '',
-      description: '',
-      isLeftAlign: true,
+      featureSummary: '',
+      isImageLeftAligned: true,
     },
   ]);
   const [addedItemList, setAddedItemList] = useState([]);
+  const [editData, setEditData] = useState(null);
+
+  const { id } = useParams();
+
+  useEffect( async() => {
+    if(id){
+      dispatch(getCompanyPending());
+      try {
+        const company = await getCompanyById(id);
+        console.log(company);
+        setCompanyName(company.companyName);
+        setCompanyDescription(company.companyInfo);
+        setReturnablePolicy(company.returnablePolicy);
+        setLogoUrl(company.imageUrl);
+        setInputList(company.companyContent);
+        dispatch(getCompanySuccess());
+      } catch (error) {
+        dispatch(getCompanyFail(error.message));
+      }
+    }
+  }, [id]);
 
   // handle input change
   const handleInputChange = (e, index) => {
     const { id, name, value } = e.target;
     const list = [...inputList];
     if (id === `left-align-${index}`) {
-      list[index].isLeftAlign = true;
+      list[index].isImageLeftAligned = true;
     } else if (id === `right-align-${index}`) {
-      list[index].isLeftAlign = false;
+      list[index].isImageLeftAligned = false;
     } else if (e.target.name === 'image') {
       list[index][name] = e.target.files[0];
       list[index]['imageUrl'] = URL.createObjectURL(e.target.files[0]);
@@ -105,11 +128,11 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     setInputList([
       ...inputList,
       {
-        title: '',
-        image: null,
-        imageUrl: '',
-        description: '',
-        isLeftAlign: true,
+        FeatureTitle: '',
+        FeatureImage: null,
+        imageUl: '',
+        FeatureSummary: '',
+        IsImageLeftAligned: true,
       },
     ]);
   };
@@ -131,11 +154,11 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     setLogoUrl('');
     setInputList([
       {
-        title: '',
-        image: null,
-        imageUrl: '',
-        description: '',
-        isLeftAlign: true,
+        FeatureTitle: '',
+        FeatureImage: null,
+        imageUl: '',
+        FeatureSummary: '',
+        IsImageLeftAligned: true,
       },
     ]);
     setAddedItemList([]);
@@ -162,24 +185,24 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
         formData.append(`CompanyFeatures[${i}].Id`, 0);
         formData.append(
           `CompanyFeatures[${i}].FeatureTitle`,
-          addedItemList[i].title
+          addedItemList[i].FeatureTitle
         );
         formData.append(
           `CompanyFeatures[${i}].FeatureSummary`,
-          addedItemList[i].description
+          addedItemList[i].featureSummary
         );
-        console.log(addedItemList[i].image);
-        if (addedItemList[i].image) {
+        console.log(addedItemList[i].FeatureImage);
+        if (addedItemList[i].featureImage) {
           formData.append(
             `CompanyFeatures[${i}].FeatureImage`,
-            addedItemList[i].image,
-            addedItemList[i].image.name
+            addedItemList[i].featureImage,
+            addedItemList[i].featureImage.name
           );
         }
 
         formData.append(
           `CompanyFeatures[${i}].IsImageLeftAligned`,
-          addedItemList[i].isLeftAlign
+          addedItemList[i].isImageLeftAligned
         );
       }
 
@@ -212,7 +235,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
           Company Registration
         </div>
         <Button
-          children="Add Company"
+          children={id ? "Edit company" : "Add Company"}
           className="flex items-center w-auto px-5 text-xs text-white border-2 rounded-sm gap-x-3 md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
           onClick={handleSubmit}
         />
@@ -293,7 +316,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
           </div>
           <div className="flex flex-col gap-y-4">
             {inputList.map(
-              ({ title, description, isLeftAlign, image, imageUrl }, idx) => {
+              ({ featureTitle, featureSummary, isImageLeftAligned, FeatureImage, imageUrl }, idx) => {
                 return (
                   <div
                     className="flex flex-col p-2 gap-y-4"
@@ -309,23 +332,23 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                         placeholder="Title"
                         className="border border-G-dark"
                         name="title"
-                        value={title}
+                        value={featureTitle}
                         onChange={(e) => handleInputChange(e, idx)}
                       />
                     </div>
-                    {isLeftAlign ? (
+                    {isImageLeftAligned ? (
                       <div className="flex flex-shrink gap-x-3">
                         <div className="flex">
                           <DropZone
                             className="w-32 h-32 bg-white"
                             width={80}
                             style={{ height: '124px' }}
-                            img={imageUrl}
+                            img={imageUrl !== null && imageUrl}
                             onChange={(e) => handleInputChange(e, idx)}
                             fileDrop={(e) => {
                               e.preventDefault();
                               const list = [...inputList];
-                              list[idx]['image'] = e.dataTransfer.files[0];
+                              list[idx]['featureImage'] = e.dataTransfer.files[0];
                               list[idx]['imageUrl'] = URL.createObjectURL(
                                 e.dataTransfer.files[0]
                               );
@@ -336,7 +359,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                               e.preventDefault();
                               const list = [...inputList];
                               list[idx].imageUrl = [];
-                              list[idx].image = null;
+                              list[idx].featureImage = null;
                               setInputList(list);
                             }}
                           />
@@ -346,7 +369,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                             rows={5}
                             textRules="max length 200"
                             name="description"
-                            value={description}
+                            value={featureSummary}
                             onChange={(e) => handleInputChange(e, idx)}
                           />
                         </div>
@@ -358,7 +381,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                             rows={5}
                             textRules="max length 200"
                             name="description"
-                            value={description}
+                            value={featureSummary}
                             onChange={(e) => handleInputChange(e, idx)}
                           />
                         </div>
@@ -367,12 +390,12 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                             className="w-32 h-32 bg-white"
                             width={80}
                             style={{ height: '124px' }}
-                            img={imageUrl}
+                            img={imageUrl !== null && imageUrl}
                             onChange={(e) => handleInputChange(e, idx)}
                             fileDrop={(e) => {
                               e.preventDefault();
                               const list = [...inputList];
-                              list[idx]['image'] = e.dataTransfer.files[0];
+                              list[idx]['featureImage'] = e.dataTransfer.files[0];
                               list[idx]['imageUrl'] = URL.createObjectURL(
                                 e.dataTransfer.files[0]
                               );
@@ -383,7 +406,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                               e.preventDefault();
                               const list = [...inputList];
                               list[idx].imageUrl = [];
-                              list[idx].image = null;
+                              list[idx].featureImage = null;
                               setInputList(list);
                             }}
                           />
@@ -421,8 +444,8 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                           onClick={(e) => {
                             const list = [...inputList];
                             if (
-                              list[idx].title !== '' &&
-                              list[idx].description !== ''
+                              list[idx].featureTitle !== '' &&
+                              list[idx].featureSummary !== ''
                             ) {
                               handleAddItemList(e, idx);
                             } else {

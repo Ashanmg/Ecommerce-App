@@ -7,7 +7,7 @@ import './Companies.scss';
 import UITable from '../../components/CMS-components/UITable/UITable';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { COLUMNS } from './columns';
+import columns from './columns';
 import { toast, Flip } from 'react-toastify';
 import {
   getAllCompaniesListFail,
@@ -118,6 +118,13 @@ export const Companies = ({ className, ...restProps }) => {
     setPageNumber(pageNumber - 1);
   };
 
+  const handleEditPage = (id) => {
+    navigate(`/admin/company-edit/${id}`);
+  };
+
+  /* Setup Columns */
+  const cols = React.useMemo(() => columns(handleEditPage), []);
+
   return (
     <div className={(CompaniesClasses, 'flex flex-col')} {...restProps}>
       <div className="w-full mb-2 text-3xl font-bold dashboard_title text-G-dark">
@@ -147,7 +154,7 @@ export const Companies = ({ className, ...restProps }) => {
         ) : (
           companies.data && (
             <UITable
-              COLUMNS={COLUMNS}
+              COLUMNS={cols}
               DATA={companies?.data || []}
               onChangePageSize={handlePageSizeChange}
               onChange={(rows) => setRemoveCompanies(rows)}

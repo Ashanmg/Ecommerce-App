@@ -4,7 +4,7 @@ import CN from 'classnames';
 import './ImagesForm.scss';
 import DropZone from '../../../components/DropZone/DropZone';
 
-export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
+export const ImagesForm = ({ className, setFieldValue, images=[], ...restProps }) => {
   const ImagesFormClasses = CN(
     'images-form px-3 py-7 border-t border-N-100 gap-3',
     className,
@@ -12,21 +12,21 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
   );
 
   const [image1, setImage1] = useState([]);
-  const [imageUrl1, setImageUrl1] = useState([]);
+  const [imageUrl1, setImageUrl1] = useState(images[0] ? images[0].imageUrl : []);
   const [image2, setImage2] = useState([]);
-  const [imageUrl2, setImageUrl2] = useState([]);
+  const [imageUrl2, setImageUrl2] = useState(images[1] ? images[1].imageUrl : []);
   const [image3, setImage3] = useState([]);
-  const [imageUrl3, setImageUrl3] = useState([]);
+  const [imageUrl3, setImageUrl3] = useState(images[2] ? images[1].imageUrl : []);
   const [image4, setImage4] = useState([]);
-  const [imageUrl4, setImageUrl4] = useState([]);
+  const [imageUrl4, setImageUrl4] = useState(images[3] ? images[1].imageUrl : []);
   const [image5, setImage5] = useState([]);
-  const [imageUrl5, setImageUrl5] = useState([]);
+  const [imageUrl5, setImageUrl5] = useState(images[4] ? images[1].imageUrl : []);
   const [image6, setImage6] = useState([]);
-  const [imageUrl6, setImageUrl6] = useState([]);
+  const [imageUrl6, setImageUrl6] = useState(images[5] ? images[1].imageUrl : []);
   const [image7, setImage7] = useState([]);
-  const [imageUrl7, setImageUrl7] = useState([]);
+  const [imageUrl7, setImageUrl7] = useState(images[6] ? images[1].imageUrl : []);
   const [image8, setImage8] = useState([]);
-  const [imageUrl8, setImageUrl8] = useState([]);
+  const [imageUrl8, setImageUrl8] = useState(images[7] ? images[1].imageUrl : []);
 
   useEffect(() => {
     setFieldValue('productImages', [
@@ -40,6 +40,7 @@ export const ImagesForm = ({ className, setFieldValue, ...restProps }) => {
       image8,
     ]);
   }, [image1, image2, image3, image4, image5, image6, image7, image8]);
+
   return (
     <div className={ImagesFormClasses} {...restProps}>
       <DropZone

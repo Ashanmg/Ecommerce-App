@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CN from 'classnames';
 
 import './InventoryForm.scss';
@@ -12,6 +12,7 @@ export const InventoryForm = ({
   handleBlur,
   setFieldValue,
   values,
+  inventory,
   handleChange,
   ...restProps
 }) => {
@@ -21,10 +22,24 @@ export const InventoryForm = ({
     {}
   );
 
+  const inventoryMethods = [
+    { value: false, label: 'Do not track inventory' },
+    { value: true, label: 'Track inventory' },
+  ];
+
+  const [selectedInventoryMethod, setSelectedInventoryMethod] = useState();
+
+  useEffect(() => {
+    const filterMainValue = inventoryMethods.filter(
+      (inventoryMethod) => inventoryMethod.value === values?.inventoryMethod
+    );
+    setSelectedInventoryMethod(filterMainValue[0]);
+  }, [inventory]);
+  
   return (
     <div className={InventoryFormClasses} {...restProps}>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12 required">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark required">
           Inventory method :
         </span>
         <AutoSelect
@@ -34,16 +49,13 @@ export const InventoryForm = ({
           }}
           onBlur={handleBlur}
           name="inventoryMethod"
-          options={[
-            { value: '1', label: 'Do not track inventory' },
-            { value: '2', label: 'Track inventory' },
-          ]}
-          value={values.inventoryMethod}
+          options={inventoryMethods}
+          value={selectedInventoryMethod}
           placeHolder=""
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Minimum Cart Quantity :
         </span>
         <TextField
@@ -52,12 +64,12 @@ export const InventoryForm = ({
           name="minimumCartQuantity"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.minimumCartQuantity}
+          value={values?.minimumCartQuantity}
           type="number"
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Maximum Cart Quantity :
         </span>
         <TextField
@@ -66,12 +78,12 @@ export const InventoryForm = ({
           name="maximumCartQuantity"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.maximumCartQuantity}
+          value={values?.maximumCartQuantity}
           type="number"
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Allowed Quantity :
         </span>
         <TextField
@@ -80,13 +92,13 @@ export const InventoryForm = ({
           name="allowedQuantity"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.allowedQuantity}
+          value={values?.allowedQuantity}
           type={'number'}
         />
       </div>
-      <div className="w-full flex items-center">
+      <div className="flex items-center w-full">
         <span
-          className=" text-sm text-G-dark font-semibold"
+          className="text-sm font-semibold text-G-dark"
           style={{ width: '217px' }}
         >
           Not returnable :
@@ -95,6 +107,7 @@ export const InventoryForm = ({
           id="notReturnable"
           name="notReturnable"
           onChange={handleChange}
+          checked={values?.notReturnable}
           onBlur={handleBlur}
           className=""
         />

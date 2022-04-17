@@ -10,6 +10,7 @@ export const ShippingForm = ({
   handleBlur,
   handleChange,
   values,
+  shipping,
   setFieldValue,
   ...restProps
 }) => {
@@ -19,10 +20,12 @@ export const ShippingForm = ({
     {}
   );
 
+  console.log(shipping);
+
   return (
     <div className={ShippingFormClasses} {...restProps}>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Description :
         </span>
         <TextField
@@ -31,25 +34,25 @@ export const ShippingForm = ({
           name="shippingDescription"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.shippingDescription}
+          value={values?.shippingDescription}
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Length :
         </span>
         <TextField
           id="shippingLength"
-          className="border border-G-dark w-5/12"
+          className="w-5/12 border border-G-dark"
           name="shippingLength"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.shippingLength}
+          value={values?.shippingLength}
           type="number"
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Width :
         </span>
         <TextField
@@ -58,12 +61,12 @@ export const ShippingForm = ({
           name="shippingWidth"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.shippingWidth}
+          value={values?.shippingWidth}
           type="number"
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Height :
         </span>
         <TextField
@@ -72,12 +75,12 @@ export const ShippingForm = ({
           name="shippingHeight"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.shippingHeight}
+          value={values?.shippingHeight}
           type="number"
         />
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Weight :
         </span>
         <TextField
@@ -86,53 +89,53 @@ export const ShippingForm = ({
           name="shippingWeight"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.shippingWeight}
+          value={values?.shippingWeight}
           type="number"
         />
       </div>
       <div className="flex gap-3">
         <div className="flex items-center gap-x-2">
-          <span className=" text-sm text-G-dark font-semibold">Cm</span>
+          <span className="text-sm font-semibold text-G-dark">Cm</span>
           <RadioButton
             id="ShippingUnitCm"
             name="ShippingUnitStrength"
             defaultChecked={values.ShippingUnitStrength === 'cm'}
             onChange={() => setFieldValue('ShippingUnitStrength', 'cm')}
-            checked={values.ShippingUnitStrength === 'cm'}
+            checked={values?.ShippingUnitStrength === 'cm'}
           />
         </div>
         <div className="flex items-center gap-x-2">
-          <span className=" text-sm text-G-dark font-semibold">Inch</span>
+          <span className="text-sm font-semibold text-G-dark">Inch</span>
           <RadioButton
             id="ShippingUnitInch"
             name="ShippingUnitStrength"
             onChange={() => setFieldValue('ShippingUnitStrength', 'inch')}
-            checked={values.ShippingUnitStrength === 'inch'}
+            checked={values?.ShippingUnitStrength === 'inch'}
           />
         </div>
         <div>|</div>
         <div className="flex items-center gap-x-2">
-          <span className=" text-sm text-G-dark font-semibold">Kg</span>
+          <span className="text-sm font-semibold text-G-dark">Kg</span>
           <RadioButton
             id="ShippingUnitKg"
             name="ShippingUnitWeight"
-            defaultChecked={values.ShippingUnitWeight === 'kg'}
+            defaultChecked={values.weightType === 'kg'}
             onChange={() => setFieldValue('ShippingUnitWeight', 'kg')}
-            checked={values.ShippingUnitWeight === 'kg'}
+            checked={values?.ShippingUnitWeight === 'kg'}
           />
         </div>
         <div className="flex items-center gap-x-2">
-          <span className=" text-sm text-G-dark font-semibold">Pou</span>
+          <span className="text-sm font-semibold text-G-dark">Pou</span>
           <RadioButton
             id="ShippingUnitPou"
             name="ShippingUnitWeight"
             onChange={() => setFieldValue('ShippingUnitWeight', 'pou')}
-            checked={values.ShippingUnitWeight === 'pou'}
+            checked={values?.ShippingUnitWeight === 'pou'}
           />
         </div>
       </div>
-      <div className="w-full flex items-center">
-        <span className=" text-sm text-G-dark font-semibold w-2/12">
+      <div className="flex items-center w-full">
+        <span className="w-2/12 text-sm font-semibold text-G-dark">
           Note (Optional) :
         </span>
         <TextField
@@ -141,7 +144,7 @@ export const ShippingForm = ({
           name="shippingNote"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.shippingNote}
+          value={values?.shippingNote}
         />
       </div>
     </div>

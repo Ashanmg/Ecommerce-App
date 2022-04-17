@@ -5,7 +5,7 @@ import Loader from 'react-spinners/PuffLoader';
 
 import './Products.scss';
 import UITable from '../../components/CMS-components/UITable/UITable';
-import { COLUMNS } from './columns';
+import columns from './columns';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllProductFail,
@@ -78,6 +78,10 @@ export const Products = ({ className, ...restProps }) => {
     }
   }, [pageSize, pageNumber]);
 
+  const handleEditPage = (id) => {
+    navigate(`/admin/product-edit/${id}`);
+  };
+
   //pagination handle
   const handlePageSizeChange = async (e) => {
     setPageSize(e.target.value);
@@ -106,13 +110,16 @@ export const Products = ({ className, ...restProps }) => {
     setPageNumber(pageNumber - 1);
   };
 
+  /* Setup Columns */
+  const cols = React.useMemo(() => columns(handleEditPage), []);
+
   return (
     <div className={ProductsClasses} {...restProps}>
       <div className="w-full mb-2 text-3xl font-bold dashboard_title text-G-dark">
         Products
       </div>
       <div className="flex justify-end mb-2 product__add -item-btn gap-x-2">
-      <Button
+        <Button
           children="Delete Products"
           className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-R-500 lg:text-sm border-R-500 hover:bg-white hover:text-R-500"
           onClick={() => console.log('delete')}
@@ -125,12 +132,12 @@ export const Products = ({ className, ...restProps }) => {
       </div>
       <div className="product__table">
         {isLoading ? (
-          <div className='flex items-center justify-center w-full h-auto'>
+          <div className="flex items-center justify-center w-full h-auto">
             <Loader type="Grid" color="#1c473c" size={60} />
           </div>
         ) : (
           <UITable
-            COLUMNS={COLUMNS}
+            COLUMNS={cols}
             DATA={products?.data || []}
             onChangePageSize={handlePageSizeChange}
             pageSize={pageSize}

@@ -76,6 +76,13 @@ export const routes = [
     accessRoles: [1, 6],
   },
   {
+    path: '/admin/product-edit/:id',
+    component: ProductUpload,
+    layout: CMSLayout,
+    private: false,
+    accessRoles: [1, 6],
+  },
+  {
     path: '/admin/product-uploads',
     component: ProductUpload,
     layout: CMSLayout,
@@ -87,15 +94,22 @@ export const routes = [
     component: Companies,
     layout: CMSLayout,
     private: true,
-    accessRoles: [1, 6]
+    accessRoles: [1, 6],
   },
   {
     path: '/admin/company-registration',
     component: CompanyRegistration,
     layout: CMSLayout,
     private: true,
-    accessRoles: [1, 6]
-  }
+    accessRoles: [1, 6],
+  },
+  {
+    path: '/admin/company-edit/:id',
+    component: CompanyRegistration,
+    layout: CMSLayout,
+    private: false,
+    accessRoles: [1, 6],
+  },
 ];
 
 export default routes;
