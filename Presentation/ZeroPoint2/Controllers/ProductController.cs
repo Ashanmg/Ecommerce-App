@@ -91,6 +91,14 @@ namespace ZeroPoint2.Controllers
             ExecutionResponse<GetProductDetailForEditDto> response = await _productService.GetProductDetailForEdit(id);
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("updateProduct")]
+        public async Task<IActionResult> UpdateProduct([FromForm] UploadProductForCreationDto productForCreationDto)
+        {
+            ExecutionResponse<bool> response = await _productService.UpdateProduct(productForCreationDto);
+            return Ok(response);
+        }
         #endregion
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ZeroPoint2.Core.Dtos;
 using ZeroPoint2.Core.Entities;
 using ZeroPoint2.Data;
+using ZeroPoint2.Helper;
 
 namespace ZeroPoint2.Services
 {
@@ -39,6 +40,36 @@ namespace ZeroPoint2.Services
         public async Task<bool> UserExistsAsync(string email)
         {
             return await _authRepository.UserExistsAsync(email);
+        }
+
+        public async Task<ExecutionResponse<bool>> ForgetPassword(string email)
+        {          
+            ExecutionResponse<bool> response = new ExecutionResponse<bool>();
+            try
+            {
+                var user = await _authRepository.GetUserByEmail(email);
+
+                if (user != null)
+                {
+                    user.PasswordResetToken = Guid.NewGuid();
+                    user.IsTokenUsed = false;
+                    user.TokenCreatedOnUtc = DateTime.UtcNow;
+
+                    await _authRepository.UpdateUser(user);
+
+
+                    // then send the email to the relevant email address.
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error.";
+                response.ExceptionData = ex.Message;
+                response.RequestStatus = ExecutionStatus.Error;
+            }
+
+            return response;
         }
     }
 }

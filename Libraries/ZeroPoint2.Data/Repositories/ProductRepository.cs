@@ -142,6 +142,78 @@ namespace ZeroPoint2.Data
                 .Include(p => p.ProductSpecifications)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<Product> UpdateSingleProductDataAsync(Product product)
+        {
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+
+            return product;
+        }
+
+        public async Task<List<ProductColor>> DeleteAndUpdateProductColorData(List<ProductColor> productColors, int productId)
+        {
+            var existingProductColors = await _context.ProductColors.Where(pc => pc.ProductId == productId).ToListAsync();
+
+            var existingSizesList = await _context.productSizes
+                .Where(ps => existingProductColors.Select(p => p.Id).Contains(ps.ProductColorId)).ToListAsync();
+            _context.productSizes.RemoveRange(existingSizesList);
+            _context.ProductColors.RemoveRange(existingProductColors);
+
+            foreach (var productColor in productColors)
+            {
+                productColor.ProductId = productId;
+                productColor.CreatedOnUtc = DateTime.UtcNow;
+                await _context.ProductColors.AddAsync(productColor);
+            }
+            await _context.SaveChangesAsync();
+
+            return productColors;
+        }
+
+        public async Task<bool> UpdateProductCombinationData(List<ProductCombination> productCombinationList, int productId)
+        {
+            var existingProductCombinations = await _context.ProductCombinations.Where( pc => pc.ProductId == productId).ToListAsync();
+
+            _context.ProductCombinations.RemoveRange(existingProductCombinations);
+
+            foreach (var productCombination in productCombinationList)
+            {
+                await _context.ProductCombinations.AddAsync(productCombination);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public Task<List<ProductImage>> GetProductImagesByProductId(int productId)
+        {
+             return _context.ProductImages.Where(pc => pc.ProductId == productId).ToListAsync();
+        }
+
+        public async Task<bool> UpdateProductImageDataAsync(List<ProductImage> productImagesList, List<ProductImage> existingImages)
+        {
+            _context.ProductImages.RemoveRange(existingImages);
+
+            foreach (var productImage in productImagesList)
+            {
+                await _context.ProductImages.AddAsync(productImage);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> UpdateProductSpecificationDataAsync(List<ProductSpecification> productSpecificationList, int productId)
+        {
+            var existingSpecifications = await _context.ProductSpecifications.Where(pc => pc.ProductId == productId).ToListAsync();
+            _context.ProductSpecifications.RemoveRange(existingSpecifications);
+
+            foreach (var productSpecification in productSpecificationList)
+            {
+                await _context.ProductSpecifications.AddAsync(productSpecification);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
+        }
         #endregion
     }
 }
