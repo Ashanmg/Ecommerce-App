@@ -10,7 +10,13 @@ import SizePicker from '../SizePicker/SizePicker';
 import ColorChipsPicker from '../ColorChipsPicker/ColorChipsPicker';
 import { TextField } from '../TextField';
 
-export const priceCard = ({ className, ...restProps }) => {
+export const priceCard = ({
+  className,
+  productName,
+  productPrice,
+  productQuantity,
+  ...restProps
+}) => {
   const priceCardClasses = CN(
     'price-card flex justify-center flex-col',
     className,
@@ -61,7 +67,7 @@ export const priceCard = ({ className, ...restProps }) => {
   return (
     <div className={priceCardClasses} {...restProps}>
       <div className="flex justify-center w-full p-2 font-semibold price-card__title bg-G-light">
-        <span> East Coast Pets </span>
+        <span> {productName} </span>
         <RiInformationLine className="cursor-pointer" size={24} />
       </div>
       <div className="flex justify-between pt-4 font-semibold price-card__unit-price">
@@ -69,13 +75,26 @@ export const priceCard = ({ className, ...restProps }) => {
           Unit Price
         </div>
         <div className="text-3xl price-card__unit-price-value text-G-dark">
-          $49.99
+          {`$${productPrice}`}
         </div>
       </div>
       <div className="flex justify-between pt-4 gap-x-2 price-card__inputs">
         <div className="flex items-center price-card__inputs__qty">
-          <span className="pr-2">Qty</span>
-          <TextField type={'number'} min='0' className='flex-1 mr-2' />
+          {productQuantity ? (
+            <>
+              <span className="pr-2">Qty</span>
+              <TextField
+                type={'number'}
+                min="1"
+                max={productQuantity}
+                className="flex-1 mr-2"
+                value={productQuantity}
+              />
+            </>
+          ) : (
+            <span className='font-bold text-R-500' > Not Available </span>
+          )}
+
           {/* <DropDown options={[1, 2, 3, 4, 5]} /> */}
         </div>
         <Button

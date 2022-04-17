@@ -3,9 +3,9 @@ import { RiBallPenFill } from 'react-icons/ri';
 import Button from '../../components/Button/Button';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const columns = (handleEditPage) => {
-
   const COLUMNS = [
     {
       Header: 'Product',
@@ -25,7 +25,15 @@ const columns = (handleEditPage) => {
     },
     {
       Header: 'Product Name',
-      accessor: 'name',
+      accessor: d => `${d.name}|${d.id}`,
+      Cell: ({ value }) => {
+        const val = value.split('|');
+        return (
+          <Link to={`/product/${val[1]}`} className="flex items-center">
+            {val[0]}
+          </Link>
+        );
+      },
     },
     {
       Header: 'SKU',
@@ -49,7 +57,7 @@ const columns = (handleEditPage) => {
     {
       Header: 'Edit',
       accessor: 'id',
-      Cell: ({value}) => {
+      Cell: ({ value }) => {
         return (
           <Button
             children="Edit"

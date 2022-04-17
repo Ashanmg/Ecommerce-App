@@ -248,8 +248,6 @@ export const ProductUpload = ({ className, ...restProps }) => {
     }
   }, [editData]);
 
-  console.log(productInformation);
-
   return (
     <div className={ProductUploadClasses} {...restProps}>
       {isUploadLoading && (
