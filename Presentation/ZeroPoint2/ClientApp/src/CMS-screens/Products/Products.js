@@ -13,9 +13,14 @@ import {
   getAllProductSuccess,
 } from '../../features/getAllProductSlice';
 import { toast, Flip } from 'react-toastify';
-import { getAllProducts } from '../../api/productApi';
+import { getAllProducts, removeProduct } from '../../api/productApi';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  productRemoveFail,
+  productRemovePending,
+  productRemoveSuccessful,
+} from '../../features/productRemoveSlice';
 
 export const Products = ({ className, ...restProps }) => {
   const ProductsClasses = CN('products flex flex-col', className, {});
@@ -58,6 +63,7 @@ export const Products = ({ className, ...restProps }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [canNextPage, setCanNextPage] = useState(false);
   const [canPreviousPage, setCanPreviousPage] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const {
     isLoading,
@@ -110,6 +116,20 @@ export const Products = ({ className, ...restProps }) => {
     setPageNumber(pageNumber - 1);
   };
 
+  const handleDeleteProducts = async () => {
+    const removeIds = selectedProducts.map((product) => product.id);
+    console.log(removeIds);
+    dispatch(productRemovePending());
+    try {
+      const products = await removeProduct(removeIds);
+      SuccessToast('Product removed successfully');
+      dispatch(productRemoveSuccessful(products));
+    } catch (error) {
+      errorToast('Product category fetching failed');
+      dispatch(productRemoveFail(error.message));
+    }
+  };
+
   /* Setup Columns */
   const cols = React.useMemo(() => columns(handleEditPage), []);
 
@@ -119,11 +139,14 @@ export const Products = ({ className, ...restProps }) => {
         Products
       </div>
       <div className="flex justify-end mb-2 product__add -item-btn gap-x-2">
-        <Button
-          children="Delete Products"
-          className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-R-500 lg:text-sm border-R-500 hover:bg-white hover:text-R-500"
-          onClick={() => console.log('delete')}
-        />
+        {selectedProducts.length > 0 && (
+          <Button
+            children="Delete Products"
+            className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-R-500 lg:text-sm border-R-500 hover:bg-white hover:text-R-500"
+            onClick={() => handleDeleteProducts()}
+          />
+        )}
+
         <Button
           children="Add Product"
           className="items-center px-5 text-xs text-white border-2 rounded-sm h-7 w-max md:h-8 lg:h-10 bg-G-light lg:text-sm border-G-light hover:bg-white hover:text-G-dark"
@@ -141,6 +164,7 @@ export const Products = ({ className, ...restProps }) => {
             DATA={products?.data || []}
             onChangePageSize={handlePageSizeChange}
             pageSize={pageSize}
+            onChange={(e) => setSelectedProducts(e)}
             pageCount={pageCount}
             pageNumber={pageNumber - 1}
             canNextPage={canNextPage}

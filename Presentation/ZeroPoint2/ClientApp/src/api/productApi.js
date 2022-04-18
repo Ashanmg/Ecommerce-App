@@ -85,6 +85,28 @@ export const getProductsTax = (pagesize, pageNumber) => {
   });
 };
 
+export const removeProduct = (deleteProductsId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await post('/api/product/deleteproducts', {
+        "CompanyIdList": deleteProductsId
+      });
+
+      resolve(res.data);
+
+      if (res.status === 200) {
+        // sessionStorage.setItem('token', res.data.token);
+        // localStorage.setItem(
+        //   'token',
+        //   JSON.stringify({ token: res.data.token })
+        // );
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const getProductById = (productId) => {
   return new Promise(async (resolve, reject) => {
     try {

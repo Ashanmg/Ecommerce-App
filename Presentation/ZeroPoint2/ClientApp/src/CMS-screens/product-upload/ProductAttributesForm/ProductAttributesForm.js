@@ -65,7 +65,6 @@ export const ProductAttributesForm = ({
           hashValue: color.colorHashValue,
         });
       });
-
       setSelectedColor(colors);
     }
   }, [productAttributes]);
