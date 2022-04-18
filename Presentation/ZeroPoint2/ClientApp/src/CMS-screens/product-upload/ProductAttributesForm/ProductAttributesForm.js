@@ -30,7 +30,7 @@ export const ProductAttributesForm = ({
     {}
   );
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   const dispatch = useDispatch();
   const [colors, setColors] = useState([]);
@@ -55,15 +55,20 @@ export const ProductAttributesForm = ({
     }
   }, []);
 
-  useEffect( () => {
-    if(id){
-      console.log(colors, productAttributes);
-      const filterColors = colors.filter(
-        (color) => color.value === values?.colors
-      );
-      setSelectedColor(filterColors);
-    }    
-  }, [colors]);
+  useEffect(() => {
+    if (id) {
+      const colors = [];
+      productAttributes.colors.map((color) => {
+        colors.push({
+          value: color.id,
+          label: color.colorName,
+          hashValue: color.colorHashValue,
+        });
+      });
+
+      setSelectedColor(colors);
+    }
+  }, [productAttributes]);
 
   return (
     <div className={ProductAttributesFormClasses} {...restProps}>
@@ -112,7 +117,7 @@ export const ProductAttributesForm = ({
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
               console.log('Editor is ready to use!', editor);
-            }}            
+            }}
             onChange={(event, editor) => {
               const data = editor.getData();
               // console.log({ event, editor, data });
