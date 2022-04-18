@@ -117,7 +117,7 @@ export const HomeScreen = ({ className, ...restProps }) => {
                 setMoveProduct(true);
               }, 5000);
             } else {
-              navigate(`/product/${products[idx].id}`);
+              // navigate(`/product/${products[idx].id}`);
             }
           }}
           key={products[idx].id || _.uniqueId}
