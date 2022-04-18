@@ -113,7 +113,6 @@ export const ProductInformationForm = ({
       const sub = categories?.filter(
         (category) => category.id === mainSelectedCategory?.value
       );
-      console.log(mainSelectedCategory);
 
       let childCategory = [];
       if (sub.length !== 0) {
@@ -166,14 +165,11 @@ export const ProductInformationForm = ({
       const filterChildValue = childCategories.filter(
         (category) => category.value === values?.productChildCategory
       );
-      console.log(filterMainValue);
       setMainSelectedCategory(filterMainValue[0]);
       setSubSelectedCategory(filterSubValue[0]);
       setChildSelectedCategory(filterChildValue[0]);
     }
   }, [mainCategories, subCategories, childCategories]);
-
-  console.log(values);
 
   useEffect(() => {
     const filterCompanyValue = companies.filter(

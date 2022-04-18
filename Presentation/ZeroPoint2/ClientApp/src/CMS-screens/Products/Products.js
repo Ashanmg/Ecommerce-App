@@ -118,7 +118,6 @@ export const Products = ({ className, ...restProps }) => {
 
   const handleDeleteProducts = async () => {
     const removeIds = selectedProducts.map((product) => product.id);
-    console.log(removeIds);
     dispatch(productRemovePending());
     try {
       const products = await removeProduct(removeIds);

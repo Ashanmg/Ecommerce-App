@@ -80,7 +80,6 @@ export const ProductUpload = ({ className, ...restProps }) => {
       dispatch(getProductPending());
       try {
         const products = await getProductById(id);
-        console.log(products);
         setEditData(products);
         dispatch(getProductSuccess());
       } catch (error) {
@@ -229,7 +228,6 @@ export const ProductUpload = ({ className, ...restProps }) => {
         dispatch(productUploadSuccess());
         SuccessToast('Product Upload successful.');
       } catch (error) {
-        console.log(error);
         errorToast('Product Upload failed.');
         // setProgressed(100);
         dispatch(productUploadFail(error.message));

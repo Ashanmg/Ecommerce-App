@@ -20,8 +20,6 @@ export const ShippingForm = ({
     {}
   );
 
-  console.log(shipping);
-
   return (
     <div className={ShippingFormClasses} {...restProps}>
       <div className="flex items-center w-full">

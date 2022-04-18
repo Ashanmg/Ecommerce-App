@@ -46,8 +46,6 @@ export const ProductCorasal = ({ className, images, ...restProps }) => {
     verticalSwiping: true,
   };
 
-  console.log(images);
-
   return (
     <div className={ProductCorasalClasses} {...restProps}>
       <div className="w-10/12">

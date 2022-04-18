@@ -28,8 +28,6 @@ export const priceCard = ({
   const [colorList, setColorList] = useState([]);
   const [sizeList, setSizeList] = useState([]);
 
-  console.log(productColors);
-
   useEffect(() => {
     const colorChips = [];
     productColors?.map((color) => {

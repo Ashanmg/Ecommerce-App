@@ -39,7 +39,6 @@ export const ProductScreen = ({ className, ...restProps }) => {
       dispatch(getProductPending());
       try {
         const products = await getProductById(id);
-        console.log(products);
         setProductData(products);
         dispatch(getProductSuccess());
       } catch (error) {

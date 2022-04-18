@@ -86,7 +86,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
       dispatch(getCompanyPending());
       try {
         const company = await getCompanyById(id);
-        console.log(company);
         setCompanyName(company.companyName);
         setCompanyDescription(company.companyInfo);
         setReturnablePolicy(company.returnablePolicy);
@@ -191,7 +190,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
           `CompanyFeatures[${i}].FeatureSummary`,
           addedItemList[i].featureSummary
         );
-        console.log(addedItemList[i].FeatureImage);
         if (addedItemList[i].featureImage) {
           formData.append(
             `CompanyFeatures[${i}].FeatureImage`,
@@ -214,7 +212,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
         resetForm();
         SuccessToast('Company registered successfully');
       } catch (error) {
-        console.log(error);
         errorToast('Something went wrong');
         dispatch(companyRegisterFail(error.message));
       }
