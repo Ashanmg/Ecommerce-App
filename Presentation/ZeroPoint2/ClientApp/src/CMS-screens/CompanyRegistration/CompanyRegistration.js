@@ -69,7 +69,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
   const [logoUrl, setLogoUrl] = useState('');
   const [inputList, setInputList] = useState([
     {
-      FeatureTitle: '',
+      featureTitle: '',
       featureImage: null,
       imageUrl: '',
       featureSummary: '',
@@ -127,11 +127,11 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     setInputList([
       ...inputList,
       {
-        FeatureTitle: '',
-        FeatureImage: null,
+        featureTitle: '',
+        featureImage: null,
         imageUl: '',
-        FeatureSummary: '',
-        IsImageLeftAligned: true,
+        featureSummary: '',
+        isImageLeftAligned: true,
       },
     ]);
   };
@@ -153,11 +153,11 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
     setLogoUrl('');
     setInputList([
       {
-        FeatureTitle: '',
-        FeatureImage: null,
+        featureTitle: '',
+        featureImage: null,
         imageUl: '',
-        FeatureSummary: '',
-        IsImageLeftAligned: true,
+        featureSummary: '',
+        isImageLeftAligned: true,
       },
     ]);
     setAddedItemList([]);
@@ -184,7 +184,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
         formData.append(`CompanyFeatures[${i}].Id`, 0);
         formData.append(
           `CompanyFeatures[${i}].FeatureTitle`,
-          addedItemList[i].FeatureTitle
+          addedItemList[i].featureTitle
         );
         formData.append(
           `CompanyFeatures[${i}].FeatureSummary`,
@@ -217,6 +217,8 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
       }
     }
   };
+
+  console.log(inputList);
 
   return (
     <div className={CompanyRegistrationClasses} {...restProps}>
@@ -297,11 +299,12 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
             Company content
           </div>
           <div className="flex flex-wrap flex-shrink gap-2 my-2 company-registration__content-data__add-companies">
-            {addedItemList.map(({ title }, index) => {
+            {addedItemList.map(({ featureTitle }, index) => {
+              
               return (
                 <Chip
                   key={index}
-                  title={title}
+                  title={featureTitle}
                   onClose={(e) => {
                     const addedItemListCopy = [...addedItemList];
                     addedItemListCopy.splice(index, 1);
@@ -313,7 +316,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
           </div>
           <div className="flex flex-col gap-y-4">
             {inputList.map(
-              ({ featureTitle, featureSummary, isImageLeftAligned, FeatureImage, imageUrl }, idx) => {
+              ({ featureTitle, featureSummary, isImageLeftAligned, featureImage, imageUrl }, idx) => {
                 return (
                   <div
                     className="flex flex-col p-2 gap-y-4"
@@ -328,7 +331,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                       <TextField
                         placeholder="Title"
                         className="border border-G-dark"
-                        name="title"
+                        name="featureTitle"
                         value={featureTitle}
                         onChange={(e) => handleInputChange(e, idx)}
                       />
@@ -365,7 +368,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                           <TextArea
                             rows={5}
                             textRules="max length 200"
-                            name="description"
+                            name="featureSummary"
                             value={featureSummary}
                             onChange={(e) => handleInputChange(e, idx)}
                           />
@@ -377,7 +380,7 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                           <TextArea
                             rows={5}
                             textRules="max length 200"
-                            name="description"
+                            name="featureSummary"
                             value={featureSummary}
                             onChange={(e) => handleInputChange(e, idx)}
                           />
