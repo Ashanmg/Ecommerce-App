@@ -135,24 +135,22 @@ export const ProductUpload = ({ className, ...restProps }) => {
     if (productName === '') {
       errorToast('Product Name is required');
       return;
-    } else if (productCategory === '') {
+    } else if (productCategory == null || productCategory === '') {
       errorToast('Product Category is required');
       return;
-    } else if (productSubCategory === '') {
+    } else if (productSubCategory == null || productSubCategory === '') {
       errorToast('Product Sub Category is required');
       return;
-    } else if (productChildCategory === '') {
+    } else if (productChildCategory == null || productChildCategory === '') {
       errorToast('Product Child Category is required');
       return;
     } else if (metaKeyword === '') {
       errorToast('Meta Keyword is required');
       return;
-    } else if (supplierProductCode === '') {
-      errorToast('Supplier Product Code is required');
-    } else if (company === '') {
+    } else if (company == null || company === '') {
       errorToast('Company is required');
       return;
-    } else if (productType === '') {
+    } else if (productType == null || productType === '') {
       errorToast('Product Type is required');
       return;
     } else if (wholePrice === '') {
@@ -161,7 +159,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
     } else if (retailPrice === '') {
       errorToast('Retail Price is required');
       return;
-    } else if (inventoryMethod === '') {
+    } else if (inventoryMethod == null || inventoryMethod === '') {
       errorToast('Inventory Method is required');
       return;
     } else {
@@ -211,10 +209,7 @@ export const ProductUpload = ({ className, ...restProps }) => {
       formData.append('istaxIncluded', taxExempt);
       formData.append('ShippingDescription', shippingDescription);
       formData.append('ShippingNote', shippingNote);
-      formData.append(
-        'IsInventoryTracked',
-        inventoryMethod.value === 1 ? false : true
-      );
+      formData.append('IsInventoryTracked', inventoryMethod.value);
       formData.append('MinCartQuantity', minimumCartQuantity);
       formData.append('MaxCartQuantity', maximumCartQuantity);
       formData.append('AllowedQuantity', allowedQuantity);

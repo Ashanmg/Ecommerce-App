@@ -148,50 +148,54 @@ namespace ZeroPoint2.Services
 
                 var productImagesList = new List<ProductImage>();
 
-                foreach (var file in fileList)
+                if (fileList != null)
                 {
-                    var uploadResult = new ImageUploadResult();
-
-                    var productImagesForCreationDto = new ProductImageForCreationDto();
-
-                    if (file.Length > 0)
+                    foreach (var file in fileList)
                     {
-                        using (var stream = file.OpenReadStream())
+                        var uploadResult = new ImageUploadResult();
+
+                        var productImagesForCreationDto = new ProductImageForCreationDto();
+
+                        if (file.Length > 0)
                         {
-                            var uploadParams = new ImageUploadParams()
+                            using (var stream = file.OpenReadStream())
                             {
-                                File = new FileDescription(file.Name, stream),
-                                Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
-                            };
+                                var uploadParams = new ImageUploadParams()
+                                {
+                                    File = new FileDescription(file.Name, stream),
+                                    Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+                                };
 
-                            uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                                uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                            }
                         }
+
+                        productImagesForCreationDto.ImageUrl = uploadResult.Url.ToString();
+                        productImagesForCreationDto.PublicId = uploadResult.PublicId;
+                        productImagesForCreationDto.DateAddedOnUtc = DateTime.UtcNow;
+                        productImagesForCreationDto.ProductId = product.Id;
+
+                        var productImage = _mapper.Map<ProductImage>(productImagesForCreationDto);
+
+                        if (!productImagesList.Any(p => p.IsMain))
+                        {
+                            productImage.IsMain = true;
+                        }
+
+                        productImagesList.Add(productImage);
                     }
 
-                    productImagesForCreationDto.ImageUrl = uploadResult.Url.ToString();
-                    productImagesForCreationDto.PublicId = uploadResult.PublicId;
-                    productImagesForCreationDto.DateAddedOnUtc = DateTime.UtcNow;
-                    productImagesForCreationDto.ProductId = product.Id;
+                    response.Result = await _productRepository.InsertProductImageDataAsync(productImagesList);
 
-                    var productImage = _mapper.Map<ProductImage>(productImagesForCreationDto);
-
-                    if (!productImagesList.Any(p => p.IsMain))
+                    if (!response.Result)
                     {
-                        productImage.IsMain = true;
+                        response.RequestStatus = ExecutionStatus.Error;
+                        response.Message = "Product images could not be inserted successfully.";
+
+                        return response;
                     }
-
-                    productImagesList.Add(productImage);
                 }
 
-                response.Result = await _productRepository.InsertProductImageDataAsync(productImagesList);
-
-                if (!response.Result)
-                {
-                    response.RequestStatus = ExecutionStatus.Error;
-                    response.Message = "Product images could not be inserted successfully.";
-
-                    return response;
-                }
 
                 // then insert product specification
                 List<ProductSpecification> productSpecificationList = new List<ProductSpecification>();
