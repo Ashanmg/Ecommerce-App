@@ -66,7 +66,9 @@ export const SignInFrom = ({
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [forgotEmail, setForgotEmail] = useState('');
   const [passwordShow, setPasswordShow] = useState(false);
+  const [forgetPasswordShow, setForgetPasswordShow] = useState(false);
 
   const handleSubmit = async (e) => {
     if (email === '' || password === '') {
@@ -94,13 +96,20 @@ export const SignInFrom = ({
     }
   };
 
+  const ForgetPasswordSubmit = async (e) => {
+    if (forgotEmail == '') {
+      errorToast('Your email is required.');
+      return;
+    }
+  }
+
   return (
     <div
       className={SignInFromClasses}
       {...restProps}
       style={{ backgroundColor: '#01a45300' }}
     >
-      <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
+      { forgetPasswordShow && <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-6 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
             Sign-in
@@ -146,12 +155,31 @@ export const SignInFrom = ({
                   isLoading={isLoading}
                 />
               </div>
+              <div className="mt-4 text-center">
+                <span
+                  onKeyPress={() => {
+                    setForgetPasswordShow(!forgetPasswordShow);
+                  }}
+                  onClick={() => {
+                    setForgetPasswordShow(!forgetPasswordShow);
+                  }}
+                  role="link"
+                  tabIndex="0"
+                  className="text-sm text-center text-G-dark font-bold hover:bg-white hover:text-G-light"
+                >
+                  Forgot Password?{' '}
+                </span>
+              </div>
               <div className="mt-1 text-center">
                 <span className="text-xs text-center text-G-dark">
                   If you don't have an account, you can{' '}
                   <span
-                    onKeyPress={()=>{showSignUpModal();}}
-                    onClick={()=>{showSignUpModal();}}
+                    onKeyPress={() => {
+                      showSignUpModal();
+                    }}
+                    onClick={() => {
+                      showSignUpModal();
+                    }}
                     role="link"
                     tabIndex="0"
                     className="italic font-bold underline"
@@ -164,7 +192,74 @@ export const SignInFrom = ({
             </form>
           </div>
         </div>
-      </div>
+      </div>}
+      {!forgetPasswordShow && <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
+        <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
+          <div className="mb-6 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
+            Forgot Password?
+          </div>
+          <div className="mb-4 text-justify">
+            <span className="text-xs">
+              Don’t worry. We will send you a password reset link right away.
+              Check your mailbox and click on the reset link to get a new
+              password.
+            </span>
+          </div>
+          <div className="text-xs sign-up-screen__left__form">
+            <form action="submit">
+              <TextField
+                placeholder="Email"
+                autoComplete="off"
+                className="mb-4"
+                alue={forgotEmail}
+                onChange={(e) => setForgotEmail(e.target.value)}
+              />
+              <div className="text-center">
+                <Button
+                  children={!isLoading ? 'Send Password Reset Link' : ''}
+                  className="items-center w-full px-6 py-1 text-sm text-white border-2 h-7 md:h-10 md:py-2 xl:px-8 bg-G-light border-G-light hover:bg-white hover:text-G-dark"
+                  onClick={(e) => ForgetPasswordSubmit(e)}
+                  isLoading={isLoading}
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <span
+                  onKeyPress={() => {
+                    setForgetPasswordShow(!forgetPasswordShow);
+                  }}
+                  onClick={() => {
+                    setForgetPasswordShow(!forgetPasswordShow);
+                  }}
+                  role="link"
+                  tabIndex="0"
+                  className="text-sm text-center text-G-dark font-bold hover:bg-white hover:text-G-light"
+                >
+                  Back to Login{' '}
+                </span>
+              </div>
+              <div className="mt-1 text-center">
+                <span className="text-xs text-center text-G-dark">
+                  If you don't have an account, you can{' '}
+                  <span
+                    onKeyPress={() => {
+                      showSignUpModal();
+                    }}
+                    onClick={() => {
+                      showSignUpModal();
+                    }}
+                    role="link"
+                    tabIndex="0"
+                    className="italic font-bold underline"
+                  >
+                    Sign-up{' '}
+                  </span>
+                  for free.
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>}
     </div>
   );
 };
