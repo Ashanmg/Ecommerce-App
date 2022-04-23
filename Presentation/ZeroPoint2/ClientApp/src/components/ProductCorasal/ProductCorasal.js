@@ -41,7 +41,7 @@ export const ProductCorasal = ({ className, images, ...restProps }) => {
     infinite: true,
     vertical: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 7,
     slidesToScroll: 1,
     verticalSwiping: true,
   };
@@ -62,7 +62,7 @@ export const ProductCorasal = ({ className, images, ...restProps }) => {
         </Slider>
       </div>
       {images?.length > 1 && (
-        <div className="absolute right-0 flex items-center w-2/12 h-full overflow-y-auto">
+        <div className="absolute right-0 flex w-2/12 h-full overflow-auto">
           <Slider
             {...settingsSlide}
             asNavFor={nav1}
@@ -70,6 +70,7 @@ export const ProductCorasal = ({ className, images, ...restProps }) => {
             slidesToShow={images?.length}
             swipeToSlide={true}
             focusOnSelect={true}
+            centerMode={false}
           >
             {images?.map((image) => (
               <div>

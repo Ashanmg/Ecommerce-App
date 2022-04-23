@@ -14,7 +14,7 @@ export const ColorChip = ({
   tooltipTitle,
   ...restProps
 }) => {
-  const ColorChipClasses = CN('color-chip', className, {});
+  const ColorChipClasses = CN('color-chip shadow-sm', className, {});
 
   const setMultipleBackgroundList = (colorList) => {
     let colorListPrcentage = '';
@@ -39,7 +39,7 @@ export const ColorChip = ({
         style={{ background: setMultipleBackgroundList(colors) }}
         {...restProps}
       >
-        {isSelected && <RiCheckFill color='white' />}
+        {isSelected && <RiCheckFill color='gray' />}
       </div>
     </div>
   );

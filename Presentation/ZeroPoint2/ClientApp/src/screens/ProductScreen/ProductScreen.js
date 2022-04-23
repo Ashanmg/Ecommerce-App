@@ -31,6 +31,7 @@ export const ProductScreen = ({ className, ...restProps }) => {
   const [inventory, setInventory] = useState([]);
   const [images, setImages] = useState([]);
   const [productAttributes, setProductAttributes] = useState([]);
+  const [sizeGuidHtml, setSizeGuidHtml] = useState('');
 
   const { id } = useParams();
 
@@ -67,6 +68,15 @@ export const ProductScreen = ({ className, ...restProps }) => {
     }
   }, [productData]);
 
+  useEffect(() => {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(productAttributes?.sizeGuide, 'text/html');
+    setSizeGuidHtml(doc.body);
+    return doc.body;
+  }, [productAttributes]);
+
+  console.log(sizeGuidHtml);
+
   return (
     <div className={ProductScreenClasses} {...restProps}>
       <div className="w-3/5 product-screen__corasal">
@@ -79,14 +89,10 @@ export const ProductScreen = ({ className, ...restProps }) => {
           </div> */}
           <div className="w-4/6 h-12 product-screen__details__shipping bg-G-light">
             <div className="font-semibold product-screen__details__shipping__title">
-              {shipping?.shippingDescription
-                ? shipping?.shippingDescription
-                : `FREE SHIPPING`}
+              FREE SHIPPING
             </div>
             <div className="text-sm italic product-screen__details__shipping__description">
-              {shipping?.ship
-                ? shipping?.shippingNote
-                : `Free shipping on all orders over $50`}
+              Free shipping on all orders over $50
             </div>
           </div>
           <div className="mt-3 text-sm italic product-screen__details__shipping__copy-right text-G-dark">
@@ -111,6 +117,9 @@ export const ProductScreen = ({ className, ...restProps }) => {
           </div>
           <div className="product-screen__details-cart__price-details__details">
             {productInformation?.fullDescription}
+          </div>
+          <div className="product-screen__details-cart__price-details__details">
+            {/* {sizeGuidHtml} */}
           </div>
         </div>
       </div>
