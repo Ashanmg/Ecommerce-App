@@ -67,22 +67,28 @@ export const priceCard = ({
           {`$${productPrice}`}
         </div>
       </div>
+      {productQuantity > 0 ? (
+        <span className="flex justify-end text-sm items-left price-card__unit-price">
+          {`Available Quantity ${productQuantity}`}
+        </span>
+      ) : (
+        <span className="flex justify-end text-sm items-left text-R-500">
+          {' '}
+          Not Available{' '}
+        </span>
+      )}
+
       <div className="flex justify-between pt-4 gap-x-2 price-card__inputs">
         <div className="flex items-center price-card__inputs__qty">
-          {productQuantity ? (
-            <>
-              <span className="pr-2">Qty</span>
-              <TextField
-                type={'number'}
-                min="1"
-                max={productQuantity}
-                className="flex-1 mr-2"
-                value={productQuantity}
-              />
-            </>
-          ) : (
-            <span className="font-bold text-R-500"> Not Available </span>
-          )}
+          <>
+            <span className="pr-2">Qty</span>
+            <TextField
+              type={'number'}
+              min="1"
+              max={productQuantity}
+              className="flex-1 mr-2"
+            />
+          </>
 
           {/* <DropDown options={[1, 2, 3, 4, 5]} /> */}
         </div>
