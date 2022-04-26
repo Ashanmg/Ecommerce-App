@@ -68,7 +68,7 @@ export const SignInFrom = ({
   const [password, setPassword] = useState('');
   const [forgotEmail, setForgotEmail] = useState('');
   const [passwordShow, setPasswordShow] = useState(false);
-  const [forgetPasswordShow, setForgetPasswordShow] = useState(false);
+  const [forgetPasswordShow, setForgetPasswordShow] = useState(true);
 
   const handleSubmit = async (e) => {
     if (email === '' || password === '') {
@@ -101,6 +101,20 @@ export const SignInFrom = ({
       errorToast('Your email is required.');
       return;
     }
+
+    e.preventDefault();
+    dispatch(loginPending());
+
+    try {
+      //const isAuth = await userLogin({ email, password });
+      dispatch(loginSuccess());
+      SuccessToast('Email sent successful.');
+      OnClickModalClose();
+    } catch (error) {
+      console.log(error);
+      errorToast('Email sent failed.');
+      dispatch(loginFail(error.message));
+    }
   }
 
   return (
@@ -109,7 +123,7 @@ export const SignInFrom = ({
       {...restProps}
       style={{ backgroundColor: '#01a45300' }}
     >
-      { !forgetPasswordShow && <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
+      { forgetPasswordShow && <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-6 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
             Sign-in
@@ -193,7 +207,7 @@ export const SignInFrom = ({
           </div>
         </div>
       </div>}
-      {forgetPasswordShow && <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
+      {!forgetPasswordShow && <div className="flex items-center justify-center w-full h-full p-5 sign-up-screen__wrapper">
         <div className="flex flex-col justify-center flex-1 h-full p-10 bg-white border-4 sign-up-screen__left border-G-light">
           <div className="mb-6 text-2xl font-semibold text-center sign-up-screen__left__title text-G-dark">
             Forgot Password?

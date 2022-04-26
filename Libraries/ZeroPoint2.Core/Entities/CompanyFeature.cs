@@ -12,9 +12,7 @@ namespace ZeroPoint2.Core.Entities
     public class CompanyFeature
     {
         public int Id { get; set; }
-        [MaxLength(100)]
         public string FeatureTitle { get; set; }
-        [MaxLength(500)]
         public string FeatureSummary { get; set; }
         public bool IsImageLeftAligned { get; set; }
         public int CompanyId { get; set; }

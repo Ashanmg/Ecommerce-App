@@ -245,7 +245,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
             <div className="pb-3 company-registration__form__company-name">
               <span className="pb-2 text-base text-G-dark">Company Name</span>
               <TextField
-                placeholder="company name"
                 className="border border-G-dark"
                 onChange={(e) => setCompanyName(e.target.value)}
                 value={companyName}
@@ -255,7 +254,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
               <span className="text-base text-G-dark">Company Info</span>
               <TextArea
                 rows={3}
-                textRules="max length 500"
                 onChange={(e) => setCompanyDescription(e.target.value)}
                 value={companyDescription}
               />
@@ -264,7 +262,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
               <span className="text-base text-G-dark">Returnable Policy</span>
               <TextArea
                 rows={3}
-                textRules="max length 500"
                 onChange={(e) => setReturnablePolicy(e.target.value)}
                 value={returnablePolicy}
               />
@@ -329,7 +326,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                   >
                     <div className="company-registration__content-data__title">
                       <TextField
-                        placeholder="Title"
                         className="border border-G-dark"
                         name="featureTitle"
                         value={featureTitle}
@@ -367,7 +363,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                         <div className="flex-auto company-registration__content-data__content ">
                           <TextArea
                             rows={5}
-                            textRules="max length 200"
                             name="featureSummary"
                             value={featureSummary}
                             onChange={(e) => handleInputChange(e, idx)}
@@ -379,7 +374,6 @@ export const CompanyRegistration = ({ className, ...restProps }) => {
                         <div className="flex-auto company-registration__content-data__content ">
                           <TextArea
                             rows={5}
-                            textRules="max length 200"
                             name="featureSummary"
                             value={featureSummary}
                             onChange={(e) => handleInputChange(e, idx)}
