@@ -115,7 +115,7 @@ export const SignInFrom = ({
       errorToast('Email sent failed.');
       dispatch(loginFail(error.message));
     }
-  }
+  };
 
   return (
     <div
