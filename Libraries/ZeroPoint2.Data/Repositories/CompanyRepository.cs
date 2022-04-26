@@ -73,6 +73,7 @@ namespace ZeroPoint2.Data
         {
             foreach (var companyId in companyForDeleteDto.CompanyIdList)
             {
+                // delete the company
                 var company = await _context.Companies.Where(c => c.Id == companyId).FirstAsync();
                 _context.Companies.Remove(company);
             }
@@ -93,6 +94,38 @@ namespace ZeroPoint2.Data
         public async Task<CompanyImage> GetCompanyImageByCompanyFeatureId(int id)
         {
             return await _context.CompanyImages.Where(ci => ci.CompanyFeatureId == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> AreProductsAssignedToGivenCompany(List<int> companyIdList)
+        {
+            return await _context.Products.Where(p => companyIdList.Contains(p.CompanyId)).CountAsync() > 0;
+        }
+
+        public async Task<List<CompanyImage>> GetCompanyImagesToDelete(List<int> companyIdList)
+        {
+            var companyFeatures = _context.CompanyFeatures.Where(p => companyIdList.Contains(p.CompanyId)).Select(p => p.Id).ToList();
+
+            var existingImages = await _context.CompanyImages.Where(p => companyIdList.Contains((int)p.CompanyId) || companyFeatures.Contains((int)p.CompanyFeatureId)).ToListAsync();
+
+            return existingImages;
+        }
+
+        public async Task<bool> DeleteCompanyImages(List<CompanyImage> existingImages)
+        {
+            _context.CompanyImages.RemoveRange(existingImages);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteCompanyFeatureByCompany(List<int> companyIdList)
+        {
+            var companyFeatures = _context.CompanyFeatures.Where(p => companyIdList.Contains(p.CompanyId)).ToList();
+
+            if (companyFeatures.Any())
+            {
+                _context.CompanyFeatures.RemoveRange(companyFeatures);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            return true;
         }
         #endregion
     }

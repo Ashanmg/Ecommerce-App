@@ -207,18 +207,68 @@ namespace ZeroPoint2.Services
             ExecutionResponse<bool> response = new ExecutionResponse<bool>();
             try
             {
-                var isDeleted = await _companyRepository.DeleteBulkCompany(companyForDeleteDto);
-
-                if (isDeleted)
+                // check whether this company is used in the uploaded products
+                if ( await _companyRepository.AreProductsAssignedToGivenCompany(companyForDeleteDto.CompanyIdList))
                 {
-                    response.Result = isDeleted;
-                    response.RequestStatus = ExecutionStatus.Success;
+                    response.Result = false;
+                    response.RequestStatus = ExecutionStatus.Fail;
+                    response.Message = "One or more companies have been assigned to products. Please try again.";
                 }
                 else
                 {
-                    response.Result = isDeleted;
-                    response.RequestStatus = ExecutionStatus.Fail;
-                    response.Message = "One or more company can not be deleted. Please try again.";
+                    bool isDeleted = true;
+                    // remove images first
+
+                    var existingImages = await _companyRepository.GetCompanyImagesToDelete(companyForDeleteDto.CompanyIdList);
+
+                    if (existingImages != null && existingImages.Count > 0)
+                    {
+                        // first delete the images from cloudinary
+                        foreach (var image in existingImages)
+                        {
+                            DeletionParams destroyParams = new DeletionParams(image.PublicId)
+                            {
+                                ResourceType = ResourceType.Image
+                            };
+
+                            DeletionResult destroyResult = _cloudinary.Destroy(destroyParams);
+                        }
+                        // remove company images
+                        isDeleted = await _companyRepository.DeleteCompanyImages(existingImages);
+
+                        if (!isDeleted)
+                        {
+                            response.Result = isDeleted;
+                            response.RequestStatus = ExecutionStatus.Fail;
+                            response.Message = "One or more company images can not be deleted. Please try again.";
+
+                            return response;
+                        }
+                    }
+
+                    // remove company features
+                    isDeleted = await _companyRepository.DeleteCompanyFeatureByCompany(companyForDeleteDto.CompanyIdList);
+                    if (!isDeleted)
+                    {
+                        response.Result = isDeleted;
+                        response.RequestStatus = ExecutionStatus.Fail;
+                        response.Message = "One or more company features can not be deleted. Please try again.";
+
+                        return response;
+                    }
+                    isDeleted = await _companyRepository.DeleteBulkCompany(companyForDeleteDto);
+
+                    if (!isDeleted)
+                    {
+                        response.Result = isDeleted;
+                        response.RequestStatus = ExecutionStatus.Fail;
+                        response.Message = "One or more companies can not be deleted. Please try again.";
+                    }
+                    else
+                    {
+                        response.Result = isDeleted;
+                        response.RequestStatus = ExecutionStatus.Success;
+                    }
                 }
             }
             catch (Exception ex)

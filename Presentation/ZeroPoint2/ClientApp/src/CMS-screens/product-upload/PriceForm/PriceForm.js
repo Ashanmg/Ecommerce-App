@@ -89,7 +89,7 @@ export const PriceForm = ({
           value={values?.retailPrice} 
         />
       </div>
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full hidden">
         <span className="w-2/12 text-sm font-semibold text-G-dark">
           Discount :
         </span>

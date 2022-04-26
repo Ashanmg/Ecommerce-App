@@ -83,7 +83,20 @@ export const Companies = ({ className, ...restProps }) => {
     dispatch(companyRemovePending());
     try {
       const data = await removeCompany(removeIds);
+      console.log(data);
       dispatch(companyRemoveSuccessful());
+      if (data.requestStatus != 1)
+      {
+        errorToast(data.message);
+      }
+      else
+      {
+        SuccessToast('Companies deleted successfully');
+        dispatch(getAllCompaniesListPending());
+        const data = await getAllCompanyList(pageSize, pageNumber);
+        setCompanies(data);
+        dispatch(getAllCompaniesListSuccess());
+      }
     } catch (error) {
       dispatch(companyRemoveFail(error));
       errorToast('Error loading companies list');

@@ -20,5 +20,9 @@ namespace ZeroPoint2.Data
         Task<Company> GetCompanyDetails(int id);
         Task<List<CompanyFeature>> GetCompanyFeaturesByCompanyId(int id);
         Task<CompanyImage> GetCompanyImageByCompanyFeatureId(int id);
+        Task<bool> AreProductsAssignedToGivenCompany(List<int> companyIdList);
+        Task<List<CompanyImage>> GetCompanyImagesToDelete(List<int> companyIdList);
+        Task<bool> DeleteCompanyImages(List<CompanyImage> existingImages);
+        Task<bool> DeleteCompanyFeatureByCompany(List<int> companyIdList);
     }
 }
