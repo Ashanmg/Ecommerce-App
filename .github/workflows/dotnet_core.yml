@@ -25,12 +25,3 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish -f net5.0 -c Release -o ./Release -r win-x64 --self-contained false
-    - name: FTP Deploy        
-      uses: sebastianpopp/ftp-action@releases/v2
-      with:
-        host: ftp.ph105.peopleshostshared.com
-        user: artizans
-        password: Yidh&X1&4N32mP
-        localDir: "./Release"
-        remoteDir: "/httpdocs"
-        options: "--delete"
